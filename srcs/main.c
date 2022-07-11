@@ -6,11 +6,11 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:07:29 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/11 19:18:18 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/11 22:13:08 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/minishell.h"
+#include "../includes/minishell.h"
 
 int	main(int argc, char **argv, char **env)
 {
@@ -33,12 +33,14 @@ int	w_history(char **history)
 	history_fd = open("./.minishell_history", O_CREAT | O_RDWR | O_APPEND);
 	if (history_fd < 0)
 		return (history_fd);
+
+	return (1);
 }
 
 int	welcome(void)
 {
 	int		welcome_msg;
-	char	str;
+	char	*str;
 
 	welcome_msg = open("modt.txt", O_RDONLY);
 	if (welcome_msg < 0)

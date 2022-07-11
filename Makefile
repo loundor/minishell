@@ -1,11 +1,11 @@
 NAME		= minishell
 CC			= gcc
-FLAGS		= -Wall -Error -Wextra ${EXTRAF}
+FLAGS		= -Wall -Werror -Wextra ${EXTRAF}
 EXTRAF		= -g
 LIBRARY		= -lreadline -L./readline/lib -I./readline/include
 INCLUDES	= -I./includes/ 
 SRCS		= main.c
-OBJS		= $(addprefix ./srcs/, &{SRCS: .c=.o})
+OBJS		= $(addprefix ./srcs/, ${SRCS: .c=.o})
 RM			= @rm -rf
 
 $(NAME)		:	${OBJS}
