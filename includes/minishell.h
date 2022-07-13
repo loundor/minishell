@@ -6,14 +6,14 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/12 15:19:18 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/13 11:58:17 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # define READLINE_LIBRARY
-//# include "../lib/libft/libft.h"
+# include "../lib/libft/libft.h"
 //# include "../lib/libft/gnl/gnl.h"
 # include <unistd.h>
 # include <stdio.h>
@@ -37,7 +37,22 @@
 /* ****************** */
 # define ACCESS_ERR "Access denied!"
 # define INVALID_CMD "Command not found!"
-# define WELCOME_ERR "Welcome error"
+
+typedef enum e_typeerror
+{
+	ALLRIGHT,
+	ENV,
+	MALLOCERR,
+	WELCOME_ERR,
+	NO_ENV
+}	t_error;
+
+typedef struct s_env
+{
+	struct s_env	*prev_env;
+	char			**env_var;
+	struct s_env	*next_env;
+}	t_env;
 
 typedef struct s_cmd
 {
@@ -51,13 +66,15 @@ typedef struct s_cmd
 
 typedef struct s_shell
 {
+	struct s_env	*env;
+	struct s_cmd	cmd;
 }	t_shell;
 
 /* ************ */
 /*   PROGRAM    */
 /* ************ */
 
-int		ft_echo(char *str,int fd); // echo prg
+int		ft_echo(char *str); // echo prg
 int		cd(char *directory); // change directory
 int		pwd(void); // write the working directory
 int		export(char *str); // set a env variable
