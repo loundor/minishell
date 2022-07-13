@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/13 11:58:17 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/13 16:22:22 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void	create_command(char **argv, char **env);
 /*     SUB      */
 /* ************ */
 
+t_env	*do_env(char **env); // Parssing from env ok - check return error
 char	*take_simple_quote(char *str);
 char	*take_double_quote(char *str);
 int		check_auth(char **path, char *dest);	// check the access
