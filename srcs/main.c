@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:07:29 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/13 16:22:21 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/13 18:45:14 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,18 @@ int	main(int argc, char **argv, char **env)
 	shell.env = do_env(env);
 	if (!shell.env)
 		exit(ft_error(ENV));
-	
 	if (argc == 1)
 		(void)argv;
-	else
-		create_command(**argv, shell);
+	// Not already implemented..
+/* 	else
+	{
+		commande_parse(**argv, shell);
+		execute(shell);
+		exit (ft_free_lvl(2));
+	} */
 
 	if (welcome() != 0)
-		exit (ft_error(WELCOME_ERR));
+		exit (ft_free_lvl(3));
 
 	if (!prompt())
 		return (0);
