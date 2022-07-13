@@ -6,11 +6,27 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 14:26:15 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/13 14:39:57 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/13 16:14:36 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+static t_env	*parse_path(t_env *tenv, t_env *ret)
+{
+	char	**path;
+	t_env	*cmp;
+
+	tenv->next_env = ret;
+	ret->prev_env = tenv;
+	cmp = ret;
+	while (ft_strncmp(cmp->env_var[0], "PATH", 4) != 0)
+		cmp = cmp->next_env;
+	path = ft_split(ft_strjoin("PATH:", cmp->env_var[1]), ':');
+	free(cmp->env_var);
+	cmp->env_var = path;
+	return (ret);
+}
 
 t_env	*do_env(char **env)
 {
@@ -38,12 +54,5 @@ t_env	*do_env(char **env)
 		tenv = tenv->next_env;
 	}
 	ret = parse_path(tenv, ret);
-	return (ret);
-}
-
-static t_env	*parse_path(t_env *tenv, t_env *ret)
-{
-	tenv->next_env = ret;
-	ret->prev_env = tenv;
 	return (ret);
 }

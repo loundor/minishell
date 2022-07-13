@@ -43,6 +43,22 @@ typedef struct s_shell
 	struct s_cmd	cmd;
 }	t_shell;
 
+static t_env	*parse_path(t_env *tenv, t_env *ret)
+{
+	char	**path;
+	t_env	*cmp;
+
+	tenv->next_env = ret;
+	ret->prev_env = tenv;
+	cmp = ret;
+	while (ft_strncmp(cmp->env_var[0], "PATH", 4) != 0)
+		cmp = cmp->next_env;
+	path = ft_split(ft_strjoin("PATH:", cmp->env_var[1]), ':');
+	free(cmp->env_var);
+	cmp->env_var = path;
+	return (ret);
+}
+
 t_env	*do_env(char **env)
 {
 	t_env	*tenv;
@@ -57,8 +73,6 @@ t_env	*do_env(char **env)
 		tenv->env_var = ft_split(*env, '=');
 		ret = tenv;
 	}
-	else
-		return (NULL);
 	while (++env && *env)
 	{
 		parsse = 0;
@@ -70,8 +84,7 @@ t_env	*do_env(char **env)
 		tenv->next_env = parsse;
 		tenv = tenv->next_env;
 	}
-	tenv->next_env = ret;
-	ret->prev_env = tenv;
+	ret = parse_path(tenv, ret);
 	return (ret);
 }
 
@@ -81,12 +94,16 @@ int	main(int argc, char **argv, char **env)
 
 	shell.env = do_env(env);
 	if (!shell.env)
-		return(1);
-
-while (shell.env->env_var[0])
-{
-	printf("%s=%s\n", shell.env->env_var[0],shell.env->env_var[1]);
+		return (1);
+// Test struct
+	int i = 0;
 	shell.env = shell.env->next_env;
-}
+	shell.env = shell.env->next_env;
+	while (shell.env->env_var[i])
+	{
+		printf("%s - \n", shell.env->env_var[i]);
+		i++;
+	}
+// End of test
 	return (0);
 }
