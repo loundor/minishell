@@ -56,11 +56,10 @@ t_env	*do_env(char **env)
 			return (NULL);
 		tenv->env_var = ft_split(*env, '=');
 		ret = tenv;
-		env++;
 	}
 	else
 		return (NULL);
-	while (*env)
+	while (++env && *env)
 	{
 		parsse = 0;
 		parsse = malloc(sizeof(t_env));
@@ -70,7 +69,6 @@ t_env	*do_env(char **env)
 		parsse->env_var = ft_split(*env, '=');
 		tenv->next_env = parsse;
 		tenv = tenv->next_env;
-		env++;
 	}
 	tenv->next_env = ret;
 	ret->prev_env = tenv;
