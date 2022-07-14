@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/14 13:28:21 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/14 14:21:58 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <curses.h>
 # include <sys/wait.h>
 # include <term.h>
-# include <readline/history.h>
-# include <readline/readline.h>
+//# include <readline/history.h>
+//# include <readline/readline.h>
 
 # define STDIN	0
 # define STDOUT	1
