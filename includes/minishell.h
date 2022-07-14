@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/13 16:22:22 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/14 13:28:21 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ int		unset(char *var); // unset a env variable
 /* ************ */
 // Welcome msg return 0 if ok, otherwise number of type error
 int		welcome(void);
-int		msg_err(char *errno);	// Write the descripted error
 int		w_history(char **history); // write history
 int		parser(char *str); // split the commande
 void	create_command(char **argv, char **env);
@@ -95,6 +94,9 @@ void	create_command(char **argv, char **env);
 /* ************ */
 
 t_env	*do_env(char **env); // Parssing from env ok - check return error
+int		ft_exit(int type, int to_free, void *data); // Need complet with right error and right free()
+
+
 char	*take_simple_quote(char *str);
 char	*take_double_quote(char *str);
 int		check_auth(char **path, char *dest);	// check the access

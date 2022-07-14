@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:07:29 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/13 18:45:14 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/14 13:28:01 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char **argv, char **env)
 
 	shell.env = do_env(env);
 	if (!shell.env)
-		exit(ft_error(ENV));
+		exit(ft_exit(ENV));
 	if (argc == 1)
 		(void)argv;
 	// Not already implemented..
@@ -30,7 +30,7 @@ int	main(int argc, char **argv, char **env)
 	} */
 
 	if (welcome() != 0)
-		exit (ft_free_lvl(3));
+		exit (ft_exit(WELCOME_ERR, 1)); // A verifier 1 en 2 ???!!
 
 	if (!prompt())
 		return (0);
