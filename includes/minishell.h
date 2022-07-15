@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/15 13:28:39 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/15 20:23:08 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	create_command(char **argv, char **env);
 
 t_env	*do_env(char **env); // Parssing from env ok - check return error
 int		ft_exit(int type, int to_free, void *data); // Need complet with right error and right free()
-
+int		prompt(t_shell *shell);
 
 char	*take_simple_quote(char *str);
 char	*take_double_quote(char *str);

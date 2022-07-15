@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:38:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/15 13:28:40 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/15 20:22:19 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	prompt(t_shell *shell)
 {
-	shell->line = readline(STDIN);
+	while (!shell->line || strcmp(shell->line, "exit"))
+		shell->line = readline("minishell-0.1$ ");
+	write(STDOUT, "exit\n", 5);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 10:08:54 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/15 11:36:23 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/15 20:13:16 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ static void	print_welcome(int *fd, int *file)
 	while (i++ < 2)
 	{
 		write(*output, "\
-		___  ____       _     _          _ _\n\
-		|  \\/  (_)     (_)   | |        | | |\n\
-		| .  . |_ _ __  _ ___| |__   ___| | |\n\
-		| |\\/| | | '_ \\| / __| '_ \\ / _ \\ | |\n\
-		| |  | | | | | | \\__ \\ | | |  __/ | |\n\
-		\\_|  |_/_|_| |_|_|___/_| |_|\\___|_|_|\n\
-					stissera - v0.1", 259);
+	___  ____       _     _          _ _\n\
+	|  \\/  (_)     (_)   | |        | | |\n\
+	| .  . |_ _ __  _ ___| |__   ___| | |\n\
+	| |\\/| | | '_ \\| / __| '_ \\ / _ \\ | |\n\
+	| |  | | | | | | \\__ \\ | | |  __/ | |\n\
+	\\_|  |_/_|_| |_|_|___/_| |_|\\___|_|_|\n\
+				stissera - v0.1\n", 260);
 		if (i == 1)
 			write (*output, "\nA new file named modt was created\
 on minishell directory.\n You can modify the file to see a new welcome\
-page.", 109);
+page.\n", 110);
 		output = file;
 	}
 }
