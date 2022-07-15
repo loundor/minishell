@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 10:08:54 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/14 14:46:00 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/15 11:33:23 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	print_welcome(int *fd, int *file)
 
 	i = 0;
 	output = fd;
-	while (i++ < 1)
+	while (i++ < 2)
 	{
 		write(*output, "\
 		___  ____       _     _          _ _\n\
@@ -28,9 +28,11 @@ static void	print_welcome(int *fd, int *file)
 		| |\\/| | | '_ \\| / __| '_ \\ / _ \\ | |\n\
 		| |  | | | | | | \\__ \\ | | |  __/ | |\n\
 		\\_|  |_/_|_| |_|_|___/_| |_|\\___|_|_|\n\
-							stissera - v0.1\n\
-		\n A new file named modt was created on minishell directory.\n\
-		You can modify the file to see a new welcome page.\0", 376);
+					stissera - v0.1\0", 263);
+		if (i == 1)
+			write (*output, "\nA new file named modt was created\
+on minishell directory.\n You can modify the file to see a new welcome\
+page.", 109);
 		output = file;
 	}
 }
@@ -38,25 +40,26 @@ static void	print_welcome(int *fd, int *file)
 int	welcome(void)
 {
 	int		welcome_msg;
-	char	*str;
+	char	str[1];
 	int		output;
 
-	str = NULL;
+	str[0] = 0;
 	welcome_msg = open("modt", O_RDONLY);
 	output = STDOUT;
-
 	if (welcome_msg < 0)
 	{
+		welcome_msg = open("modt", O_CREAT | O_WRONLY, 0644);
 		print_welcome(&output, &welcome_msg);
 		close(welcome_msg);
 		return (0);
 	}
 	else
 	{
-		while (read(welcome_msg, str, 1))
+		while (read(welcome_msg, str, 1) > 0)
+		{
 			write(STDOUT, str, 1);
+		}
 		return (0);
 	}
-	
 	return (1);
 }

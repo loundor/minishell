@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/14 14:21:58 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/15 11:01:23 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,11 @@
 # include <signal.h>
 # include <curses.h>
 # include <sys/wait.h>
+# include <sys/types.h>
+# include <sys/stat.h>
 # include <term.h>
+
+# include <errno.h>
 //# include <readline/history.h>
 //# include <readline/readline.h>
 
