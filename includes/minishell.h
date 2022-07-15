@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/15 11:01:23 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/15 13:28:39 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <term.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 # include <errno.h>
-//# include <readline/history.h>
-//# include <readline/readline.h>
 
 # define STDIN	0
 # define STDOUT	1
@@ -64,12 +64,13 @@ typedef struct s_cmd
 	char			*param;
 	char			*option;
 	struct s_redi	*redirection;
-	struct s_pipe	*pipe;
+	struct s_pipe	*pipe[2];
 	struct s_cmd	*next;
 }	t_cmd;
 
 typedef struct s_shell
 {
+	char			*line;
 	struct s_env	*env;
 	struct s_cmd	cmd;
 }	t_shell;

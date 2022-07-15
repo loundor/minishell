@@ -2,7 +2,7 @@ NAME		= 	minishell
 CC			= 	gcc
 FLAGS		= 	-Wall -Werror -Wextra ${EXTRAF}
 EXTRAF		= 	-g
-LIBRARY		= 	#-Llibft -lreadline -L./lib/libft # -L./readline/lib -I./readline/include
+LIBRARY		= 	-L/usr/local/lib -I/usr/local/include lreadline #-Llibft -L./lib/libft # -L./readline/lib -I./readline/include
 INCLUDES	= 	-I./includes/  #-I./lib/libft -I./readline/include
 #BUILTIN		=	echo.c \
 				cd .c
