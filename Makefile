@@ -2,8 +2,10 @@ NAME		= 	minishell
 CC			= 	gcc
 FLAGS		= 	-Wall -Werror -Wextra ${EXTRAF}
 EXTRAF		= 	-g
-LIBRARY		=  -lreadline -Lreadline/lib #-Llibft -L./lib/libft
-INCLUDES	= 	-I./includes -I./readline/include/readline #-I./lib/libft 
+LIBRARY		=  -lreadline -Lreadline/shlib #-Llibft -L./lib/libft
+INCLUDES	= 	-I./includes -I./readline #-I./lib/libft 
+#LIBRARY		=  -lreadline #-Lreadline/lib #-Llibft -L./lib/libft
+#INCLUDES	= 	-I./includes #-I./readline/include/readline #-I./lib/libft 
 #BUILTIN		=	echo.c \
 				cd .c
 SRCS		= 	main.c \
@@ -20,7 +22,7 @@ RM			= 	rm -rf
 #				$(CC) $(FLAGS) $(INCLUDES) -c $< -o ${<:.c=.o}
 
 $(NAME)		:	${OBJS}
-				${CC} ${FLAGS} ${INCLUDES} ${LIBRARY} ${OBJS} ./libft.a -o $@
+				${CC} ${FLAGS} ${INCLUDES} ${LIBRARY} ${OBJS} ./lib/libft/libft.a -o $@
 
 all			:	${NAME}
 

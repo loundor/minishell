@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/15 20:23:08 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/17 16:57:24 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <term.h>
+//# include "../readline-8.0/readline.h"
+//# include "../readline-8.0/history.h"
 # include <readline/readline.h>
 # include <readline/history.h>
-
 # include <errno.h>
 
 # define STDIN	0
@@ -48,7 +49,8 @@ typedef enum e_typeerror
 	ENV,
 	MALLOCERR,
 	WELCOME_ERR,
-	NO_ENV
+	NO_ENV,
+	SIGN
 }	t_error;
 
 typedef struct s_env
@@ -63,25 +65,29 @@ typedef struct s_cmd
 	char			*command;
 	char			*param;
 	char			*option;
-	struct s_redi	*redirection;
+	int				type; // 0-none; 1-|; 2-||; 3-&& ; 4->; 5->>; 6-<; 7-<<
+	int				fd;
 	struct s_pipe	*pipe[2];
 	struct s_cmd	*next;
 }	t_cmd;
 
 typedef struct s_shell
 {
-	char			*line;
-	struct s_env	*env;
-	struct s_cmd	cmd;
+	char				*line;
+	pid_t				*pid;
+	struct s_env		*env;
+	struct s_cmd		*cmd;
+	struct sigaction	signal_act;
 }	t_shell;
 
 /* ************ */
 /*   PROGRAM    */
 /* ************ */
 
+int		pwd(t_shell *shell); // write the working directory
+
 int		ft_echo(char *str); // echo prg
 int		cd(char *directory); // change directory
-int		pwd(void); // write the working directory
 int		export(char *str); // set a env variable
 int		unset(char *var); // unset a env variable
 

@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 13:00:26 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/15 12:21:14 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/16 11:04:19 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ft_exit(int type, int to_free, void *data)
 	else if (type == 4)
 		printf("No environement variable!");
 	else if (type == 5)
-		printf("...!");
+		printf("Signal modification not autorized");
 	else if (type == 6)
 		printf("...!");
 	if (to_free)
