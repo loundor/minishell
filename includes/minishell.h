@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/18 17:47:36 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/18 18:29:53 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <term.h>
-//# include "../readline-8.0/readline.h"
-//# include "../readline-8.0/history.h"
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <errno.h>
@@ -65,7 +63,7 @@ typedef struct s_cmd
 	char			*command;
 	char			*param;
 	char			*option;
-	int				type; // 0-none; 1-|; 2-||; 3-&& ; 4->; 5->>; 6-<; 7-<<
+	int				type; // 0- end; 1- |; 2- ||; 3- && ; 4- >; 5- >>; 6- <; 7- << // ATTENTION au ' et "
 	int				fd;
 	struct s_pipe	*pipe[2];
 	struct s_cmd	*next;
@@ -80,39 +78,41 @@ typedef struct s_shell
 	struct sigaction	signal_act;
 }	t_shell;
 
+// OK - NEED TEST
+int		welcome(void); // OK
+int		pwd(t_shell *shell); // Should ok
+int		env(t_shell *shell); // Should ok
+t_env	*do_env(char **env); // Parssing from env ok - check return error
+
+// WORKING
+int		cd(char *directory); // change directory
+int		ft_exit(int type, int to_free, void *data); // Need complet with right error and right free()
+int		core(t_shell *shell);// ACTUALY ONLY FOR TEST
+int		prep_signal(t_shell *shell);
+int		prompt(t_shell *shell);
+
+// TO DO
+int		ft_echo(char *str); // echo prg
+int		export(char *str); // set a env variable
+int		unset(char *var); // unset a env variable
+int		parser(char *str); // split the commande
+void	create_command(char **argv, char **env);
+int		w_history(char **history); // write history
+char	*take_simple_quote(char *str);
+char	*take_double_quote(char *str);
+int		check_auth(char **path, char *dest);	// check the access
+
 /* ************ */
 /*   PROGRAM    */
 /* ************ */
-
-int		pwd(t_shell *shell); // Should ok
-int		env(t_shell *shell); // working...
-
-int		ft_echo(char *str); // echo prg
-int		cd(char *directory); // change directory
-int		export(char *str); // set a env variable
-int		unset(char *var); // unset a env variable
 
 /* ************ */
 /*   INTERN     */
 /* ************ */
 // Welcome msg return 0 if ok, otherwise number of type error
-int		welcome(void);
-int		w_history(char **history); // write history
-int		parser(char *str); // split the commande
-void	create_command(char **argv, char **env);
-int		prep_signal(t_shell *shell);
-int		core(t_shell *shell);
 
 /* ************ */
 /*     SUB      */
 /* ************ */
-
-t_env	*do_env(char **env); // Parssing from env ok - check return error
-int		ft_exit(int type, int to_free, void *data); // Need complet with right error and right free()
-int		prompt(t_shell *shell);
-
-char	*take_simple_quote(char *str);
-char	*take_double_quote(char *str);
-int		check_auth(char **path, char *dest);	// check the access
 
 #endif

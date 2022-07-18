@@ -6,8 +6,14 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:04:42 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/12 14:56:27 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/18 18:17:01 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/minishell.h"
+#include "../../includes/minishell.h"
+
+int	cd(t_shell *shell)
+{
+
+	return (0);
+}
