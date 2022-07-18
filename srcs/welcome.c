@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 10:08:54 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/15 20:13:16 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/18 11:42:01 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ static void	print_welcome(int *fd, int *file)
 	| |\\/| | | '_ \\| / __| '_ \\ / _ \\ | |\n\
 	| |  | | | | | | \\__ \\ | | |  __/ | |\n\
 	\\_|  |_/_|_| |_|_|___/_| |_|\\___|_|_|\n\
-				stissera - v0.1\n", 260);
-		if (i == 1)
+				stissera - v0.1\n", 253);
+		if (i == 1 && output != file)
 			write (*output, "\nA new file named modt was created\
 on minishell directory.\n You can modify the file to see a new welcome\
 page.\n", 110);

@@ -2,8 +2,8 @@ NAME		= 	minishell
 CC			= 	gcc
 FLAGS		= 	-Wall -Werror -Wextra ${EXTRAF}
 EXTRAF		= 	-g
-LIBRARY		=  -lreadline -Lreadline/shlib #-Llibft -L./lib/libft
-INCLUDES	= 	-I./includes -I./readline #-I./lib/libft 
+LIBRARY		=  -lreadline -Lreadline/lib #-Llibft -L./lib/libft
+INCLUDES	= 	-I./includes -I./readline -I./lib/libft 
 #LIBRARY		=  -lreadline #-Lreadline/lib #-Llibft -L./lib/libft
 #INCLUDES	= 	-I./includes #-I./readline/include/readline #-I./lib/libft 
 #BUILTIN		=	echo.c \
@@ -12,8 +12,10 @@ SRCS		= 	main.c \
 				ft_error.c \
 				env_pars.c \
 				welcome.c \
-				prompt.c #\
-				${addprefix /builtin/, ${BUILTIN}}
+				prompt.c \
+				signal.c \
+				${addprefix builtins/, ${BUILTIN}}
+BUILTIN		=	pwd.c
 
 OBJS		= 	$(addprefix ./srcs/, ${SRCS: .c=.o})
 RM			= 	rm -rf
@@ -22,7 +24,7 @@ RM			= 	rm -rf
 #				$(CC) $(FLAGS) $(INCLUDES) -c $< -o ${<:.c=.o}
 
 $(NAME)		:	${OBJS}
-				${CC} ${FLAGS} ${INCLUDES} ${LIBRARY} ${OBJS} ./lib/libft/libft.a -o $@
+				${CC} ${FLAGS} ${INCLUDES} ${LIBRARY} ${OBJS} ./libft.a -o $@
 
 all			:	${NAME}
 

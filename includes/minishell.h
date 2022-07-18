@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/17 16:57:24 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/18 15:48:07 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ int		welcome(void);
 int		w_history(char **history); // write history
 int		parser(char *str); // split the commande
 void	create_command(char **argv, char **env);
+int		prep_signal(t_shell *shell);
+int		core(t_shell *shell);
 
 /* ************ */
 /*     SUB      */

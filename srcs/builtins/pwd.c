@@ -6,32 +6,30 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:04:51 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/17 16:42:37 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/18 17:15:55 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int	pwd(t_shell *shell)
 {
-	t_env	*tmp;
-	int		i;
+	char	*buffer;
+	size_t	size;
 
-	i = 0;
-	tmp = shell->env;
-	while (ft_strcmp(tmp->env_var[0], "PWD")
-		|| (!ft_strcmp(tmp->env_var[0], shell->env->env_var[0] && i != 1)))
+	size = 1;
+	buffer = NULL;
+	while (buffer == NULL)
 	{
-		tmp = tmp->next_env;
-		i = 1;
+		buffer = malloc(sizeof(char) * size);
+		if (!buffer)
+			ft_exit(MALLOCERR, 9, shell);
+		buffer = getcwd(buffer, size);
+		if (buffer == NULL)
+			free(buffer);
+		size++;
 	}
-	if (ft_strcmp(tmp->env_var[0], "PWD"))
-		write (shell->cmd->fd, tmp->env_var[1],
-			ft_strlen(tmp->env_var[1]));
-	else
-	{
-		write (shell->cmd->fd, "NO PATH FOUND!\0", 16);
-		return (1);
-	}
+	ft_putendl_fd(buffer, 1); // ATTENTION TO FD!
+	free (buffer);
 	return (0);
 }
