@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/18 15:48:07 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/18 17:47:36 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ typedef struct s_shell
 /*   PROGRAM    */
 /* ************ */
 
-int		pwd(t_shell *shell); // write the working directory
+int		pwd(t_shell *shell); // Should ok
+int		env(t_shell *shell); // working...
 
 int		ft_echo(char *str); // echo prg
 int		cd(char *directory); // change directory

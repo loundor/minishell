@@ -6,11 +6,11 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 10:08:03 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/12 10:43:27 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/18 17:47:58 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int	w_history(char **history)
 {
@@ -21,6 +21,5 @@ int	w_history(char **history)
 	history_fd = open("./.minishell_history", O_CREAT | O_RDWR | O_APPEND);
 	if (history_fd < 0)
 		return (history_fd);
-
 	return (1);
 }

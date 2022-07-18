@@ -15,8 +15,8 @@ SRCS		= 	main.c \
 				prompt.c \
 				signal.c \
 				${addprefix builtins/, ${BUILTIN}}
-BUILTIN		=	pwd.c
-
+BUILTIN		=	pwd.c \
+				env.c
 OBJS		= 	$(addprefix ./srcs/, ${SRCS: .c=.o})
 RM			= 	rm -rf
 
