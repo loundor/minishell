@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:07:29 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/17 16:57:22 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/19 10:40:10 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	main(int argc, char **argv, char **env)
 		(void)argv;
 	if (prep_signal(&shell))
 		exit(ft_exit(SIGN, 0, NULL));
+	if (add_builtins(&shell))
+		exit(ft_exit(BUILT, 0, NULL));
 	// Not already implemented..
 /* 	else
 	{

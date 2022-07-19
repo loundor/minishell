@@ -8,12 +8,13 @@ INCLUDES	= 	-I./includes -I./readline -I./lib/libft
 #INCLUDES	= 	-I./includes #-I./readline/include/readline #-I./lib/libft 
 #BUILTIN		=	echo.c \
 				cd .c
-SRCS		= 	main.c \
-				ft_error.c \
+SRCS		= 	builtins.c \
 				env_pars.c \
-				welcome.c \
+				ft_error.c \
+				main.c \
 				prompt.c \
 				signal.c \
+				welcome.c \
 				${addprefix builtins/, ${BUILTIN}}
 BUILTIN		=	pwd.c \
 				env.c \

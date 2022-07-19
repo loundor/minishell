@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 13:00:26 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/16 11:04:19 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/19 11:46:50 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,12 @@
 
 static void	err_type(int msg, void *data)
 {
-	t_shell	*shell;
-	t_env	*env;
-
-	(void)shell;
 	if (msg == 1)
+		free((t_env *)data);
+	if (msg == 2)
 	{
-		env = data;
-		free(env);
+		err_type(1, (t_shell *)data);
+		free ((t_builtins *)((t_shell *)data)->builtin);
 	}
 }
 
@@ -38,7 +36,7 @@ int	ft_exit(int type, int to_free, void *data)
 	else if (type == 5)
 		printf("Signal modification not autorized");
 	else if (type == 6)
-		printf("...!");
+		printf("Can't create builtins!");
 	if (to_free)
 		err_type(to_free, data);
 	exit (type);

@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/18 18:29:53 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/19 11:39:06 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,16 @@ typedef enum e_typeerror
 	MALLOCERR,
 	WELCOME_ERR,
 	NO_ENV,
-	SIGN
+	SIGN,
+	BUILT
 }	t_error;
+
+typedef struct s_builtins
+{
+	char				*cmd;
+	int					(*f)();
+	struct s_builtins	*next;
+}	t_builtins;
 
 typedef struct s_env
 {
@@ -75,17 +83,20 @@ typedef struct s_shell
 	pid_t				*pid;
 	struct s_env		*env;
 	struct s_cmd		*cmd;
+	struct s_builtins	*builtin;
 	struct sigaction	signal_act;
 }	t_shell;
 
 // OK - NEED TEST
-int		welcome(void); // OK
-int		pwd(t_shell *shell); // Should ok
-int		env(t_shell *shell); // Should ok
-t_env	*do_env(char **env); // Parssing from env ok - check return error
-
+int			welcome(void); // OK
+int			pwd(t_shell *shell); // Should ok
+int			env(t_shell *shell); // Should ok
+t_env		*do_env(char **env); // Parssing from env ok - check return error
+t_builtins	*search_builtin(char *cmd, t_builtins *builtin); // NEED ADD BUILTIN IN LIST
+int			add_builtins(t_shell *shell); // NEED TEST
 // WORKING
-int		cd(char *directory); // change directory
+
+int		cd(t_shell *shell); // change directory
 int		ft_exit(int type, int to_free, void *data); // Need complet with right error and right free()
 int		core(t_shell *shell);// ACTUALY ONLY FOR TEST
 int		prep_signal(t_shell *shell);

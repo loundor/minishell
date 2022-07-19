@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:38:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/18 18:32:34 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/19 11:46:25 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,15 @@ int	prompt(t_shell *shell)
 int	core(t_shell *shell)
 {
 	int	ret;
+
+	ret = 0;
 	// DO PARSSING FROM shell->line to struct shell->cmd
 	if (!ft_strncmp(shell->line, "pwd", 3))
 		ret = pwd(shell);
 	else if (!ft_strncmp(shell->line, "env", 3))
 		ret = env(shell);
-	else if (!ft_strncmp(shell->line, "cd", 2))
-		ret = ls(shell);
+//	else if (!ft_strncmp(shell->line, "cd", 2))
+//		ret = ls(shell);
 	//puts(shell->line);
 	printf("Error : %d\n", ret);
 	return (0);
