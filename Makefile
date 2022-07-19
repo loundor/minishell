@@ -9,6 +9,7 @@ INCLUDES	= 	-I./includes -I./readline -I./lib/libft
 #BUILTIN		=	echo.c \
 				cd .c
 SRCS		= 	builtins.c \
+				cmd_parse.c \
 				env_pars.c \
 				ft_error.c \
 				main.c \
@@ -16,9 +17,9 @@ SRCS		= 	builtins.c \
 				signal.c \
 				welcome.c \
 				${addprefix builtins/, ${BUILTIN}}
-BUILTIN		=	pwd.c \
+BUILTIN		=	cd.c \
 				env.c \
-				cd.c
+				pwd.c
 OBJS		= 	$(addprefix ./srcs/, ${SRCS: .c=.o})
 RM			= 	rm -rf
 
