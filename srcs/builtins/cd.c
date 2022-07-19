@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:04:42 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/19 11:46:06 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/19 16:38:59 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,6 @@
 int	cd(t_shell *shell)
 {
 	(void)shell;
+	chdir("/etc");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/19 11:39:06 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/19 17:35:26 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ typedef enum e_typeerror
 	WELCOME_ERR,
 	NO_ENV,
 	SIGN,
-	BUILT
+	BUILT,
+	CMDNFOUND
 }	t_error;
 
 typedef struct s_builtins
@@ -112,6 +113,7 @@ int		w_history(char **history); // write history
 char	*take_simple_quote(char *str);
 char	*take_double_quote(char *str);
 int		check_auth(char **path, char *dest);	// check the access
+int		see_errno(t_env *env);
 
 /* ************ */
 /*   PROGRAM    */

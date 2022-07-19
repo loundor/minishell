@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 13:00:26 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/19 11:46:50 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/19 16:30:28 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ int	ft_exit(int type, int to_free, void *data)
 		printf("Signal modification not autorized");
 	else if (type == 6)
 		printf("Can't create builtins!");
+	else if (type == 7)
+	{
+		printf("Error command not found!\n");
+		return (1);
+	}
 	if (to_free)
 		err_type(to_free, data);
 	exit (type);

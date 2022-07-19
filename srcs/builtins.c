@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:41:57 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/19 12:33:31 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/19 17:31:48 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	init_builtins(char *cmd, int (*f)(), t_shell *sh)
 	builtins->cmd = (char *)malloc(sizeof(char) * (ft_strlen(cmd) + 1));
 	if (!builtins->cmd)
 		ft_exit(MALLOCERR, 2, sh);
-	ft_strlcpy(builtins->cmd, cmd, ft_strlen(cmd));
+	ft_strlcpy(builtins->cmd, cmd, ft_strlen(cmd) + 1);
 	builtins->f = f;
 	if (sh->builtin)
 	{
@@ -45,6 +45,8 @@ int	add_builtins(t_shell *shell)
 {
 	init_builtins("pwd", &pwd, shell);
 	init_builtins("env", &env, shell);
+	init_builtins("cd", &cd, shell);
+	init_builtins("$?", &see_errno, shell);
 	return (0);
 }
 
@@ -53,7 +55,14 @@ t_builtins	*search_builtin(char *cmd, t_builtins *builtin)
 	t_builtins	*tmp;
 
 	tmp = builtin;
-	while (tmp && !ft_strncmp(cmd, tmp->cmd, ft_strlen(tmp->cmd)))
-		tmp = tmp->next;
+	while (ft_strlen(cmd) != ft_strlen(tmp->cmd)
+		|| ft_strncmp(cmd, tmp->cmd, ft_strlen(tmp->cmd))
+		|| ft_strncmp(cmd, tmp->cmd, ft_strlen(cmd)))
+	{
+		if (tmp->next)
+			tmp = tmp->next;
+		else
+			return (NULL);
+	}
 	return (tmp);
 }
