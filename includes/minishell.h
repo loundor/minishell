@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/20 17:01:01 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/20 17:11:24 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ typedef struct s_cmd
 	char			*command;
 	char			*param;
 	char			*option;
-	int				type; // 0- end; 1- |; 2- ||; 3- && ; 4- >; 5- >>; 6- <; 7- << // ATTENTION au ' et "
+// 0- end; 1- |; 2- ||; 3- && ; 4- >; 5- >>; 6- <; 7- << // ATTENTION au ' et "
+	int				type;
 	int				fd;
 	struct s_pipe	*pipe[2];
 	struct s_cmd	*next;
@@ -101,7 +102,7 @@ void		*struct_passing(int type, void *data);
 // WORKING
 t_cmd		*cmd_parse(char *shell, t_cmd *cmd);
 int			cd(t_shell *shell); // change directory
-int			ft_exit(int type, int to_free); // Need complet with right error and right free()
+int			ft_exit(int type, int to_free); // Need complet
 int			core(t_shell *shell);// ACTUALY ONLY FOR TEST
 int			prep_signal(t_shell *shell);
 int			prompt(t_shell *shell);
