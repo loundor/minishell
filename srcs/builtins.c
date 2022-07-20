@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:41:57 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/20 17:18:53 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/20 20:30:34 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	add_builtins(t_shell *shell)
 	init_builtins("pwd", &pwd, shell);
 	init_builtins("env", &env, shell);
 	init_builtins("cd", &cd, shell);
-	init_builtins("$?", &see_errno, shell);
+	init_builtins("test", &test, shell); // builtin for new test. Type only test in minishell
 	return (0);
 }
 

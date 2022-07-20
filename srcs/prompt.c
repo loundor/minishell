@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:38:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/19 16:30:03 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/20 20:30:15 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	core(t_shell *shell)
 {
 	t_builtins	*builtin;
 	// DO PARSSING FROM shell->line to struct shell->cmd
+	shell->cmd = cmd_parse(shell->line, shell->cmd);
 	builtin = search_builtin(shell->line, shell->builtin);
 	if (builtin != NULL)
 		builtin->f(shell);

@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 17:10:41 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/20 17:07:02 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/20 21:26:28 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	*take_path(char *line, t_cmd *cmd)
 {
 	char	*ret;
 	size_t	i;
-	int		slash;
+	size_t	slash;
 
 	i = 0;
 	slash = 0;
@@ -39,10 +39,11 @@ static char	*take_path(char *line, t_cmd *cmd)
 	if (!ret)
 		ft_exit(MALLOCERR, 1);
 	slash = 0;
-	while (slash != i)
+	while (slash <= i)
 		ret[slash++] = *line++;
-	ret[slash] = '\0';
-	return (ret);
+	ret[slash + 1] = '\0';
+	cmd->path = ret;
+	return (line);
 }
 
 static char	*take_exec(char *line, t_cmd *cmd)
@@ -50,6 +51,7 @@ static char	*take_exec(char *line, t_cmd *cmd)
 	char	*ret;
 	size_t	i[2];
 
+	(void)cmd;
 	i[0] = 0;
 	while (!ft_isspace(line[i[0]]) && line[i[0]] != '\0')
 		i[0]++;
@@ -66,8 +68,22 @@ static char	*take_exec(char *line, t_cmd *cmd)
 static char	*take_params(char *line, t_cmd *cmd)
 {
 	char	*ret;
-	size_t	i[2];
+//	size_t	i[2];
 
+	ret = NULL;
+	(void)cmd;
+	(void)line;
+	return (ret);
+}
+
+static int	take_operator(char *line, t_cmd *cmd)
+{
+	int		ret;
+//	size_t	i[2];
+
+	ret = 0;
+	(void)cmd;
+	(void)line;
 	return (ret);
 }
 
@@ -76,20 +92,23 @@ t_cmd	*cmd_parse(char *shell, t_cmd *cmd)
 	char	*line;
 	t_cmd	*new;
 
+
 	line = shell;
 	line = ft_skipspace(line);
 	new = (t_cmd *)malloc(sizeof(t_cmd));
 	if (!line || !new)
 		ft_exit(MALLOCERR, 1);
-	new->path = take_path(&line, new);
+	line = take_path(line, new);
 	line = ft_skipspace(line);
-	new->command = take_exec(&line, new);
+write(1, "OK4 ", 3);
+	new->command = take_exec(line, new);
 	line = ft_skipspace(line);
-	new->param = take_params(&line, new);
+write(1, "OK5 ", 3);
+	new->param = take_params(line, new);
 	line = ft_skipspace(line);
-	new->option = take_option(&line, new);
-	line = ft_skipspace(line);
-	new->type = take_operator(&line, new);
+//	new->option = take_option(line, new);
+//	line = ft_skipspace(line);
+	new->type = take_operator(line, new);
 	line = ft_skipspace(line);
 	if (*line != '\0')
 		cmd->next = cmd_parse(line, new);

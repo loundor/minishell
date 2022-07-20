@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:07:29 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/20 17:25:43 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/20 17:26:52 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,5 @@ void	*struct_passing(int type, void *data)
 		return (env);
 	else if (type == 3)
 		return (0);
+	return (0);
 }

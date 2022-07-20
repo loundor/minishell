@@ -16,6 +16,7 @@ SRCS		= 	builtins.c \
 				prompt.c \
 				signal.c \
 				welcome.c \
+				test.c \
 				${addprefix builtins/, ${BUILTIN}}
 BUILTIN		=	cd.c \
 				env.c \
@@ -27,7 +28,7 @@ RM			= 	rm -rf
 #				$(CC) $(FLAGS) $(INCLUDES) -c $< -o ${<:.c=.o}
 
 $(NAME)		:	${OBJS}
-				${CC} ${FLAGS} ${INCLUDES} ${LIBRARY} ${OBJS} ./libft.a -o $@
+				${CC} ${FLAGS} ${INCLUDES} ${LIBRARY} ${OBJS} ./lib/libft/libft.a -o $@
 
 all			:	${NAME}
 

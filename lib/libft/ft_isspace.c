@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 16:38:19 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/20 16:41:17 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/20 21:17:37 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_isspace(char car)
 	if (!car)
 		return (0);
 	if (car == ' ' || car == '\t' || car == '\n'
-		|| car == '\v' || car == 'f' || car == '\r')
+		|| car == '\v' || car == '\f' || car == '\r')
 		return (1);
 	return (0);
 }
