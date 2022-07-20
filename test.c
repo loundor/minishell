@@ -13,6 +13,7 @@
 
 typedef enum e_typeerror
 {
+	//bite
 	ALLRIGHT,
 	ENV,
 	MALLOCERR,
