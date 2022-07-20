@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 17:10:41 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/20 15:07:48 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/20 17:07:02 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char	*take_path(char *line, t_cmd *cmd)
 	}
 	ret = (char *)malloc(sizeof(char) * (i + 1));
 	if (!ret)
-		ft_exit(MALLOCERR, 0, 0);
+		ft_exit(MALLOCERR, 1);
 	slash = 0;
 	while (slash != i)
 		ret[slash++] = *line++;
@@ -55,7 +55,7 @@ static char	*take_exec(char *line, t_cmd *cmd)
 		i[0]++;
 	ret = (char *)malloc(sizeof(char) * (i[0] + 1));
 	if (!ret)
-		ft_exit(MALLOCERR, 0, 0);
+		ft_exit(MALLOCERR, 1);
 	while (i[1] != i[0])
 		ret[i[1]++] = *line++;
 	ret[i[1]] = '\0';
@@ -80,7 +80,7 @@ t_cmd	*cmd_parse(char *shell, t_cmd *cmd)
 	line = ft_skipspace(line);
 	new = (t_cmd *)malloc(sizeof(t_cmd));
 	if (!line || !new)
-		ft_exit(MALLOCERR, 0, 0);
+		ft_exit(MALLOCERR, 1);
 	new->path = take_path(&line, new);
 	line = ft_skipspace(line);
 	new->command = take_exec(&line, new);

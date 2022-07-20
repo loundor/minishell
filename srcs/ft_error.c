@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 13:00:26 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/19 16:30:28 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/20 17:01:04 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	err_type(int msg, void *data)
 	}
 }
 
-int	ft_exit(int type, int to_free, void *data)
+int	ft_exit(int type, int to_free)
 {
 	if (type == 1)
 		printf("Can't create environement structure!");
@@ -43,6 +43,6 @@ int	ft_exit(int type, int to_free, void *data)
 		return (1);
 	}
 	if (to_free)
-		err_type(to_free, data);
+		err_type(to_free, struct_passing(to_free, 0));
 	exit (type);
 }

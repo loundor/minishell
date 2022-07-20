@@ -31,13 +31,13 @@ $(NAME)		:	${OBJS}
 
 all			:	${NAME}
 
-re			:	fclean all
+#re			:	fclean all
 
 clean		:
 				${RM} ${OBJS}
 
-fclean		:	clean
-				${RED} ${RM} ${NAME} ${RST}	
+#fclean		:	clean
+#				${RED} ${RM} ${NAME} ${RST}	
 
 .PHONY		:	${NAME} all clean fclean re
 

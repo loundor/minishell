@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/20 10:42:46 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/20 17:01:01 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,12 @@ int			env(t_shell *shell); // Should ok
 t_env		*do_env(char **env); // Parssing from env ok - check return error
 t_builtins	*search_builtin(char *cmd, t_builtins *builtin); // OK
 int			add_builtins(t_shell *shell); // OK
+void		*struct_passing(int type, void *data);
+
 // WORKING
 t_cmd		*cmd_parse(char *shell, t_cmd *cmd);
 int			cd(t_shell *shell); // change directory
-int			ft_exit(int type, int to_free, void *data); // Need complet with right error and right free()
+int			ft_exit(int type, int to_free); // Need complet with right error and right free()
 int			core(t_shell *shell);// ACTUALY ONLY FOR TEST
 int			prep_signal(t_shell *shell);
 int			prompt(t_shell *shell);
