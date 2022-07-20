@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/20 17:11:24 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/20 17:20:11 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ typedef struct s_shell
 
 // OK - NEED TEST
 int			welcome(void); // OK
-int			pwd(t_shell *shell); // Should ok
+int			pwd(void); // Should ok
 int			env(t_shell *shell); // Should ok
 t_env		*do_env(char **env); // Parssing from env ok - check return error
 t_builtins	*search_builtin(char *cmd, t_builtins *builtin); // OK

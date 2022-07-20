@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:07:29 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/20 17:05:31 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/20 17:25:43 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,15 @@ void	*struct_passing(int type, void *data)
 {
 	static int			reload;
 	static t_shell		*shell;
-	static t_cmd		*env;
+	static t_env		*env;
+	static t_cmd		*cmd;
 	static t_builtins	*builtins;
 
 	if (reload != 1)
 	{
 		shell = (t_shell *)data;
 		env = (t_env *)((t_shell *)data)->env;
+		cmd = (t_cmd *)((t_shell *)data)->cmd;
 		builtins = (t_builtins *)((t_shell *)data)->builtin;
 		reload = 1;
 	}

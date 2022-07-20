@@ -6,13 +6,13 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:04:51 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/19 16:24:50 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/20 17:19:38 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	pwd(t_shell *shell)
+int	pwd(void)
 {
 	char	*buffer;
 	size_t	size;
@@ -23,7 +23,7 @@ int	pwd(t_shell *shell)
 	{
 		buffer = malloc(sizeof(char) * size);
 		if (!buffer)
-			ft_exit(MALLOCERR, 9, shell);
+			ft_exit(MALLOCERR, 1);
 		buffer = getcwd(buffer, size);
 		if (buffer == NULL)
 			free(buffer);
