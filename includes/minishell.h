@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/19 17:35:26 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/20 10:42:46 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_env
 
 typedef struct s_cmd
 {
+	char			*path;
 	char			*command;
 	char			*param;
 	char			*option;
@@ -93,27 +94,27 @@ int			welcome(void); // OK
 int			pwd(t_shell *shell); // Should ok
 int			env(t_shell *shell); // Should ok
 t_env		*do_env(char **env); // Parssing from env ok - check return error
-t_builtins	*search_builtin(char *cmd, t_builtins *builtin); // NEED ADD BUILTIN IN LIST
-int			add_builtins(t_shell *shell); // NEED TEST
+t_builtins	*search_builtin(char *cmd, t_builtins *builtin); // OK
+int			add_builtins(t_shell *shell); // OK
 // WORKING
-
-int		cd(t_shell *shell); // change directory
-int		ft_exit(int type, int to_free, void *data); // Need complet with right error and right free()
-int		core(t_shell *shell);// ACTUALY ONLY FOR TEST
-int		prep_signal(t_shell *shell);
-int		prompt(t_shell *shell);
+t_cmd		*cmd_parse(char *shell, t_cmd *cmd);
+int			cd(t_shell *shell); // change directory
+int			ft_exit(int type, int to_free, void *data); // Need complet with right error and right free()
+int			core(t_shell *shell);// ACTUALY ONLY FOR TEST
+int			prep_signal(t_shell *shell);
+int			prompt(t_shell *shell);
 
 // TO DO
-int		ft_echo(char *str); // echo prg
-int		export(char *str); // set a env variable
-int		unset(char *var); // unset a env variable
-int		parser(char *str); // split the commande
-void	create_command(char **argv, char **env);
-int		w_history(char **history); // write history
-char	*take_simple_quote(char *str);
-char	*take_double_quote(char *str);
-int		check_auth(char **path, char *dest);	// check the access
-int		see_errno(t_env *env);
+int			ft_echo(char *str); // echo prg
+int			export(char *str); // set a env variable
+int			unset(char *var); // unset a env variable
+int			parser(char *str); // split the commande
+void		create_command(char **argv, char **env);
+int			w_history(char **history); // write history
+char		*take_simple_quote(char *str);
+char		*take_double_quote(char *str);
+int			check_auth(char **path, char *dest);	// check the access
+int			see_errno(t_env *env);
 
 /* ************ */
 /*   PROGRAM    */
