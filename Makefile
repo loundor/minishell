@@ -6,8 +6,6 @@ LIBRARY		=  -lreadline -Lreadline/lib #-Llibft -L./lib/libft
 INCLUDES	= 	-I./includes -I./readline -I./lib/libft 
 #LIBRARY		=  -lreadline #-Lreadline/lib #-Llibft -L./lib/libft
 #INCLUDES	= 	-I./includes #-I./readline/include/readline #-I./lib/libft 
-#BUILTIN		=	echo.c \
-				cd .c
 SRCS		= 	builtins.c \
 				cmd_parse.c \
 				env_pars.c \
