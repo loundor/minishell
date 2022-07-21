@@ -6,16 +6,19 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 17:10:41 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/21 13:25:25 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/21 16:10:38 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-/* ------------------------------------------------------- */
-/*              STARTEND[0] = DEPART DU CHAR               */
-/*	STARTEND[1] = POSITION DU CHAR TEST ET POSITION DE FIN */
-/* ------------------------------------------------------- */
+/* -----------------| PARSSE THE DIRECTORY |--------------- */
+/*	Take the line until a space and come back to the last / */
+/*	if no / in the line before a space, PATH = NULL			*/
+/*	For the future, when path is NULL, check in env $PATH	*/
+/*	The pointer of line variable was moved until the end of */
+/*	path.													*/
+/* -------------------------------------------------------- */
 static char	*take_path(char *line, t_cmd *cmd)
 {
 	char	*ret;
@@ -46,6 +49,12 @@ static char	*take_path(char *line, t_cmd *cmd)
 	return (line);
 }
 
+/* ------------------| PARSSE THE FILE |------------------- */
+/*	After try to catch a path, we get the reste of the line */
+/*	We juste catch the start of line until a space and put	*/
+/*	that in a variable command stored in struct cmd and		*/
+/*	return the reste of the line.							*/
+/* -------------------------------------------------------- */
 static char	*take_exec(char *line, t_cmd *cmd)
 {
 	char	*ret;
@@ -58,7 +67,7 @@ static char	*take_exec(char *line, t_cmd *cmd)
 	if (!ret)
 		ft_exit(MALLOCERR, 1);
 	i[1] = 0;
-	while (i[1] <= i[0])
+	while (i[1] < i[0])
 		ret[i[1]++] = *line++;
 	ret[i[1] + 1] = '\0';
 	line = ft_skipspace(line);
@@ -67,6 +76,10 @@ static char	*take_exec(char *line, t_cmd *cmd)
 	return (line);
 }
 
+/* ----------------| PARSSE THE PARAMETER |---------------- */
+/*	The line start after the command. Also we take the rest */
+/*	until a \0, redirection, pipe and binary test.			 */
+/* -------------------------------------------------------- */
 static char	*take_params(char *line, t_cmd *cmd)
 {
 	char	*ret;
@@ -79,20 +92,26 @@ static char	*take_params(char *line, t_cmd *cmd)
 			&& line[i[0] + 1] != '&') && line[i[0]] != '>' && line[i[0]] != '<')
 		i[0]++;
 	if (i[0] == 0)
-		return (NULL);
+		return (line);
 	ret = (char *)malloc(sizeof(char) * (i[0] + 1));
 	if (!ret)
 		ft_exit(MALLOCERR, 1);
 	i[1] = 0;
 	while (i[1] < i[0])
 		ret[i[1]++] = *line++;
-	ret[i[1] + 1] = '\0';
+	ret[i[1]] = '\0';
 //	cmd->param = check_quote(ret, struct_passing(1, 0));
 	cmd->param = ret; // to check
 	line = ft_skipspace(line);
 	return (line);
 }
 
+/* --------------| PARSSE BETWEEN COMMAND |---------------- */
+/*	We check the rest of the line. If the line egal \0 that	*/
+/*	means the command is finish otherise we put the			*/
+/*	variable to TYPE in struct to know what the redirection */
+/*	pipe, or binary operation is.
+/* -------------------------------------------------------- */
 static char	*take_operator(char *line, t_cmd *cmd)
 {
 	if (!line || *line == '\0')
@@ -119,6 +138,12 @@ static char	*take_operator(char *line, t_cmd *cmd)
 	return (line);
 }
 
+/* ------------------| START OF PARSER |------------------- */
+/*	The parser work in recurssive mode when the line is		*/
+/*	empty after parssing. When the line containt something	*/
+/*	we create a new structure cmd to place the new command.	*/
+/*	See struct in minishell.h								*/
+/* -------------------------------------------------------- */
 t_cmd	*cmd_parse(char *shell, t_cmd *cmd)
 {
 	char	*line;
@@ -136,6 +161,9 @@ t_cmd	*cmd_parse(char *shell, t_cmd *cmd)
 	line = take_params(line, new);
 	line = take_operator(line, new);
 	if (line && *line != '\0')
+	{
 		new->next = cmd_parse(line, new);
+		new->next->prev = new;
+	}
 	return (new);
 }

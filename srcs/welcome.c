@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 10:08:54 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/18 11:42:01 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/21 16:28:40 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ page.\n", 110);
 	}
 }
 
+/* --------------------| WELCOME MESSAGE |----------------- */
+/*	Check if the file modt exist and write this in screen	*/
+/*	If the file don't exist, we put the model on screen and	*/
+/*	create the file modt with the model inside.				*/
+/* -------------------------------------------------------- */
 int	welcome(void)
 {
 	int		welcome_msg;

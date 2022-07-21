@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:07:29 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/21 11:56:47 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/21 16:18:16 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,19 @@ int	main(int argc, char **argv, char **env)
 //		exit(ft_exit(SIGN, 0));
 	if (add_builtins(&shell))
 		exit(ft_exit(BUILT, 0));
-/* 	else
-	{
-		commande_parse(**argv, shell);
-		execute(shell);
-		exit (ft_free_lvl(2));
-	} */
 	if (welcome() != 0)
 		exit (ft_exit(WELCOME_ERR, 2));
-
 	if (!prompt(&shell))
 		return (0);
 	return (ft_exit(WELCOME_ERR, 1));
 }
 
+/* -----------------| PARSSE THE DIRECTORY |--------------- */
+/*	This function help to take the structure. Used to free	*/
+/*	before exit the program.								*/
+/*	This function create a static at the first call. The	*/
+/*	next call the function return the struct was asked!		*/
+/* -------------------------------------------------------- */
 void	*struct_passing(int type, void *data)
 {
 	static int			reload;

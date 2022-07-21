@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/21 13:01:51 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/21 15:52:13 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,19 +70,20 @@ typedef struct s_env
 typedef struct s_cmd
 {
 	char			*path;
-	char			*command;
+	char			*command; // commamd = file
 	char			*param;
 // 0- end; 1- |; 2- ||; 3- && ; 4- >; 5- >>; 6- <; 7- << // ATTENTION au ' et "
 	int				type;
 	int				fd;
 	struct s_pipe	*pipe[2];
 	struct s_cmd	*next;
+	struct s_cmd	*prev;
 }	t_cmd;
 
 typedef struct s_shell
 {
 	char				*line;
-	pid_t				*pid;
+	short unsigned int	*return_err;
 	struct s_env		*env;
 	struct s_cmd		*cmd;
 	struct s_builtins	*builtin;

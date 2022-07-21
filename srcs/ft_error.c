@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 13:00:26 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/20 17:01:04 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/21 16:26:35 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ static void	err_type(int msg, void *data)
 	}
 }
 
+/* ------------| NEED EXIT??! PREVENT LEAKS! |------------- */
+/*	The function tale a type of "error" and put a message	*/
+/*	in a screen. If there are something to free (level)		*/
+/*	We call the err_type with the code/level to free and	*/
+/*	exit the program without leaks.							*/
+/* -------------------------------------------------------- */
 int	ft_exit(int type, int to_free)
 {
 	if (type == 1)
