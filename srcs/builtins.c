@@ -6,13 +6,11 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:41:57 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/21 16:15:56 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/21 19:38:23 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-
 
 /* -------------------| DO THE BUILTIN |------------------- */
 /*	Add builtins in a structure with a pointer of function	*/

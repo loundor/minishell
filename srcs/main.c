@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:07:29 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/21 16:18:16 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/21 19:56:38 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	main(int argc, char **argv, char **env)
 {
 	t_shell	shell;
 
+	struct_passing(0, &shell);
 	shell.env = do_env(env);
 	if (!shell.env)
 		exit(ft_exit(ENV, 0));
@@ -53,6 +54,7 @@ void	*struct_passing(int type, void *data)
 		cmd = (t_cmd *)((t_shell *)data)->cmd;
 		builtins = (t_builtins *)((t_shell *)data)->builtin;
 		reload = 1;
+		return (0);
 	}
 	if (type == 1)
 		return (shell);

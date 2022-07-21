@@ -11,6 +11,7 @@ SRCS		= 	builtins.c \
 				env_pars.c \
 				ft_error.c \
 				main.c \
+				param_parse.c \
 				prompt.c \
 				signal.c \
 				welcome.c \

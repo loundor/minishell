@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 17:10:41 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/21 16:10:38 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/21 19:53:30 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ static char	*take_params(char *line, t_cmd *cmd)
 /*	We check the rest of the line. If the line egal \0 that	*/
 /*	means the command is finish otherise we put the			*/
 /*	variable to TYPE in struct to know what the redirection */
-/*	pipe, or binary operation is.
+/*	pipe, or binary operation is.							*/
 /* -------------------------------------------------------- */
 static char	*take_operator(char *line, t_cmd *cmd)
 {
@@ -159,6 +159,8 @@ t_cmd	*cmd_parse(char *shell, t_cmd *cmd)
 	line = ft_skipspace(line);
 	line = take_exec(line, new);
 	line = take_params(line, new);
+	if (new->param != NULL)
+		new->param = param_parse(new);
 	line = take_operator(line, new);
 	if (line && *line != '\0')
 	{
