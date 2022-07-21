@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 17:10:41 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/21 11:56:42 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/21 13:25:25 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,7 @@ static char	*take_path(char *line, t_cmd *cmd)
 		i++;
 	}
 	if (slash == 0)
-	{
-		cmd->path = NULL;
 		return (line);
-	}
 	if (slash > 0)
 		while (line[i] != '/')
 			i--;
@@ -66,6 +63,7 @@ static char	*take_exec(char *line, t_cmd *cmd)
 	ret[i[1] + 1] = '\0';
 	line = ft_skipspace(line);
 	cmd->command = ret;
+	line = ft_skipspace(line);
 	return (line);
 }
 
@@ -80,6 +78,8 @@ static char	*take_params(char *line, t_cmd *cmd)
 	while (line[i[0]] != '\0' && line[i[0]] != '|' && (line[i[0]] != '&'
 			&& line[i[0] + 1] != '&') && line[i[0]] != '>' && line[i[0]] != '<')
 		i[0]++;
+	if (i[0] == 0)
+		return (NULL);
 	ret = (char *)malloc(sizeof(char) * (i[0] + 1));
 	if (!ret)
 		ft_exit(MALLOCERR, 1);
@@ -89,19 +89,33 @@ static char	*take_params(char *line, t_cmd *cmd)
 	ret[i[1] + 1] = '\0';
 //	cmd->param = check_quote(ret, struct_passing(1, 0));
 	cmd->param = ret; // to check
+	line = ft_skipspace(line);
 	return (line);
 }
 
 static char	*take_operator(char *line, t_cmd *cmd)
 {
-	int		ret;
-//	size_t	i[2];
-
-cmd->type = 1;
 	if (!line || *line == '\0')
-		return (0);
-	ret = 0;
-	(void)line;
+		return (NULL);
+	if (!ft_strncmp(line, "||", 2))
+		cmd->type = 2;
+	else if (!ft_strncmp(line, "|", 1))
+		cmd->type = 1;
+	if (!ft_strncmp(line, "&&", 2))
+		cmd->type = 3;
+	if (!ft_strncmp(line, "<<", 2))
+		cmd->type = 7;
+	else if (!ft_strncmp(line, "<", 1))
+		cmd->type = 6;
+	if (!ft_strncmp(line, ">>", 2))
+		cmd->type = 5;
+	else if (!ft_strncmp(line, ">", 1))
+		cmd->type = 4;
+	if (cmd->type == 5 || cmd->type == 7 || cmd->type == 2 || cmd->type == 3)
+		line += 2;
+	else
+		line++;
+	line = ft_skipspace(line);
 	return (line);
 }
 
@@ -111,28 +125,17 @@ t_cmd	*cmd_parse(char *shell, t_cmd *cmd)
 	t_cmd	*new;
 
 	line = shell;
-printf("\nSTART = %s", line);
+	(void)cmd;
 	line = ft_skipspace(line);
-	new = (t_cmd *)malloc(sizeof(t_cmd));
+	new = malloc(sizeof(t_cmd));
 	if (!line || !new)
 		ft_exit(MALLOCERR, 1);
 	line = take_path(line, new);
-printf("\nPATH = %s", new->path);
 	line = ft_skipspace(line);
 	line = take_exec(line, new);
-printf("\nEXEC = %s", new->command);
-	line = ft_skipspace(line);
 	line = take_params(line, new);
-printf("\nPARAM = %s", new->param);
-	line = ft_skipspace(line);
 	line = take_operator(line, new);
-printf("\nTYPE = %d", new->type);
-	line = ft_skipspace(line);
 	if (line && *line != '\0')
-{
-printf("\nTAKE NEXT CMD");
-		cmd->next = cmd_parse(line, new);
-}
-printf("FINISH");
-	return (cmd);
+		new->next = cmd_parse(line, new);
+	return (new);
 }
