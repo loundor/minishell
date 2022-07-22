@@ -6,65 +6,11 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 13:00:26 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/22 11:34:23 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/22 13:16:21 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-static void	free_shell(t_shell *shell)
-{
-
-}
-
-static void	free_env(t_env *env)
-{
-	if (env)
-	{
-		if (env->prev_env)
-		{
-			env->prev_env->next_env = NULL;
-			env->prev_env = NULL;
-		}
-		free_env_rec(env);
-	}
-}
-
-static void free_env_rec(t_env *env)
-{
-	if (env)
-	{
-		if (env->next)
-			free_env_rec(env->next);
-		
-	}
-}
-static void free_cmd(t_cmd *cmd)
-{
-	if (cmd)
-	{
-		if (cmd->next)
-			free_cmd(cmd->next);
-		if (cmd->path)
-			free(cmd->path);
-		if (cmd->command)
-			free(cmd->command);
-		if (cmd->param)
-			free(param);
-		free(cmd);
-	}
-}
-
-static void free_builtins(t_builtins *builtins)
-{
-	if (builtins)
-	{
-		if (builtins->next)
-			free_builtins(builtins->next);
-		free(builtins->cmd);
-		free(builtins);
-	}
-}
 
 static void	err_type(int msg, void *data)
 {

@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 17:10:41 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/22 11:34:21 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/22 14:07:13 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static char	*take_path(char *line, t_cmd *cmd)
 	size_t	i;
 	size_t	slash;
 
+	if (*line == '\"')
+		return (line);
 	i = 0;
 	slash = 0;
 	while (line[i] != '\0' && !ft_isspace(line[i]))
@@ -58,11 +60,19 @@ static char	*take_path(char *line, t_cmd *cmd)
 static char	*take_exec(char *line, t_cmd *cmd)
 {
 	char	*ret;
+	t_cmd	more;
 	size_t	i[2];
 
 	i[0] = 0;
-	while (!ft_isspace(line[i[0]]) && line[i[0]] != '\0')
-		i[0]++;
+	if (*line == '\"')
+	{
+		line++;
+		while (line[i[0]] != '\"')
+			i[0]++;
+	}
+	else
+		while (!ft_isspace(line[i[0]]) && line[i[0]] != '\0')
+			i[0]++;
 	ret = (char *)malloc(sizeof(char) * (i[0] + 1));
 	if (!ret)
 		ft_exit(MALLOCERR, 1);
@@ -70,9 +80,17 @@ static char	*take_exec(char *line, t_cmd *cmd)
 	while (i[1] < i[0])
 		ret[i[1]++] = *line++;
 	ret[i[1] + 1] = '\0';
+	if (*line == '\"')
+		line++;
+	if (*line == '\"')
+	{
+		line = take_exec(line, &more);
+		cmd->command = ft_strjoin(ret, more.command);
+		free(more.command);
+		return (line);
+	}
 	line = ft_skipspace(line);
 	cmd->command = ret;
-	line = ft_skipspace(line);
 	return (line);
 }
 
@@ -90,7 +108,7 @@ static char	*take_params(char *line, t_cmd *cmd)
 		return (0);
 	while (line[i[0]] != '\0' && line[i[0]] != '|' && (line[i[0]] != '&'
 			&& line[i[0] + 1] != '&') && line[i[0]] != '>' && line[i[0]] != '<')
-		i[0]++;
+	i[0]++;
 	if (i[0] == 0)
 		return (line);
 	ret = (char *)malloc(sizeof(char) * (i[0] + 1));

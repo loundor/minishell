@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/22 11:34:19 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/22 13:27:26 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,19 @@ int			add_builtins(t_shell *shell); // OK
 void		*struct_passing(int type, void *data);
 t_cmd		*cmd_parse(char *shell, t_cmd *cmd);
 
+/* --------------------| FREE PARTY |---------------------- */
+/*															*/
+/* -------------------------------------------------------- */
+int			ft_exit(int type, int to_free); // Need complet
+void		free_builtins(t_builtins *builtins);
+void		free_cmd(t_cmd *cmd);
+void		free_env_rec(t_env *env);
+void		free_env(t_env *env);
+void		free_shell(t_shell *shell);
+
 // WORKING
 char		*param_parse(t_cmd *cmd);
 int			cd(t_shell *shell); // change directory
-int			ft_exit(int type, int to_free); // Need complet
 int			core(t_shell *shell);// ACTUALY ONLY FOR TEST
 int			prep_signal(t_shell *shell);
 int			prompt(t_shell *shell);
@@ -132,5 +141,5 @@ int			see_errno(t_env *env);
 /* ************ */
 /*     SUB      */
 /* ************ */
-int	test(void *data);
+int			test(void *data);
 #endif
