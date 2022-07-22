@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:38:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/22 14:07:21 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/22 16:22:11 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	prompt(t_shell *shell)
 			if (core(shell))
 				printf("An error was occured!\n");
 		add_history(shell->line);
+		//free_cmd(shell->cmd);
 	}
 	write(STDOUT, "exit\n", 5);
 	return (0);

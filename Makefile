@@ -9,6 +9,7 @@ INCLUDES	= 	-I./includes -I./readline -I./lib/libft
 SRCS		= 	builtins.c \
 				cmd_parse.c \
 				env_pars.c \
+				free.c \
 				ft_error.c \
 				main.c \
 				param_parse.c \

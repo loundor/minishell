@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 13:11:52 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/22 13:27:20 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/22 16:21:13 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,15 @@ void	free_env_rec(t_env *env)
 
 void	free_cmd(t_cmd *cmd)
 {
-	if (cmd)
+	if (cmd != NULL)
 	{
-		if (cmd->next)
+		if (cmd->next != NULL)
 			free_cmd(cmd->next);
-		if (cmd->path)
+		if (cmd->path != NULL)
 			free(cmd->path);
-		if (cmd->command)
+		if (cmd->command != NULL)
 			free(cmd->command);
-		if (cmd->param)
+		if (cmd->param != NULL)
 			free(cmd->param);
 		free(cmd);
 	}

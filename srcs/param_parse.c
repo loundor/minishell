@@ -6,11 +6,20 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 19:35:56 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/22 15:58:35 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/22 16:15:01 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+static char	*search_var(char *var)
+{
+	char	*ret;
+
+	ret = NULL;
+	(void)var;
+	return (ret);
+}
 
 static char	*take_simple_quote(char *old, char *new)
 {
@@ -26,15 +35,23 @@ static char	*take_double_quote(char *old, char *new)
 	return (old);
 }
 
-static char	*search_var(char *var)
+static char	*take_dollar(char *old, char *new)
 {
 	char	*ret;
+	char	*var;
 
-	ret = NULL;
-	(void)var;
-	return (ret);
+	var = NULL;
+	ret = search_var(var);
+	if (new)
+		write (1, "NEW IS NEW $\n", 12);
+	return (old);
 }
 
+/* ---------------| PARAMETER PARSSING |------------------- */
+/*	Get the pointer of cmd->param. Of every caractere check	*/
+/*	if it's a signle or double quote and launch the funct	*/
+/*	if need. Recept the new created line, and free the last	*/
+/* -------------------------------------------------------- */
 char	*param_parse(t_cmd *cmd)
 {
 	t_env	*env;
@@ -45,20 +62,23 @@ char	*param_parse(t_cmd *cmd)
 	env = struct_passing(2, 0);
 	while (*cmd->param)
 	{
-		if (*cmd->param == '\'' || *cmd->param == '\"')
+		if (*cmd->param == '\'' || *cmd->param == '\"'
+			|| *cmd->param == '$')
 		{
 			bak[1] = new;
 			if (*cmd->param == '\'')
 				new = take_simple_quote(cmd->param, new);
-			else
+			else if (*cmd->param == '\"')
 				new = take_double_quote(cmd->param, new);
+			else
+				new = take_dollar(cmd->param, new);
 			free(bak[1]);
 			continue ;
 		}
 		bak[1] = new;
 // fonction was just create ft_joincts. need test if work properly!!		
 		new = ft_joincts(new, (char)cmd->param);
-		free(new);
+		free(bak[1]);
 	}
 	free(bak[0]);
 	return (new);

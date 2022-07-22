@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:41:57 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/21 19:38:23 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/22 16:15:30 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ static void	init_builtins(char *cmd, int (*f)(), t_shell *sh)
 
 	builtins = (t_builtins *) malloc(sizeof(t_builtins));
 	if (!builtins)
-		ft_exit(MALLOCERR, 1);
+		exit(ft_exit(MALLOCERR, 1));
 	builtins->cmd = (char *)malloc(sizeof(char) * (ft_strlen(cmd) + 1));
 	if (!builtins->cmd)
-		ft_exit(MALLOCERR, 2);
+		exit(ft_exit(MALLOCERR, 2));
 	ft_strlcpy(builtins->cmd, cmd, ft_strlen(cmd) + 1);
 	builtins->f = f;
 	if (sh->builtin)
