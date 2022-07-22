@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:38:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/22 21:31:49 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/22 21:48:47 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,26 @@
 /* -------------------------------------------------------- */
 int	prompt(t_shell *shell)
 {
+	char	*line;
+
 	while (!shell->line || strcmp(shell->line, "exit"))
 	{
 		shell->cmd = NULL;
 		if (shell->line != NULL)
 			free(shell->line);
 		shell->line = readline("\e[36mminishell-0.1$\e[0m ");
-		if (shell->line[0] != '\0')
+		line = shell->line;
+		line = ft_skipspace(line);
+		if (line)
+		{
 			if (core(shell))
 				printf("An error was occured!\n");
+		}
+		else
+			continue ;
 		add_history(shell->line);
 		ft_exit(0, 3);
+		line = NULL;
 	}
 	return (0);
 }
