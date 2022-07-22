@@ -14,7 +14,8 @@ SRCS	=	ft_atoi.c ft_memchr.c ft_split.c \
 			ft_isdigit.c ft_putendl_fd.c ft_strlen.c \
 			ft_isprint.c ft_putnbr_fd.c ft_strmapi.c \
 			ft_striteri.c ft_itoa.c ft_putstr_fd.c \
-			ft_strncmp.c ft_skipspace.c ft_isspace.c
+			ft_strncmp.c ft_skipspace.c ft_isspace.c \
+			ft_joincts.c
 OBJS	= $(addprefix ./, ${SRCS:.c=.o})
 BONUSSRCS = 
 BNS		= $(addprefix ./, ${BONUSSRCS:.c=.o})

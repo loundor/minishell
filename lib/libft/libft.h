@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 19:20:39 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/20 16:41:30 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/22 15:54:30 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,5 @@ void		ft_putendl_fd(char *s, int fd);
 void		ft_putnbr_fd(int n, int fd);
 char		*ft_skipspace(char *str);
 int			ft_isspace(char car);
+char		*ft_joincts(const char *s, const char c);
 #endif

@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/22 13:27:26 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/22 15:52:39 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,7 @@ int			unset(char *var); // unset a env variable
 int			parser(char *str); // split the commande
 void		create_command(char **argv, char **env);
 int			w_history(char **history); // write history
-char		*take_simple_quote(char *str);
-char		*take_double_quote(char *str);
+
 int			check_auth(char **path, char *dest);	// check the access
 int			see_errno(t_env *env);
 
