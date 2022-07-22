@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 14:26:15 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/20 17:06:02 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/22 11:34:18 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_env	*do_env(char **env)
 	while (++env && *env)
 	{
 		parsse = 0;
-		parsse = malloc(sizeof(t_env));
+		parsse = (t_env *)malloc(sizeof(t_env));
 		if (!parsse)
 			exit(ft_exit(MALLOCERR, 1));
 		parsse->prev_env = tenv;
