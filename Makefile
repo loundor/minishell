@@ -1,7 +1,7 @@
 NAME		= 	minishell
 CC			= 	gcc
 FLAGS		= 	-Wall -Werror -Wextra ${EXTRAF}
-EXTRAF		= 	-g
+EXTRAF		= 	-g -fsanitize=address
 LIBRARY		=  -lreadline -Lreadline/lib #-Llibft -L./lib/libft
 INCLUDES	= 	-I./includes -I./readline -I./lib/libft 
 #LIBRARY		=  -lreadline #-Lreadline/lib #-Llibft -L./lib/libft

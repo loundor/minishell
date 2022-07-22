@@ -6,21 +6,40 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 13:00:26 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/22 13:16:21 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/22 21:31:50 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static void	err_type(int msg, void *data)
+static void	tab_err(int type)
 {
-	if (msg == 1)
-		free((t_env *)data);
-	if (msg == 2)
+	static char	*msg_err[8];
+
+	if (!msg_err[0])
 	{
-		err_type(1, (t_shell *)data);
-		free ((t_builtins *)((t_shell *)data)->builtin);
+		msg_err[0] = "Can't create environement structure!";
+		msg_err[1] = "Malloc error!";
+		msg_err[2] = "Welcome error!";
+		msg_err[3] = "No environement variable!";
+		msg_err[4] = "Signal modification not autorized";
+		msg_err[5] = "Can't create builtins!";
+		msg_err[6] = "Error command not found!\n";
 	}
+	if (type != 0)
+		printf("%s", msg_err[type + 1]);
+}
+
+static void	err_type(int to_free, void *data)
+{
+	if (to_free == 1)
+		free_shell((t_shell *)data);
+	if (to_free == 2)
+		free_env((t_env *)data);
+	if (to_free == 3)
+		free_cmd((t_cmd *)data);
+	if (to_free == 4)
+		free_builtins((t_builtins *)data);
 }
 
 /* ------------| NEED EXIT??! PREVENT LEAKS! |------------- */
@@ -32,24 +51,8 @@ static void	err_type(int msg, void *data)
 /* -------------------------------------------------------- */
 int	ft_exit(int type, int to_free)
 {
-	if (type == 1)
-		printf("Can't create environement structure!");
-	else if (type == 2)
-		printf("Malloc error!");
-	else if (type == 3)
-		printf("Welcome error!");
-	else if (type == 4)
-		printf("No environement variable!");
-	else if (type == 5)
-		printf("Signal modification not autorized");
-	else if (type == 6)
-		printf("Can't create builtins!");
-	else if (type == 7)
-	{
-		printf("Error command not found!\n");
-		return (1);
-	}
+	tab_err(type);
 	if (to_free)
 		err_type(to_free, struct_passing(to_free, 0));
-	return (0);
+	return (type);
 }

@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/22 15:52:39 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/22 19:42:49 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,15 @@
 
 typedef enum e_typeerror
 {
-	ALLRIGHT,
+	EXIT,
 	ENV,
 	MALLOCERR,
 	WELCOME_ERR,
 	NO_ENV,
 	SIGN,
 	BUILT,
-	CMDNFOUND
+	CMDNFOUND,
+	ALLRIGHT
 }	t_error;
 
 typedef struct s_builtins

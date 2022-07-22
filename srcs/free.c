@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 13:11:52 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/22 16:21:13 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/22 21:25:51 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	free_shell(t_shell *shell)
 	if (shell->line)
 		free(shell->line);
 	free_env(shell->env);
-	free_cmd(shell->cmd);
 	free_builtins(shell->builtin);
 	// SEE FOR STRUCT PIPE
 }
@@ -52,7 +51,7 @@ void	free_env_rec(t_env *env)
 
 void	free_cmd(t_cmd *cmd)
 {
-	if (cmd != NULL)
+	if (cmd)
 	{
 		if (cmd->next != NULL)
 			free_cmd(cmd->next);

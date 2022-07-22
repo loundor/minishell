@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:41:57 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/22 16:15:30 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/22 20:57:14 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static void	init_builtins(char *cmd, int (*f)(), t_shell *sh)
 		exit(ft_exit(MALLOCERR, 2));
 	ft_strlcpy(builtins->cmd, cmd, ft_strlen(cmd) + 1);
 	builtins->f = f;
+	builtins->next = NULL;
 	if (sh->builtin)
 	{
 		tmp = sh->builtin;

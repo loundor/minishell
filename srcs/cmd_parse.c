@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 17:10:41 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/22 15:38:09 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/22 21:31:47 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ static char	*take_path(char *line, t_cmd *cmd)
 	size_t	i;
 	size_t	slash;
 
-	if (*line == '\"')
+	cmd->path = NULL;
+	if (!line || *line == '\"')
 		return (line);
 	i = 0;
 	slash = 0;
@@ -40,13 +41,13 @@ static char	*take_path(char *line, t_cmd *cmd)
 	if (slash > 0)
 		while (line[i] != '/')
 			i--;
-	ret = (char *)malloc(sizeof(char) * (i + 1));
+	ret = (char *)malloc(sizeof(char) * (i + 2));
 	if (!ret)
 		ft_exit(MALLOCERR, 1);
 	slash = 0;
 	while (slash <= i)
 		ret[slash++] = *line++;
-	ret[slash + 1] = '\0';
+	ret[slash] = '\0';
 	cmd->path = ret;
 	return (line);
 }
@@ -73,7 +74,7 @@ static char	*take_exec(char *line, t_cmd *cmd)
 	else
 		while (!ft_isspace(line[i[0]]) && line[i[0]] != '\0')
 			i[0]++;
-	ret = (char *)malloc(sizeof(char) * (i[0] + 1));
+	ret = (char *)malloc(sizeof(char) * (i[0] + 2));
 	if (!ret)
 		ft_exit(MALLOCERR, 1);
 	i[1] = 0;
@@ -104,8 +105,9 @@ static char	*take_params(char *line, t_cmd *cmd)
 	size_t	i[2];
 
 	i[0] = 0;
+	cmd->param = NULL;
 	if (!line || *line == '\0')
-		return (0);
+		return (NULL);
 	while (line[i[0]] != '\0' && line[i[0]] != '|' && (line[i[0]] != '&'
 			&& line[i[0] + 1] != '&') && line[i[0]] != '>' && line[i[0]] != '<')
 	i[0]++;
@@ -177,7 +179,7 @@ t_cmd	*cmd_parse(char *shell, t_cmd *cmd)
 	line = ft_skipspace(line);
 	line = take_exec(line, new);
 	line = take_params(line, new);
-	if (new->param != NULL)
+	if (new->param)
 		new->param = param_parse(new);
 	line = take_operator(line, new);
 	if (line && *line != '\0')
@@ -185,5 +187,7 @@ t_cmd	*cmd_parse(char *shell, t_cmd *cmd)
 		new->next = cmd_parse(line, new);
 		new->next->prev = new;
 	}
+	else
+		new->next = NULL;
 	return (new);
 }

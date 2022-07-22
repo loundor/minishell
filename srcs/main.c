@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:07:29 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/22 16:17:35 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/22 21:08:44 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	main(int argc, char **argv, char **env)
 
 	struct_passing(0, &shell);
 	shell.env = do_env(env);
+	shell.line = NULL;
 	if (!shell.env)
 		exit(ft_exit(ENV, 0));
 	if (argc == 1)
@@ -28,9 +29,11 @@ int	main(int argc, char **argv, char **env)
 		exit(ft_exit(BUILT, 0));
 	if (welcome() != 0)
 		exit (ft_exit(WELCOME_ERR, 2));
-	if (!prompt(&shell))
+	if (prompt(&shell))
 		return (ft_exit(WELCOME_ERR, 1));
-	return (ft_exit(WELCOME_ERR, 1));
+	ft_exit(0, 1);
+	printf("exit\n");
+	return (0);
 }
 
 /* -----------------| PARSSE THE DIRECTORY |--------------- */
