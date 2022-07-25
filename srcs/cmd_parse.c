@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 17:10:41 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/22 21:44:43 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/25 07:08:37 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,13 @@ static char	*take_exec(char *line, t_cmd *cmd)
 	else
 		while (!ft_isspace(line[i[0]]) && line[i[0]] != '\0')
 			i[0]++;
-	ret = (char *)malloc(sizeof(char) * (i[0] + 2));
+	ret = (char *)malloc(sizeof(char) * (i[0] + 1));
 	if (!ret)
 		ft_exit(MALLOCERR, 1);
 	i[1] = 0;
 	while (i[1] < i[0])
 		ret[i[1]++] = *line++;
-	ret[i[1] + 1] = '\0';
+	ret[i[1]] = '\0';
 	if (*line == '\"')
 		line++;
 	if (*line == '\"')

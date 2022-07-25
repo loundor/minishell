@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 14:26:15 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/22 11:34:18 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/25 07:15:24 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,16 @@ static t_env	*parse_path(t_env *tenv, t_env *ret)
 {
 	char	**path;
 	t_env	*cmp;
+	char	*tojoin;
 
 	tenv->next_env = ret;
 	ret->prev_env = tenv;
 	cmp = ret;
+	tojoin = ft_strjoin("PATH:", cmp->env_var[1]);
 	while (ft_strncmp(cmp->env_var[0], "PATH", 4) != 0)
 		cmp = cmp->next_env;
-	path = ft_split(ft_strjoin("PATH:", cmp->env_var[1]), ':');
+	path = ft_split(tojoin, ':');
+	free(tojoin);
 	free(cmp->env_var);
 	cmp->env_var = path;
 	return (ret);

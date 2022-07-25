@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 19:35:56 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/22 21:01:12 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/25 07:05:17 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static char	*take_dollar(char *old, char *new)
 	char	*ret;
 	char	*var;
 
+	(void)ret;
 	var = NULL;
 	ret = search_var(var);
 	if (new)
@@ -77,9 +78,10 @@ char	*param_parse(t_cmd *cmd)
 		}
 		bak[1] = new;
 // fonction was just create ft_joincts. need test if work properly!!		
-		new = ft_joincts(new, (char)cmd->param);
+		new = ft_joincts(new, (char)cmd->param[0]);
 		free(bak[1]);
 	}
 	free(bak[0]);
+	(void)env;
 	return (new);
 }

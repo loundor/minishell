@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 10:47:21 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/18 12:06:41 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/25 07:05:39 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 static void	get_signal(int signo, siginfo_t *info, void *context)
 {
-	context = NULL; // Look about what is context maybe old act??!!
+//	context = NULL; // Look about what is context maybe old act??!!
 
 	(void)info;
+	(void)context;
 
 	if (signo == 2 || signo == 6)
 	{

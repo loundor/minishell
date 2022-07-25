@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:38:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/22 21:48:47 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/25 07:07:42 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	core(t_shell *shell)
 
 	shell->cmd = cmd_parse(shell->line, shell->cmd);
 	builtin = search_builtin(shell->cmd->command, shell->builtin);
+printf("-->%s<--", shell->cmd->command);
 	if (builtin != NULL)
 		builtin->f(shell);
 	return (0);

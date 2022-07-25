@@ -2,10 +2,10 @@ NAME		= 	minishell
 CC			= 	gcc
 FLAGS		= 	-Wall -Werror -Wextra ${EXTRAF}
 EXTRAF		= 	-g -fsanitize=address
-LIBRARY		=  -lreadline -Lreadline/lib #-Llibft -L./lib/libft
-INCLUDES	= 	-I./includes -I./readline -I./lib/libft 
-#LIBRARY		=  -lreadline #-Lreadline/lib #-Llibft -L./lib/libft
-#INCLUDES	= 	-I./includes #-I./readline/include/readline #-I./lib/libft 
+#LIBRARY		=  -lreadline -Lreadline/lib #-L./lib/libft // MACOS
+#INCLUDES	= 	-I./includes -I./readline -I./lib/libft // MACOS
+LIBRARY		=  -lreadline -lcurses #-L./lib/libft
+INCLUDES	= 	-I./includes -I./lib/libft  
 SRCS		= 	builtins.c \
 				cmd_parse.c \
 				env_pars.c \
