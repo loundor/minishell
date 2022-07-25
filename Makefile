@@ -3,11 +3,11 @@ CC			= 	gcc
 FLAGS		= 	-Wall -Werror -Wextra ${EXTRAF}
 EXTRAF		= 	-g -fsanitize=address
 # MACOS
-LIBRARY		=  -lreadline -Lreadline/lib #-L./lib/libft
-INCLUDES	= 	-I./includes -I./readline -I./lib/libft
+#LIBRARY		=  -lreadline -Lreadline/lib #-L./lib/libft -L./lib/libft ./lib/libft/libft.a
+#INCLUDES	= 	-I./includes -I./readline -I./lib/libft 
 # LINUX
-#LIBRARY		=  -lreadline -lcurses #-L./lib/libft
-#INCLUDES	= 	-I./includes -I./lib/libft  
+LIBRARY		=   /usr/local/lib/libreadline.a /usr/local/lib/libhistory.a -lncurses -lreadline -L./lib/libft ./lib/libft/libft.a
+INCLUDES	= 	-I./includes -I./lib/libft
 SRCS		= 	builtins.c \
 				cmd_parse.c \
 				env_pars.c \
@@ -30,7 +30,7 @@ RM			= 	rm -rf
 #				$(CC) $(FLAGS) $(INCLUDES) -c $< -o ${<:.c=.o}
 
 $(NAME)		:	${OBJS}
-				${CC} ${FLAGS} ${INCLUDES} ${LIBRARY} ${OBJS} ./lib/libft/libft.a -o $@
+				${CC} ${FLAGS} ${OBJS} ${INCLUDES} ${LIBRARY} -o $@
 
 all			:	${NAME}
 

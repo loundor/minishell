@@ -90,6 +90,7 @@ char	*param_parse(t_cmd *cmd)
 	t_env		*env;
 	t_pparams	*param;
 
+	(void)env;
 	param = (t_pparams *)malloc(sizeof(t_pparams));
 	if (!param)
 		exit(ft_exit(MALLOCERR, 1));
