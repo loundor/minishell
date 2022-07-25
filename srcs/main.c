@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:07:29 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/22 21:08:44 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/25 14:24:04 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	main(int argc, char **argv, char **env)
 	struct_passing(0, &shell);
 	shell.env = do_env(env);
 	shell.line = NULL;
+	shell.builtin = NULL;
 	if (!shell.env)
 		exit(ft_exit(ENV, 0));
 	if (argc == 1)

@@ -6,82 +6,103 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 19:35:56 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/25 07:05:17 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/25 14:41:01 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static char	*search_var(char *var)
+/* static char	*search_var(char *var)
 {
 	char	*ret;
 
 	ret = NULL;
 	(void)var;
 	return (ret);
+} */
+
+static char	*take_single_quote(t_pparams *param)
+{
+	char	*line;
+	size_t	start;
+	size_t	end;
+size_t	len;
+
+	end = 0;
+	line = NULL;
+	len = 0;
+	param->old++;
+	while (param->old[end] != '\'')
+		end++;
+	if (end == 0)
+		return (param->line);
+if (param->line)
+len = ft_strlen(param->line);
+	line = (char *)malloc(sizeof(char) * (len + end + 1));
+	if (!line)
+		exit(ft_exit(MALLOCERR, 1));
+	start = -1;
+if (param->line)
+	while (param->line[++start])
+			line[start] = param->line[start];
+	start--;
+	while (start++ <= (end + ft_strlen(param->line)))
+		line[start + ft_strlen(line)] = \
+			param->old[start - ft_strlen(param->line)];
+	line[ft_strlen(line) + end] = '\0';
+	param->old = &param->old[end + 1];
+	free (param->line);
+	return (line);
 }
 
-static char	*take_simple_quote(char *old, char *new)
+static char	*take_double_quote(t_pparams *param)
 {
-	if (new)
-		write (1, "NEW IS NEW\n", 12);
-	return (old);
+	(void) param;
+	write (1, "NEW IS NEW $\n", 12);
+	return (param->line);
 }
 
-static char	*take_double_quote(char *old, char *new)
+static char	*take_dollar(t_pparams *param)
 {
-	if (new)
-		write (1, "NEW IS NEW DC\n", 15);
-	return (old);
-}
-
-static char	*take_dollar(char *old, char *new)
-{
-	char	*ret;
-	char	*var;
-
-	(void)ret;
-	var = NULL;
-	ret = search_var(var);
-	if (new)
-		write (1, "NEW IS NEW $\n", 12);
-	return (old);
+	(void) param;
+	write (1, "NEW IS NEW $\n", 12);
+	return (param->line);
 }
 
 /* ---------------| PARAMETER PARSSING |------------------- */
 /*	Get the pointer of cmd->param. Of every caractere check	*/
 /*	if it's a signle or double quote and launch the funct	*/
 /*	if need. Recept the new created line, and free the last	*/
+/*	linenbak 0 -> parssing str								*/
+/*	linenbak 1 -> str to parsse								*/
 /* -------------------------------------------------------- */
 char	*param_parse(t_cmd *cmd)
 {
-	t_env	*env;
-	char	*bak[2];
-	char	*new;
+	t_env		*env;
+	t_pparams	*param;
 
-	bak[0] = cmd->param;
+	param = (t_pparams *)malloc(sizeof(t_pparams));
+	if (!param)
+		exit(ft_exit(MALLOCERR, 1));
+	param->old = cmd->param;
+	param->line = NULL;
 	env = struct_passing(2, 0);
-	while (*cmd->param)
+	while (*param->old)
 	{
-		if (*cmd->param == '\'' || *cmd->param == '\"'
-			|| *cmd->param == '$')
+		if (*param->old == '\"')
+			param->line = take_double_quote(param);
+		else if (*param->old == '$' && *param->old != ' ')
+			param->line = take_dollar(param);
+		else if (*param->old == '\'')
+			param->line = take_single_quote(param);
+// fonction was just create ft_joincts. need test if work properly!!
+		else
 		{
-			bak[1] = new;
-			if (*cmd->param == '\'')
-				new = take_simple_quote(cmd->param, new);
-			else if (*cmd->param == '\"')
-				new = take_double_quote(cmd->param, new);
-			else
-				new = take_dollar(cmd->param, new);
-			free(bak[1]);
-			continue ;
+			param->line = ft_joincts(param->line, (char)param->old[0]);
+			param->old++;
 		}
-		bak[1] = new;
-// fonction was just create ft_joincts. need test if work properly!!		
-		new = ft_joincts(new, (char)cmd->param[0]);
-		free(bak[1]);
 	}
-	free(bak[0]);
-	(void)env;
-	return (new);
+	param->old = NULL;
+	free(cmd->param);
+	return (param->line);
 }

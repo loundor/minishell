@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/22 19:42:49 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/25 14:02:20 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,12 @@ typedef struct s_builtins
 	int					(*f)();
 	struct s_builtins	*next;
 }	t_builtins;
+
+typedef struct s_pparams
+{
+	char				*line;
+	char				*old;
+}	t_pparams;
 
 typedef struct s_env
 {
