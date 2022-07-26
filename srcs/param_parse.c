@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 19:35:56 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/26 16:31:20 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/26 19:08:47 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static char	*search_var(char *var)
 {
-	ft_putstr_fd(var, 1);
 	t_env	*env;
 	t_env	*tmp;
 	int		round;
+	char	*line;
 
 	env = (t_env *)struct_passing(2, NULL);
 	tmp = env;
@@ -29,8 +29,8 @@ static char	*search_var(char *var)
 		tmp = tmp->next_env;
 		round++;
 	}
-	ft_putstr_fd(tmp->env_var[1], 1);
-	return (NULL);
+	line = ft_strdup(tmp->env_var[1]);
+	return (line);
 }
 
 static char	*take_single_quote(char *param)
@@ -85,8 +85,7 @@ char	*take_dollar(char *param)
 		search[start] = *(param++);
 	search[start] = 0;
 	line = search_var(search);
-	line = search;
-	//free(search);
+	free(search);
 	return (line);
 }
 
