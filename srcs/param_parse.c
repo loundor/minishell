@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 19:35:56 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/26 16:04:20 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/26 16:31:20 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static char	*search_var(char *var)
 {
+	ft_putstr_fd(var, 1);
 	t_env	*env;
 	t_env	*tmp;
 	int		round;
@@ -28,7 +29,7 @@ static char	*search_var(char *var)
 		tmp = tmp->next_env;
 		round++;
 	}
-	ft_putstr_fd(tmp->env_var, 1);
+	ft_putstr_fd(tmp->env_var[1], 1);
 	return (NULL);
 }
 
