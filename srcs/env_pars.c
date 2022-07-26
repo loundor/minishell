@@ -6,13 +6,16 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 14:26:15 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/25 07:15:24 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/26 22:42:10 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static t_env	*parse_path(t_env *tenv, t_env *ret)
+/* ---------------|					 |------------------- */
+/*															*/
+/* -------------------------------------------------------- */
+/* static t_env	*parse_path(t_env *tenv, t_env *ret)
 {
 	char	**path;
 	t_env	*cmp;
@@ -29,8 +32,11 @@ static t_env	*parse_path(t_env *tenv, t_env *ret)
 	free(cmp->env_var);
 	cmp->env_var = path;
 	return (ret);
-}
+} */
 
+/* ---------------|					 |------------------- */
+/*															*/
+/* -------------------------------------------------------- */
 t_env	*do_env(char **env)
 {
 	t_env	*tenv;
@@ -56,6 +62,6 @@ t_env	*do_env(char **env)
 		tenv->next_env = parsse;
 		tenv = tenv->next_env;
 	}
-	ret = parse_path(tenv, ret);
+//	ret = parse_path(tenv, ret);
 	return (ret);
 }

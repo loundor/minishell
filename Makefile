@@ -3,11 +3,11 @@ CC			= 	gcc
 FLAGS		= 	-Wall -Werror -Wextra ${EXTRAF}
 EXTRAF		= 	-g -fsanitize=address
 # MACOS
-LIBRARY		=  -lreadline -Lreadline/lib -L./lib/libft ./lib/libft/libft.a
-INCLUDES	= 	-I./includes -I./readline -I./lib/libft 
+#LIBRARY		=  -lreadline -Lreadline/lib -L./lib/libft ./lib/libft/libft.a
+#INCLUDES	= 	-I./includes -I./readline -I./lib/libft 
 # LINUX
-#LIBRARY		=   /usr/local/lib/libreadline.a /usr/local/lib/libhistory.a -lncurses -lreadline -L./lib/libft ./lib/libft/libft.a
-#INCLUDES	= 	-I./includes -I./lib/libft
+LIBRARY		=   /usr/local/lib/libreadline.a /usr/local/lib/libhistory.a -lncurses -lreadline -L./lib/libft ./lib/libft/libft.a
+INCLUDES	= 	-I./includes -I./lib/libft
 SRCS		= 	builtins.c \
 				cmd_parse.c \
 				env_pars.c \

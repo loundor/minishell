@@ -6,12 +6,15 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 19:35:56 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/26 19:08:47 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/26 22:42:14 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+/* ---------------|					 |------------------- */
+/*															*/
+/* -------------------------------------------------------- */
 static char	*search_var(char *var)
 {
 	t_env	*env;
@@ -33,6 +36,9 @@ static char	*search_var(char *var)
 	return (line);
 }
 
+/* ---------------|					 |------------------- */
+/*															*/
+/* -------------------------------------------------------- */
 static char	*take_single_quote(char *param)
 {
 	char	*line;
@@ -59,6 +65,9 @@ static char	*take_single_quote(char *param)
 	return (line);
 }
 
+/* ---------------|					 |------------------- */
+/*															*/
+/* -------------------------------------------------------- */
 static char	*take_double_quote(char *param)
 {
 	write (1, "DOUBLE QUOTES\n", 15);
@@ -66,6 +75,9 @@ static char	*take_double_quote(char *param)
 	return (NULL);
 }
 
+/* ---------------|					 |------------------- */
+/*															*/
+/* -------------------------------------------------------- */
 char	*take_dollar(char *param)
 {
 	char	*line;
