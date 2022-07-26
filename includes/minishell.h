@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/26 11:17:30 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/26 14:48:15 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ void		free_shell(t_shell *shell);
 
 // WORKING
 char		*param_parse(char *cmd);
+char		*take_dollar(char *param);
 int			cd(t_shell *shell); // change directory
 int			core(t_shell *shell);// ACTUALY ONLY FOR TEST
 int			prep_signal(t_shell *shell);

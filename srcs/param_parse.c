@@ -6,20 +6,31 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 19:35:56 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/26 14:21:09 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/26 16:04:20 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-/* static char	*search_var(char *var)
+static char	*search_var(char *var)
 {
-	char	*ret;
+	t_env	*env;
+	t_env	*tmp;
+	int		round;
 
-	ret = NULL;
-	(void)var;
-	return (ret);
-} */
+	env = (t_env *)struct_passing(2, NULL);
+	tmp = env;
+	round = 0;
+	while (ft_strlen(var) != ft_strlen(tmp->env_var[0])
+		|| ft_strncmp(var, tmp->env_var[0], ft_strlen(tmp->env_var[0]))
+		|| ft_strncmp(var, tmp->env_var[0], ft_strlen(var)) || round == 0)
+	{
+		tmp = tmp->next_env;
+		round++;
+	}
+	ft_putstr_fd(tmp->env_var, 1);
+	return (NULL);
+}
 
 static char	*take_single_quote(char *param)
 {
@@ -54,11 +65,28 @@ static char	*take_double_quote(char *param)
 	return (NULL);
 }
 
-static char	*take_dollar(char *param)
+char	*take_dollar(char *param)
 {
-	write (1, "TAKE DOLLAR\n", 13);
-	(void) param;
-	return (NULL);
+	char	*line;
+	char	*search;
+	size_t	start;
+	size_t	end;
+
+	start = -1;
+	end = 0;
+	param++;
+	while (param[end] != 0 && ft_isalnum(param[end]))
+		end++;
+	search = (char *)malloc(sizeof(char) * (end + 1));
+	if (!search)
+		exit(ft_exit(MALLOCERR, 1));
+	while (++start < end)
+		search[start] = *(param++);
+	search[start] = 0;
+	line = search_var(search);
+	line = search;
+	//free(search);
+	return (line);
 }
 
 /* ---------------| PARAMETER PARSSING |------------------- */
@@ -127,12 +155,16 @@ char	*param_parse(char *cmd)
 	else if (*line == '$')
 	{
 		tmp = take_dollar(line);
-		ret[1] = ft_strjoin(ret[0], tmp);
-		start = -1;
-		while (++start <= ft_strlen(tmp))
-			line++;
-		free(tmp);
-		free (ret[0]);
+		if (ret[0] != NULL)
+		{
+			ret[1] = ft_strjoin(ret[0], tmp);
+			free(tmp);
+		}
+		else
+			ret[1] = tmp;
+		while (*(++line) != '\0' && ft_isalnum(*line));
+		if (ret[0] != NULL)
+			free (ret[0]);
 		ret[0] = ret[1];
 	}
 	if (line != NULL && *line != 0)
