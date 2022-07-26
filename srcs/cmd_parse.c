@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 17:10:41 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/25 14:29:08 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/26 14:17:47 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,7 @@ static char	*take_operator(char *line, t_cmd *cmd)
 t_cmd	*cmd_parse(char *shell, t_cmd *cmd)
 {
 	char	*line;
+	char	*bak;
 	t_cmd	*new;
 
 	line = shell;
@@ -180,7 +181,11 @@ t_cmd	*cmd_parse(char *shell, t_cmd *cmd)
 	line = take_exec(line, new);
 	line = take_params(line, new);
 	if (new->param != NULL)
-		new->param = param_parse(new);
+	{
+		bak = param_parse(new->param);
+		new->param = bak;
+		bak = NULL;
+	}
 	line = take_operator(line, new);
 	if (line && *line != '\0')
 	{

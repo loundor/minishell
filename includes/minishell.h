@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/25 14:02:20 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/26 11:17:30 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void		free_env(t_env *env);
 void		free_shell(t_shell *shell);
 
 // WORKING
-char		*param_parse(t_cmd *cmd);
+char		*param_parse(char *cmd);
 int			cd(t_shell *shell); // change directory
 int			core(t_shell *shell);// ACTUALY ONLY FOR TEST
 int			prep_signal(t_shell *shell);

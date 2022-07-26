@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 19:35:56 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/25 16:22:10 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/26 14:21:09 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,61 +21,44 @@
 	return (ret);
 } */
 
-static char	*take_single_quote(t_pparams *param)
+static char	*take_single_quote(char *param)
 {
 	char	*line;
 	size_t	start;
-	size_t	end;
-	size_t	len;
+	size_t	stop;
+	int		space;
 
-	end = 0;
-	line = NULL;
-	len = 0;
 	start = -1;
-	param->old++;
-	while (param->old[end] != '\'')
-		end++;
-	if (end == 0)
-		return (param->line);
-	if (param->line)
-		len = ft_strlen(param->line);
-	line = (char *)malloc(sizeof(char) * (len + end + 1));
+	space = 1;
+	stop = 0;
+	line = ++param;
+	while (line[stop] != '\'')
+		stop++;
+	if (line[stop + 1] == ' ')
+		space = 2;
+	line = (char *)malloc(sizeof(char) * stop + 2);
 	if (!line)
-		exit(ft_exit(MALLOCERR, 1));
-	if (param->line)
-	{
-		if (*param->line)
-			while (param->line[++start])
-				line[start] = param->line[start];
-		start = 0;
-		while (start++ <= (end + len))
-			line[start + ft_strlen(line)] = \
-				param->old[start - ft_strlen(param->line)];
-		line[ft_strlen(line) + end] = '\0';
-	}
-	else
-	{
-		while (++start <= end)
-			line[start] = param->old[start];
-		line[end] = '\0';
-	}
-	param->old = &param->old[end + 1];
-	free (param->line);
+		exit(ft_exit(MALLOCERR, 2));
+	while (++start < stop)
+		line[start] = *param++;
+	if (space == 2)
+		line[start++] = 32;
+	line[start] = '\0';
 	return (line);
 }
 
-static char	*take_double_quote(t_pparams *param)
+static char	*take_double_quote(char *param)
 {
+	write (1, "DOUBLE QUOTES\n", 15);
 	(void) param;
-	write (1, "NEW IS NEW $\n", 12);
-	return (param->line);
+	return (NULL);
 }
 
-static char	*take_dollar(t_pparams *param)
+static char	*take_dollar(char *param)
 {
+	write (1, "TAKE DOLLAR\n", 13);
 	(void) param;
-	write (1, "NEW IS NEW $\n", 12);
-	return (param->line);
+	return (NULL);
 }
 
 /* ---------------| PARAMETER PARSSING |------------------- */
@@ -84,36 +67,81 @@ static char	*take_dollar(t_pparams *param)
 /*	if need. Recept the new created line, and free the last	*/
 /*	linenbak 0 -> parssing str								*/
 /*	linenbak 1 -> str to parsse								*/
+/*				/!\ REWRITE THE EXPLAIN BLOCK!!!			*/
 /* -------------------------------------------------------- */
-char	*param_parse(t_cmd *cmd)
-{
-	t_env		*env;
-	t_pparams	*param;
 
-	(void)env;
-	param = (t_pparams *)malloc(sizeof(t_pparams));
-	if (!param)
-		exit(ft_exit(MALLOCERR, 1));
-	param->old = cmd->param;
-	param->line = NULL;
-	env = struct_passing(2, 0);
-	while (*param->old)
+char	*param_parse(char *cmd)
+{
+	char	*line;
+	char	*ret[2];
+	char	*tmp;
+	size_t	start;
+	size_t	end;
+
+	tmp = NULL;
+	ret[0] = NULL;
+	start = -1;
+	line = cmd;
+	end = 0;
+	while (line[end] != 0 && line[end] != 39 && line[end] != 34
+		&& !(line[end] == 36 && line[end + 1] != 32))
+		end++;
+	if (end == ft_strlen(line))
+		return (cmd);
+	if (end != 0)
 	{
-		if (*param->old == '\"')
-			param->line = take_double_quote(param);
-		else if (*param->old == '$' && *param->old != ' ')
-			param->line = take_dollar(param);
-		else if (*param->old == '\'')
-			param->line = take_single_quote(param);
-// fonction was just create ft_joincts. need test if work properly!!
-		else
-		{
-ft_putstr_fd(param->line, 1);
-			param->line = ft_joincts(param->line, (char)param->old[0]);
-			param->old++;
-		}
+		ret[0] = (char *)malloc(sizeof(char) * (end + 1));
+		if (!ret[0])
+			exit(ft_exit(MALLOCERR, 2));
+		while (++start < end)
+			ret[0][start] = *line++;
+		ret[0][start] = '\0';
 	}
-	param->old = NULL;
-	free(cmd->param);
-	return (param->line);
+	if (*line == '\'')
+	{
+		tmp = take_single_quote(line);
+		if (ret[0] != NULL)
+		{
+			ret[1] = ft_strjoin(ret[0], tmp);
+			free(tmp);
+		}
+		else
+			ret[1] = tmp;
+		while (*(++line) != '\'');
+		line++;
+		if (ret[0] != NULL)
+			free (ret[0]);
+		ret[0] = ret[1];
+	}
+	else if (*line == '\"')
+	{
+		tmp = take_double_quote(line);
+		ret[1] = ft_strjoin(ret[0], tmp);
+		start = -1;
+		while (++start <= ft_strlen(tmp))
+			line++;
+		free(tmp);
+		free (ret[0]);
+		ret[0] = ret[1];
+	}
+	else if (*line == '$')
+	{
+		tmp = take_dollar(line);
+		ret[1] = ft_strjoin(ret[0], tmp);
+		start = -1;
+		while (++start <= ft_strlen(tmp))
+			line++;
+		free(tmp);
+		free (ret[0]);
+		ret[0] = ret[1];
+	}
+	if (line != NULL && *line != 0)
+	{
+		line = ft_skipspace(line);
+		tmp = param_parse(line);
+		ret[1] = ft_strjoin(ret[0], tmp);
+		free (ret[0]);
+		ret[0] = ret[1];
+	}
+	return (ret[0]);
 }
