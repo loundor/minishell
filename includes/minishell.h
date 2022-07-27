@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/26 14:48:15 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/27 16:35:52 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,17 @@ void		free_env(t_env *env);
 void		free_shell(t_shell *shell);
 
 // WORKING
+//		-- PARSSING
 char		*param_parse(char *cmd);
 char		*take_dollar(char *param);
+char		*take_single_quote(char *param);
+char		*take_double_quote(char *param);
+char		*take_path(char *line, t_cmd *cmd);
+char		*take_exec(char *line, t_cmd *cmd);
+char		*take_params(char *line, t_cmd *cmd);
+char		*take_operator(char *line, t_cmd *cmd);
+
+char		*search_var(char *var);
 int			cd(t_shell *shell); // change directory
 int			core(t_shell *shell);// ACTUALY ONLY FOR TEST
 int			prep_signal(t_shell *shell);

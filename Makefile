@@ -19,6 +19,14 @@ SRCS		= 	builtins.c \
 				signal.c \
 				welcome.c \
 				test.c \
+				parsser/dollar.c \
+				parsser/double_quotes.c \
+				parsser/exec.c \
+				parsser/param.c \
+				parsser/path.c \
+				parsser/redir.c \
+				parsser/search_var.c \
+				parsser/single_quote.c \
 				${addprefix builtins/, ${BUILTIN}}
 BUILTIN		=	cd.c \
 				env.c \
