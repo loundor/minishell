@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 19:35:56 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/27 17:03:55 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/27 17:13:12 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,17 @@ char	*param_parse(char *cmd)
 	else if (*line == '\"')
 	{
 		tmp = take_double_quote(line);
-		ret[1] = ft_strjoin(ret[0], tmp);
-		start = -1;
-		while (++start <= ft_strlen(tmp))
-			line++;
-		free(tmp);
-		free (ret[0]);
+		if (ret[0] != NULL)
+		{
+			ret[1] = ft_strjoin(ret[0], tmp);
+			free(tmp);
+		}
+		else
+			ret[1] = tmp;
+		while (*(++line) != '\"');
+		line++;
+		if (ret[0] != NULL)
+			free (ret[0]);
 		ret[0] = ret[1];
 	}
 	else if (*line == '$')

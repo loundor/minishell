@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:23:10 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/27 17:02:25 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/27 17:14:16 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ char	*take_double_quote(char *param)
 	param++;
 	if (param == NULL)
 		return (NULL);	// For test but NEED sent to HEREDOC!
-	while (param[count] != '"' && (param[count] == '$'
+	while (param[count] != '"' && (param[count] != '$'
 			&& param[count + 1] != ' ') && param[count] != '\0')
 		count++;
-	if (*param)
+	if (*param == '\0')
 		return (NULL);	// For test but NEED sent to HEREDOC!
 	line = (char *)malloc(sizeof(char) * (count + 1));
 	if (!line)
@@ -43,7 +43,7 @@ char	*take_double_quote(char *param)
 	while (++start <= count)
 		line[start] = *param++;
 	line[count] = '\0';
-	if (*param != '\0')
+	if (*param != '\0') // CHECK CAN HAVE OR NOT A $ IN STR
 		new = take_double_quote(line);
 	if (new != NULL)
 	{
