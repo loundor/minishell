@@ -6,14 +6,18 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 19:35:56 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/27 12:11:03 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/27 12:22:36 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-/* ---------------|					 |------------------- */
-/*															*/
+/* -------------------| SEARCH $VAR |---------------------- */
+/*	Search and return de value of asked variable			*/
+/*	Check and compare the asked variable in env struct		*/
+/*	When env->next is flase that s mark en of struct		*/
+/*	Check if var as same of env->var, if same use ft_strdup */
+/*	and return the right variable, otherwise return NULL	*/
 /* -------------------------------------------------------- */
 static char	*search_var(char *var)
 {
@@ -37,8 +41,11 @@ static char	*search_var(char *var)
 	return (line);
 }
 
-/* ---------------|					 |------------------- */
-/*															*/
+/* ------------------|	SINGLE QUOTE |--------------------- */
+/*	Take the line until a single quote and return that in a */
+/*	malloced variable. If end of line without single quote	*/
+/*	open a HEREDOC to finish the right line.				*/
+/*	HEREDOC NO ALLREADY IMPLEMENTED!!!!!					*/
 /* -------------------------------------------------------- */
 static char	*take_single_quote(char *param)
 {
@@ -76,8 +83,11 @@ static char	*take_double_quote(char *param)
 	return (NULL);
 }
 
-/* ---------------|					 |------------------- */
-/*															*/
+/* --------------| WITH $VAR TO ENV VAR |------------------ */
+/*	Take the variable (until space, no alphanum caractere	*/
+/*	or _) and call the function search_var to get the var	*/
+/*	if var don't exist, we get en NULL return				*/
+/*	TAKE CARE ABOUT THE SPACE AFTER THE $VAR!!!! need impl.	*/
 /* -------------------------------------------------------- */
 char	*take_dollar(char *param)
 {

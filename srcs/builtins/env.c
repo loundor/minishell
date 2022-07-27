@@ -6,15 +6,16 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 17:18:27 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/27 11:24:26 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/27 12:25:55 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-
-/* ---------------|					 |------------------- */
-/*															*/
+/* ----------------| WRITE THE ENV VAR |------------------- */
+/*	Just take the struct env and print all line separed by =*/
+/*	index 0 = VAR NAME						index 1 = VALUE	*/
+/*	TAKE CARE ABOUT REDIRECTION!!!							*/
 /* -------------------------------------------------------- */
 int	env(t_shell *shell)
 {
@@ -30,7 +31,7 @@ int	env(t_shell *shell)
 		if (bak->next_env != NULL)
 			bak = bak->next_env;
 		else
-			break;
+			break ;
 	}
 	return (0);
 }
