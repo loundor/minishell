@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:22:21 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/27 16:24:17 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/27 16:52:51 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 /*	open a HEREDOC to finish the right line.				*/
 /*	HEREDOC NO ALLREADY IMPLEMENTED!!!!!					*/
 /* -------------------------------------------------------- */
+
 char	*take_single_quote(char *param)
 {
 	char	*line;
@@ -29,8 +30,12 @@ char	*take_single_quote(char *param)
 	space = 1;
 	stop = 0;
 	line = ++param;
-	while (line[stop] != '\'')
+	if (*line == '\0')
+		return (NULL);	// For test but NEED sent to HEREDOC!
+	while (line[stop] != '\'' && line[stop] != '\0')
 		stop++;
+	if (line[stop] == '\0')
+		return (NULL);	// For test but NEED sent to HEREDOC!
 	if (line[stop + 1] == ' ')
 		space = 2;
 	line = (char *)malloc(sizeof(char) * stop + 2);

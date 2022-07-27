@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/27 16:35:52 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/27 16:43:45 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,13 @@ typedef struct s_cmd
 	struct s_cmd	*next;
 	struct s_cmd	*prev;
 }	t_cmd;
+
+typedef struct s_tmp
+{
+	struct s_tmp		*prev;
+	char				**var;
+	struct s_tmp		*next;
+}	t_tmp;
 
 typedef struct s_shell
 {
