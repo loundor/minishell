@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 19:35:56 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/26 22:42:14 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/27 12:11:03 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,15 @@ static char	*search_var(char *var)
 	env = (t_env *)struct_passing(2, NULL);
 	tmp = env;
 	round = 0;
-	while (ft_strlen(var) != ft_strlen(tmp->env_var[0])
-		|| ft_strncmp(var, tmp->env_var[0], ft_strlen(tmp->env_var[0]))
-		|| ft_strncmp(var, tmp->env_var[0], ft_strlen(var)) || round == 0)
+	while (ft_strcmp(var, tmp->env_var[0]) && tmp->next_env != NULL)
 	{
 		tmp = tmp->next_env;
-		round++;
+		round = 1;
 	}
-	line = ft_strdup(tmp->env_var[1]);
+	if (!ft_strcmp(var, tmp->env_var[0]))
+		line = ft_strdup(tmp->env_var[1]);
+	else
+		return (NULL);
 	return (line);
 }
 
@@ -88,7 +89,7 @@ char	*take_dollar(char *param)
 	start = -1;
 	end = 0;
 	param++;
-	while (param[end] != 0 && ft_isalnum(param[end]))
+	while (param[end] != 0 && (ft_isalnum(param[end]) || param[end] == '_'))
 		end++;
 	search = (char *)malloc(sizeof(char) * (end + 1));
 	if (!search)
@@ -97,7 +98,8 @@ char	*take_dollar(char *param)
 		search[start] = *(param++);
 	search[start] = 0;
 	line = search_var(search);
-	free(search);
+	if (line != NULL)
+		free(search);
 	return (line);
 }
 
@@ -167,24 +169,33 @@ char	*param_parse(char *cmd)
 	else if (*line == '$')
 	{
 		tmp = take_dollar(line);
-		if (ret[0] != NULL)
+		if (ret[0] != NULL && tmp != NULL)
 		{
 			ret[1] = ft_strjoin(ret[0], tmp);
 			free(tmp);
 		}
-		else
+		else if (ret[0] != NULL && tmp == NULL)
+			ret[1] = ft_strdup(ret[0]);
+		else if (ret[0] == NULL && tmp != NULL)
 			ret[1] = tmp;
-		while (*(++line) != '\0' && ft_isalnum(*line));
+		else
+			ret[1] = 0;
+		while (*(++line) != '\0' && (ft_isalnum(*line) || *line == '_'));
 		if (ret[0] != NULL)
 			free (ret[0]);
 		ret[0] = ret[1];
+		ft_putstr_fd(line, 1);
 	}
 	if (line != NULL && *line != 0)
 	{
 		line = ft_skipspace(line);
 		tmp = param_parse(line);
-		ret[1] = ft_strjoin(ret[0], tmp);
-		free (ret[0]);
+		if (ret[0] != NULL)
+			ret[1] = ft_strjoin(ret[0], tmp);
+		else
+			ret[1] = ft_strdup(tmp);
+		if (ret[0] != NULL)
+			free (ret[0]);
 		ret[0] = ret[1];
 	}
 	return (ret[0]);

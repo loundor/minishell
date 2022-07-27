@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 14:26:15 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/26 22:42:10 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/27 11:20:13 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ t_env	*do_env(char **env)
 		if (!tenv)
 			exit(ft_exit(MALLOCERR, 1));
 		tenv->env_var = ft_split(*env, '=');
+		tenv->next_env = NULL;
 		ret = tenv;
 	}
 	while (++env && *env)
@@ -59,6 +60,7 @@ t_env	*do_env(char **env)
 			exit(ft_exit(MALLOCERR, 1));
 		parsse->prev_env = tenv;
 		parsse->env_var = ft_split(*env, '=');
+		parsse->next_env = NULL;
 		tenv->next_env = parsse;
 		tenv = tenv->next_env;
 	}
