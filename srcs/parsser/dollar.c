@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:23:54 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/27 16:24:06 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/28 17:30:46 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,13 @@ char	*take_dollar(char *param)
 	char	*search;
 	size_t	start;
 	size_t	end;
-	int		c;
 
 	start = -1;
 	end = 0;
+	line = NULL;
 	param++;
 	while (param[end] != 0 && (ft_isalnum(param[end]) || param[end] == '_'))
 		end++;
-	if (param[end] == 32)
-		c = 2;
 	search = (char *)malloc(sizeof(char) * (end + 1));
 	if (!search)
 		exit(ft_exit(MALLOCERR, 1));
@@ -42,11 +40,5 @@ char	*take_dollar(char *param)
 	line = search_var(search);
 	if (line != NULL)
 		free(search);
-	if (c && c == 2)
-	{
-		search = ft_strjoin(line, " ");
-		free (line);
-		line = search;
-	}
 	return (line);
 }

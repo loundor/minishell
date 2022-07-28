@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 13:11:52 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/27 12:23:09 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/28 17:41:44 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,26 +23,13 @@ void	free_shell(t_shell *shell)
 
 void	free_env(t_env *env)
 {
-	if (env)
-	{
-		if (env->prev_env)
-		{
-			env->prev_env->next_env = NULL;
-			env->prev_env = NULL;
-		}
-		free_env_rec(env);
-	}
-}
-
-void	free_env_rec(t_env *env)
-{
 	int	i;
 
 	i = -1;
 	if (env)
 	{
 		if (env->next_env)
-			free_env_rec(env->next_env);
+			free_env(env->next_env);
 		while (env->env_var[++i])
 			free(env->env_var[i]);
 		free(env->env_var);

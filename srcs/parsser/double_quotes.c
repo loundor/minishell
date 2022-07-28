@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:23:10 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/28 15:47:24 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/28 17:24:54 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ char	*take_double_quote(char *param)
 	line = NULL;
 	pre = NULL;
 	reserved = NULL;
-	if (*param == '"')
-		param++;
+	param++;
 	while (*param && *param != '"' && *param != '\0')
 	{
 		if (*param == '$' && (ft_isalnum(param[1]) || param[1] == '_'))
@@ -61,6 +60,12 @@ char	*take_double_quote(char *param)
 			*line = *param++;
 			line[1] = '\0';
 		}
+	}
+	if (*param == '\0')
+	{
+		//pre = heredoc(line); // EN ATTENTE DE CREATION DE FONCTION
+		free(line);
+		return (pre);
 	}
 	return (line);
 }

@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:22:21 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/27 16:52:51 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/28 17:35:29 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,29 +22,33 @@
 char	*take_single_quote(char *param)
 {
 	char	*line;
-	size_t	start;
-	size_t	stop;
-	int		space;
+	char	*pre;
 
-	start = -1;
-	space = 1;
-	stop = 0;
-	line = ++param;
-	if (*line == '\0')
-		return (NULL);	// For test but NEED sent to HEREDOC!
-	while (line[stop] != '\'' && line[stop] != '\0')
-		stop++;
-	if (line[stop] == '\0')
-		return (NULL);	// For test but NEED sent to HEREDOC!
-	if (line[stop + 1] == ' ')
-		space = 2;
-	line = (char *)malloc(sizeof(char) * stop + 2);
-	if (!line)
-		exit(ft_exit(MALLOCERR, 2));
-	while (++start < stop)
-		line[start] = *param++;
-	if (space == 2)
-		line[start++] = 32;
-	line[start] = '\0';
+	line = NULL;
+	pre = NULL;
+	param++;
+	while (*param && *param != '\'' && *param != '\0')
+	{
+		if (line != NULL)
+		{
+			pre = line;
+			line = ft_joincts(pre, *param++);
+			free(pre);
+		}
+		else
+		{
+			line = (char *)malloc(sizeof(char) * 2);
+			if (!line)
+				exit(ft_exit(MALLOCERR, 2));
+			*line = *param++;
+			line[1] = '\0';
+		}
+	}
+	if (*param == '\0')
+	{
+		//pre = heredoc(line); // EN ATTENTE DE CREATION DE FONCTION
+		free(line);
+		return (pre);
+	}
 	return (line);
 }

@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 14:26:15 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/27 11:20:13 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/28 17:39:14 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ t_env	*do_env(char **env)
 		tenv->next_env = parsse;
 		tenv = tenv->next_env;
 	}
+
 //	ret = parse_path(tenv, ret);
 	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/27 16:43:45 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/28 17:41:56 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,6 @@ t_cmd		*cmd_parse(char *shell, t_cmd *cmd);
 int			ft_exit(int type, int to_free); // Need complet
 void		free_builtins(t_builtins *builtins);
 void		free_cmd(t_cmd *cmd);
-void		free_env_rec(t_env *env);
 void		free_env(t_env *env);
 void		free_shell(t_shell *shell);
 
