@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:23:10 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/27 17:14:16 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/28 15:47:24 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,35 +20,47 @@
 
 char	*take_double_quote(char *param)
 {
-	size_t	count;
-	size_t	start;
 	char	*line;
-	char	*new;
+	char	*pre;
+	char	*reserved;
 
-	count = 0;
-	start = -1;
 	line = NULL;
-	new = NULL;
-	param++;
-	if (param == NULL)
-		return (NULL);	// For test but NEED sent to HEREDOC!
-	while (param[count] != '"' && (param[count] != '$'
-			&& param[count + 1] != ' ') && param[count] != '\0')
-		count++;
-	if (*param == '\0')
-		return (NULL);	// For test but NEED sent to HEREDOC!
-	line = (char *)malloc(sizeof(char) * (count + 1));
-	if (!line)
-		exit(ft_exit(MALLOCERR, 2));
-	while (++start <= count)
-		line[start] = *param++;
-	line[count] = '\0';
-	if (*param != '\0') // CHECK CAN HAVE OR NOT A $ IN STR
-		new = take_double_quote(line);
-	if (new != NULL)
+	pre = NULL;
+	reserved = NULL;
+	if (*param == '"')
+		param++;
+	while (*param && *param != '"' && *param != '\0')
 	{
-		free (line);
-		line = new;
+		if (*param == '$' && (ft_isalnum(param[1]) || param[1] == '_'))
+		{
+			pre = take_dollar(param++);
+			if (line != NULL)
+			{
+				reserved = line;
+				line = ft_strjoin(line, pre);
+				free(pre);
+				free(reserved);
+			}
+			else
+				line = pre;
+			while ((ft_isalnum(*param) || *param == '_'))
+				param++;
+			continue ;
+		}
+		if (line != NULL)
+		{
+			pre = line;
+			line = ft_joincts(pre, *param++);
+			free(pre);
+		}
+		else
+		{
+			line = (char *)malloc(sizeof(char) * 2);
+			if (!line)
+				exit(ft_exit(MALLOCERR, 2));
+			*line = *param++;
+			line[1] = '\0';
+		}
 	}
 	return (line);
 }
