@@ -1,3 +1,3 @@
-ok - Check parsse of env
-ok - Check the file builtin env.c
-ok - do a godd parsing VAR=STRING (without split in string... because the string splited do problem in fork return)
+Refaire le parssing de cmd_parss et cmd_parss car probleme avec les espaces..
+utlisier au mieux les fonction dollar, quotes double quote....
+
