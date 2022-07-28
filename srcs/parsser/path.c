@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:31:26 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/27 16:32:03 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/28 18:23:47 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*take_path(char *line, t_cmd *cmd)
 	size_t	slash;
 
 	cmd->path = NULL;
-	if (!line || *line == '\"')
+	if (!line || *line == '"' || *line == '\'')
 		return (line);
 	i = 0;
 	slash = 0;

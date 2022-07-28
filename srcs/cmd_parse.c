@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 17:10:41 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/28 17:42:43 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/28 18:56:55 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_cmd	*cmd_parse(char *shell, t_cmd *cmd)
 
 	line = shell;
 	(void)cmd;
+// See if the firt occurance is a $ and change by env if that!
 	line = ft_skipspace(line);
 	new = malloc(sizeof(t_cmd));
 	if (!line || !new)
@@ -33,9 +34,11 @@ t_cmd	*cmd_parse(char *shell, t_cmd *cmd)
 	line = take_path(line, new);
 	line = ft_skipspace(line);
 	line = take_exec(line, new);
+	line = ft_skipspace(line);
 	line = take_params(line, new);
 	if (new->param != NULL)
 	{
+		// TO REVIEW PROBLEM WITH SPACE!!
 		bak = param_parse(new->param);
 		new->param = bak;
 		bak = NULL;

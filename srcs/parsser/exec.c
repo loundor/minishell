@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:32:29 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/27 16:35:19 by stissera         ###   ########.fr       */
+/*   Updated: 2022/07/28 18:47:35 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,30 @@ char	*take_exec(char *line, t_cmd *cmd)
 	char	*ret;
 	t_cmd	more;
 	size_t	i[2];
+	char	type_quote;
 
 	i[0] = 0;
-	if (*line == '\"')
+	if (*line == '"' || *line == '\'')
 	{
+		type_quote = *line;
 		line++;
-		while (line[i[0]] != '\"')
+		while (line[i[0]] != type_quote)
 			i[0]++;
 	}
 	else
-		while (!ft_isspace(line[i[0]]) && line[i[0]] != '\0')
+		while (!ft_isspace(line[i[0]]) && line[i[0]] != '\0'
+			&& line[i[0]] != '\'' && line[i[0]] != '"')
 			i[0]++;
 	ret = (char *)malloc(sizeof(char) * (i[0] + 1));
 	if (!ret)
-		ft_exit(MALLOCERR, 1);
+		exit(ft_exit(MALLOCERR, 2));
 	i[1] = 0;
 	while (i[1] < i[0])
 		ret[i[1]++] = *line++;
 	ret[i[1]] = '\0';
-	if (*line == '\"')
+	if (*line == type_quote && *line != '\0')
 		line++;
-	if (*line == '\"')
+	if (line && (*line == '"' || *line == '\''))
 	{
 		line = take_exec(line, &more);
 		cmd->command = ft_strjoin(ret, more.command);
