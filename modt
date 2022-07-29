@@ -5,5 +5,7 @@
 	| |  | | | | | | \__ \ | | |  __/ | |
 	\_|  |_/_|_| |_|_|___/_| |_|\___|_|_|
 			afuchs & stissera - v0.1
+			
+./rep/rep2/rep3/exec param1 $LANG param3 $NOTEXT "param4 $LANG '$LANG' '$NOEXT' param7" 'param8 $LANG' param10
 
 
