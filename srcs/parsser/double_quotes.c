@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:23:10 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/28 17:24:54 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/02 14:29:32 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,12 @@ char	*take_double_quote(char *param)
 			*line = *param++;
 			line[1] = '\0';
 		}
+	}
+	if (param[1] == ' ')
+	{
+		pre = line;
+		line = ft_joincts(pre, ' ');
+		free(pre);
 	}
 	if (*param == '\0')
 	{
