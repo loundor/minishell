@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:23:10 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/03 17:06:33 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/03 18:10:44 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ char	*take_double_quote(char *param)
 		if (*param == '$' && (ft_isalnum(param[1]) || param[1] == '_'))
 		{
 			pre = take_dollar(param++);
+			while ((ft_isalnum(*param) || *param == '_'))
+				param++;
+			if (pre == NULL)
+				continue ;
 			if (line != NULL)
 			{
 				reserved = line;
@@ -42,8 +46,6 @@ char	*take_double_quote(char *param)
 			}
 			else
 				line = pre;
-			while ((ft_isalnum(*param) || *param == '_'))
-				param++;
 			continue ;
 		}
 		if (line != NULL)

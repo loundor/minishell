@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 10:39:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/03 17:18:21 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/03 18:53:11 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,17 @@ static char	*alloc(int *end, char **ret, char *line)
 
 static char	*dollar(char *tmp, char *line, char **ret)
 {
-	tmp = take_dollar(line);
-	line++;
+	tmp = take_dollar(line++);
 	while (*line && (ft_isalnum(*line) || *line == '_'))
 		line++;
-	if (*line == ' ')
+	if (tmp == NULL)
+		return (line);
+/* 	if (*line == ' ')
 	{
 		ret[1] = tmp;
 		tmp = ft_joincts(tmp, ' ');
 		free(ret[1]);
-	}
+	} */
 	if (ret[0] != NULL)
 		ret[1] = ft_strjoin(ret[0], tmp);
 	else
@@ -49,14 +50,15 @@ static char	*dollar(char *tmp, char *line, char **ret)
 
 static char	*d_quotes(char *tmp, char *line, char **ret)
 {
-	tmp = take_double_quote(line);
-	line ++;
+	tmp = take_double_quote(line++);
 	while (*line != '\"')
 		line++;
 	line++;
+	if (tmp == NULL)
+		return (line);
 	if (ret[0] != NULL)
 		ret[1] = ft_strjoin(ret[0], tmp);
-	else
+	else if (tmp != NULL)
 		ret[1] = ft_strdup(tmp);
 	if (tmp != NULL)
 		free(tmp);
@@ -67,11 +69,12 @@ static char	*s_quotes(char *tmp, char *line, char **ret)
 {
 	if (*line == '\'')
 	{
-		tmp = take_single_quote(line);
-		line++;
+		tmp = take_single_quote(line++);
 		while (*line != '\'')
 			line++;
 		line++;
+		if (tmp == NULL)
+			return (line);
 		if (ret[0] != NULL)
 			ret[1] = ft_strjoin(ret[0], tmp);
 		else
@@ -85,9 +88,12 @@ static char	*s_quotes(char *tmp, char *line, char **ret)
 		line = dollar(tmp, line, ret);
 	else
 		return (line);
+	if (ret[1] == NULL)
+		return (line);
 	if (ret[0] != NULL)
 		free (ret[0]);
 	ret[0] = ret[1];
+	ret[1] = NULL;
 	return (line);
 }
 

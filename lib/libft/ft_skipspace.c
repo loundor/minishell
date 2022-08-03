@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 09:54:34 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/21 11:45:35 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/03 18:18:28 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_skipspace(char *str)
 		return (0);
 	ret = str;
 	while (*ret && (*ret == '\t' || *ret == '\n' || *ret == '\v'
-			|| *ret == '\f' || *ret == 'r' || *ret == ' '))
+			|| *ret == '\f' || *ret == '\r' || *ret == ' '))
 		ret++;
 	if (*ret == '\0')
 		return (0);

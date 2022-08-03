@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:23:54 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/28 17:30:46 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/03 18:48:13 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ char	*take_dollar(char *param)
 	start = -1;
 	end = 0;
 	line = NULL;
+	search = NULL;
 	param++;
 	while (param[end] != 0 && (ft_isalnum(param[end]) || param[end] == '_'))
 		end++;
@@ -38,7 +39,7 @@ char	*take_dollar(char *param)
 		search[start] = *(param++);
 	search[start] = 0;
 	line = search_var(search);
-	if (line != NULL)
+	if (search != NULL)
 		free(search);
 	return (line);
 }

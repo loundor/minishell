@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/03 17:18:22 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/03 17:42:25 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void		free_shell(t_shell *shell);
 // WORKING
 //		-- PARSSING
 // char		*param_parse(char *cmd);
-char		*line_parse(char *cmd);
+char		*line_parse(char *cmd); // Work but first element with quote and space inside doing problem....
 char		*take_dollar(char *param);
 char		*take_single_quote(char *param);
 char		*take_double_quote(char *param);
