@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:38:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/03 11:41:55 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/03 17:12:14 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	core(t_shell *shell)
 	shell->cmd = cmd_parse(shell->line, shell->cmd);
 	builtin = search_builtin(shell->cmd->command, shell->builtin);
  printf("--> \e[32mPATH: %s\e[0m\n--> \e[33mCMD: %s\e[0m\n--> \e[34mPARAM: %s\e[0m\n", shell->cmd->path, shell->cmd->command, shell->cmd->param);
-	if (builtin != NULL)
+	if (builtin != NULL && shell->cmd->path == NULL)
 		builtin->f(shell);
 	return (0);
 }

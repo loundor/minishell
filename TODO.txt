@@ -8,3 +8,4 @@ Output:"./rep1/rep2/rep3/exec test $VAR=variable || grep variable"
 Warning, when the  cmd start by ex: "hello world" thats means it's the file "hello world" asked and not "hello" with parameter "world"!!! need do that!
 
 LES PARAMETRES DANS EXECVE EST UN TABLEAU!!!!
+Probleme double espace dans le parssing de la cmd avec les simple et double quotes.

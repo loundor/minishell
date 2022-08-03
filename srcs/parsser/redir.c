@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:33:52 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/27 16:35:45 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/03 17:18:21 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@
 char	*take_operator(char *line, t_cmd *cmd)
 {
 	if (!line || *line == '\0')
+	{
+		cmd->type = 0;
 		return (NULL);
+	}
 	if (!ft_strncmp(line, "||", 2))
 		cmd->type = 2;
 	else if (!ft_strncmp(line, "|", 1))

@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 10:39:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/03 15:57:32 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/03 17:18:21 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ char	*line_parse(char *cmd)
 			ret[1] = ft_strjoin(ret[0], tmp);
 		else
 			ret[1] = ft_strdup(tmp);
+		free(tmp);
 		if (ret[0] != NULL)
 			free (ret[0]);
 		ret[0] = ret[1];
