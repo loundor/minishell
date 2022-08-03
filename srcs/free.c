@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 13:11:52 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/28 17:41:44 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/03 16:55:24 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 void	free_shell(t_shell *shell)
 {
-	if (shell->line)
+	if (shell->line != NULL)
 		free(shell->line);
 	free_env(shell->env);
 	free_builtins(shell->builtin);
+//	free_cmd(shell->cmd);
 	// SEE FOR STRUCT PIPE
 }
 
@@ -26,19 +27,20 @@ void	free_env(t_env *env)
 	int	i;
 
 	i = -1;
-	if (env)
+	if (env != NULL)
 	{
 		if (env->next_env)
 			free_env(env->next_env);
 		while (env->env_var[++i])
 			free(env->env_var[i]);
 		free(env->env_var);
+		free(env);
 	}
 }
 
 void	free_cmd(t_cmd *cmd)
 {
-	if (cmd)
+	if (cmd != NULL)
 	{
 		if (cmd->next != NULL)
 			free_cmd(cmd->next);

@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 14:26:15 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/28 17:39:14 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/03 16:53:44 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ t_env	*do_env(char **env)
 	t_env	*ret;
 	t_env	*parsse;
 
-	if (*env)
+	if (*env != NULL)
 	{
-		tenv = malloc(sizeof(t_env));
+		tenv = (t_env *)malloc(sizeof(t_env));
 		if (!tenv)
 			exit(ft_exit(MALLOCERR, 1));
 		tenv->env_var = ft_split(*env, '=');

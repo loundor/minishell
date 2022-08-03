@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 10:39:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/03 15:09:48 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/03 15:57:32 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static char	*dollar(char *tmp, char *line, char **ret)
 		ret[1] = ft_strdup(tmp);
 	if (tmp != NULL)
 		free(tmp);
-	ft_putstr_fd(ret[1], 1);
 	return (line);
 }
 
