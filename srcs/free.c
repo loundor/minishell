@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 13:11:52 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/03 16:55:24 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/03 22:39:19 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@ void	free_shell(t_shell *shell)
 		free(shell->line);
 	free_env(shell->env);
 	free_builtins(shell->builtin);
-//	free_cmd(shell->cmd);
-	// SEE FOR STRUCT PIPE
 }
+//	free_cmd(shell->cmd);
+//		SEE FOR STRUCT PIPE
+//	}
 
 void	free_env(t_env *env)
 {

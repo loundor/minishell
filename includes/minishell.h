@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/03 19:31:47 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/03 22:37:50 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,17 @@ typedef struct s_env
 	struct s_env	*next_env;
 }	t_env;
 
+/* -------------| ENVIRONNEMENT VARIABLES  |--------------- */
+/*	Variable command means the file							*/
+/*	About type:	0 - end		1 - |	2 - ||	3- &&	4- >	*/
+/*				5 - >>		6 - <	7 - <<					*/
+/*		 ATTENTION au ' et " <--- Ne sais plus pkoi!!		*/
+/* -------------------------------------------------------- */
 typedef struct s_cmd
 {
 	char			*path;
-	char			*command; // commamd = file
+	char			*command;
 	char			*param;
-// 0- end; 1- |; 2- ||; 3- && ; 4- >; 5- >>; 6- <; 7- << // ATTENTION au ' et "
 	int				type;
 	int				fd;
 	struct s_pipe	*pipe[2];
@@ -125,9 +130,10 @@ void		free_env(t_env *env);
 void		free_shell(t_shell *shell);
 int			prompt(t_shell *shell);
 // WORKING
+
 //		-- PARSSING
-// char		*param_parse(char *cmd);
-char		*line_parse(char *cmd); // Work but first element with quote and space inside doing problem....
+// Work but first element with quote and space inside doing problem....
+char		*line_parse(char *cmd);
 char		*take_dollar(char *param);
 char		*take_single_quote(char *param);
 char		*take_double_quote(char *param);
@@ -141,7 +147,6 @@ int			prepare_exe(t_shell *shell);
 int			cd(t_shell *shell); // change directory
 int			core(t_shell *shell);// ACTUALY ONLY FOR TEST
 int			prep_signal(t_shell *shell);
-
 
 // TO DO
 int			ft_echo(char *str); // echo prg
