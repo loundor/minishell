@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:31:26 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/03 18:24:00 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/03 22:09:50 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,10 @@
 
 char	*take_path(char *line, t_cmd *cmd)
 {
-	char	*ret;
 	size_t	i;
 	size_t	slash;
 
 	cmd->path = NULL;
-	if (!line || *line == '"' || *line == '\'')
-		return (line);
 	i = 0;
 	slash = 0;
 	while (line[i] != '\0' && !ft_isspace(line[i]))
@@ -39,16 +36,14 @@ char	*take_path(char *line, t_cmd *cmd)
 	}
 	if (slash == 0)
 		return (line);
-	if (slash > 0)
-		while (line[i] != '/')
-			i--;
-	ret = (char *)malloc(sizeof(char) * (i + 2));
-	if (!ret)
+	while (line[i] != '/')
+		i--;
+	cmd->path = (char *)malloc(sizeof(char) * (i + 2));
+	if (!cmd->path)
 		ft_exit(MALLOCERR, 1);
 	slash = 0;
 	while (slash <= i)
-		ret[slash++] = *line++;
-	ret[slash] = '\0';
-	cmd->path = ret;
+		cmd->path[slash++] = *line++;
+	cmd->path[slash] = '\0';
 	return (line);
 }

@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:33:11 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/28 18:52:52 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/03 22:05:28 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ char	*take_params(char *line, t_cmd *cmd)
 	while (i[1] < i[0])
 		ret[i[1]++] = *line++;
 	ret[i[1]] = '\0';
-//	cmd->param = check_quote(ret, struct_passing(1, 0));
-	cmd->param = ret; // to check
+	cmd->param = ret;
 	line = ft_skipspace(line);
 	return (line);
 }

@@ -9,3 +9,7 @@ Warning, when the  cmd start by ex: "hello world" thats means it's the file "hel
 
 LES PARAMETRES DANS EXECVE EST UN TABLEAU!!!!
 Probleme double espace dans le parssing de la cmd avec les simple et double quotes.
+Dans exec.c ajouter un arret dans le while pour || | && << >> < >...
+
+fichier line.c plus de 5 fonctions...
+Fichiers double quotes et single quotes plus de 25 lignes!!!
