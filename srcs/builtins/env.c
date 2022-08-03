@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 17:18:27 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/27 12:25:55 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/03 15:26:07 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ int	env(t_shell *shell)
 {
 	t_env	*bak;
 
+	if (shell->cmd->param != NULL)
+	{
+		printf("env : option invalid '%s'\n", shell->cmd->param);
+		return (125);
+	}
 	bak = shell->env;
 	while (bak->env_var[0])
 	{

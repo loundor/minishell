@@ -1,3 +1,10 @@
-Refaire le parssing de param_parse car probleme avec les espaces..
-utlisier au mieux les fonction dollar, quotes double quote.... qui seront amene a etre utilise dans d autre fonctions....
+Reddo the parssing...
+after read line ok, parse directly the compelet command
+and after do the split for path, exec, param...
+Exemple:
+Input:"       "./re""p1/"rep'2/'$REP/exec    test '$VAR'"=$VAR" ||    grep $VAR   "
+Output:"./rep1/rep2/rep3/exec test $VAR=variable || grep variable"
 
+Warning, when the  cmd start by ex: "hello world" thats means it's the file "hello world" asked and not "hello" with parameter "world"!!! need do that!
+
+LES PARAMETRES DANS EXECVE EST UN TABLEAU!!!!

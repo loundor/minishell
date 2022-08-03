@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/28 17:41:56 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/03 15:28:16 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct s_cmd
 	int				type;
 	int				fd;
 	struct s_pipe	*pipe[2];
+	pid_t			pid;
 	struct s_cmd	*next;
 	struct s_cmd	*prev;
 }	t_cmd;
@@ -125,7 +126,8 @@ void		free_shell(t_shell *shell);
 
 // WORKING
 //		-- PARSSING
-char		*param_parse(char *cmd);
+// char		*param_parse(char *cmd);
+char		*line_parse(char *cmd);
 char		*take_dollar(char *param);
 char		*take_single_quote(char *param);
 char		*take_double_quote(char *param);

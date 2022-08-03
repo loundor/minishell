@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:32:29 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/02 15:29:43 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/03 15:12:58 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,38 +18,6 @@
 /*	that in a variable command stored in struct cmd and		*/
 /*	return the reste of the line.							*/
 /* -------------------------------------------------------- */
-
-
-// MAUVAISE IDEE!!!
-static char	*test_env(char	*param)
-{
-	char	*line;
-	char	*pre;
-	char	*reserved;
-	size_t	i;
-
-	i = -1;
-	while (param[++i] != '\0')
-	{
-		if (*param == '$' && (ft_isalnum(param[1]) || param[1] == '_'))
-		{
-			pre = take_dollar(param++);
-			if (line != NULL)
-			{
-				reserved = line;
-				line = ft_strjoin(line, pre);
-				free(pre);
-				free(reserved);
-			}
-			else
-				line = pre;
-			while ((ft_isalnum(*param) || *param == '_'))
-				param++;
-			continue ;
-		}
-	}
-	return (ret);
-}
 
 char	*take_exec(char *line, t_cmd *cmd)
 {

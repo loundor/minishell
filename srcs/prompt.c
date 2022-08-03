@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:38:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/27 16:28:45 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/03 11:41:55 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ int	prompt(t_shell *shell)
 		line = ft_skipspace(line);
 		if (line)
 		{
+			add_history(shell->line);
 			if (core(shell))
 				printf("An error was occured!\n");
 		}
 		else
 			continue ;
-		add_history(shell->line);
 		ft_exit(0, 3);
 		line = NULL;
 	}
@@ -52,7 +52,11 @@ int	prompt(t_shell *shell)
 int	core(t_shell *shell)
 {
 	t_builtins	*builtin;
+	char		*line;
 
+	line = line_parse(shell->line);
+	free(shell->line);
+	shell->line = line;
 	shell->cmd = cmd_parse(shell->line, shell->cmd);
 	builtin = search_builtin(shell->cmd->command, shell->builtin);
  printf("--> \e[32mPATH: %s\e[0m\n--> \e[33mCMD: %s\e[0m\n--> \e[34mPARAM: %s\e[0m\n", shell->cmd->path, shell->cmd->command, shell->cmd->param);
