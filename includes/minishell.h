@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/03 22:37:50 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/04 11:55:20 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,9 @@ typedef struct s_env
 /*	About type:	0 - end		1 - |	2 - ||	3- &&	4- >	*/
 /*				5 - >>		6 - <	7 - <<					*/
 /*		 ATTENTION au ' et " <--- Ne sais plus pkoi!!		*/
+/*	Profondeur des perenthensis								*/
 /* -------------------------------------------------------- */
+
 typedef struct s_cmd
 {
 	char			*path;
@@ -87,6 +89,8 @@ typedef struct s_cmd
 	char			*param;
 	int				type;
 	int				fd;
+	int				result;
+	int				parenthesis;
 	struct s_pipe	*pipe[2];
 	pid_t			pid;
 	struct s_cmd	*next;
