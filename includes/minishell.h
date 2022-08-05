@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/04 11:55:20 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/05 12:18:31 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ int			prompt(t_shell *shell);
 // WORKING
 
 //		-- PARSSING
-// Work but first element with quote and space inside doing problem....
+int			add_env(char *line);
 char		*line_parse(char *cmd);
 char		*take_dollar(char *param);
 char		*take_single_quote(char *param);

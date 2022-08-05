@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:38:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/03 21:53:13 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/05 12:27:43 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,6 @@ int	core(t_shell *shell)
 	t_builtins	*builtin;
 	char		*line;
 
-// ATTENTION SI LE DEBUT DE CMD EST " OU ' ET QU UN ESPACE EST PRESENT DEDANS
-// LA COMMANDE NE SERA PAS CORRECT ET LA PARTIE APRES L ESPACE SE RETROUVERA
-// DANS LES PARAMM!!!
 	line = line_parse(shell->line);
 	if (line == NULL)
 		return (0);
@@ -67,7 +64,7 @@ int	core(t_shell *shell)
  printf("--> \e[32mPATH: %s\e[0m\n--> \e[33mCMD: %s\e[0m\n--> \e[34mPARAM: %s\e[0m\n", shell->cmd->path, shell->cmd->command, shell->cmd->param);
 	prepare_exe(shell);
 	if (builtin != NULL && shell->cmd->path == NULL)
-		builtin->f(shell);	
+		builtin->f(shell);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 10:39:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/03 22:04:54 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/05 13:06:40 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static char	*dollar(char *tmp, char *line, char **ret)
 {
 	tmp = take_dollar(line++);
 	while (*line && (ft_isalnum(*line) || *line == '_'))
+		line++;
+	while (*line == ' ')
 		line++;
 	if (tmp == NULL)
 		return (line);

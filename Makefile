@@ -8,7 +8,8 @@ INCLUDES	= 	-I./includes -I./readline -I./lib/libft
 # LINUX
 #LIBRARY		=   /usr/local/lib/libreadline.a /usr/local/lib/libhistory.a -lncurses -lreadline -L./lib/libft ./lib/libft/libft.a
 #INCLUDES	= 	-I./includes -I./lib/libft
-SRCS		= 	builtins.c \
+SRCS		= 	add_env.c \
+				builtins.c \
 				cmd_parse.c \
 				env_pars.c \
 				free.c \
