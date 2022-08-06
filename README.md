@@ -7,10 +7,10 @@ Pour ce faire il existe plusieurs possibilite et donc algorithme comme tout prog
 Sur ce projet nous avons choisi de faire l'utilisation d'un arbre binaire.
 L'arbre binaire va nous servir a effectuer ligne de commande dans un ordre precis en commancant l'execution de l'arbre en bas a gauche tout en remontant et en effectuant les partie droit a chaque noeud. Si dans la branche de droite contient d'autre branche nous allons donc repereter cette operation en y descendant tout en bas a gauche afin d'y remonter tout en effectuant la branche de droite a chaque noeud selon le type que nous verrons plus tard.
 Pour construire l'arbre nous allons utiliser des priorite que nous allons potentiellement retrouver dans la ligne donne par l'utilisateur qui sont dans l'ordre:
-### 1. &&
-### 2. ||
-### 3. |
-### 4. les redirections
+###### 1. &&
+###### 2. ||
+###### 3. |
+###### 4. les redirections
 
 En cas de parenthese nous devons isoler celle-ci afin dans faire un bloque qui sera envoye et traiter dans l'arbre au moment venu.
 Apres le parssing et la creation de l'arbre binaire nous passons a sont execution.
