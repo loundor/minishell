@@ -24,12 +24,12 @@ Apres le parssing et la creation de l'arbre binaire nous passons a sont executio
 ```
 typedef struct s_tree
 {
-	int				type;
-	int				code_err;
+	int		type;
+	int		code_err;
 	struct t_cmd	*cmd;
 	struct s_pipe	*pipe[2];
-	struct tree		*left;
-	struct tree		*right;
+	struct tree	*left;
+	struct tree	*right;
 }	t_tree;
 ```
 
