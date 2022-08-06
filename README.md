@@ -16,6 +16,9 @@ Apres le parssing et la creation de l'arbre binaire nous passons a sont executio
 
 -- Partie a faire quand nous y serrons...
 
+La structure:
+EN COURS DE CREATION
+
 Le parssing:
 Apre reception de la ligne de commande nous allons annalyser celle-ci et la retravailler afin de remplacer toutes demandes de variable(s) d'environement ou non par la variable en question;
 Ex: $LANG deviens donc fr_FR.UTF-8
@@ -27,3 +30,35 @@ Commencons par la structure de cette arbre, rappelons qu'un arbre binaire contie
 Voici un exemple d'une potentielle commande decouper et integre dans un arbre binaire.
 
 ![Alt text](img/bt.png?raw=true "Title")
+
+Pour creer et remplir cette arbre nous allons avoir besoin de notre structure et d effectuer une recurssive qui va utiliser le priorite et ainsi effectuer les actions de remplissage.
+
+Voici un algo tres simplifier pour le remplissage de l'arbre:
+ne pas oublier que les parenthese doivent etre considerer comme un bloc.
+
+start
+
+if block is &&
+  work <- take line before &&
+  line <- *line after &&
+  create node type && and afiliate to parent if exist
+  recall this function argv (work, node->left)
+if block is ||
+  work <- take line before ||
+  line <- *line after ||
+  create node type || and afiliate to parent if exist
+  recall this function argv (work, node->left)
+ if *line egale (
+  work <- take block until the right parenthesis
+  recall this fonction argv (work, thisnode->left)
+ if block is |
+  work <- take line before |
+  line <- *line after |
+  create node type | and afiliate to parent if exist
+  recall this function argv (work, node->left)
+ if block is redicrection (<, >, >>)
+  create a node type leaf and afiliate to parent if exist
+ if line is not empty
+  recall this function argv (line, node->right)
+
+end
