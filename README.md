@@ -38,8 +38,8 @@ ne pas oublier que les parenthese doivent etre considerer comme un bloc.
 
 start
 
-if block is &&
-  work <- take line before &&
+if block is "&&"
+  work <- take line before "&&"
   line <- *line after &&
   create node type && and afiliate to parent if exist
   recall this function argv (work, node->left)
@@ -48,17 +48,17 @@ if block is ||
   line <- *line after ||
   create node type || and afiliate to parent if exist
   recall this function argv (work, node->left)
- if *line egale (
+if *line egale (
   work <- take block until the right parenthesis
   recall this fonction argv (work, thisnode->left)
- if block is |
+if block is |
   work <- take line before |
   line <- *line after |
   create node type | and afiliate to parent if exist
   recall this function argv (work, node->left)
- if block is redicrection (<, >, >>)
+if block is redicrection (<, >, >>)
   create a node type leaf and afiliate to parent if exist
- if line is not empty
+if line is not empty
   recall this function argv (line, node->right)
 
 end
