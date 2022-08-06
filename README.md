@@ -31,7 +31,7 @@ Commencons par la structure de cette arbre, rappelons qu'un arbre binaire contie
 
 __Voici un exemple d'une potentielle commande decoupe et integre dans un arbre binaire.__
 
-![Alt text](img/bt.png?raw=true "Title")
+![Binary tree](img/bt.png?raw=true "Title")
 
 Pour creer et remplir cette arbre nous allons avoir besoin de notre structure et effectuer une recurssive qui va utiliser la priorite pour ainsi effectuer les actions de remplissage.
 
