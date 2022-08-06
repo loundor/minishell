@@ -12,30 +12,31 @@ Pour construire l'arbre nous allons utiliser des priorite que nous allons potent
 ###### 3. |
 ###### 4. les redirections
 
-En cas de parenthese nous devons isoler celle-ci afin dans faire un bloque qui sera envoye et traiter dans l'arbre au moment venu.
+En cas de __parenthese__ nous devons isoler celle-ci afin dans faire un bloque qui sera envoye et traiter dans l'arbre au moment venu.
 Apres le parssing et la creation de l'arbre binaire nous passons a sont execution.
 
 -- Partie a faire quand nous y serrons...
 
 ## La structure:
-EN COURS DE CREATION
+*EN COURS DE CREATION*
 
 ## Le parssing:
 Apre reception de la ligne de commande nous allons annalyser celle-ci et la retravailler afin de remplacer toutes demandes de variable(s) d'environement ou non par la variable en question;
-Ex: $LANG deviens donc fr_FR.UTF-8
+Ex: *$LANG deviens donc fr_FR.UTF-8*
 Si la variable n'existe pas nous effacerons simplement la demande.
-Ex: "I want $TOTO!" deviens "I want !"
+Ex: *"I want $TOTO!" deviens "I want !"*
 
 ##### L'arbre binaire:
-Commencons par la structure de cette arbre, rappelons qu'un arbre binaire contient un racine (le pere) et au maximum deux branche (2 fils) qui a leur tour peuvent devenir un racine d'un sous arbre et donc avoir egalement au maximum 2 branche et ainsi de suite.
-Voici un exemple d'une potentielle commande decouper et integre dans un arbre binaire.
+Commencons par la structure de cette arbre, rappelons qu'un arbre binaire contient une racine *(le pere)* et au maximum deux branches *(2 fils)* qui a leur tour peuvent devenir une racine d'un sous arbre et donc avoir egalement au maximum 2 branches et ainsi de suite...
+
+__Voici un exemple d'une potentielle commande decoupe et integre dans un arbre binaire.__
 
 ![Alt text](img/bt.png?raw=true "Title")
 
-Pour creer et remplir cette arbre nous allons avoir besoin de notre structure et d effectuer une recurssive qui va utiliser le priorite et ainsi effectuer les actions de remplissage.
+Pour creer et remplir cette arbre nous allons avoir besoin de notre structure et effectuer une recurssive qui va utiliser la priorite pour ainsi effectuer les actions de remplissage.
 
-Voici un algo tres simplifier pour le remplissage de l'arbre:
-ne pas oublier que les parenthese doivent etre considerer comme un bloc.
+Voici un algo survole pour le remplissage de l'arbre:
+ne pas oublier que ***les parenthese doivent etre considerer comme un bloc.***
 ```
 start
 
