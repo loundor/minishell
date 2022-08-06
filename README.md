@@ -26,7 +26,7 @@ Ex: $LANG deviens donc fr_FR.UTF-8
 Si la variable n'existe pas nous effacerons simplement la demande.
 Ex: "I want $TOTO!" deviens "I want !"
 
-# L'arbre binaire:
+##### L'arbre binaire:
 Commencons par la structure de cette arbre, rappelons qu'un arbre binaire contient un racine (le pere) et au maximum deux branche (2 fils) qui a leur tour peuvent devenir un racine d'un sous arbre et donc avoir egalement au maximum 2 branche et ainsi de suite.
 Voici un exemple d'une potentielle commande decouper et integre dans un arbre binaire.
 
