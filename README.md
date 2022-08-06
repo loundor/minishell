@@ -39,9 +39,11 @@ ne pas oublier que les parenthese doivent etre considerer comme un bloc.
 start
 
 if block is "&&"
+
   work <- take line before &&
   
   line <- *line after &&
+  
   create node type && and afiliate to parent if exist
   recall this function argv (work, node->left)
 if block is ||
