@@ -14,7 +14,6 @@
 # define MINISHELL_H
 # define READLINE_LIBRARY
 # include "../lib/libft/libft.h"
-//# include "../lib/libft/gnl/gnl.h"
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -54,12 +53,37 @@ typedef enum e_typeerror
 	ALLRIGHT
 }	t_error;
 
+/* -------------| ENVIRONNEMENT VARIABLES  |--------------- */
+/*	Binary tree, need "type" for the type of separator		*/
+/*	About type:	0 - end		1 - |	2 - ||	3- &&	4- >	*/
+/*				5 - >>		6 - <	7 - <<					*/
+/*	The code_err it the number returned by the programm.	*/
+/*	The cmd take the path, name of file and param			*/
+/*	for the no leaf, dont forget to put at NULL all			*/
+/*	variable that we don't use!								*/
+/* -------------------------------------------------------- */
+
+typedef struct s_tree
+{
+	int				type;
+	int				code_err;
+	struct t_cmd	*cmd;
+	struct s_pipe	*pipe[2];
+	struct tree		*left;
+	struct tree		*right;
+}	t_tree;
+
 typedef struct s_builtins
 {
 	char				*cmd;
 	int					(*f)();
 	struct s_builtins	*next;
 }	t_builtins;
+
+/* -------------| ENVIRONNEMENT VARIABLES  |--------------- */
+/*	Maybe for somethings but i don't remember why...		*/
+/*	A leave that in moment....
+/* -------------------------------------------------------- */
 
 typedef struct s_pparams
 {
