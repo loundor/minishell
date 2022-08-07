@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:22:21 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/04 14:23:05 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/07 10:24:28 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,25 @@ char	*take_single_quote(char *param)
 
 	line = NULL;
 	pre = NULL;
-	line = (char *)malloc(sizeof(char) * 2);
-	if (!line)
-		exit(ft_exit(MALLOCERR, 2));
-	*line = *param++;
-	line[1] = '\0';
+	param++;
 	while (*param && *param != '\'' && *param != '\0')
 	{
+		if (line == NULL)
+		{
+			line = (char *)malloc(sizeof(char) * 1);
+			if (!line)
+				exit(ft_exit(MALLOCERR, 2));
+			*line = '\0';
+		}
 		pre = line;
 		line = ft_joincts(pre, *param++);
 		free(pre);
 	}
 	if (*param == '\0')
 	{
-		//pre = heredoc(line); // EN ATTENTE DE CREATION DE FONCTION
+		//pre = heredoc(line, 1); // EN ATTENTE DE CREATION DE FONCTION
 		free(line);
 		return (pre);
 	}
-	pre = line;
-	line = ft_joincts(pre, '\'');
-	free(pre);
 	return (line);
 }

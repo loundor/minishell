@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 17:10:41 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/05 15:03:18 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/07 10:07:58 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 /* -------------------------------------------------------- */
 
 
-int	big_split(char *shell)
+/* int	big_split(char *shell)
 {
 	size_t	i;
 	size_t	start;
@@ -58,7 +58,7 @@ int	big_split(char *shell)
 	if (*line != '\0')
 		big_split(line);
 	//// After work!
-}
+} */
 
 /* ------------------| START OF PARSER |------------------- */
 /*	The parser work in recurssive mode when the line is		*/
@@ -69,7 +69,7 @@ int	big_split(char *shell)
 
 t_cmd	*cmd_parse(char *shell, t_cmd *cmd)
 {
-int	big_split(char *shell)
+//	big_split(char *shell);
 	char	*line;
 	t_cmd	*new;
 

@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 10:39:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/05 13:06:40 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/07 10:21:40 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ static char	*dollar(char *tmp, char *line, char **ret)
 	return (line);
 }
 
+/* -----------------| DOUBLE QUOTES?! |-------------------- */
+/* ADD DOUBLE QUOTE IN TMP IF NOT NULL AFTER THE FIRST FUNC	*/
+/* -------------------------------------------------------- */
 static char	*d_quotes(char *tmp, char *line, char **ret)
 {
 	tmp = take_double_quote(line++);
@@ -61,6 +64,9 @@ static char	*d_quotes(char *tmp, char *line, char **ret)
 	return (line);
 }
 
+/* -----------------| SINGLE QUOTES?! |-------------------- */
+/* ADD SIGNLE QUOTE IN TMP IF NOT NULL AFTER THE FIRST FUNC	*/
+/* -------------------------------------------------------- */
 static char	*s_quotes(char *tmp, char *line, char **ret)
 {
 	tmp = take_single_quote(line++);

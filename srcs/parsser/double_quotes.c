@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:23:10 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/04 14:24:13 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/07 10:24:27 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,16 @@ char	*take_double_quote(char *param)
 	line = NULL;
 	pre = NULL;
 	reserved = NULL;
-	line = (char *)malloc(sizeof(char) * 2);
-	if (!line)
-		exit(ft_exit(MALLOCERR, 2));
-	*line = *param++;
-	line[1] = '\0';
+	param++;
 	while (*param && *param != '"' && *param != '\0')
 	{
+		if (line == NULL)
+		{
+			line = (char *)malloc(sizeof(char) * 1);
+			if (!line)
+				exit(ft_exit(MALLOCERR, 2));
+			*line = '\0';
+		}
 		if (*param == '$' && (ft_isalnum(param[1]) || param[1] == '_'))
 		{
 			pre = take_dollar(param++);
@@ -58,12 +61,9 @@ char	*take_double_quote(char *param)
 	}
 	if (*param == '\0')
 	{
-		//pre = heredoc(line); // EN ATTENTE DE CREATION DE FONCTION
+		//pre = heredoc(line, 2); // EN ATTENTE DE CREATION DE FONCTION
 		free(line);
 		return (pre);
 	}
-	pre = line;
-	line = ft_joincts(pre, '"');
-	free(pre);
 	return (line);
 }

@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/05 12:18:31 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/07 10:07:06 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ typedef struct s_builtins
 
 /* -------------| ENVIRONNEMENT VARIABLES  |--------------- */
 /*	Maybe for somethings but i don't remember why...		*/
-/*	A leave that in moment....
+/*	A leave that in moment....								*/
 /* -------------------------------------------------------- */
 
 typedef struct s_pparams
