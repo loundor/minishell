@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:57:32 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/07 22:37:59 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/08 01:43:04 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,21 +72,32 @@ static char	*tree_parenthesis(char *line, t_tree *tree)
 		i[0] = 0;
 		i[1] = 0;
 		i[2] = 0;
-		while (line[i[0]] != ')' || i[2])
+		while (line[i[0]] == '(' || i[2])
 		{
-			if (line[i[0]] == '(')
-				i[2]++;
+			while (line[i[0]] != ')')
+			{
+				if (line[i[0]] == '(')
+					i[2]++;
+				i[0]++;
+			}
 			i[2]--;
 			i[0]++;
 		}
+		line++;
 		if (i[0] <= 1)
+		{
+			line++;
 			return (line);
-		work = (char *)malloc(sizeof(char) * (i[0] + 1));
+		}
+		work = (char *)malloc(sizeof(char) * (i[0] - 1));
 		if (!work)
 			exit(ft_exit(MALLOCERR, 1));
-		while (i[1] < i[0])
+		while (i[1] < (i[0] - 2))
 			work[i[1]++] = *line++;
 		work[i[1]] = '\0';
+		line ++;
+		line = ft_skipspace(line);
+		line += 2;
 		tree->left = bt_create(work);
 	}
 	return (line);
@@ -185,12 +196,12 @@ t_tree	*bt_create(char *line)
 	if (!tree)
 		exit(ft_exit(MALLOCERR, 1));
 	tree->type = 0;
-	if (bt_test_and(line))
+	if (*line == '(')
+		line = tree_parenthesis(line, tree);
+	else if (bt_test_and(line))
 		line = tree_and(line, tree);
 	else if (bt_test_or(line))
 		line = tree_or(line, tree);
-	else if (*line == '(')
-		line = tree_parenthesis(line, tree);
 	else if (bt_test_pipe(line))
 		line = tree_pipe(line, tree);
 	else if (bt_test_redir(line))

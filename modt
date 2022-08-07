@@ -7,5 +7,5 @@
 			afuchs & stissera - v0.1
 			
 ./rep/rep2/rep3/exec param1 $LANG param3 $NOTEXT "param4 $LANG '$LANG' '$NOEXT' param7" 'param8 $LANG' param10
-cmd | cmd2 > txt && cmd3 | cmd4 > txt | cmd8 || cmd9 && cmd10 > txt
+cmd | cmd2 > txt && cmd3 | ( cmd4 > txt || ( cmd5 | cmd6 > imp ) | cmd7 > txt ) | cmd8 || cmd9 && cmd10 > txt
 
