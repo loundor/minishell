@@ -1,6 +1,6 @@
 NAME		= 	minishell
 CC			= 	gcc
-FLAGS		= 	-Wall -Werror -Wextra ${EXTRAF}
+FLAGS		= 	-Wall -Wextra ${EXTRAF}
 EXTRAF		= 	-g -fsanitize=address
 # MACOS
 #LIBRARY		=  -lreadline -Lreadline/lib -L./lib/libft ./lib/libft/libft.a
@@ -19,6 +19,8 @@ SRCS		= 	add_env.c \
 				signal.c \
 				welcome.c \
 				test.c \
+				tree/bt_create.c \
+				tree/bt_test_sep.c \
 				parsser/dollar.c \
 				parsser/double_quotes.c \
 				parsser/exec.c \

@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/07 10:07:06 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/07 17:43:27 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,11 @@ typedef struct s_tree
 {
 	int				type;
 	int				code_err;
-	struct t_cmd	*cmd;
+	char			*cmd;
+//	struct t_cmd	*cmd;
 	struct s_pipe	*pipe[2];
-	struct tree		*left;
-	struct tree		*right;
+	struct s_tree	*left;
+	struct s_tree	*right;
 }	t_tree;
 
 typedef struct s_builtins
@@ -134,6 +135,7 @@ typedef struct s_shell
 	short unsigned int	*return_err;
 	struct s_env		*env;
 	struct s_cmd		*cmd;
+	struct s_tree		*tree;
 	struct s_builtins	*builtin;
 	struct sigaction	signal_act;
 }	t_shell;
@@ -158,6 +160,16 @@ void		free_env(t_env *env);
 void		free_shell(t_shell *shell);
 int			prompt(t_shell *shell);
 // WORKING
+
+// TREE
+t_tree		*bt_create(char *line);
+int			bt_test_and(char *line);
+int			bt_test_or(char *line);
+int			bt_test_pipe(char *line);
+int			bt_test_redir(char *line);
+int			bt_test_appd(char *line);
+int			bt_test_input(char *line);
+int			bt_test_heredoc(char *line);
 
 //		-- PARSSING
 int			add_env(char *line);
