@@ -97,6 +97,7 @@ static char	*tree_parenthesis(char *line, t_tree *tree)
 		work[i[1]] = '\0';
 		line ++;
 		line = ft_skipspace(line);
+		tree->type = get_cmd_type(line);
 		line += 2;
 		tree->left = bt_create(work);
 	}

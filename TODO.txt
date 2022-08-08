@@ -1,15 +1,11 @@
 Reddo the parssing...
-after read line ok, parse directly the compelet command
-and after do the split for path, exec, param...
-Exemple:
-Input:"       "./re""p1/"rep'2/'$REP/exec    test '$VAR'"=$VAR" ||    grep $VAR   "
-Output:"./rep1/rep2/rep3/exec test $VAR=variable || grep variable"
-
-Warning, when the  cmd start by ex: "hello world" thats means it's the file "hello world" asked and not "hello" with parameter "world"!!! need do that!
+Do only one space between command (don't touch between " and ')
+Do free on binary tree (struct tree)
+Before execute a command, we need parse again the command or do that after or in binary tree writing.
 
 LES PARAMETRES DANS EXECVE EST UN TABLEAU!!!!
 Probleme double espace dans le parssing de la cmd avec les simple et double quotes.
-Dans exec.c ajouter un arret dans le while pour || | && << >> < >...
+Dans exec.c ajouter un arret dans le while pour || | && << >> < >... // DEPRECATED
 
 fichier line.c plus de 5 fonctions...
 Fichiers double quotes et single quotes plus de 25 lignes!!!

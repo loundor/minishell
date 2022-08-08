@@ -159,6 +159,7 @@ void		free_cmd(t_cmd *cmd);
 void		free_env(t_env *env);
 void		free_shell(t_shell *shell);
 int			prompt(t_shell *shell);
+int			get_cmd_type(char *line);
 // WORKING
 
 // TREE
