@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 13:15:55 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/07 22:38:31 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/08 09:24:13 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	bt_test_and(char *line)
 				i++;
 			}
 			parenthesis--;
+			i++;
 		}
 		if (line[i] == '&' && line[i + 1] == '&')
 			return (i);
@@ -59,6 +60,7 @@ int	bt_test_or(char *line)
 				i++;
 			}
 			parenthesis--;
+			i++;
 		}
 		if (line[i] == '|' && line[i + 1] == '|')
 			return (i);
@@ -85,6 +87,7 @@ int	bt_test_pipe(char *line)
 				i++;
 			}
 			parenthesis--;
+			i++;
 		}
 		if (line[i] == '|' && line[i + 1] != '|')
 			return (i);
@@ -111,6 +114,7 @@ int	bt_test_redir(char *line)
 				line++;
 			}
 			parenthesis--;
+			line++;
 		}
 		if (line[i] == '>' && line[i + 1] != '>')
 			return (i);
@@ -137,6 +141,7 @@ int	bt_test_appd(char *line)
 				i++;
 			}
 			parenthesis--;
+			i++;
 		}
 		if (line[i] == '>' && line[i + 1] == '>')
 			return (i);
@@ -163,6 +168,7 @@ int	bt_test_input(char *line)
 				i++;
 			}
 			parenthesis--;
+			i++;
 		}
 		if (line[i] == '<' && line[i + 1] != '<')
 			return (i);
@@ -189,6 +195,7 @@ int	bt_test_heredoc(char *line)
 				i++;
 			}
 			parenthesis--;
+			i++;
 		}
 		if (line[i] == '<' && line[i + 1] == '<')
 			return (i);
