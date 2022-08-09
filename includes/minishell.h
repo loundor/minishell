@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/07 17:43:27 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/09 23:15:43 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,7 @@ int			bt_test_heredoc(char *line);
 
 //		-- PARSSING
 int			add_env(char *line);
+char		*parse_space(char *line);
 char		*line_parse(char *cmd);
 char		*take_dollar(char *param);
 char		*take_single_quote(char *param);

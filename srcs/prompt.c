@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:38:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/05 12:27:43 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/09 23:16:24 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ int	core(t_shell *shell)
 	t_builtins	*builtin;
 	char		*line;
 
-	line = line_parse(shell->line);
+	//line = line_parse(shell->line);
+	line = parse_space(shell->line);
 	if (line == NULL)
 		return (0);
 	free(shell->line);
