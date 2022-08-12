@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 19:42:02 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/12 20:16:44 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/12 21:53:38 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,9 +131,9 @@ char	*parse_space(char *line)
 
 int main()
 {
-    char    test[] = "    test1   test2&&    (   test3 \"   ) test4    \"  )   ||'    test5 \"  test6  \"  |  test7   '  >    test8   >> test9      <<    test 10      ";
+    char    test[] = "     cmd   \"->   ' ' '    <-\" | cmd2 '->     \"  \"  \"  <-'  >   txt   &&cmd3  |( cmd4     >     txt ||    (   cmd5     |   cmd6 > imp ) | cmd7     > txt )|cmd8    || cmd9    && cmd10  >     txt    ";
     // Total: 150
-// test1 test2 && ( test3 "   ) test4    " ) || '    test5 "  test6  "  |  test7   ' > test8 >> test9 << test 10
+//	cmd | cmd2 > txt &&cmd3 |( cmd4 > txt || ( cmd5 | cmd6 > imp ) | cmd7 > txt )|cmd8 || cmd9 && cmd10 > txt
     // Should: 111
     char    *line;
 
