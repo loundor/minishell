@@ -1,6 +1,6 @@
 NAME		= 	minishell
 CC			= 	gcc
-FLAGS		= 	-Wall -Wextra ${EXTRAF}
+FLAGS		= 	-Wall -Werror -Wextra ${EXTRAF}
 EXTRAF		= 	-g -fsanitize=address
 # MACOS
 #LIBRARY		=  -lreadline -Lreadline/lib -L./lib/libft ./lib/libft/libft.a
