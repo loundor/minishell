@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/09 23:15:43 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/13 18:30:05 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <fcntl.h>
 # include <signal.h>
 # include <curses.h>
+# include <dirent.h>
 # include <sys/wait.h>
 # include <sys/types.h>
 # include <sys/stat.h>
