@@ -6,11 +6,18 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 13:15:55 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/08 09:24:13 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/14 11:11:04 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+
+/* ----------------| SEPARATOR TESTER |-------------------- */
+/*	Take the line and check if need to separate something.	*/
+/*	There function return only the index of char after the	*/
+/*	separator otherfalse it return 0.						*/
+/* -------------------------------------------------------- */
 
 /* see for add a type int in prototype but take care && || << */
 /* (that can do only in one or two functions) */

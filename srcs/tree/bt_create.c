@@ -6,11 +6,26 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:57:32 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/08 09:29:47 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/14 11:04:20 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+/* -------------------| MAKE A TREE B |-------------------- */
+/*	After parsing the cmd, we get this and create a tree.	*/
+/*	We always check if a separator exist, and take the cmd	*/
+/*	before the separator and call the function separator	*/
+/*	There functions are a recursive, there function make a	*/
+/*	root about type of separator and a left branch recall	*/
+/*	the function tree, after it make a right branch if there*/
+/*	are always something of the part of cmd and call tree	*/
+/*	The function bt_create is the principal function, it	*/
+/*	always make a root, the another function do the banch if*/
+/*	need.													*/
+/* -------------------------------------------------------- */
+/*		WE CAN MAYBE REDUCE THE NUMBER OF FUCNTION			*/
+/* -------------------------------------------------------- */
 
 static char	*tree_and(char *line, t_tree *tree)
 {

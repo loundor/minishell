@@ -6,11 +6,17 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:57:32 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/08 09:29:47 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/14 10:53:44 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+/* ------------------| GET TYPE OF CMD |------------------- */
+/*	This command just check *char and *char+1 and return a	*/
+/*	number of type. PIPE, OR, AND, REDIRECTION, APPEND, IN	*/
+/*	and HEREDOC												*/
+/* -------------------------------------------------------- */
 
 int	get_cmd_type(char *line)
 {

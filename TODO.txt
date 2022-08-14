@@ -6,9 +6,26 @@ Dans le remplissage de l'arbre binaire les variables *cmd comportes un espace ne
 Tester le parssing avec tout les separateurs restant (>>, <<, <). Le reste fonctionne...
 
 
-Avant l'execution de la commande dans l'arbre binaire, il nous faudra utilise la fonction de parsing de ligne, qui nous servira a transformer toute les demandes de variable en valeur de celle-ci.
+Avant l'execution de la commande dans l'arbre binaire, il nous faudra utiliser la fonction de parsing de ligne, qui nous servira a transformer toute les demandes de variable en valeur de celle-ci.
 Attention si dans le parssing nous rencontrons quelquechose=untruc il nous faut declarer cette variable dans la memoire et non dans l'environnement, hormis dans me cas ou la command de gauche (tree) est export.
 
+wildcard a effectuer ajouter le '?' ?? outsanding project.. :
+	loundor@Surface:~$ ls p***********c
+		pwd.c
+	loundor@Surface:~$ ls p*******d*******c
+		pwd.c
+	loundor@Surface:~$ ls p*******d*******c
+		pwd.c
+	loundor@Surface:~$ ls ******p*******d*******c
+		pwd.c
+	loundor@Surface:~$ ls ******p*******d*******c********
+		pwd.c
+	loundor@Surface:~$ ls p?*
+		pwd.c
+	loundor@Surface:~$ ls p?*c
+		pwd.c
+	loundor@Surface:~$ ls p?d.c
+		pwd.c
 
 LES PARAMETRES DE EXECVE EST UN TABLEAU!!!!
 Probleme double espace dans le parssing de la cmd avec les simple et double quotes. (Non fixé??!! A tester dans un premier temps.)
