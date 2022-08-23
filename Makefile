@@ -31,6 +31,7 @@ SRCS		= 	add_env.c \
 				parsser/redir.c \
 				parsser/search_var.c \
 				parsser/single_quote.c \
+				parsser/wildcard.c \
 				utils/get.c \
 				${addprefix builtins/, ${BUILTIN}}
 BUILTIN		=	cd.c \
