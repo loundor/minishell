@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/13 18:30:05 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/23 22:53:16 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,16 @@ typedef struct s_builtins
 	int					(*f)();
 	struct s_builtins	*next;
 }	t_builtins;
+
+typedef struct s_wildcard
+{
+	char		*str;
+	int			ss;
+	int			se;
+	char		*pattern;
+	int			ps;
+	int			pe;
+}	t_wildcard;
 
 /* -------------| ENVIRONNEMENT VARIABLES  |--------------- */
 /*	Maybe for somethings but i don't remember why...		*/
@@ -185,6 +195,7 @@ char		*take_exec(char *line, t_cmd *cmd);
 char		*take_params(char *line, t_cmd *cmd);
 char		*take_operator(char *line, t_cmd *cmd);
 char		*search_var(char *var);
+int			starcmp(t_wildcard	*test);
 
 int			prepare_exe(t_shell *shell);
 int			cd(t_shell *shell); // change directory

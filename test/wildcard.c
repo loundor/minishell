@@ -102,12 +102,14 @@ int	main(int argc, char **argv)
 //	DIR				*path;
 //	struct dirent	*inside;
 
-	test.pattern = "test1*test2*test3";
+	test.pattern = "?????e**********";
 	test.str = "test1entretest2suitetest3";
-	test.pe = 0;
+	test.ss = 0;
 	test.se = 0;
 	test.pe = 0;
 	test.ps = 0;
+	puts(test.pattern);
+	puts(test.str);
 	printf("Valeur de retour sur wildcard: %d\n", starcmp(&test));
 	return (0);
 }
