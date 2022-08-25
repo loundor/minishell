@@ -12,7 +12,7 @@
 
 #include "../../includes/minishell.h"
 
-/* --------------| WITH $VAR TO ENV VAR |------------------ */
+/* -----------| TO HARD TO FIND?? NOOO! |------------------ */
 /*	The wildcard count and check all char until a !=		*/
 /*	If the differente char is * or ?, that call the subfunc	*/
 /*	and check how is the next part of the pattern. We use	*/
