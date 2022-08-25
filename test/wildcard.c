@@ -99,33 +99,28 @@ int	part_wild_test(t_wildcard *test)
 int	main(int argc, char **argv)
 {
 	t_wildcard		test;
-//	DIR				*path;
-//	struct dirent	*inside;
+	DIR				*path;
+	struct dirent	*inside;
 
-	test.pattern = "?????e**********";
-	test.str = "test1entretest2suitetest3";
-	test.ss = 0;
-	test.se = 0;
-	test.pe = 0;
-	test.ps = 0;
-	puts(test.pattern);
-	puts(test.str);
-	printf("Valeur de retour sur wildcard: %d\n", starcmp(&test));
-	return (0);
-}
-
-/* 	(void)argc;
+	(void)argc;
 	path = opendir(argv[1]);
 	inside = readdir(path);
+
+	test.pattern = argv[2];
+//	test.str = "test1entretest2suitetest3";
 	puts("Nom   - Type");
 	while (inside != NULL)
 	{
-		printf("%s  --  %d\n", inside->d_name, inside->d_type );
+		if (inside->d_type == 8)
+		{
+			test.ss = 0;
+			test.se = 0;
+			test.pe = 0;
+			test.ps = 0;
+			test.str = inside->d_name;
+			printf("Valeur du pattern %s sur le fichier %s: %d\n", test.pattern, test.str, starcmp(&test));
+		}
 		inside = readdir(path);
 	}
-	if (starcmp("AllerEtC*he", "AllerEtCaMarche pas"))
-		printf("Oui");
-	else
-		printf("Non");
 	return (0);
-} */
+}
