@@ -48,14 +48,14 @@ int	parse_wildcard(t_wildcard *test)
 		test->pe++;
 	if (test->pattern[test->pe] == 0)
 	{
-		while (test->str[test->se] == test->pattern[test->pe]
-			&& test->pe >= test->ps)
+		while ((test->str[test->se] == test->pattern[test->pe]
+			|| test->pattern[test->pe] == '?') && test->pe >= test->ps)
 		{
 			test->pe--;
 			test->se--;
 		}
-		if (test->str[++test->se] == test->pattern[++test->pe]
-			&& test->pe == test->ps)
+		if ((test->str[++test->se] == test->pattern[++test->pe]
+			|| test->pattern[++test->pe] == '?') && test->pe == test->ps)
 			return (1);
 		return (0);
 	}
@@ -79,7 +79,7 @@ int	part_wild_test(t_wildcard *test)
 	count = baks;
 	while (bakp > test->ps)
 	{
-		if (test->str[baks] == test->pattern[bakp])
+		if (test->str[baks] == test->pattern[bakp] || test->pattern[bakp] == '?')
 		{
 			bakp--;
 			baks--;
@@ -107,7 +107,6 @@ int	main(int argc, char **argv)
 	inside = readdir(path);
 
 	test.pattern = argv[2];
-//	test.str = "test1entretest2suitetest3";
 	puts(test.pattern);
 	while (inside != NULL)
 	{
