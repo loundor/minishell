@@ -6,11 +6,22 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 22:51:03 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/25 17:57:32 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/25 21:00:20 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+/* --------------| WITH $VAR TO ENV VAR |------------------ */
+/*	The wildcard count and check all char until a !=		*/
+/*	If the differente char is * or ?, that call the subfunc	*/
+/*	and check how is the next part of the pattern. We use	*/
+/*	a decressing mode that means with start end of the str	*/
+/*	to search the correspondant between part of parttern	*/
+/*	and str.. Use the decressing mode its maybe not the		*/
+/*	good solution... After this check, if the str and patt	*/
+/*	are not \0 we recall the main function (recursive)...	*/
+/* -------------------------------------------------------- */
 
 static int	part_wild_test(t_wildcard *test)
 {
@@ -21,7 +32,7 @@ static int	part_wild_test(t_wildcard *test)
 	bakp = test->pe - 1;
 	baks = ft_strlen(test->str) - 1;
 	count = baks;
-	while (bakp > test->ps)
+	while (baks > test->ss && bakp >= test->ps)
 	{
 		if (test->str[baks] == test->pattern[bakp] || test->pattern[bakp] == '?')
 		{
@@ -32,7 +43,8 @@ static int	part_wild_test(t_wildcard *test)
 		baks = --count;
 		bakp = test->pe - 1;
 	}
-	if (bakp == test->ps)
+	baks++;
+	if (bakp <= test->ps)
 	{
 		test->ss = baks;
 		return (1);

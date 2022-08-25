@@ -77,7 +77,7 @@ int	part_wild_test(t_wildcard *test)
 	bakp = test->pe - 1;
 	baks = strlen(test->str) - 1; // Do ft_ !!!!
 	count = baks;
-	while (bakp > test->ps)
+	while (baks > test->ss && bakp >= test->ps)
 	{
 		if (test->str[baks] == test->pattern[bakp] || test->pattern[bakp] == '?')
 		{
@@ -88,7 +88,8 @@ int	part_wild_test(t_wildcard *test)
 		baks = --count;
 		bakp = test->pe - 1;
 	}
-	if (bakp == test->ps)
+	baks++;
+	if (bakp <= test->ps)
 	{
 		test->ss = baks;
 		return (1);
