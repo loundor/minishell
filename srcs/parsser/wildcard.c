@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 22:51:03 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/23 22:56:27 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/25 17:57:32 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	part_wild_test(t_wildcard *test)
 	count = baks;
 	while (bakp > test->ps)
 	{
-		if (test->str[baks] == test->pattern[bakp])
+		if (test->str[baks] == test->pattern[bakp] || test->pattern[bakp] == '?')
 		{
 			bakp--;
 			baks--;
@@ -47,14 +47,14 @@ static int	parse_wildcard(t_wildcard *test)
 		test->pe++;
 	if (test->pattern[test->pe] == 0)
 	{
-		while (test->str[test->se] == test->pattern[test->pe]
-			&& test->pe >= test->ps)
+		while ((test->str[test->se] == test->pattern[test->pe]
+			|| test->pattern[test->pe] == '?') && test->pe >= test->ps)
 		{
 			test->pe--;
 			test->se--;
 		}
-		if (test->str[++test->se] == test->pattern[++test->pe]
-			&& test->pe == test->ps)
+		if ((test->str[++test->se] == test->pattern[++test->pe]
+			|| test->pattern[++test->pe] == '?') && test->pe == test->ps)
 			return (1);
 		return (0);
 	}
