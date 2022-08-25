@@ -108,7 +108,7 @@ int	main(int argc, char **argv)
 
 	test.pattern = argv[2];
 //	test.str = "test1entretest2suitetest3";
-	puts("Nom   - Type");
+	puts(test.pattern);
 	while (inside != NULL)
 	{
 		if (inside->d_type == 8)
@@ -118,7 +118,8 @@ int	main(int argc, char **argv)
 			test.pe = 0;
 			test.ps = 0;
 			test.str = inside->d_name;
-			printf("Valeur du pattern %s sur le fichier %s: %d\n", test.pattern, test.str, starcmp(&test));
+			if (starcmp(&test))
+				printf("%s\n", test.str);
 		}
 		inside = readdir(path);
 	}
