@@ -21,8 +21,8 @@ int	parse_wildcard(t_wildcard *test);
 int	starcmp(t_wildcard	*test)
 {
 	test->se = strlen(test->str); // to ft_!!!
-	while (test->pattern[test->ps] == test->str[test->ss]
-		|| test->pattern[test->ps] == '?'
+	while ((test->pattern[test->ps] == test->str[test->ss]
+		|| test->pattern[test->ps] == '?')
 		&& (test->pattern[test->ps] != 0 && test->str[test->ss] != 0))
 	{
 		test->ss++;
