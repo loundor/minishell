@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:57:32 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/14 11:04:20 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/26 15:30:40 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ static char	*tree_or(char *line, t_tree *tree)
 	}
 	return (line);
 }
-
 
 // CERTAINEMENT A METTRE DANS UN TEST
 static char	*tree_parenthesis(char *line, t_tree *tree)

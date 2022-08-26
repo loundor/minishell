@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 22:51:03 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/26 15:21:45 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/26 15:29:02 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	starcmp(t_wildcard	*test)
 {
 	test->se = ft_strlen(test->str);
 	while ((test->pattern[test->ps] == test->str[test->ss]
-		|| test->pattern[test->ps] == '?')
+			|| test->pattern[test->ps] == '?')
 		&& (test->pattern[test->ps] != 0 && test->str[test->ss] != 0))
 	{
 		test->ss++;

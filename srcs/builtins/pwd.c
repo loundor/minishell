@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/11 18:04:51 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/26 15:20:26 by stissera         ###   ########.fr       */
+/*   Created: 2022/08/08 18:40:11 by alfux             #+#    #+#             */
+/*   Updated: 2022/08/26 15:30:03 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@ int	pwd(void)
 	pwd = getcwd((void *)0, 0);
 //	if (!pwd)
 //		ft_errmsg(errno);
-	ft_putendl_fd(pwd, 1); // ATTENTION TO FD!
+	ft_putendl_fd(pwd, 1);
 	return (0);
 }
