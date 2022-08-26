@@ -49,13 +49,13 @@ int	parse_wildcard(t_wildcard *test)
 	if (test->pattern[test->pe] == 0)
 	{
 		while ((test->str[test->se] == test->pattern[test->pe]
-			|| test->pattern[test->pe] == '?') && test->pe >= test->ps)
+				|| test->pattern[test->pe] == '?') && test->pe >= test->ps)
 		{
 			test->pe--;
 			test->se--;
 		}
 		if ((test->str[++test->se] == test->pattern[++test->pe]
-			|| test->pattern[++test->pe] == '?') && test->pe == test->ps)
+				|| test->pattern[++test->pe] == '?') && test->pe == test->ps)
 			return (1);
 		return (0);
 	}
@@ -74,24 +74,24 @@ int	part_wild_test(t_wildcard *test)
 	int	baks;
 	int	count;
 
-	bakp = test->pe - 1;
-	baks = strlen(test->str) - 1; // Do ft_ !!!!
+	bakp = test->ps;
+	baks = test->ss;
 	count = baks;
-	while (baks > test->ss && bakp >= test->ps)
+	while (baks < test->se && bakp < test->pe)
 	{
-		if (test->str[baks] == test->pattern[bakp] || test->pattern[bakp] == '?')
+		if (test->str[baks] == test->pattern[bakp]
+			|| test->pattern[bakp] == '?')
 		{
-			bakp--;
-			baks--;
+			bakp++;
+			baks++;
 			continue ;
 		}
-		baks = --count;
-		bakp = test->pe - 1;
+		baks = ++count;
+		bakp = test->ps;
 	}
-	baks++;
-	if (bakp <= test->ps)
+	if (bakp >= test->ps)
 	{
-		test->ss = baks;
+		test->ss = count;
 		return (1);
 	}
 	return (0);
@@ -106,7 +106,6 @@ int	main(int argc, char **argv)
 	(void)argc;
 	path = opendir(argv[1]);
 	inside = readdir(path);
-
 	test.pattern = argv[2];
 	puts(test.pattern);
 	while (inside != NULL)
