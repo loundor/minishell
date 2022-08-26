@@ -6,12 +6,11 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 13:15:55 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/14 11:11:04 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/26 15:01:42 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
 
 /* ----------------| SEPARATOR TESTER |-------------------- */
 /*	Take the line and check if need to separate something.	*/

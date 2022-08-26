@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/23 22:53:16 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/26 15:12:54 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,13 @@ typedef struct s_env
 	struct s_env	*next_env;
 }	t_env;
 
+typedef struct s_tmp
+{
+	struct s_tmp		*prev;
+	char				**var;
+	struct s_tmp		*next;
+}	t_tmp;
+
 /* -------------| ENVIRONNEMENT VARIABLES  |--------------- */
 /*	Variable command means the file							*/
 /*	About type:	0 - end		1 - |	2 - ||	3- &&	4- >	*/
@@ -132,13 +139,6 @@ typedef struct s_cmd
 	struct s_cmd	*next;
 	struct s_cmd	*prev;
 }	t_cmd;
-
-typedef struct s_tmp
-{
-	struct s_tmp		*prev;
-	char				**var;
-	struct s_tmp		*next;
-}	t_tmp;
 
 typedef struct s_shell
 {
@@ -171,7 +171,6 @@ void		free_env(t_env *env);
 void		free_shell(t_shell *shell);
 int			prompt(t_shell *shell);
 int			get_cmd_type(char *line);
-// WORKING
 
 // TREE
 t_tree		*bt_create(char *line);
@@ -182,10 +181,11 @@ int			bt_test_redir(char *line);
 int			bt_test_appd(char *line);
 int			bt_test_input(char *line);
 int			bt_test_heredoc(char *line);
+char		*parse_space(char *line);
+void		free_bt(t_tree *tree);
 
 //		-- PARSSING
 int			add_env(char *line);
-char		*parse_space(char *line);
 char		*line_parse(char *cmd);
 char		*take_dollar(char *param);
 char		*take_single_quote(char *param);
