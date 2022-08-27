@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 11:55:12 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/27 19:19:37 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/27 19:21:22 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void rem_env(t_env *env, char *str)
 	shell = 0;
 	while (env->next_env != NULL && !ft_strncmp(env->env_var, str, ft_strlen(str)))
 		env = env->next_env;
-	if (env && !ft_strncmp(env->env_var[], str, ft_strlen(str)))
+	if (env && !ft_strncmp(env->env_var[1], str, ft_strlen(str)))
 	{
 		if (env->prev_env == NULL && env->next_env != NULL)
 		{
