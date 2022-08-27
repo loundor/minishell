@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 11:55:12 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/05 13:04:02 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/27 19:19:37 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char	**take(char *line)
 	var = (char **)malloc(sizeof(char *) * 2);
 	var[0] = (char *)malloc(sizeof(char) * (size + 1));
 	if (!var[0])
-		exit(ft_exit(MALLOCERR, 1));
+		exit(ft_exit(errno, 1));
 	var[0][size] = 0;
 	while (size-- > 0)
 		var[0][size] = line[size];
@@ -42,22 +42,84 @@ static char	**take(char *line)
 	return (var);
 }
 
-int	add_env(char *line)
+void	add_env_line(char *line)
 {
-	t_env	*env;
-	t_env	*add;
 	char	**var;
-
 	var = take(line);
-	env = (t_env *)struct_passing(2, 0);
-	add = (t_env *)malloc(sizeof(t_env));
-	if (!add)
-		exit(ft_exit(MALLOCERR, 1));
-	while (env->next_env != NULL)
+	addenv_splited(struct_passing(2, 0), var[1], var[0]);
+	free(var);
+	return ;
+}
+
+void	set_env(t_env *env, char *str, char* type)
+{
+	while (env->next_env != NULL
+		&& ft_strncmp(env->env_var[0], type, ft_strlen(type)))
 		env = env->next_env;
-	add->env_var = var;
-	add->next_env = NULL;
-	env->next_env = add;
-	add->prev_env = env;
-	return (0);
+	if (env != NULL && ft_strncmp(env->env_var[0], type, ft_strlen(type)))
+	{
+		free(env->env_var[1]);
+		env->env_var[1] = ft_strdup(str);
+		return ;
+	}
+	addenv_splited(env, str, type);
+	return ;
+}
+
+void	add_env_splited(t_env *env, char *str, char* type)
+{
+	t_env	*newenv;
+	t_shell	*shell;
+
+	shell = 0;
+	newenv = (t_env *)malloc(sizeof(t_env) * 1);
+	if (!newenv)
+		exit(ft_exit(errno, 1));
+	newenv->env_var[0] = ft_strdup(type);
+	newenv->env_var[1] = ft_strdup(str);
+	newenv->next_env = NULL;
+	if (env == 0)
+	{
+		shell = (t_shell *)struct_passing(1, 0);
+		newenv->prev_env = NULL;
+		shell->env = newenv;
+		return ;
+	}
+	newenv->prev_env = env;
+	env->next_env = newenv;
+	return ;
+}
+
+
+
+/// a retravailler......
+void rem_env(t_env *env, char *str)
+{
+	t_shell	*shell;
+
+	shell = 0;
+	while (env->next_env != NULL && !ft_strncmp(env->env_var, str, ft_strlen(str)))
+		env = env->next_env;
+	if (env && !ft_strncmp(env->env_var[], str, ft_strlen(str)))
+	{
+		if (env->prev_env == NULL && env->next_env != NULL)
+		{
+			shell = (t_shell *)struct_passing(1, 0);
+			shell->env = env->next_env;
+		}
+		else if (env->prev_env == NULL && env->next_env == NULL)
+		{
+			shell = (t_shell *)struct_passing(1, 0);
+			shell->env = NULL;
+		}
+		else
+		{
+			env->prev_env->next_env = env->next_env;
+			env->next_env->prev_env = env->prev_env;
+		}
+		free(env->env_var[0]);
+		free(env->env_var[1]);
+		free(env->env_var);	
+	}
+	return ;
 }

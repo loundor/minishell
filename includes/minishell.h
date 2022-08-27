@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/26 16:49:54 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/27 18:56:59 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,6 @@
 # define STDIN	0
 # define STDOUT	1
 # define STDERR 2
-
-# define FILE_HISTORY ".minishell_history"
-
-/* ****************** */
-/*	  ERROR MESSAGE   */
-/* ****************** */
-# define ACCESS_ERR "Access denied!"
-# define INVALID_CMD "Command not found!"
 
 typedef enum e_typeerror
 {
@@ -71,6 +63,7 @@ typedef struct s_tree
 	char			*cmd;
 	struct t_cmd	*cmdr;
 	struct s_pipe	*pipe[2];
+	struct s_tree	*parent;
 	struct s_tree	*left;
 	struct s_tree	*right;
 }	t_tree;
@@ -160,6 +153,7 @@ t_builtins	*search_builtin(char *cmd, t_builtins *builtin); // OK
 int			add_builtins(t_shell *shell); // OK
 void		*struct_passing(int type, void *data);
 t_cmd		*cmd_parse(char *shell, t_cmd *cmd);
+int			ft_errmsg(int errn);
 
 /* --------------------| FREE PARTY |---------------------- */
 /*															*/
@@ -184,8 +178,13 @@ int			bt_test_heredoc(char *line);
 char		*parse_space(char *line);
 void		free_bt(t_tree *tree);
 
+// ENVIRONEMENT VARIABLES
+void		add_env_line(char *line);
+void		set_env(t_env *env, char *str, char* type);
+void		add_env_splited(t_env *env, char *str, char* type);
+void		rem_env(t_env *env, char *str);
+
 //		-- PARSSING
-int			add_env(char *line);
 char		*line_parse(char *cmd);
 char		*take_dollar(char *param);
 char		*take_single_quote(char *param);

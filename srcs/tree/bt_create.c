@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:57:32 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/26 15:30:40 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/27 11:48:06 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static char	*tree_and(char *line, t_tree *tree)
 		line += 2;
 		tree->type = 3;
 		tree->left = bt_create(work);
+		tree->left->parent = tree;
 		free(work);
 	}
 	return (line);
@@ -70,6 +71,7 @@ static char	*tree_or(char *line, t_tree *tree)
 		line += 2;
 		tree->type = 2;
 		tree->left = bt_create(work);
+		tree->left->parent = tree;
 		free(work);
 	}
 	return (line);
@@ -114,6 +116,8 @@ static char	*tree_parenthesis(char *line, t_tree *tree)
 		tree->type = get_cmd_type(line);
 		line += 2;
 		tree->left = bt_create(work);
+		tree->left->parent = tree;
+		free(work); // Check if need this free
 	}
 	return (line);
 }
@@ -137,6 +141,7 @@ static char	*tree_pipe(char *line, t_tree *tree)
 		line++;
 		tree->type = 1;
 		tree->left = bt_create(work);
+		tree->left->parent = tree;
 		free(work);
 	}
 	return (line);
@@ -161,6 +166,7 @@ static char	*tree_redirection(char *line, t_tree *tree)
 		line++;
 		tree->type = 4;
 		tree->left = bt_create(work);
+		tree->left->parent = tree;
 		free(work);
 	}
 	return (line);
@@ -185,6 +191,7 @@ static char	*tree_append(char *line, t_tree *tree)
 		line++;
 		tree->type = 5;
 		tree->left = bt_create(work);
+		tree->left->parent = tree;
 		free(work);
 	}
 	return (line);
