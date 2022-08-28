@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 23:12:44 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/12 21:53:56 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/28 15:48:33 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ static char	*write_parse_space(char *line, size_t i)
 			while (line && *line == ' ')
 				line++;
 		}
+		else if (*line == 0)
+			continue ;
 		else
 			ret[i] = *line++;
 		i++;

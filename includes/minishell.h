@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/28 14:43:01 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/28 15:36:11 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,8 @@ t_builtins	*search_builtin(char *cmd, t_builtins *builtin); // OK
 int			add_builtins(t_shell *shell); // OK
 void		*struct_passing(int type, void *data);
 t_cmd		*cmd_parse(char *shell, t_cmd *cmd);
-int			ft_errmsg(int errn);
+int			ft_errmsg(int errn); // Print error message
+int			ft_echo(t_shell *shell); // echo builtins
 
 /* --------------------| FREE PARTY |---------------------- */
 /*															*/
@@ -207,7 +208,6 @@ int			core(t_shell *shell);// ACTUALY ONLY FOR TEST
 int			prep_signal(t_shell *shell);
 
 // TO DO
-int			ft_echo(char *str); // echo prg
 int			parser(char *str); // split the commande
 void		create_command(char **argv, char **env);
 int			w_history(char **history); // write history

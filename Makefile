@@ -37,6 +37,7 @@ SRCS		= 	add_env.c \
 				utils/errmsg.c \
 				${addprefix builtins/, ${BUILTIN}}
 BUILTIN		=	cd.c \
+				echo.c \
 				env.c \
 				exit.c \
 				export.c \
