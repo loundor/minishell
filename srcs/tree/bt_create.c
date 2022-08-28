@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:57:32 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/27 11:48:06 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/28 13:25:35 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,7 +238,10 @@ t_tree	*bt_create(char *line)
 	}
 	line = ft_skipspace(line);
 	if (line && *line != '\0')
+	{
 		tree->right = bt_create(line);
+		tree->right->parent = tree;
+	}
 	if (tree->type != 0)
 		return (tree);
 	return (tree);
