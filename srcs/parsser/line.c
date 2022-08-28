@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 10:39:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/07 10:21:40 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/28 15:53:23 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,8 @@ char	*line_parse(char *cmd)
 	ret[1] = NULL;
 	line = cmd;
 	end = 0;
+	if (cmd == NULL)
+		return (NULL);
 	while (line[end] != 0 && line[end] != '\'' && line[end] != '"'
 		&& !(line[end] == '$' && line[end + 1] != ' '))
 		end++;
