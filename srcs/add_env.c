@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 11:55:12 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/28 12:16:22 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/28 12:40:31 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	**take(char *line)
 	size = 0;
 	if (*line == '$')
 		line++;
-	while (line[size] != '=')
+	while (line[size] != '=' && line[size] != 0)
 		size++;
 	var = (char **)malloc(sizeof(char *) * 2);
 	var[0] = (char *)malloc(sizeof(char) * (size + 1));
@@ -29,8 +29,13 @@ static char	**take(char *line)
 	var[0][size] = 0;
 	while (size-- > 0)
 		var[0][size] = line[size];
-	while (*line != '=')
+	while (*line != '=' && *line != 0)
 		line++;
+	if (*line == 0)
+	{
+		var[1] = NULL;
+		return (var);
+	}
 	line++;
 	size = 0;
 	while (line[size] && (line[size] != ' ' || line[size] != '\0'))
@@ -46,14 +51,14 @@ void	add_env_line(char *line)
 {
 	char	**var;
 	var = take(line);
-	add_env_splited(struct_passing(2, 0), var[1], var[0]);
+	set_env(struct_passing(2, 0), var[1], var[0]);
 	free(var);
 	return ;
 }
 
 void	set_env(t_env *env, char *str, char* type)
 {
-	while (env != NULL
+	while (env->next_env != NULL
 		&& ft_strncmp(env->env_var[0], type, ft_strlen(type) + 1))
 		env = env->next_env;
 	if (env != NULL && !ft_strncmp(env->env_var[0], type, ft_strlen(type) + 1))

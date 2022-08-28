@@ -38,6 +38,7 @@ SRCS		= 	add_env.c \
 				${addprefix builtins/, ${BUILTIN}}
 BUILTIN		=	cd.c \
 				env.c \
+				export.c \
 				pwd.c \
 				unset.c
 OBJS		= 	$(addprefix ./srcs/, ${SRCS: .c=.o})

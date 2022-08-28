@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/28 11:34:09 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/28 12:25:06 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,8 @@ void		add_env_line(char *line);
 void		set_env(t_env *env, char *str, char* type);
 void		add_env_splited(t_env *env, char *str, char* type);
 void		rem_env(t_env *env, char *str);
-int			unset(t_shell *shell);
+int			unset(t_shell *shell); // unset a env variable
+int			export(t_shell *shell); // set a env variable
 
 //		-- PARSSING
 char		*line_parse(char *cmd);
@@ -206,7 +207,6 @@ int			prep_signal(t_shell *shell);
 
 // TO DO
 int			ft_echo(char *str); // echo prg
-int			export(char *str); // set a env variable
 int			parser(char *str); // split the commande
 void		create_command(char **argv, char **env);
 int			w_history(char **history); // write history
