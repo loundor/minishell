@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 11:55:12 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/28 10:34:33 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/28 12:16:22 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ void	add_env_line(char *line)
 
 void	set_env(t_env *env, char *str, char* type)
 {
-	while (env->next_env != NULL
-		&& ft_strncmp(env->env_var[0], type, ft_strlen(type)))
+	while (env != NULL
+		&& ft_strncmp(env->env_var[0], type, ft_strlen(type) + 1))
 		env = env->next_env;
-	if (env != NULL && !ft_strncmp(env->env_var[0], type, ft_strlen(type)))
+	if (env != NULL && !ft_strncmp(env->env_var[0], type, ft_strlen(type) + 1))
 	{
 		free(env->env_var[1]);
 		env->env_var[1] = ft_strdup(str);
@@ -85,6 +85,7 @@ void	add_env_splited(t_env *env, char *str, char* type)
 	{
 		shell = (t_shell *)struct_passing(1, 0);
 		newenv->prev_env = NULL;
+		newenv->next_env = NULL;
 		shell->env = newenv;
 		return ;
 	}
@@ -93,22 +94,24 @@ void	add_env_splited(t_env *env, char *str, char* type)
 	return ;
 }
 
-
-
-/// a retravailler......
 void rem_env(t_env *env, char *str)
 {
 	t_shell	*shell;
 
 	shell = 0;
-	while (env->next_env != NULL && !ft_strncmp(env->env_var[0], str, ft_strlen(str)))
+	while (env != NULL && ft_strncmp(env->env_var[0], str, ft_strlen(str) + 1))
 		env = env->next_env;
-	if (env && !ft_strncmp(env->env_var[1], str, ft_strlen(str)))
+	if (env != NULL && !ft_strncmp(env->env_var[0], str, ft_strlen(str) + 1))
 	{
 		if (env->prev_env == NULL && env->next_env != NULL)
 		{
 			shell = (t_shell *)struct_passing(1, 0);
+			env->next_env->prev_env = NULL;
 			shell->env = env->next_env;
+		}
+		else if (env->prev_env != NULL && env->next_env == NULL)
+		{
+			env->prev_env->next_env = NULL;
 		}
 		else if (env->prev_env == NULL && env->next_env == NULL)
 		{
@@ -121,7 +124,8 @@ void rem_env(t_env *env, char *str)
 			env->next_env->prev_env = env->prev_env;
 		}
 		free(env->env_var[0]);
-		free(env->env_var[1]);
+		if (env->env_var[1] != NULL)
+			free(env->env_var[1]);
 		free(env->env_var);	
 	}
 	return ;

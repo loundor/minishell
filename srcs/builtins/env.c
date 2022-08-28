@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 17:18:27 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/03 15:26:07 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/28 12:17:59 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	env(t_shell *shell)
 		return (125);
 	}
 	bak = shell->env;
-	while (bak->env_var[0])
+	while (shell->env != NULL && bak->env_var[0])
 	{
 		write (1, bak->env_var[0], ft_strlen(bak->env_var[0]));
 		write (1, "=", 1);

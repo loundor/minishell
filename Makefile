@@ -38,7 +38,8 @@ SRCS		= 	add_env.c \
 				${addprefix builtins/, ${BUILTIN}}
 BUILTIN		=	cd.c \
 				env.c \
-				pwd.c
+				pwd.c \
+				unset.c
 OBJS		= 	$(addprefix ./srcs/, ${SRCS: .c=.o})
 RM			= 	rm -rf
 
