@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/28 12:25:06 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/28 14:43:01 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,6 +200,7 @@ char		*take_operator(char *line, t_cmd *cmd);
 char		*search_var(char *var);
 int			starcmp(t_wildcard	*test);
 
+char		**env_to_exec(void); // Parsse struc env to char **
 int			prepare_exe(t_shell *shell);
 int			cd(t_shell *shell); // change directory
 int			core(t_shell *shell);// ACTUALY ONLY FOR TEST
