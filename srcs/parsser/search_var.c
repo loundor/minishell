@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:21:33 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/29 10:56:52 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/28 16:11:24 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*search_var(char *var)
 	tmp = env;
 	while (ft_strcmp(var, tmp->env_var[0]) && tmp->next_env != NULL)
 		tmp = tmp->next_env;
-	if (!ft_strcmp(var, tmp->env_var[0]))
+	if (!ft_strcmp(var, tmp->env_var[0]) && tmp->env_var[1] != NULL)
 		line = ft_strdup(tmp->env_var[1]);
 	else
 		return (NULL);
