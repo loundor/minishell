@@ -6,20 +6,11 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:07:29 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/28 09:58:37 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/29 00:00:28 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-/* int	envtest(t_shell *shell)
-{
-	t_builtins	*builtin;
-
-	builtin = search_builtin(env, shell->builtin);
-		builtin->f(shell);
-	return (0);
-} */
 
 int	main(int argc, char **argv, char **env)
 {

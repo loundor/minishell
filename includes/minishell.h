@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/28 16:37:27 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/28 23:09:55 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,15 +148,16 @@ typedef struct s_shell
 
 // OK - NEED TEST
 int			welcome(void); // OK
-int			pwd(void); // Should ok
-int			env(t_shell *shell); // Should ok
-t_env		*do_env(char **env); // Parssing from env ok - check return error
+int			pwd(void); // ok
+int			env(t_shell *shell); // ok
+t_env		*do_env(char **env); // ok
 t_builtins	*search_builtin(char *cmd, t_builtins *builtin); // OK
 int			add_builtins(t_shell *shell); // OK
-void		*struct_passing(int type, void *data);
+void		*struct_passing(int type, void *data); // ok
 t_cmd		*cmd_parse(char *shell, t_cmd *cmd);
-int			ft_errmsg(int errn); // Print error message
-int			ft_echo(t_shell *shell); // echo builtins
+int			ft_errmsg(int errn); // ok Print error message
+int			ft_echo(t_shell *shell); // ok echo builtins
+int			get_cmd_type(char *line); // ok
 
 /* --------------------| FREE PARTY |---------------------- */
 /*															*/
@@ -167,43 +168,43 @@ void		free_cmd(t_cmd *cmd);
 void		free_env(t_env *env);
 void		free_shell(t_shell *shell);
 int			prompt(t_shell *shell);
-int			get_cmd_type(char *line);
+
 
 // TREE
-t_tree		*bt_create(char *line);
-int			bt_test_and(char *line);
-int			bt_test_or(char *line);
-int			bt_test_pipe(char *line);
-int			bt_test_redir(char *line);
-int			bt_test_appd(char *line);
-int			bt_test_input(char *line);
+t_tree		*bt_create(char *line); // ok
+int			bt_test_and(char *line); // ok
+int			bt_test_or(char *line); // ok
+int			bt_test_pipe(char *line); // ok
+int			bt_test_redir(char *line); // ok
+int			bt_test_appd(char *line); // ok
+int			bt_test_input(char *line); // ok
 int			bt_test_heredoc(char *line);
 char		*parse_space(char *line);
 void		free_bt(t_tree *tree);
 
 // ENVIRONEMENT VARIABLES
-void		add_env_line(char *line);
-void		set_env(t_env *env, char *str, char* type);
-void		add_env_splited(t_env *env, char *str, char* type);
-void		rem_env(t_env *env, char *str);
-int			unset(t_shell *shell); // unset a env variable
-int			export(t_shell *shell); // set a env variable
+void		add_env_line(char *line); // ok
+void		set_env(t_env *env, char *str, char* type); // ok
+void		add_env_splited(t_env *env, char *str, char* type); // ok
+void		rem_env(t_env *env, char *str); // ok
+int			unset(t_shell *shell); // ok unset a env variable
+int			export(t_shell *shell); // ok set a env variable
 
 //		-- PARSSING
 char		*line_parse(char *cmd);
-char		*take_dollar(char *param);
+char		*take_dollar(char *param); // ok
 char		*take_single_quote(char *param);
 char		*take_double_quote(char *param);
 char		*take_path(char *line, t_cmd *cmd);
 char		*take_exec(char *line, t_cmd *cmd);
 char		*take_params(char *line, t_cmd *cmd);
 char		*take_operator(char *line, t_cmd *cmd);
-char		*search_var(char *var);
-int			starcmp(t_wildcard	*test);
+char		*search_var(char *var); // ok
+int			starcmp(t_wildcard	*test); // ok
 
-char		**env_to_exec(void); // Parsse struc env to char **
+char		**env_to_exec(void); // ok Parsse struc env to char **
 int			prepare_exe(t_shell *shell);
-int			cd(t_shell *shell); // change directory
+int			cd(t_shell *shell); // ok change directory
 int			core(t_shell *shell);// ACTUALY ONLY FOR TEST
 int			prep_signal(t_shell *shell);
 
