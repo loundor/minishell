@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:38:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/28 21:33:34 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/28 22:20:11 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,10 @@ int	core(t_shell *shell)
 	line = parse_space(shell->line);
 	if (line == NULL)
 		return (0);
+puts("======== Test LINE pour verification du parse_space ================");
+puts(shell->line);
+puts(line);
+puts("====================================================================");
 	free(shell->line);
 	shell->line = line;
 	shell->cmd = cmd_parse(shell->line, shell->cmd);

@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 23:12:44 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/28 15:48:33 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/28 22:20:14 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,10 @@ static char	*write_parse_space(char *line, size_t i)
 			continue ;
 		else
 			ret[i] = *line++;
+		// dans le else il faut egalement verifier les separateurs
+		// Si un separateur est present, verifier qu il y a bien
+		// un espace avant et apres, sinon les ajouter et deplacer
+		// le pointeur et incrementer i * continue...
 		i++;
 	}
 	ret[i] = '\0';
@@ -96,6 +100,11 @@ char	*parse_space(char *line)
 	while (ret && *ret != 0)
 	{
 		ret = count_quotes(ret, &i);
+		// ajouter le test des separateurs (|, &, <....) avec verification des
+		// espaces avant et apres.. si il n y a pas d espaces, incrementer la
+		// variable i. Deplacer egaelent le pointeur puis faire un continue.
+		//	Attention retravailler le write_parse_space pour ajouter les
+		// espaces au besoin!!!
 		if (*ret == ' ')
 		{
 			i++;
