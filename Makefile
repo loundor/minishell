@@ -3,11 +3,11 @@ CC			= 	gcc
 FLAGS		= 	-Wall -Werror -Wextra ${EXTRAF}
 EXTRAF		= 	-g -fsanitize=address
 # MACOS
-LIBRARY		=  -lreadline -Lreadline/lib -L./lib/libft ./lib/libft/libft.a
-INCLUDES	= 	-I./includes -I./readline -I./lib/libft 
+#LIBRARY		=  -lreadline -Lreadline/lib -L./lib/libft ./lib/libft/libft.a
+#INCLUDES	= 	-I./includes -I./readline -I./lib/libft 
 # LINUX
-#LIBRARY		=   /usr/local/lib/libreadline.a /usr/local/lib/libhistory.a -lncurses -lreadline -L./lib/libft ./lib/libft/libft.a
-#INCLUDES	= 	-I./includes -I./lib/libft
+LIBRARY		=   ./readline.linux/shlib/libreadline.a ./readline.linux/shlib/libhistory.a -lncurses -L./readline.linux/shlib -L./lib/libft ./lib/libft/libft.a
+INCLUDES	= 	-I./includes -I./lib/libft
 SRCS		= 	add_env.c \
 				builtins.c \
 				cmd_parse.c \
@@ -34,6 +34,7 @@ SRCS		= 	add_env.c \
 				parsser/single_quote.c \
 				parsser/wildcard.c \
 				utils/get.c \
+				utils/errmsg.c \
 				${addprefix builtins/, ${BUILTIN}}
 BUILTIN		=	cd.c \
 				env.c \

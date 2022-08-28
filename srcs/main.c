@@ -6,11 +6,20 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:07:29 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/27 18:51:09 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/28 09:58:37 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+/* int	envtest(t_shell *shell)
+{
+	t_builtins	*builtin;
+
+	builtin = search_builtin(env, shell->builtin);
+		builtin->f(shell);
+	return (0);
+} */
 
 int	main(int argc, char **argv, char **env)
 {
@@ -31,7 +40,8 @@ int	main(int argc, char **argv, char **env)
 	if (welcome() != 0)
 		exit (ft_exit(WELCOME_ERR, 2));
 	if (prompt(&shell))
-		return (ft_exit(WELCOME_ERR, 1));
+//envtest(&shell);
+	return (ft_exit(WELCOME_ERR, 1));
 	ft_exit(0, 1);
 	printf("exit\n");
 	return (0);

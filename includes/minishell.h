@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/27 18:56:59 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/28 09:52:19 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <term.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+# include "../readline.linux/readline.h"
+# include "../readline.linux/history.h"
+//# include <readline/readline.h>
+//# include <readline/history.h>
 # include <errno.h>
 
 # define STDIN	0
