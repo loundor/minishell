@@ -13,7 +13,6 @@ SRCS		= 	add_env.c \
 				cmd_parse.c \
 				env_pars.c \
 				free.c \
-				ft_error.c \
 				main.c \
 				prompt.c \
 				signal.c \
@@ -38,6 +37,7 @@ SRCS		= 	add_env.c \
 				${addprefix builtins/, ${BUILTIN}}
 BUILTIN		=	cd.c \
 				env.c \
+				exit.c \
 				export.c \
 				pwd.c \
 				unset.c

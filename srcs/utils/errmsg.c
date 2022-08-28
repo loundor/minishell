@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 18:40:11 by alfux             #+#    #+#             */
-/*   Updated: 2022/08/27 10:24:41 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/28 13:04:48 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ static int	ft_errmsg_a(int errn)
 		ft_putstr_fd("Error: Couldn't find USER in environnement\n", 2);
 	else if (errn == -4)
 		ft_putstr_fd("Error: Command not found\n", 2);
-	else
-		ft_putstr_fd("Error: Unknown\n", 2);
+// errn = 0 -> don't need to put something
+//	else
+//		ft_putstr_fd("Error: Unknown\n", 2);
 	return (errn);
 }
 

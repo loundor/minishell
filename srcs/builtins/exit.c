@@ -1,34 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/14 13:00:26 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/28 12:56:16 by stissera         ###   ########.fr       */
+/*   Created: 2022/08/28 12:56:26 by stissera          #+#    #+#             */
+/*   Updated: 2022/08/28 12:58:58 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-static void	tab_err(int type)
-{
-	static char	*msg_err[8];
-
-	if (!msg_err[0])
-	{
-		msg_err[0] = "Can't create environement structure!";
-		msg_err[1] = "Malloc error!";
-		msg_err[2] = "Welcome error!";
-		msg_err[3] = "No environement variable!";
-		msg_err[4] = "Signal modification not autorized";
-		msg_err[5] = "Can't create builtins!";
-		msg_err[6] = "Error command not found!\n";
-	}
-	if (type != 0)
-		printf("%s", msg_err[type + 1]);
-}
+/* ------------| NEED EXIT??! PREVENT LEAKS! |------------- */
+/*	The function tale a type of "error" and put a message	*/
+/*	in a screen. If there are something to free (level)		*/
+/*	We call the err_type with the code/level to free and	*/
+/*	exit the program without leaks.							*/
+/*	TO_FREE= 0-Nothing; 1-SHELL; 2-ENV; 3-CMD; 4-BUILTINS	*/
+/* -------------------------------------------------------- */
 
 static void	err_type(int to_free, void *data)
 {
@@ -42,3 +32,9 @@ static void	err_type(int to_free, void *data)
 		free_builtins((t_builtins *)data);
 }
 
+int	ft_exit(int type, int to_free)
+{
+	if (to_free)
+		err_type(to_free, struct_passing(to_free, 0));
+	return (ft_errmsg(type));
+}
