@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 11:55:12 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/28 12:40:31 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/28 12:47:45 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,16 @@ void	add_env_line(char *line)
 
 void	set_env(t_env *env, char *str, char* type)
 {
-	while (env->next_env != NULL
+	while (env != NULL && env->next_env != NULL
 		&& ft_strncmp(env->env_var[0], type, ft_strlen(type) + 1))
 		env = env->next_env;
 	if (env != NULL && !ft_strncmp(env->env_var[0], type, ft_strlen(type) + 1))
 	{
 		free(env->env_var[1]);
-		env->env_var[1] = ft_strdup(str);
+		if (str)
+			env->env_var[1] = ft_strdup(str);
+		else
+			env->env_var[1] = NULL;
 		return ;
 	}
 	add_env_splited(env, str, type);
@@ -84,7 +87,10 @@ void	add_env_splited(t_env *env, char *str, char* type)
 	if (!newenv->env_var)
 		exit(ft_exit(errno, 1));
 	newenv->env_var[0] = ft_strdup(type);
-	newenv->env_var[1] = ft_strdup(str);
+	if (str)
+		newenv->env_var[1] = ft_strdup(str);
+	else
+		newenv->env_var[1] = NULL;
 	newenv->next_env = NULL;
 	if (env == 0)
 	{
