@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:38:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/28 16:52:38 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/28 21:33:34 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,51 @@
 /*	The prompt wait until the command is validate, check	*/
 /* the command is not null and put the command line in core	*/
 /* -------------------------------------------------------- */
+
+static	char *get_title_shell(void)
+{
+	char	*path;
+	char	*home;
+	char	*title;
+	int		i;
+	
+	i = 0;
+	home = take_dollar("$HOME");
+	path = getcwd((void *)0, 0);
+	if (home != NULL && !ft_strncmp(home, path, ft_strlen(home) - 1))
+	{
+		while (path[i] && home[i] == path[i])
+			i++;
+		if (home[i] == 0 && (path[i] == 0 || path[i] == '/'))
+			title = ft_strjoin("\e[1;32mminishell-0.1\e[0m:\e[1;34m~", &path[i]);
+		else
+			title = ft_strjoin("\e[1;32mminishell-0.1\e[0m:\e[1;34m", path);
+	}
+	else
+		title = ft_strjoin("\e[1;32mminishell-0.1\e[0m:\e[1;34m", path);
+	free(path);
+	path = ft_strjoin(title, "\e[0m$ ");
+	free(title);
+	if (home != NULL)
+		free(home);
+	return (path);
+}
+
 int	prompt(t_shell *shell)
 {
-	char	*line;
 	char	*path;
-	char	*title;
+	char	*line;
 
 	while (!shell->line || strcmp(shell->line, "exit"))
 	{
-		path = getcwd((void *)0, 0);
-		title = ft_strjoin("\e[1;32mminishell-0.1\e[0m:\e[1;34m", path);
-		free(path);
-		path = ft_strjoin(title, "\e[0m$ ");
 		shell->cmd = NULL;
 		if (shell->line != NULL)
 			free(shell->line);
+		path = get_title_shell();
 		shell->line = readline(path);
 		line = shell->line;
 		line = ft_skipspace(line);
 		free(path);
-		free(title);
 		if (line)
 		{
 			add_history(shell->line);
