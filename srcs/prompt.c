@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:38:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/09 23:16:24 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/28 16:52:38 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,23 @@
 int	prompt(t_shell *shell)
 {
 	char	*line;
+	char	*path;
+	char	*title;
 
 	while (!shell->line || strcmp(shell->line, "exit"))
 	{
+		path = getcwd((void *)0, 0);
+		title = ft_strjoin("\e[1;32mminishell-0.1\e[0m:\e[1;34m", path);
+		free(path);
+		path = ft_strjoin(title, "\e[0m$ ");
 		shell->cmd = NULL;
 		if (shell->line != NULL)
 			free(shell->line);
-		shell->line = readline("\e[36mminishell-0.1$\e[0m ");
+		shell->line = readline(path);
 		line = shell->line;
 		line = ft_skipspace(line);
+		free(path);
+		free(title);
 		if (line)
 		{
 			add_history(shell->line);
