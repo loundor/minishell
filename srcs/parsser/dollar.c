@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:23:54 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/29 10:38:51 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/29 15:25:10 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ char	*take_dollar(char *param)
 	line = NULL;
 	search = NULL;
 	param++;
-	while (param[end] != 0 && (ft_isalnum(param[end]) || param[end] == '_'))
+	while (param[end] != 0 && (ft_isalnum(param[end]) || param[end] == '_'
+			|| param[end] == '?'))
 		end++;
 	search = (char *)malloc(sizeof(char) * (end + 1));
 	if (!search)

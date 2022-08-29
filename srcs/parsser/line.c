@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 10:39:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/28 15:53:23 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/29 15:24:35 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static char	*alloc(int *end, char **ret, char *line)
 static char	*dollar(char *tmp, char *line, char **ret)
 {
 	tmp = take_dollar(line++);
-	while (*line && (ft_isalnum(*line) || *line == '_'))
+	while (*line && (ft_isalnum(*line) || *line == '_' || *line == '?'))
 		line++;
 	while (*line == ' ')
 		line++;
@@ -132,7 +132,7 @@ char	*line_parse(char *cmd)
 	if (cmd == NULL)
 		return (NULL);
 	while (line[end] != 0 && line[end] != '\'' && line[end] != '"'
-		&& !(line[end] == '$' && line[end + 1] != ' '))
+		&& !(line[end] == '$' && (line[end + 1] != ' ' || line[end + 1] != 0)))
 		end++;
 	if (end != 0)
 		line = alloc(&end, ret, line);

@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:38:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/28 22:20:11 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/29 15:36:53 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static	char *get_title_shell(void)
 	char	*home;
 	char	*title;
 	int		i;
-	
+
 	i = 0;
 	home = take_dollar("$HOME");
 	path = getcwd((void *)0, 0);
@@ -102,7 +102,7 @@ puts("====================================================================");
  printf("--> \e[32mPATH: %s\e[0m\n--> \e[33mCMD: %s\e[0m\n--> \e[34mPARAM: %s\e[0m\n", shell->cmd->path, shell->cmd->command, shell->cmd->param);
 	prepare_exe(shell);
 	if (builtin != NULL && shell->cmd->path == NULL)
-		builtin->f(shell);
+		shell->return_err = builtin->f(shell);
 	return (0);
 }
 

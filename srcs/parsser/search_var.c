@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:21:33 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/28 16:11:24 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/29 15:33:18 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,14 @@ char	*search_var(char *var)
 {
 	t_env	*env;
 	t_env	*tmp;
+	t_shell	*shell;
 	char	*line;
 
+	if (*var == '?')
+	{
+		shell = (t_shell *)struct_passing(1, NULL);
+		return (ft_itoa((int)shell->return_err));
+	}
 	env = (t_env *)struct_passing(2, NULL);
 	tmp = env;
 	while (ft_strcmp(var, tmp->env_var[0]) && tmp->next_env != NULL)
