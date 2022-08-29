@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 23:12:44 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/29 14:44:48 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/29 17:22:48 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,20 @@ static char	*write_parse_space(char *line, size_t i)
 	i = 0;
 	while (line && *line != 0)
 	{
+		if (get_cmd_type(line) || *line == '(' || *line == ')')
+		{
+			if (line[-1] != ' ' && !get_cmd_type(&line[-1]))
+				ret[i++] = ' ';
+			if (get_cmd_type(line) == 2 || get_cmd_type(line) == 3
+				|| get_cmd_type(line) == 5 || get_cmd_type(line) == 7)
+			{
+				ret[i++] = *line++;
+			}
+			ret[i++] = *line++;
+			if (*line != ' ')
+				ret[i++] = ' ';
+			continue ;
+		}
 		line = write_quotes(&*line, ret, &i);
 		if (*line == ' ')
 		{
@@ -55,10 +69,6 @@ static char	*write_parse_space(char *line, size_t i)
 			continue ;
 		else
 			ret[i] = *line++;
-		// dans le else il faut egalement verifier les separateurs
-		// Si un separateur est present, verifier qu il y a bien
-		// un espace avant et apres, sinon les ajouter et deplacer
-		// le pointeur et incrementer i * continue...
 		i++;
 	}
 	ret[i] = '\0';
@@ -99,12 +109,25 @@ char	*parse_space(char *line)
 	ret = ft_skipspace(line);
 	while (ret && *ret != 0)
 	{
+		if (get_cmd_type(ret) || *ret == '(' || *ret == ')')
+		{
+			if (ret[-1] != ' ' && !get_cmd_type(&ret[-1]))
+				i++;
+			if (get_cmd_type(ret) == 2 || get_cmd_type(ret) == 3
+				|| get_cmd_type(ret) == 5 || get_cmd_type(ret) == 7)
+			{
+				i += 2;
+				ret++;
+			}
+			else
+				i++;
+			ret++;
+			if (*ret != ' ')
+				i++;
+			continue ;
+		}
 		ret = count_quotes(ret, &i);
-		// ajouter le test des separateurs (|, &, <....) avec verification des
-		// espaces avant et apres.. si il n y a pas d espaces, incrementer la
-		// variable i. Deplacer egaelent le pointeur puis faire un continue.
-		//	Attention retravailler le write_parse_space pour ajouter les
-		// espaces au besoin!!!
+
 		if (*ret == ' ')
 		{
 			i++;

@@ -15,3 +15,6 @@ fichier line.c plus de 5 fonctions...
 Fichiers double quotes et single quotes plus de 25 lignes!!!
 
 FAIRE UN GROS NETTOYAGE AVANT D ATTAQUER LE CORE! VOIR MEME POUR FAIRE PLUSIEURS FICHIER H CAR C'EST LE BORDEL DANS LE MINISHELL.H !!!!
+
+
+Verifier qu il n y a pas plus de deux |, <, >, & a la suite hornis entre quotes ou dquotes. Sinon directement revoyer un message d erreur!

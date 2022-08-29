@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:38:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/29 15:36:53 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/29 16:17:59 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ puts("====================================================================");
 	shell->line = line;
 	shell->cmd = cmd_parse(shell->line, shell->cmd);
 	builtin = search_builtin(shell->cmd->command, shell->builtin);
- printf("--> \e[32mPATH: %s\e[0m\n--> \e[33mCMD: %s\e[0m\n--> \e[34mPARAM: %s\e[0m\n", shell->cmd->path, shell->cmd->command, shell->cmd->param);
+// printf("--> \e[32mPATH: %s\e[0m\n--> \e[33mCMD: %s\e[0m\n--> \e[34mPARAM: %s\e[0m\n", shell->cmd->path, shell->cmd->command, shell->cmd->param);
 	prepare_exe(shell);
 	if (builtin != NULL && shell->cmd->path == NULL)
 		shell->return_err = builtin->f(shell);
