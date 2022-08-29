@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:38:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/29 16:17:59 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/29 21:08:34 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,42 @@
 /*	The prompt wait until the command is validate, check	*/
 /* the command is not null and put the command line in core	*/
 /* -------------------------------------------------------- */
+
+static char	*test_line(char *line)
+{
+	int		good;
+	int		parenthesis;
+	char	*bak;
+
+	good = 0;
+	parenthesis = 0;
+	bak = line;
+	while (line && *line != 0)
+	{
+		if (get_cmd_type(line) == 2 || get_cmd_type(line) == 3
+			|| get_cmd_type(line) == 5 || get_cmd_type(line) == 7)
+		{
+			if (get_cmd_type(&line[2]) == 2 || get_cmd_type(&line[2]) == 3
+				|| get_cmd_type(&line[2]) == 5 || get_cmd_type(&line[2]) == 7)
+			{
+				good = 1;
+				break ;
+			}
+		}
+		if (*line == '(')
+			parenthesis++;
+		if (*line == ')')
+			parenthesis--;
+		line++;
+	}
+	if (good == 1 || parenthesis == 1)
+	{
+		printf("parse error near `%c'\n", *line);
+		free(bak);
+		bak = NULL;
+	}
+	return (bak);
+}
 
 static	char *get_title_shell(void)
 {
@@ -87,10 +123,10 @@ int	core(t_shell *shell)
 	t_builtins	*builtin;
 	char		*line;
 
-	//line = line_parse(shell->line);
+	line = test_line(shell->line);
 	line = parse_space(shell->line);
 	if (line == NULL)
-		return (0);
+		return (shell->return_err = 1);
 puts("======== Test LINE pour verification du parse_space ================");
 puts(shell->line);
 puts(line);
