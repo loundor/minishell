@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/28 23:09:55 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/29 14:00:02 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,6 @@ void		free_env(t_env *env);
 void		free_shell(t_shell *shell);
 int			prompt(t_shell *shell);
 
-
 // TREE
 t_tree		*bt_create(char *line); // ok
 int			bt_test_and(char *line); // ok
@@ -184,8 +183,8 @@ void		free_bt(t_tree *tree);
 
 // ENVIRONEMENT VARIABLES
 void		add_env_line(char *line); // ok
-void		set_env(t_env *env, char *str, char* type); // ok
-void		add_env_splited(t_env *env, char *str, char* type); // ok
+void		set_env(t_env *env, char *str, char *type); // ok
+void		add_env_splited(t_env *env, char *str, char *type); // ok
 void		rem_env(t_env *env, char *str); // ok
 int			unset(t_shell *shell); // ok unset a env variable
 int			export(t_shell *shell); // ok set a env variable

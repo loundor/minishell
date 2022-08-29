@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 18:40:11 by alfux             #+#    #+#             */
-/*   Updated: 2022/08/27 14:58:16 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/29 15:11:11 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	pwd(void)
 	if (!pwd)
 		ft_errmsg(errno);
 	ft_putendl_fd(pwd, 1);
-	set_env(env, pwd, "PWD");
 	free(pwd);
 	return (0);
 }

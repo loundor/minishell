@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 12:56:26 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/28 12:58:58 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/29 11:12:55 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ int	ft_exit(int type, int to_free)
 {
 	if (to_free)
 		err_type(to_free, struct_passing(to_free, 0));
+// si exit a un valeur retourn la valeur dans exit sinon renvoye la valeur de struct t_shell return_err
 	return (ft_errmsg(type));
 }
