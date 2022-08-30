@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 13:15:55 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/30 13:20:13 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/30 15:41:26 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,18 @@
 
 /* see for add a type int in prototype but take care && || << */
 /* (that can do only in one or two functions) */
+
+static int	skip_part_char(char *line, size_t *i, char type)
+{
+	if (line[*i] == type)
+	{
+		*i = *i + 1;
+		while (line[*i] != 0 && line[*i] != type)
+			*i = *i + 1;
+		return (1);
+	}
+	return (0);
+}
 
 int	bt_test_and(char *line)
 {
@@ -41,20 +53,8 @@ int	bt_test_and(char *line)
 			parenthesis--;
 			i++;
 		}
-		if (line[i] == '\'')
-		{
-			i++;
-			while (line[i] != 0 && line[i++] != '\'')
-				;
+		if (skip_part_char(line, &i, '\'') || skip_part_char(line, &i, '"'))
 			continue ;
-		}
-		if (line[i] == '"')
-		{
-			i++;
-			while (line[i] != 0 && line[i++] != '"')
-				;
-			continue ;
-		}
 		if (line[i] == '&' && line[i + 1] == '&')
 			return (i);
 		i++;
@@ -82,20 +82,8 @@ int	bt_test_or(char *line)
 			parenthesis--;
 			i++;
 		}
-		if (line[i] == '\'')
-		{
-			i++;
-			while (line[i] != 0 && line[i++] != '\'')
-				;
+		if (skip_part_char(line, &i, '\'') || skip_part_char(line, &i, '"'))
 			continue ;
-		}
-		if (line[i] == '"')
-		{
-			i++;
-			while (line[i] != 0 && line[i++] != '"')
-				;
-			continue ;
-		}
 		if (line[i] == '|' && line[i + 1] == '|')
 			return (i);
 		i++;
@@ -123,20 +111,8 @@ int	bt_test_pipe(char *line)
 			parenthesis--;
 			i++;
 		}
-		if (line[i] == '\'')
-		{
-			i++;
-			while (line[i] != 0 && line[i++] != '\'')
-				;
+		if (skip_part_char(line, &i, '\'') || skip_part_char(line, &i, '"'))
 			continue ;
-		}
-		if (line[i] == '"')
-		{
-			i++;
-			while (line[i] != 0 && line[i++] != '"')
-				;
-			continue ;
-		}
 		if (line[i] == '|' && line[i + 1] != '|')
 			return (i);
 		i++;
@@ -164,20 +140,8 @@ int	bt_test_redir(char *line)
 			parenthesis--;
 			line++;
 		}
-		if (line[i] == '\'')
-		{
-			i++;
-			while (line[i] != 0 && line[i++] != '\'')
-				;
+		if (skip_part_char(line, &i, '\'') || skip_part_char(line, &i, '"'))
 			continue ;
-		}
-		if (line[i] == '"')
-		{
-			i++;
-			while (line[i] != 0 && line[i++] != '"')
-				;
-			continue ;
-		}
 		if (line[i] == '>' && line[i + 1] != '>')
 			return (i);
 		i++;
@@ -205,20 +169,8 @@ int	bt_test_appd(char *line)
 			parenthesis--;
 			i++;
 		}
-		if (line[i] == '\'')
-		{
-			i++;
-			while (line[i] != 0 && line[i++] != '\'')
-				;
+		if (skip_part_char(line, &i, '\'') || skip_part_char(line, &i, '"'))
 			continue ;
-		}
-		if (line[i] == '"')
-		{
-			i++;
-			while (line[i] != 0 && line[i++] != '"')
-				;
-			continue ;
-		}
 		if (line[i] == '>' && line[i + 1] == '>')
 			return (i);
 		i++;
@@ -246,20 +198,8 @@ int	bt_test_input(char *line)
 			parenthesis--;
 			i++;
 		}
-		if (line[i] == '\'')
-		{
-			i++;
-			while (line[i] != 0 && line[i++] != '\'')
-				;
+		if (skip_part_char(line, &i, '\'') || skip_part_char(line, &i, '"'))
 			continue ;
-		}
-		if (line[i] == '"')
-		{
-			i++;
-			while (line[i] != 0 && line[i++] != '"')
-				;
-			continue ;
-		}
 		if (line[i] == '<' && line[i + 1] != '<')
 			return (i);
 		i++;
@@ -287,20 +227,8 @@ int	bt_test_heredoc(char *line)
 			parenthesis--;
 			i++;
 		}
-		if (line[i] == '\'')
-		{
-			i++;
-			while (line[i] != 0 && line[i++] != '\'')
-				;
+		if (skip_part_char(line, &i, '\'') || skip_part_char(line, &i, '"'))
 			continue ;
-		}
-		if (line[i] == '"')
-		{
-			i++;
-			while (line[i] != 0 && line[i++] != '"')
-				;
-			continue ;
-		}
 		if (line[i] == '<' && line[i + 1] == '<')
 			return (i);
 		i++;

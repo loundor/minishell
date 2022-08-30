@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:32:29 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/03 22:11:58 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/30 15:24:50 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*take_exec(char *line, t_cmd *cmd)
 
 	i[0] = 0;
 	while (!ft_isspace(line[i[0]]) && line[i[0]] != '\0'
-		&& line[i[0]] != '\'' && line[i[0]] != '"') // ADD || && << >> < >...
+		&& line[i[0]] != '\'' && line[i[0]] != '"')
 		i[0]++;
 	ret = (char *)malloc(sizeof(char) * (i[0] + 1));
 	if (!ret)

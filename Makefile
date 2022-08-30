@@ -19,7 +19,6 @@ SRCS		= 	add_env.c \
 				welcome.c \
 				test.c \
 				tree/bt_create.c \
-				tree/bt_free.c \
 				tree/bt_test_sep.c \
 				parsser/dollar.c \
 				parsser/double_quotes.c \

@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:33:11 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/03 22:05:28 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/30 15:23:58 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ char	*take_params(char *line, t_cmd *cmd)
 	cmd->param = NULL;
 	if (!line || *line == '\0')
 		return (NULL);
-	while (line[i[0]] != '\0' && line[i[0]] != '|' && (line[i[0]] != '&'
-			&& line[i[0] + 1] != '&') && line[i[0]] != '>' && line[i[0]] != '<')
+	while (line[i[0]] != '\0')
 		i[0]++;
 	if (i[0] == 0)
 		return (line);

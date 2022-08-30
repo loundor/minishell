@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 17:10:41 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/11 19:25:14 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/30 15:35:44 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_cmd	*cmd_parse(char *shell, t_cmd *cmd)
 	line = take_exec(line, new);
 	line = ft_skipspace(line);
 	line = take_params(line, new);
-	line = take_operator(line, new);
+//	line = take_operator(line, new);
 	if (line && *line != '\0')
 	{
 		new->next = cmd_parse(line, new);

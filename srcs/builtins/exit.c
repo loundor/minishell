@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 12:56:26 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/29 11:12:55 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/30 15:38:06 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static void	err_type(int to_free, void *data)
 		free_cmd((t_cmd *)data);
 	if (to_free == 4)
 		free_builtins((t_builtins *)data);
+	if (to_free == 5)
+		free_bt((t_tree *)data);
 }
 
 int	ft_exit(int type, int to_free)

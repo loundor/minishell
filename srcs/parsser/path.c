@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:31:26 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/05 12:25:15 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/30 15:25:43 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*take_path(char *line, t_cmd *cmd)
 	i = 0;
 	slash = 0;
 	while ((line[i] != '\0' && !ft_isspace(line[i]))
-			|| (!jump_char[0] && !jump_char[1]))
+		|| (!jump_char[0] && !jump_char[1]))
 	{
 		if (line[i] == '\'')
 			jump_char[0] *= -1;

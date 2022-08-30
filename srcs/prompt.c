@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:38:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/30 12:48:59 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/30 15:35:24 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ static char	*test_line(char *line)
 	bak = line;
 	while (line && *line != 0)
 	{
+		if (*line == '\'')
+			while (*++line != '\'')
+				;
+		if (*line == '"')
+			while (*++line != '"')
+				;
 		if (get_cmd_type(line) == 2 || get_cmd_type(line) == 3
 			|| get_cmd_type(line) == 5 || get_cmd_type(line) == 7)
 		{
@@ -48,7 +54,7 @@ static char	*test_line(char *line)
 	if (good == 1 || parenthesis != 0)
 	{
 		if (good == 1)
-			printf("parse error near `%c'\n", *line);
+			printf("parse error near '%c'\n", *line);
 		else if (parenthesis != 0)
 			printf("missing parenthesis\n");
 		free(bak);
