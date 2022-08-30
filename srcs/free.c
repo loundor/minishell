@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 13:11:52 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/30 17:44:29 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/30 20:55:34 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void	free_builtins(t_builtins *builtins)
 
 void	free_bt(t_tree *tree)
 {
+	if (tree == NULL)
+		return ;
 	if (tree->left != NULL)
 		free_bt((t_tree *)tree->left);
 	if (tree->right && tree->right != NULL)

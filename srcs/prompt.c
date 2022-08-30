@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:38:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/30 18:18:38 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/30 20:54:35 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,8 @@ puts("====================================================================");
 	prepare_exe(shell);
 	if (builtin != NULL && shell->cmd->path == NULL)
 		shell->return_err = builtin->f(shell);
+	free_bt(shell->tree);
+	shell->tree = NULL;
 	return (0);
 }
 
