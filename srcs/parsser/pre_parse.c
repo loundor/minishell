@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 23:12:44 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/29 18:26:17 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/30 12:37:46 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ char	*parse_space(char *line)
 	size_t	i;
 
 	i = 0;
-	if (*line == '\0')
+	if (!line || line == NULL || *line == '\0')
 		return (NULL);
 	ret = ft_skipspace(line);
 	while (ret && *ret != 0)

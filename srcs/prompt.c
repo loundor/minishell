@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:38:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/29 21:08:34 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/30 12:48:59 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static char	*test_line(char *line)
 		if (get_cmd_type(line) == 2 || get_cmd_type(line) == 3
 			|| get_cmd_type(line) == 5 || get_cmd_type(line) == 7)
 		{
-			if (get_cmd_type(&line[2]) == 2 || get_cmd_type(&line[2]) == 3
-				|| get_cmd_type(&line[2]) == 5 || get_cmd_type(&line[2]) == 7)
+			if (get_cmd_type(&line[1]) == 2 || get_cmd_type(&line[1]) == 3
+				|| get_cmd_type(&line[1]) == 5 || get_cmd_type(&line[1]) == 7)
 			{
 				good = 1;
 				break ;
@@ -45,16 +45,19 @@ static char	*test_line(char *line)
 			parenthesis--;
 		line++;
 	}
-	if (good == 1 || parenthesis == 1)
+	if (good == 1 || parenthesis != 0)
 	{
-		printf("parse error near `%c'\n", *line);
+		if (good == 1)
+			printf("parse error near `%c'\n", *line);
+		else if (parenthesis != 0)
+			printf("missing parenthesis\n");
 		free(bak);
 		bak = NULL;
 	}
 	return (bak);
 }
 
-static	char *get_title_shell(void)
+static char	*get_title_shell(void)
 {
 	char	*path;
 	char	*home;
@@ -123,7 +126,7 @@ int	core(t_shell *shell)
 	t_builtins	*builtin;
 	char		*line;
 
-	line = test_line(shell->line);
+	shell->line = test_line(shell->line);
 	line = parse_space(shell->line);
 	if (line == NULL)
 		return (shell->return_err = 1);

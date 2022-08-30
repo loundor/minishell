@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 13:15:55 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/26 15:01:42 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/30 13:20:13 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,20 @@ int	bt_test_and(char *line)
 			parenthesis--;
 			i++;
 		}
+		if (line[i] == '\'')
+		{
+			i++;
+			while (line[i] != 0 && line[i++] != '\'')
+				;
+			continue ;
+		}
+		if (line[i] == '"')
+		{
+			i++;
+			while (line[i] != 0 && line[i++] != '"')
+				;
+			continue ;
+		}
 		if (line[i] == '&' && line[i + 1] == '&')
 			return (i);
 		i++;
@@ -67,6 +81,20 @@ int	bt_test_or(char *line)
 			}
 			parenthesis--;
 			i++;
+		}
+		if (line[i] == '\'')
+		{
+			i++;
+			while (line[i] != 0 && line[i++] != '\'')
+				;
+			continue ;
+		}
+		if (line[i] == '"')
+		{
+			i++;
+			while (line[i] != 0 && line[i++] != '"')
+				;
+			continue ;
 		}
 		if (line[i] == '|' && line[i + 1] == '|')
 			return (i);
@@ -95,6 +123,20 @@ int	bt_test_pipe(char *line)
 			parenthesis--;
 			i++;
 		}
+		if (line[i] == '\'')
+		{
+			i++;
+			while (line[i] != 0 && line[i++] != '\'')
+				;
+			continue ;
+		}
+		if (line[i] == '"')
+		{
+			i++;
+			while (line[i] != 0 && line[i++] != '"')
+				;
+			continue ;
+		}
 		if (line[i] == '|' && line[i + 1] != '|')
 			return (i);
 		i++;
@@ -121,6 +163,20 @@ int	bt_test_redir(char *line)
 			}
 			parenthesis--;
 			line++;
+		}
+		if (line[i] == '\'')
+		{
+			i++;
+			while (line[i] != 0 && line[i++] != '\'')
+				;
+			continue ;
+		}
+		if (line[i] == '"')
+		{
+			i++;
+			while (line[i] != 0 && line[i++] != '"')
+				;
+			continue ;
 		}
 		if (line[i] == '>' && line[i + 1] != '>')
 			return (i);
@@ -149,6 +205,20 @@ int	bt_test_appd(char *line)
 			parenthesis--;
 			i++;
 		}
+		if (line[i] == '\'')
+		{
+			i++;
+			while (line[i] != 0 && line[i++] != '\'')
+				;
+			continue ;
+		}
+		if (line[i] == '"')
+		{
+			i++;
+			while (line[i] != 0 && line[i++] != '"')
+				;
+			continue ;
+		}
 		if (line[i] == '>' && line[i + 1] == '>')
 			return (i);
 		i++;
@@ -176,6 +246,20 @@ int	bt_test_input(char *line)
 			parenthesis--;
 			i++;
 		}
+		if (line[i] == '\'')
+		{
+			i++;
+			while (line[i] != 0 && line[i++] != '\'')
+				;
+			continue ;
+		}
+		if (line[i] == '"')
+		{
+			i++;
+			while (line[i] != 0 && line[i++] != '"')
+				;
+			continue ;
+		}
 		if (line[i] == '<' && line[i + 1] != '<')
 			return (i);
 		i++;
@@ -202,6 +286,20 @@ int	bt_test_heredoc(char *line)
 			}
 			parenthesis--;
 			i++;
+		}
+		if (line[i] == '\'')
+		{
+			i++;
+			while (line[i] != 0 && line[i++] != '\'')
+				;
+			continue ;
+		}
+		if (line[i] == '"')
+		{
+			i++;
+			while (line[i] != 0 && line[i++] != '"')
+				;
+			continue ;
 		}
 		if (line[i] == '<' && line[i + 1] == '<')
 			return (i);

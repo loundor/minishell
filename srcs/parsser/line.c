@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 10:39:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/29 15:24:35 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/30 12:52:56 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static char	*dollar(char *tmp, char *line, char **ret)
 static char	*d_quotes(char *tmp, char *line, char **ret)
 {
 	tmp = take_double_quote(line++);
-	while (*line != '\"')
+	while (*line != '"')
 		line++;
 	line++;
 	if (tmp == NULL)
