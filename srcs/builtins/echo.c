@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 15:09:24 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/29 10:38:16 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/30 23:05:17 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_echo(t_shell *shell)
 	char	*bakline;
 	int		new_line;
 
-	line = line_parse(shell->cmd->param);
+	line = line_parse(shell->tree->cmdr->param);
 	bakline = line;
 	line = ft_skipspace(line);
 	new_line = 0;

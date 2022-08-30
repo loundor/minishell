@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 17:30:18 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/30 18:24:40 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/30 23:01:54 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,6 @@ typedef enum e_typeerror
 /*	for the no leaf, dont forget to put at NULL all			*/
 /*	variable that we don't use!								*/
 /* -------------------------------------------------------- */
-
-typedef struct s_tree
-{
-	int				type;
-	uint8_t			code_err;
-	char			*cmd;
-	struct t_cmd	*cmdr;
-	struct s_pipe	*pipe[2];
-	struct s_tree	*parent;
-	struct s_tree	*left;
-	struct s_tree	*right;
-}	t_tree;
 
 typedef struct s_builtins
 {
@@ -104,6 +92,18 @@ typedef struct s_cmd
 	char			*command;
 	char			*param;
 }	t_cmd;
+
+typedef struct s_tree
+{
+	int				type;
+	uint8_t			code_err;
+	char			*cmd;
+	struct s_cmd	*cmdr;
+	struct s_pipe	*pipe[2];
+	struct s_tree	*parent;
+	struct s_tree	*left;
+	struct s_tree	*right;
+}	t_tree;
 
 typedef struct s_shell
 {

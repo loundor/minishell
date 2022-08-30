@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 13:11:52 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/30 20:55:34 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/30 23:11:15 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ void	free_cmd(t_cmd *cmd)
 {
 	if (cmd != NULL)
 	{
-//		if (cmd->next != NULL)
-//			free_cmd(cmd->next);
 		if (cmd->path != NULL)
 			free(cmd->path);
 		if (cmd->command != NULL)

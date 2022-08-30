@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:04:42 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/29 15:10:17 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/30 23:06:40 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,24 @@ int	cd(t_shell *shell)
 	rep = NULL;
 	old = getcwd((void *)0, 0);
 	path = search_var("HOME");
-	if (!shell->cmd->param || shell->cmd->param == NULL)
+	if (!shell->tree->cmdr->param
+		|| shell->tree->cmdr->param == NULL)
 	{
 		if (path != NULL)
 			chdir(path);
 	}
 	else
 	{
-		if (shell->cmd->param[0] == '~' && (shell->cmd->param[1] == '/'
-				|| shell->cmd->param[1] == 0) && path != NULL)
+		if (shell->tree->cmdr->param[0] == '~'
+			&& (shell->tree->cmdr->param[1] == '/'
+			|| shell->tree->cmdr->param[1] == 0) && path != NULL)
 		{
-			rep = ft_strjoin(path, &shell->cmd->param[1]);
+			rep = ft_strjoin(path, &shell->tree->cmdr->param[1]);
 			chdir(rep);
 		}
-		else if (shell->cmd->param[0] != '~' || shell->cmd->param[1] != 0)
-			chdir(shell->cmd->param);
+		else if (shell->tree->cmdr->param[0] != '~'
+				|| shell->tree->cmdr->param[1] != 0)
+			chdir(shell->tree->cmdr->param);
 	}
 	set_env(shell->env, old, "OLDPWD");
 	free_cd(rep, path, old);
