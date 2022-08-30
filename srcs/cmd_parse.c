@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 17:10:41 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/30 15:35:44 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/30 17:52:22 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,13 @@
 /*	See struct in minishell.h								*/
 /* -------------------------------------------------------- */
 
-t_cmd	*cmd_parse(char *shell, t_cmd *cmd)
+t_cmd	*cmd_parse(char *cmd, t_shell *shell) //A modifier t_cmd par t_shell
 {
 	char	*line;
 	t_cmd	*new;
-	t_shell	*all;
 
-	all = struct_passing(1, 0);
-	all->tree = bt_create(shell);
-	line = shell;
-	(void)cmd;
+	shell->tree = bt_create(cmd);
+	line = cmd;
 	line = ft_skipspace(line);
 	new = (t_cmd *)malloc(sizeof(t_cmd));
 	if (!new)
@@ -38,12 +35,12 @@ t_cmd	*cmd_parse(char *shell, t_cmd *cmd)
 	line = ft_skipspace(line);
 	line = take_params(line, new);
 //	line = take_operator(line, new);
-	if (line && *line != '\0')
-	{
-		new->next = cmd_parse(line, new);
-		new->next->prev = new;
-	}
-	else
-		new->next = NULL;
+//	if (line && *line != '\0')
+//	{
+//		new->next = cmd_parse(line, new);
+//		new->next->prev = new;
+//	}
+//	else
+//		new->next = NULL;
 	return (new);
 }

@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 13:15:55 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/30 17:19:17 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/30 18:12:00 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static int	skip_part_char(char *line, size_t *i, char type)
 		*i = *i + 1;
 		while (line[*i] != 0 && line[*i] != type)
 			*i = *i + 1;
+		*i = *i + 1;
 		return (1);
 	}
 	return (0);

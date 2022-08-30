@@ -27,7 +27,6 @@ SRCS		= 	add_env.c \
 				parsser/param.c \
 				parsser/path.c \
 				parsser/pre_parse.c \
-				parsser/redir.c \
 				parsser/search_var.c \
 				parsser/single_quote.c \
 				parsser/wildcard.c \

@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:38:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/30 15:35:24 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/30 18:18:38 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,10 @@ int	prompt(t_shell *shell)
 
 	while (!shell->line || strcmp(shell->line, "exit"))
 	{
+		// NO B_TREE
 		shell->cmd = NULL;
+		// END OF NO B-TREE
+		
 		if (shell->line != NULL)
 			free(shell->line);
 		path = get_title_shell();
@@ -142,9 +145,13 @@ puts(line);
 puts("====================================================================");
 	free(shell->line);
 	shell->line = line;
-	shell->cmd = cmd_parse(shell->line, shell->cmd);
+
+	// NO B-TREE
+	shell->cmd = cmd_parse(shell->line, shell);
 	builtin = search_builtin(shell->cmd->command, shell->builtin);
 // printf("--> \e[32mPATH: %s\e[0m\n--> \e[33mCMD: %s\e[0m\n--> \e[34mPARAM: %s\e[0m\n", shell->cmd->path, shell->cmd->command, shell->cmd->param);
+	// END OF NO B-TREE
+
 	prepare_exe(shell);
 	if (builtin != NULL && shell->cmd->path == NULL)
 		shell->return_err = builtin->f(shell);

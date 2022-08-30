@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/29 15:32:17 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/30 17:48:34 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,134 +30,34 @@
 //# include <readline/readline.h>
 //# include <readline/history.h>
 # include <errno.h>
-
+# include "./struct.h"
 # define STDIN	0
 # define STDOUT	1
 # define STDERR 2
 
-typedef enum e_typeerror
-{
-	EXIT,
-	ENV,
-	MALLOCERR,
-	WELCOME_ERR,
-	NO_ENV,
-	SIGN,
-	BUILT,
-	CMDNFOUND,
-	ALLRIGHT
-}	t_error;
-
-/* -------------| ENVIRONNEMENT VARIABLES  |--------------- */
-/*	Binary tree, need "type" for the type of separator		*/
-/*	About type:	0 - end		1 - |	2 - ||	3- &&	4- >	*/
-/*				5 - >>		6 - <	7 - <<					*/
-/*	The code_err it the number returned by the programm.	*/
-/*	The cmd take the path, name of file and param			*/
-/*	for the no leaf, dont forget to put at NULL all			*/
-/*	variable that we don't use!								*/
+/* ---------------------| BUILTINS |----------------------- */
+/*															*/
 /* -------------------------------------------------------- */
-
-typedef struct s_tree
-{
-	int				type;
-	uint8_t			code_err;
-	char			*cmd;
-	struct t_cmd	*cmdr;
-	struct s_pipe	*pipe[2];
-	struct s_tree	*parent;
-	struct s_tree	*left;
-	struct s_tree	*right;
-}	t_tree;
-
-typedef struct s_builtins
-{
-	char				*cmd;
-	int					(*f)();
-	struct s_builtins	*next;
-}	t_builtins;
-
-typedef struct s_wildcard
-{
-	char		*str;
-	int			ss;
-	int			se;
-	char		*pattern;
-	int			ps;
-	int			pe;
-}	t_wildcard;
-
-/* -------------| ENVIRONNEMENT VARIABLES  |--------------- */
-/*	Maybe for somethings but i don't remember why...		*/
-/*	A leave that in moment....								*/
-/* -------------------------------------------------------- */
-
-typedef struct s_pparams
-{
-	char				*line;
-	char				*old;
-}	t_pparams;
-
-typedef struct s_env
-{
-	struct s_env	*prev_env;
-	char			**env_var;
-	struct s_env	*next_env;
-}	t_env;
-
-typedef struct s_tmp
-{
-	struct s_tmp		*prev;
-	char				**var;
-	struct s_tmp		*next;
-}	t_tmp;
-
-/* -------------| ENVIRONNEMENT VARIABLES  |--------------- */
-/*	Variable command means the file							*/
-/*	About type:	0 - end		1 - |	2 - ||	3- &&	4- >	*/
-/*				5 - >>		6 - <	7 - <<					*/
-/*		 ATTENTION au ' et " <--- Ne sais plus pkoi!!		*/
-/*	Profondeur des perenthensis								*/
-/* -------------------------------------------------------- */
-
-typedef struct s_cmd
-{
-	char			*path;
-	char			*command;
-	char			*param;
-	int				type;
-	int				fd;
-	int				result;
-	int				parenthesis;
-	struct s_pipe	*pipe[2];
-	pid_t			pid;
-	struct s_cmd	*next;
-	struct s_cmd	*prev;
-}	t_cmd;
-
-typedef struct s_shell
-{
-	char				*line;
-	uint8_t				return_err;
-	struct s_env		*env;
-	struct s_cmd		*cmd;
-	struct s_tree		*tree;
-	struct s_builtins	*builtin;
-	struct sigaction	signal_act;
-}	t_shell;
-
-// OK - NEED TEST
-int			welcome(void); // OK
-int			pwd(void); // ok
-int			env(t_shell *shell); // ok
-t_env		*do_env(char **env); // ok
 t_builtins	*search_builtin(char *cmd, t_builtins *builtin); // OK
 int			add_builtins(t_shell *shell); // OK
-void		*struct_passing(int type, void *data); // ok
-t_cmd		*cmd_parse(char *shell, t_cmd *cmd);
-int			ft_errmsg(int errn); // ok Print error message
+int			cd(t_shell *shell); // ok change directory
+int			pwd(void); // ok
+int			env(t_shell *shell); // ok
 int			ft_echo(t_shell *shell); // ok echo builtins
+int			export(t_shell *shell); // ok set a env variable
+
+/* -----------------------| UTILS |------------------------ */
+/*															*/
+/* -------------------------------------------------------- */
+int			welcome(void); // OK
+t_env		*do_env(char **env); // ok
+int			ft_errmsg(int errn); // ok Print error message
 int			get_cmd_type(char *line); // ok
+t_cmd		*cmd_parse(char *shell, t_shell *cmd);
+void		*struct_passing(int type, void *data); // ok
+char		**env_to_exec(void); // ok Parsse struc env to char **
+int			prepare_exe(t_shell *shell);
+int			core(t_shell *shell);// ACTUALY ONLY FOR TEST
 
 /* --------------------| FREE PARTY |---------------------- */
 /*															*/
@@ -183,13 +83,12 @@ void		free_bt(t_tree *tree);
 
 // ENVIRONEMENT VARIABLES
 void		add_env_line(char *line); // ok
-void		set_env(t_env *env, char *str, char *type); // ok
 void		add_env_splited(t_env *env, char *str, char *type); // ok
+void		set_env(t_env *env, char *str, char *type); // ok
 void		rem_env(t_env *env, char *str); // ok
 int			unset(t_shell *shell); // ok unset a env variable
-int			export(t_shell *shell); // ok set a env variable
 
-//		-- PARSSING
+// PARSSING
 char		*line_parse(char *cmd);
 char		*take_dollar(char *param); // ok
 char		*take_single_quote(char *param);
@@ -197,35 +96,16 @@ char		*take_double_quote(char *param);
 char		*take_path(char *line, t_cmd *cmd);
 char		*take_exec(char *line, t_cmd *cmd);
 char		*take_params(char *line, t_cmd *cmd);
-char		*take_operator(char *line, t_cmd *cmd);
 char		*search_var(char *var); // ok
 int			starcmp(t_wildcard	*test); // ok
 
-char		**env_to_exec(void); // ok Parsse struc env to char **
-int			prepare_exe(t_shell *shell);
-int			cd(t_shell *shell); // ok change directory
-int			core(t_shell *shell);// ACTUALY ONLY FOR TEST
+// SYSTEM
 int			prep_signal(t_shell *shell);
-
-// TO DO
-int			parser(char *str); // split the commande
-void		create_command(char **argv, char **env);
-int			w_history(char **history); // write history
-
-int			check_auth(char **path, char *dest);	// check the access
-int			see_errno(t_env *env);
-
-/* ************ */
-/*   PROGRAM    */
-/* ************ */
-
-/* ************ */
-/*   INTERN     */
-/* ************ */
-// Welcome msg return 0 if ok, otherwise number of type error
 
 /* ************ */
 /*     SUB      */
 /* ************ */
 int			test(void *data);
 #endif
+
+// char		*take_operator(char *line, t_cmd *cmd);
