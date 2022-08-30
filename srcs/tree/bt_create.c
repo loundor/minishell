@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:57:32 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/30 14:57:06 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/30 17:13:18 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,6 +218,10 @@ t_tree	*bt_create(char *line)
 	if (!tree)
 		exit(ft_exit(MALLOCERR, 1));
 	tree->type = 0;
+	tree->left = NULL;
+	tree->right = NULL;
+	tree->cmd = NULL;
+	tree->cmdr = NULL;
 	if (*line == '(')
 		line = tree_parenthesis(line, tree);
 	else if (bt_test_and(line))

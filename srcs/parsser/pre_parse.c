@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 23:12:44 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/30 14:56:34 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/30 17:23:11 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,7 @@ char	*parse_space(char *line)
 			}
 			else
 				i++;
-			ret++;
-			if (*ret != ' ')
+			if (*++ret != ' ')
 				i++;
 			continue ;
 		}
