@@ -1,14 +1,13 @@
 
-Creer la fonction free pour l'arbre binaire (structure tree) et ajouter la structure tree dans la fonction struct_parssing;
+Creer la fonction free pour l'arbre binaire (structure tree).
 dans la fonction pre parsse, ajouter un espace avant et apres un separateur si il n'y en a pas. voir pre_parse.c:103 et pre_parse.c:58
 
-Dans le remplissage de l'arbre binaire les variables *cmd comportes un espace ne trop en fin de ligne.
+Dans le remplissage de l'arbre binaire les variables *cmd comportes un espace ne trop en fin de ligne. ???
 Tester le parssing avec tout les separateurs restant (>>, <<, <). Tout devrais fonctionner et le reste fonctionne... 
 
 Avant l'execution de la commande dans l'arbre binaire, il nous faudra utiliser la fonction de parsing de ligne, qui nous servira a transformer toute les demandes de variable en valeur de celle-ci.
 Attention si dans le parssing nous rencontrons quelquechose=untruc il nous faut declarer cette variable dans la memoire et non dans l'environnement, hormis dans me cas ou la command de gauche (tree) est export.
 
-Probleme double espace dans le parssing de la cmd avec les simple et double quotes. (Non fixé??!! A tester dans un premier temps.)
 Dans exec.c ajouter un arret dans le while pour || | && << >> < >... // DEPRECATED NE PAS FAIRE LA FONCTION SERA PEUT ETRE SUPPRIMER CAR UTILISATION DE LA STRUCT TREE
 
 fichier line.c plus de 5 fonctions...
@@ -17,4 +16,4 @@ Fichiers double quotes et single quotes plus de 25 lignes!!!
 FAIRE UN GROS NETTOYAGE AVANT D ATTAQUER LE CORE! VOIR MEME POUR FAIRE PLUSIEURS FICHIER H CAR C'EST LE BORDEL DANS LE MINISHELL.H !!!!
 
 
-Verifier qu il n y a pas plus de deux |, <, >, & a la suite hornis entre quotes ou dquotes. Sinon directement revoyer un message d erreur!
+Verifier qu il y a toujours un command avant et apres un separateur.. ex: cmd << >> cmd2
