@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/31 17:49:46 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/31 22:36:14 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 //# include <readline/history.h>
 # include <errno.h>
 # include "./struct.h"
+# include "./tree.h"
+
 # define STDIN	0
 # define STDOUT	1
 # define STDERR 2
@@ -68,18 +70,6 @@ void		free_env(t_env *env);
 void		free_shell(t_shell *shell);
 int			prompt(t_shell *shell);
 
-// TREE
-t_tree		*bt_create(char *line); // ok
-int			bt_test_and(char *line); // ok
-int			bt_test_or(char *line); // ok
-int			bt_test_pipe(char *line); // ok
-int			bt_test_redir(char *line); // ok
-int			bt_test_appd(char *line); // ok
-int			bt_test_input(char *line); // ok
-int			bt_test_heredoc(char *line);
-char		*parse_space(char *line);
-void		free_bt(t_tree *tree);
-
 // ENVIRONEMENT VARIABLES
 void		add_env_line(char *line); // ok
 void		add_env_splited(t_env *env, char *str, char *type); // ok
@@ -88,6 +78,7 @@ void		rem_env(t_env *env, char *str); // ok
 int			unset(t_shell *shell); // ok unset a env variable
 
 // PARSSING
+char		*parse_space(char *line);
 char		*line_parse(char *cmd);
 char		*take_dollar(char *param); // ok
 char		*take_single_quote(char *param);

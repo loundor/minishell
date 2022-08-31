@@ -33,13 +33,5 @@ Error: TOO_MANY_LINES       (line: 143, col:   1):      Function has more than 2
 srcs/parsser/single_quote.c: Error!
 Error: TOO_MANY_LINES       (line:  50, col:   1):      Function has more than 25 lines
 
-srcs/tree/bt_create.c: Error!
-Error: TOO_MANY_LINES       (line: 122, col:   1):      Function has more than 25 lines
-Error: TOO_MANY_FUNCS       (line: 174, col:   1):      Too many functions in file
-Error: TOO_MANY_LINES       (line: 262, col:   1):      Function has more than 25 lines
-
-srcs/tree/bt_test_sep.c: Error!
-Error: TOO_MANY_FUNCS       (line: 153, col:   1):      Too many functions in file
-
 srcs/utils/env_to_exec.c: Error!
 Error: TOO_MANY_LINES       (line:  48, col:   1):      Function has more than 25 lines

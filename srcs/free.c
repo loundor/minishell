@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 13:11:52 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/31 11:16:42 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/31 22:35:40 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,4 @@ void	free_builtins(t_builtins *builtins)
 		free(builtins->cmd);
 		free(builtins);
 	}
-}
-
-void	free_bt(t_tree *tree)
-{
-	if (tree == NULL)
-		return ;
-	if (tree->left != NULL)
-		free_bt((t_tree *)tree->left);
-	if (tree->right && tree->right != NULL)
-		free_bt((t_tree *)tree->right);
-	if (tree->cmdr && tree->cmdr != NULL)
-		free_cmd((t_cmd *)tree->cmdr);
-	free(tree);
 }
