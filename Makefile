@@ -32,6 +32,7 @@ PARSER		=	dollar.c \
 				double_quotes.c \
 				exec.c \
 				line.c \
+				line_2.c \
 				param.c \
 				path.c \
 				pre_parse.c \

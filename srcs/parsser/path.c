@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:31:26 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/30 15:25:43 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/01 00:33:23 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,20 @@
 /*	The pointer of line variable was moved until the end of */
 /*	path.													*/
 /* -------------------------------------------------------- */
+
+static char	*take_path_write(t_cmd *cmd, size_t i,size_t slash, char *line)
+{
+	while (line[i] != '/')
+		i--;
+	cmd->path = (char *)malloc(sizeof(char) * (i + 2));
+	if (!cmd->path)
+		ft_exit(MALLOCERR, 1);
+	slash = 0;
+	while (slash <= i)
+		cmd->path[slash++] = *line++;
+	cmd->path[slash] = '\0';
+	return (line);
+}
 
 char	*take_path(char *line, t_cmd *cmd)
 {
@@ -44,14 +58,7 @@ char	*take_path(char *line, t_cmd *cmd)
 	}
 	if (slash == 0)
 		return (line);
-	while (line[i] != '/')
-		i--;
-	cmd->path = (char *)malloc(sizeof(char) * (i + 2));
-	if (!cmd->path)
-		ft_exit(MALLOCERR, 1);
-	slash = 0;
-	while (slash <= i)
-		cmd->path[slash++] = *line++;
-	cmd->path[slash] = '\0';
+	line = take_path_write(cmd, i, slash, line);
+
 	return (line);
 }

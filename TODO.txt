@@ -20,12 +20,6 @@ Error: TOO_MANY_LINES       (line:  56, col:   1):      Function has more than 2
 srcs/parsser/double_quotes.c: Error!
 Error: TOO_MANY_LINES       (line:  69, col:   1):      Function has more than 25 lines
 
-srcs/parsser/line.c: Error!
-Error: TOO_MANY_FUNCS       (line: 120, col:   1):      Too many functions in file
-
-srcs/parsser/path.c: Error!
-Error: TOO_MANY_LINES       (line:  57, col:   1):      Function has more than 25 lines
-
 srcs/parsser/pre_parse.c: Error!
 Error: TOO_MANY_LINES       (line:  76, col:   1):      Function has more than 25 lines
 Error: TOO_MANY_LINES       (line: 143, col:   1):      Function has more than 25 lines
@@ -33,5 +27,68 @@ Error: TOO_MANY_LINES       (line: 143, col:   1):      Function has more than 2
 srcs/parsser/single_quote.c: Error!
 Error: TOO_MANY_LINES       (line:  50, col:   1):      Function has more than 25 lines
 
-srcs/utils/env_to_exec.c: Error!
-Error: TOO_MANY_LINES       (line:  48, col:   1):      Function has more than 25 lines
+Envvar add_env et free pb de free apres export suivi de exit...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+add_env.c: Error!
+Error: TOO_MANY_LINES       (line:  48, col:   1):	Function has more than 25 lines
+Error: TOO_MANY_LINES       (line: 107, col:   1):	Function has more than 25 lines
+Error: TOO_MANY_LINES       (line: 144, col:   1):	Function has more than 25 lines
+
+prompt.c: Error!
+Error: TOO_MANY_LINES       (line:  68, col:   1):	Function has more than 25 lines
+Error: WRONG_SCOPE_COMMENT  (line: 141, col:   1):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 142, col:   1):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 143, col:   1):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 144, col:   1):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line: 149, col:   1):	line too long
+Error: WRONG_SCOPE_COMMENT  (line: 149, col:   1):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line: 149, col: 139):	line too long
+
+main.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  28, col:   1):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  29, col:   1):	Comment is invalid in this scope
+
+parsser/single_quote.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  45, col:   9):	Comment is invalid in this scope
+Error: TOO_MANY_LINES       (line:  50, col:   1):	Function has more than 25 lines
+
+parsser/pre_parse.c: Error!
+Error: TOO_MANY_LINES       (line:  76, col:   1):	Function has more than 25 lines
+Error: TOO_MANY_LINES       (line: 143, col:   1):	Function has more than 25 lines
+
+parsser/path.c: Error!
+Error: SPC_AFTER_OPERATOR   (line:  23, col:  50):	missing space after operator
+Error: EMPTY_LINE_FUNCTION  (line:  62, col:   1):	Empty line in function
+
+parsser/double_quotes.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  64, col:   9):	Comment is invalid in this scope
+Error: TOO_MANY_LINES       (line:  69, col:   1):	Function has more than 25 lines
+
+builtins/cd.c: Error!
+Error: TOO_MANY_LINES       (line:  56, col:   1):	Function has more than 25 lines
+
+tree/bt_create.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  46, col:   9):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  47, col:   9):	Comment is invalid in this scope
+tree/bt_test_sep_2.c: OK!
+utils/env_to_exec.c: Error!
+Error: EMPTY_LINE_FUNCTION  (line:  41, col:   1):	Empty line in function
+Error: SPACE_EMPTY_LINE     (line:  41, col:   1):	Space on empty line
+Error: VAR_DECL_START_FUNC  (line:  42, col:   1):	Variable declaration not at start of function
+Error: VAR_DECL_START_FUNC  (line:  44, col:   1):	Variable declaration not at start of function

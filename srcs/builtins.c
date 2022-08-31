@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:41:57 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/31 16:05:09 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/01 00:47:01 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	add_builtins(t_shell *shell)
 	init_builtins("cd", &cd, shell);
 	init_builtins("unset", &unset, shell);
 	init_builtins("export", &export, shell);
-	init_builtins("test", &test, shell); // builtin for new test.
+	init_builtins("test", &test, shell);
 	return (0);
 }
 

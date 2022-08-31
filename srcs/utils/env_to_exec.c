@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 13:42:20 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/31 17:38:04 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/01 00:51:31 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,11 @@
 /*  Don't forget to free the returned value!!               */
 /* -------------------------------------------------------- */
 
-char	**env_to_exec(void)
+static char	**env_to_exec_send(int i, t_env *env)
 {
-	char	**ret;
-	t_env	*env;
 	char	*tmp;
-	int		i;
+	char	**ret;
 
-	env = (t_env *)struct_passing(2, 0);
-	i = 0;
-	while (env != NULL && env->next_env != NULL)
-	{
-		env = env->next_env;
-		i++;
-	}
-	if (i == 0)
-		return (NULL);
 	ret = (char **)malloc(sizeof(char *) * (++i + 1));
 	if (!ret)
 		exit(ft_exit(errno, 1));
@@ -45,4 +34,21 @@ char	**env_to_exec(void)
 		env = env->prev_env;
 	}
 	return (ret);
+}
+
+char	**env_to_exec(void)
+{
+	t_env	*env;
+	int		i;
+
+	env = (t_env *)struct_passing(2, 0);
+	i = 0;
+	while (env != NULL && env->next_env != NULL)
+	{
+		env = env->next_env;
+		i++;
+	}
+	if (i == 0)
+		return (NULL);
+	return (env_to_exec_send(i, env));
 }
