@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 11:55:12 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/28 12:47:45 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/31 17:47:15 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,14 @@ static char	**take(char *line)
 void	add_env_line(char *line)
 {
 	char	**var;
+
 	var = take(line);
 	set_env(struct_passing(2, 0), var[1], var[0]);
 	free(var);
 	return ;
 }
 
-void	set_env(t_env *env, char *str, char* type)
+void	set_env(t_env *env, char *str, char *type)
 {
 	while (env != NULL && env->next_env != NULL
 		&& ft_strncmp(env->env_var[0], type, ft_strlen(type) + 1))
@@ -74,7 +75,7 @@ void	set_env(t_env *env, char *str, char* type)
 	return ;
 }
 
-void	add_env_splited(t_env *env, char *str, char* type)
+void	add_env_splited(t_env *env, char *str, char *type)
 {
 	t_env	*newenv;
 	t_shell	*shell;
@@ -105,7 +106,7 @@ void	add_env_splited(t_env *env, char *str, char* type)
 	return ;
 }
 
-void rem_env(t_env *env, char *str)
+void	rem_env(t_env *env, char *str)
 {
 	t_shell	*shell;
 
@@ -137,7 +138,7 @@ void rem_env(t_env *env, char *str)
 		free(env->env_var[0]);
 		if (env->env_var[1] != NULL)
 			free(env->env_var[1]);
-		free(env->env_var);	
+		free(env->env_var);
 	}
 	return ;
 }

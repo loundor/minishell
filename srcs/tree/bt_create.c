@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:57:32 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/31 11:17:36 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/31 17:30:35 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ static char	*tree_or(char *line, t_tree *tree)
 	return (line);
 }
 
-// CERTAINEMENT A METTRE DANS UN TEST
 static char	*tree_parenthesis(char *line, t_tree *tree)
 {
 	char	*work;
@@ -117,7 +116,7 @@ static char	*tree_parenthesis(char *line, t_tree *tree)
 		line += 2;
 		tree->left = bt_create(work);
 		tree->left->parent = tree;
-		free(work); // Check if need this free
+		free(work);
 	}
 	return (line);
 }

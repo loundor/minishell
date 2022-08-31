@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:38:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/31 11:20:20 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/31 17:40:31 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,16 @@ static char	*test_line(char *line)
 	bak = line;
 	while (line && *line != 0)
 	{
-		if (*line == '\'')
-			while (*++line != '\'')
-				;
-		if (*line == '"')
-			while (*++line != '"')
-				;
+		if (*line == '\'' || *line == '"')
+		{
+			if (*line != 0 && *line == '\'')
+				while (*line != 0 && *++line != '\'')
+					;
+			if (*line != 0 && *line == '"')
+				while (*line != 0 && *++line != '"')
+					;
+			continue ;
+		}
 		if (get_cmd_type(line) == 2 || get_cmd_type(line) == 3
 			|| get_cmd_type(line) == 5 || get_cmd_type(line) == 7)
 		{
@@ -134,10 +138,10 @@ int	core(t_shell *shell)
 	line = parse_space(shell->line);
 	if (line == NULL)
 		return (shell->return_err = 1);
-puts("======== Test LINE pour verification du parse_space ================");
-puts(shell->line);
-puts(line);
-puts("====================================================================");
+//puts("======== Test LINE pour verification du parse_space ================");
+//puts(shell->line);
+//puts(line);
+//puts("====================================================================");
 	free(shell->line);
 	shell->line = line;
 	shell->tree = bt_create(shell->line);

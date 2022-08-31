@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 17:18:27 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/30 23:06:17 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/31 17:41:45 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	env(t_shell *shell)
 		write (1, bak->env_var[0], ft_strlen(bak->env_var[0]));
 		write (1, "=", 1);
 		if (bak->env_var[1] != NULL)
-			write (1, bak->env_var[1], ft_strlen(bak->env_var[1]));	// fd a modifier.. ATTENTION A LA LONGUEUR DE CETTE LIGNE!!!!
+			write (1, bak->env_var[1], ft_strlen(bak->env_var[1]));
 		write (1, "\n", 1);
 		if (bak->next_env != NULL)
 			bak = bak->next_env;

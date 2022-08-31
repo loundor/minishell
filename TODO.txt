@@ -1,12 +1,45 @@
-tree->cmdr donne certainnes command en param au lieu de command.... Peut etre le ' ou " avec espaces...
 Avant l'execution de la commande dans l'arbre binaire, il nous faudra utiliser la fonction de parsing de ligne, qui nous servira a transformer toute les demandes de variable en valeur de celle-ci.
 Attention si dans le parssing nous rencontrons quelquechose=untruc il nous faut declarer cette variable dans la memoire et non dans l'environnement, hormis dans me cas ou la command de gauche (tree) est export.
-
-Dans exec.c ajouter un arret dans le while pour || | && << >> < >... // DEPRECATED NE PAS FAIRE LA FONCTION SERA PEUT ETRE SUPPRIMER CAR UTILISATION DE LA STRUCT TREE
-
-fichier line.c plus de 5 fonctions...
-Fichiers double quotes et single quotes plus de 25 lignes!!!
 
 FAIRE UN GROS NETTOYAGE AVANT D ATTAQUER LE CORE! VOIR MEME POUR FAIRE PLUSIEURS FICHIER H CAR C'EST LE BORDEL DANS LE MINISHELL.H !!!!
 
 Verifier qu il y a toujours une commande avant et apres un separateur.. ex: cmd << >> cmd2
+
+ERROR NORM:
+srcs/add_env.c: Error!
+Error: TOO_MANY_LINES       (line:  48, col:   1):      Function has more than 25 lines
+Error: TOO_MANY_LINES       (line: 107, col:   1):      Function has more than 25 lines
+Error: TOO_MANY_LINES       (line: 144, col:   1):      Function has more than 25 lines
+
+srcs/prompt.c: Error!
+Error: TOO_MANY_LINES       (line:  68, col:   1):      Function has more than 25 lines
+
+srcs/builtins/cd.c: Error!
+Error: TOO_MANY_LINES       (line:  56, col:   1):      Function has more than 25 lines
+
+srcs/parsser/double_quotes.c: Error!
+Error: TOO_MANY_LINES       (line:  69, col:   1):      Function has more than 25 lines
+
+srcs/parsser/line.c: Error!
+Error: TOO_MANY_FUNCS       (line: 120, col:   1):      Too many functions in file
+
+srcs/parsser/path.c: Error!
+Error: TOO_MANY_LINES       (line:  57, col:   1):      Function has more than 25 lines
+
+srcs/parsser/pre_parse.c: Error!
+Error: TOO_MANY_LINES       (line:  76, col:   1):      Function has more than 25 lines
+Error: TOO_MANY_LINES       (line: 143, col:   1):      Function has more than 25 lines
+
+srcs/parsser/single_quote.c: Error!
+Error: TOO_MANY_LINES       (line:  50, col:   1):      Function has more than 25 lines
+
+srcs/tree/bt_create.c: Error!
+Error: TOO_MANY_LINES       (line: 122, col:   1):      Function has more than 25 lines
+Error: TOO_MANY_FUNCS       (line: 174, col:   1):      Too many functions in file
+Error: TOO_MANY_LINES       (line: 262, col:   1):      Function has more than 25 lines
+
+srcs/tree/bt_test_sep.c: Error!
+Error: TOO_MANY_FUNCS       (line: 153, col:   1):      Too many functions in file
+
+srcs/utils/env_to_exec.c: Error!
+Error: TOO_MANY_LINES       (line:  48, col:   1):      Function has more than 25 lines

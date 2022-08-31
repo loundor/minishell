@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:07:29 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/31 11:21:05 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/31 17:39:51 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ int	main(int argc, char **argv, char **env)
 	if (welcome() != 0)
 		exit (ft_exit(WELCOME_ERR, 2));
 	if (prompt(&shell))
-//envtest(&shell);
-	return (ft_exit(WELCOME_ERR, 1));
+		return (ft_exit(WELCOME_ERR, 1));
 	ft_exit(0, 1);
 	printf("exit\n");
 	return (0);

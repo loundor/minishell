@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:32:29 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/30 15:24:50 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/31 17:30:05 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,48 @@
 /*	return the reste of the line.							*/
 /* -------------------------------------------------------- */
 
+static size_t	count_char(char *line)
+{
+	size_t	i;
+
+	i = 0;
+	while (line && line[i] != '\0' && !ft_isspace(line[i]))
+	{
+		if (line[i] == '\'' || line[i] == '"')
+		{
+			if (line[i] == '\'')
+			{
+				i++;
+				while (line && line[i] != '\0' && line[i] != '\'')
+					i++;
+			}
+			if (line && line[i] != '\0' && line[i] == '"')
+			{
+				i++;
+				while (line && line[i] != '\0' && line[i] != '"')
+					i++;
+			}
+			continue ;
+		}
+		i++;
+	}
+	return (i);
+}
+
 char	*take_exec(char *line, t_cmd *cmd)
 {
 	char	*ret;
-	size_t	i[2];
+	size_t	e;
+	size_t	i;
 
-	i[0] = 0;
-	while (!ft_isspace(line[i[0]]) && line[i[0]] != '\0'
-		&& line[i[0]] != '\'' && line[i[0]] != '"')
-		i[0]++;
-	ret = (char *)malloc(sizeof(char) * (i[0] + 1));
+	i = count_char(line);
+	ret = (char *)malloc(sizeof(char) * (i + 1));
 	if (!ret)
 		exit(ft_exit(MALLOCERR, 2));
-	i[1] = 0;
-	while (i[1] < i[0])
-		ret[i[1]++] = *line++;
-	ret[i[1]] = '\0';
+	e = 0;
+	while (e < i)
+		ret[e++] = *line++;
+	ret[e] = '\0';
 	line = ft_skipspace(line);
 	cmd->command = ret;
 	return (line);

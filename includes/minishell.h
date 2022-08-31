@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/31 11:23:17 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/31 17:49:46 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,5 @@ int			prep_signal(t_shell *shell);
 /*     SUB      */
 /* ************ */
 int			test(void *data);
-#endif
 
-// char		*take_operator(char *line, t_cmd *cmd);
+#endif
