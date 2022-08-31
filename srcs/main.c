@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:07:29 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/29 15:36:40 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/31 11:21:05 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	*struct_passing(int type, void *data)
 	else if (type == 2)
 		return ((t_env *)shell->env);
 	else if (type == 3)
-		return ((t_cmd *)shell->cmd);
+		return ((t_cmd *)shell->tree->cmdr);
 	else if (type == 4)
 		return ((t_builtins *)shell->builtin);
 	else if (type == 5)

@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/30 17:48:34 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/31 11:23:17 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int			welcome(void); // OK
 t_env		*do_env(char **env); // ok
 int			ft_errmsg(int errn); // ok Print error message
 int			get_cmd_type(char *line); // ok
-t_cmd		*cmd_parse(char *shell, t_shell *cmd);
 void		*struct_passing(int type, void *data); // ok
 char		**env_to_exec(void); // ok Parsse struc env to char **
 int			prepare_exe(t_shell *shell);

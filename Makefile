@@ -10,7 +10,6 @@ LIBRARY		=   ./readline.linux/shlib/libreadline.a ./readline.linux/shlib/libhist
 INCLUDES	= 	-I./includes -I./lib/libft
 SRCS		= 	add_env.c \
 				builtins.c \
-				cmd_parse.c \
 				env_pars.c \
 				free.c \
 				main.c \

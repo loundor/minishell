@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:57:32 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/30 23:11:22 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/31 11:17:36 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,12 +199,24 @@ static char	*tree_append(char *line, t_tree *tree)
 
 static char	*tree_cmd(char *line, t_tree *tree)
 {
+	t_cmd	*new;
+
+	new = NULL;
 	if (bt_test_and(line) || bt_test_or(line) || bt_test_pipe(line)
 		|| bt_test_redir(line) || bt_test_appd(line))
 		return (line);
 	if (tree->type != 0)
 		return (line);
-	tree->cmd = ft_strdup(line);
+	new = (t_cmd *)malloc(sizeof(t_cmd));
+	if (!new)
+		ft_exit(MALLOCERR, 1);
+	line = ft_skipspace(line);
+	line = take_path(line, new);
+	line = ft_skipspace(line);
+	line = take_exec(line, new);
+	line = ft_skipspace(line);
+	line = take_params(line, new);
+	tree->cmdr = new;
 	line = NULL;
 	return (line);
 }
@@ -220,7 +232,6 @@ t_tree	*bt_create(char *line)
 	tree->type = 0;
 	tree->left = NULL;
 	tree->right = NULL;
-	tree->cmd = NULL;
 	tree->cmdr = NULL;
 	if (*line == '(')
 		line = tree_parenthesis(line, tree);

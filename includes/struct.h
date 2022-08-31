@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 17:30:18 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/30 23:01:54 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/31 11:15:46 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ typedef struct s_tree
 {
 	int				type;
 	uint8_t			code_err;
-	char			*cmd;
 	struct s_cmd	*cmdr;
 	struct s_pipe	*pipe[2];
 	struct s_tree	*parent;
@@ -110,7 +109,6 @@ typedef struct s_shell
 	char				*line;
 	uint8_t				return_err;
 	struct s_env		*env;
-	struct s_cmd		*cmd; // A enlever
 	struct s_tree		*tree;
 	struct s_builtins	*builtin;
 	struct sigaction	signal_act;

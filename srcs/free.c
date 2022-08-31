@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 13:11:52 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/30 23:11:15 by stissera         ###   ########.fr       */
+/*   Updated: 2022/08/31 11:16:42 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,5 @@ void	free_bt(t_tree *tree)
 		free_bt((t_tree *)tree->right);
 	if (tree->cmdr && tree->cmdr != NULL)
 		free_cmd((t_cmd *)tree->cmdr);
-	if (tree->cmd && tree->cmd != NULL)
-		free(tree->cmd);
 	free(tree);
 }
