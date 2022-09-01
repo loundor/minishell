@@ -7,10 +7,9 @@ Pour ce faire il existe plusieurs possibilitees, et donc algorithmes, comme tout
 Pour ce projet nous avons choisi de faire l'utilisation d'un arbre binaire.
 L'arbre binaire va nous servir a effectuer ligne de commande dans un ordre precis en commancant l'execution de l'arbre en bas a gauche tout en remontant et en effectuant les partie de droite a chaque noeud si il en existe. Si dans la branche de droite contient d'autre branche nous allons donc repereter cette operation en y descendant tout en bas a gauche afin d'y remonter tout en effectuant la branche de droite a chaque noeud selon le type que nous verrons plus tard.
 Pour construire l'arbre nous allons utiliser des priorites que nous allons potentiellement retrouver dans la ligne donne par l'utilisateur qui ont pour priorites:
-###### 1. &&
-###### 2. ||
-###### 3. |
-###### 4. les redirections
+###### 1. && et ||
+###### 2. |
+###### 3. les redirections
 
 En cas de __parenthese__ nous devons isoler celle-ci afin d'en faire un bloc qui sera envoye et traiter dans l'arbre, comme un nouvel arbre (execution) au moment venu.
 Apres le parssing et la creation de l'arbre binaire nous passons a sont execution.
@@ -43,6 +42,7 @@ Ex: *"I want $TOTO!" deviens "I want !"*
 Commencons par la structure de cette arbre, rappelons qu'un arbre binaire contient une racine *(le pere)* et au maximum deux branches *(2 fils)* qui a leur tour peuvent devenir une racine d'un sous arbre et donc avoir egalement au maximum 2 branches et ainsi de suite...
 
 __Voici un exemple d'une potentielle commande decoupe et integre dans un arbre binaire.__
+__A retravailler car pas bon sur les prio && et ||!!!__
 
 ![Binary tree](img/bt.png?raw=true "Title")
 
@@ -78,3 +78,15 @@ if line is not empty
 
 end
 ```
+## L'execution:
+Nous allons parcourir tout l'arbre du bas a gauche au bas a droite en passant pas tout (ou presque) les nodes.
+Pour ce faire nous allons rentrer dans notre arbre par la racine et lancer une recursive qui va se rappeler a chaque branche de gauche en et celle de droite.
+A arrive a la feuille nous allons tester que notre type, donc un fois que gauche et droite sont null; si le type est 0, cela signifie que nous somme donc au bout et qu il n y a pas de branche a gauche comme a droite.
+Arrive le moment des conditions a l'arrive d une feuille:
+A savoir, le resultat de sortie est toujours enregistre dans le parent code_err (sur 8 bits).
+
+Si le parent est null, on execute simplement ce que le noeud contient.
+
+Si le patent est 1 (|) on check si le parent->droite.
+  Si le parent->droite est 0 oui on cree la recuperation de la sortie via dup2, lance la node de gauche puis modifie l entree de droite et lance la feuille de droite.
+  Si le parent->droute est 1 (|)

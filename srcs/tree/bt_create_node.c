@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 22:17:36 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/01 00:49:21 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/02 00:56:56 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,25 +35,14 @@ char	*add_node_type(char *line, t_tree *tree, int t, size_t i)
 	return (line);
 }
 
-char	*tree_and(char *line, t_tree *tree)
+char	*tree_andor(char *line, t_tree *tree)
 {
 	size_t	i[2];
 
-	i[0] = bt_test_and(line);
+	i[0] = bt_test_andor(line);
 	i[1] = 0;
 	if (i[0] > 0)
-		line = add_node_type(line, tree, 3, i[0]);
-	return (line);
-}
-
-char	*tree_or(char *line, t_tree *tree)
-{
-	size_t	i[2];
-
-	i[0] = bt_test_or(line);
-	i[1] = 0;
-	if (i[0] > 0)
-		line = add_node_type(line, tree, 2, i[0]);
+		line = add_node_type(line, tree, get_cmd_type(&line[i[0]]), i[0]);
 	return (line);
 }
 

@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:57:32 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/31 22:35:17 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/02 00:59:33 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,8 @@ static char	*bt_create_if(char *line, t_tree *tree)
 {
 	if (*line == '(')
 		line = tree_parenthesis(line, tree);
-	else if (bt_test_and(line))
-		line = tree_and(line, tree);
-	else if (bt_test_or(line))
-		line = tree_or(line, tree);
+	else if (bt_test_andor(line))
+		line = tree_andor(line, tree);
 	else if (bt_test_pipe(line))
 		line = tree_pipe(line, tree);
 	else if (bt_test_appd(line))

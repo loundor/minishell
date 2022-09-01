@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 13:15:55 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/31 22:30:29 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/02 01:01:41 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	skip_part_char(char *line, size_t *i, char type)
 	return (0);
 }
 
-int	bt_test_and(char *line)
+int	bt_test_andor(char *line)
 {
 	int		parenthesis;
 	size_t	i;
@@ -56,36 +56,8 @@ int	bt_test_and(char *line)
 		}
 		if (skip_part_char(line, &i, '\'') || skip_part_char(line, &i, '"'))
 			continue ;
-		if (line[i] == '&' && line[i + 1] == '&')
-			return (i);
-		i++;
-	}
-	return (0);
-}
-
-int	bt_test_or(char *line)
-{
-	int		parenthesis;
-	size_t	i;
-
-	i = 0;
-	parenthesis = 0;
-	while (line[i] || line[i] != '\0')
-	{
-		while (line[i] == '(' || parenthesis != 0)
-		{
-			while (line[i] != ')')
-			{
-				if (line[i] == '(')
-					parenthesis++;
-				i++;
-			}
-			parenthesis--;
-			i++;
-		}
-		if (skip_part_char(line, &i, '\'') || skip_part_char(line, &i, '"'))
-			continue ;
-		if (line[i] == '|' && line[i + 1] == '|')
+		if ((line[i] == '&' && line[i + 1] == '&')
+			|| (line[i] == '|' && line[i + 1] == '|'))
 			return (i);
 		i++;
 	}

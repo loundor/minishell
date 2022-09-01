@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 12:17:06 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/01 15:31:34 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/02 01:02:43 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static char	*write_quotes(char *line, char *ret, size_t *i)
 			while (*line != '\'')
 			{
 				ret[(*i)++] = *line++;
-				*i = *i + 1;
 			}
 		}
 			ret[(*i)++] = *line++;
@@ -86,7 +85,7 @@ char	*write_parse_space(char *line, size_t i)
 			continue ;
 		}
 		line = write_quotes(&*line, ret, &i);
-		if (*line == ' ')
+		if (*line != 0 && *line == ' ')
 			line = write_is_space(&*ret, &*line, i);
 		else if (*line == 0)
 			continue ;
