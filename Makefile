@@ -9,6 +9,7 @@ EXTRAF		= 	-g -fsanitize=address
 LIBRARY		=   ./readline.linux/shlib/libreadline.a ./readline.linux/shlib/libhistory.a -lncurses -L./readline.linux/shlib -L./lib/libft ./lib/libft/libft.a
 INCLUDES	= 	-I./includes -I./lib/libft
 SRCS		= 	add_env.c \
+				add_env_2.c \
 				builtins.c \
 				env_pars.c \
 				free.c \

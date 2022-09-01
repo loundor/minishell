@@ -1,9 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/01 17:04:56 by stissera          #+#    #+#             */
+/*   Updated: 2022/09/01 17:05:34 by stissera         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	test(void *data)
-{
-	(void)data;
 	// -------------------------------------------------------------------
 	// ------------------------------- Wildcard --------------------------
 	// -------------------------------------------------------------------
@@ -39,7 +47,8 @@ int	test(void *data)
 	write (1, "\nSTART OF TEST\n", 15);
 	while (cmd != NULL)
 	{
-		printf("PATH: %s\nEXE: %s\nPARAM: %s\nTYPE: %d\n", cmd->path, cmd->command, cmd->param, cmd->type);
+		printf("PATH: %s\nEXE: %s\nPARAM: %s\nTYPE: %d\n"
+				, cmd->path, cmd->command, cmd->param, cmd->type);
 		cmd = cmd->next;
 	}
 	write (1, "END OF TEST\n", 12); */
@@ -59,5 +68,8 @@ int	test(void *data)
 	free (bak);
 	write (1, "END OF TEST\n", 12); */
 
+int	test(void *data)
+{
+	(void)data;
 	return (0);
 }

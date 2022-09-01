@@ -6,58 +6,11 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 11:55:12 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/01 13:11:40 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/01 17:03:16 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-static char	**take(char *line)
-{
-	size_t	size;
-	char	**var;
-
-	size = 0;
-	if (*line == '$')
-		line++;
-	while (line[size] != '=' && line[size] != 0)
-		size++;
-	var = (char **)malloc(sizeof(char *) * 2);
-	var[0] = (char *)malloc(sizeof(char) * (size + 1));
-	if (!var[0])
-		exit(ft_exit(errno, 1));
-	var[0][size] = 0;
-	while (size-- > 0)
-		var[0][size] = line[size];
-	while (*line != '=' && *line != 0)
-		line++;
-	if (*line == 0)
-	{
-		var[1] = NULL;
-		return (var);
-	}
-	line++;
-	size = 0;
-	/// 
-	while (line[size] && (line[size] != ' ' || line[size] != '\0'))
-		size++;
-	var[1] = (char *)malloc(sizeof(char) * (size + 1));
-	var[1][size] = 0;
-	while (size-- > 0)
-		var[1][size] = line[size];
-	///
-	return (var);
-}
-
-void	add_env_line(char *line)
-{
-	char	**var;
-
-	var = take(line);
-	set_env(struct_passing(2, 0), var[1], var[0]);
-	free(var);
-	return ;
-}
 
 void	set_env(t_env *env, char *str, char *type)
 {
@@ -74,6 +27,21 @@ void	set_env(t_env *env, char *str, char *type)
 		return ;
 	}
 	add_env_splited(env, str, type);
+	return ;
+}
+
+static void	set_next_prev(t_env *env, t_shell *shell, t_env *newenv)
+{
+	if (env == 0)
+	{
+		shell = (t_shell *)struct_passing(1, 0);
+		newenv->prev_env = NULL;
+		newenv->next_env = NULL;
+		shell->env = newenv;
+		return ;
+	}
+	newenv->prev_env = env;
+	env->next_env = newenv;
 	return ;
 }
 
@@ -95,18 +63,30 @@ void	add_env_splited(t_env *env, char *str, char *type)
 	else
 		newenv->env_var[1] = NULL;
 	newenv->next_env = NULL;
-	//
-	if (env == 0)
+	set_next_prev(env, shell, newenv);
+	return ;
+}
+
+static void	set_env_rem(t_env *env, t_shell *shell)
+{
+	if (env->prev_env == NULL && env->next_env != NULL)
 	{
 		shell = (t_shell *)struct_passing(1, 0);
-		newenv->prev_env = NULL;
-		newenv->next_env = NULL;
-		shell->env = newenv;
-		return ;
+		env->next_env->prev_env = NULL;
+		shell->env = env->next_env;
 	}
-	//
-	newenv->prev_env = env;
-	env->next_env = newenv;
+	else if (env->prev_env != NULL && env->next_env == NULL)
+		env->prev_env->next_env = NULL;
+	else if (env->prev_env == NULL && env->next_env == NULL)
+	{
+		shell = (t_shell *)struct_passing(1, 0);
+		shell->env = NULL;
+	}
+	else
+	{
+		env->prev_env->next_env = env->next_env;
+		env->next_env->prev_env = env->prev_env;
+	}
 	return ;
 }
 
@@ -115,36 +95,15 @@ void	rem_env(t_env *env, char *str)
 	t_shell	*shell;
 
 	shell = 0;
+	if (!str || str == 0)
+		return ;
 	while (env != NULL && ft_strncmp(env->env_var[0], str, ft_strlen(str) + 1))
 		env = env->next_env;
 	if (env != NULL && !ft_strncmp(env->env_var[0], str, ft_strlen(str) + 1))
-	{
-		///
-		if (env->prev_env == NULL && env->next_env != NULL)
-		{
-			shell = (t_shell *)struct_passing(1, 0);
-			env->next_env->prev_env = NULL;
-			shell->env = env->next_env;
-		}
-		else if (env->prev_env != NULL && env->next_env == NULL)
-		{
-			env->prev_env->next_env = NULL;
-		}
-		else if (env->prev_env == NULL && env->next_env == NULL)
-		{
-			shell = (t_shell *)struct_passing(1, 0);
-			shell->env = NULL;
-		}
-		else
-		{
-			env->prev_env->next_env = env->next_env;
-			env->next_env->prev_env = env->prev_env;
-		}
-		///
-		free(env->env_var[0]);
-		if (env->env_var[1] != NULL)
-			free(env->env_var[1]);
-		free(env->env_var);
-	}
+		set_env_rem(env, shell);
+	free(env->env_var[0]);
+	free(env->env_var[1]);
+	free(env->env_var);
+	free(env);
 	return ;
 }
