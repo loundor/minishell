@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 11:55:12 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/31 17:47:15 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/01 13:11:40 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,14 @@ static char	**take(char *line)
 	}
 	line++;
 	size = 0;
+	/// 
 	while (line[size] && (line[size] != ' ' || line[size] != '\0'))
 		size++;
 	var[1] = (char *)malloc(sizeof(char) * (size + 1));
 	var[1][size] = 0;
 	while (size-- > 0)
 		var[1][size] = line[size];
+	///
 	return (var);
 }
 
@@ -93,6 +95,7 @@ void	add_env_splited(t_env *env, char *str, char *type)
 	else
 		newenv->env_var[1] = NULL;
 	newenv->next_env = NULL;
+	//
 	if (env == 0)
 	{
 		shell = (t_shell *)struct_passing(1, 0);
@@ -101,6 +104,7 @@ void	add_env_splited(t_env *env, char *str, char *type)
 		shell->env = newenv;
 		return ;
 	}
+	//
 	newenv->prev_env = env;
 	env->next_env = newenv;
 	return ;
@@ -115,6 +119,7 @@ void	rem_env(t_env *env, char *str)
 		env = env->next_env;
 	if (env != NULL && !ft_strncmp(env->env_var[0], str, ft_strlen(str) + 1))
 	{
+		///
 		if (env->prev_env == NULL && env->next_env != NULL)
 		{
 			shell = (t_shell *)struct_passing(1, 0);
@@ -135,6 +140,7 @@ void	rem_env(t_env *env, char *str)
 			env->prev_env->next_env = env->next_env;
 			env->next_env->prev_env = env->prev_env;
 		}
+		///
 		free(env->env_var[0]);
 		if (env->env_var[1] != NULL)
 			free(env->env_var[1]);

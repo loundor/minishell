@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:31:26 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/01 00:33:23 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/01 10:20:17 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 /*	path.													*/
 /* -------------------------------------------------------- */
 
-static char	*take_path_write(t_cmd *cmd, size_t i,size_t slash, char *line)
+static char	*take_path_write(t_cmd *cmd, size_t i, size_t slash, char *line)
 {
 	while (line[i] != '/')
 		i--;
@@ -59,6 +59,5 @@ char	*take_path(char *line, t_cmd *cmd)
 	if (slash == 0)
 		return (line);
 	line = take_path_write(cmd, i, slash, line);
-
 	return (line);
 }

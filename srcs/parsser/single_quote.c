@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:22:21 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/31 16:05:08 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/01 13:01:58 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,6 @@ char	*take_single_quote(char *param)
 		pre = line;
 		line = ft_joincts(pre, *param++);
 		free(pre);
-	}
-	if (*param == '\0')
-	{
-		//pre = heredoc(line, 1); // EN ATTENTE DE CREATION DE FONCTION
-		free(line);
-		return (pre);
 	}
 	return (line);
 }
