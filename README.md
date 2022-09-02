@@ -90,3 +90,53 @@ Si le parent est null, on execute simplement ce que le noeud contient.
 Si le patent est 1 (|) on check si le parent->droite.
   Si le parent->droite est 0 oui on cree la recuperation de la sortie via dup2, lance la node de gauche puis modifie l entree de droite et lance la feuille de droite.
   Si le parent->droute est 1 (|)
+
+
+#  Schema..
+On part du principe ou la recurvise pour qui donne la node feuille en bas a gauche est en cours de traitement...
+
+on commence par la regle de priorite la plus petite...
+
+prepare_exec(node):
+
+Si node->type == 0 && node->parent == NULL
+  execute la node;
+Sinon:
+  Si node->type == 0 && node->parent != NULL
+  return
+Sinon:
+-------
+  Si > ou >> ou < ou << (difference fonction mais le principe global reste le meme.)
+    preparation du pipe 
+    Si node->right->type != 0  
+      appeler prepare_exec(node->right)
+    Sinon
+      Si node->right->type == 0
+      open/create.. node->right
+    execute node->left (interblocage sur parent??)
+    write code err
+    return
+-------
+  Si |
+    prepare pipe
+    Si node->right != 0   
+     appeler prepare_exec(node->right)
+    Sinon
+      prepare pipe
+      exec right
+    exec left
+    write code err
+    return
+-------
+  Si &&
+    Si node->left>code_err == 0
+      appeler prepare_exec(node->right)
+    write code err
+    return
+-------
+  Si ||
+    Si node->left != 0
+      appeler prepare_exec(node->right)
+    write code err
+    return
+-------
