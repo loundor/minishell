@@ -98,7 +98,7 @@ On part du principe ou la recurvise pour qui donne la node feuille en bas a gauc
 on commence par la regle de priorite la plus petite...
 
 ### prepare_exec(node):
-
+```
 Si node->type == 0 && node->parent == NULL
   execute la node;
 Sinon:
@@ -149,3 +149,4 @@ Sinon:
     return
 
 -/-/-/-/-/-/-/-/-/-/-
+```
