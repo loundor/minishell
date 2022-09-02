@@ -97,7 +97,7 @@ On part du principe ou la recurvise pour qui donne la node feuille en bas a gauc
 
 on commence par la regle de priorite la plus petite...
 
-prepare_exec(node):
+### prepare_exec(node):
 
 Si node->type == 0 && node->parent == NULL
   execute la node;
@@ -105,7 +105,9 @@ Sinon:
   Si node->type == 0 && node->parent != NULL
   return
 Sinon:
--------
+
+-/-/-/-/-/-/-/-/-/-/-
+
   Si > ou >> ou < ou << (difference fonction mais le principe global reste le meme.)
     preparation du pipe 
     Si node->right->type != 0  
@@ -116,7 +118,9 @@ Sinon:
     execute node->left (interblocage sur parent??)
     write code err
     return
--------
+
+-/-/-/-/-/-/-/-/-/-/-
+
   Si |
     prepare pipe
     Si node->right != 0   
@@ -127,16 +131,21 @@ Sinon:
     exec left
     write code err
     return
--------
+
+-/-/-/-/-/-/-/-/-/-/-
+
   Si &&
     Si node->left>code_err == 0
       appeler prepare_exec(node->right)
     write code err
     return
--------
+
+-/-/-/-/-/-/-/-/-/-/-
+
   Si ||
     Si node->left != 0
       appeler prepare_exec(node->right)
     write code err
     return
--------
+
+-/-/-/-/-/-/-/-/-/-/-
