@@ -97,6 +97,7 @@ On part du principe ou la recurvise pour qui donne la node feuille en bas a gauc
 on commence par la regle de priorite la plus petite...
 
 ### prepare_exec(node):
+
 ```
 Si node->type == 0 && node->parent == NULL
   execute la node;
@@ -149,3 +150,6 @@ Sinon:
 
 -/-/-/-/-/-/-/-/-/-/-
 ```
+
+il faut egalement ajouter des waitpid ou le pid sur la branche left or right de pid..
+peut etre ajouter le pid directement dans le parent pour savoir sur quel pid le parent doit attendre avant de continuer l exe....
