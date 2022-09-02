@@ -42,7 +42,6 @@ Ex: *"I want $TOTO!" deviens "I want !"*
 Commencons par la structure de cette arbre, rappelons qu'un arbre binaire contient une racine *(le pere)* et au maximum deux branches *(2 fils)* qui a leur tour peuvent devenir une racine d'un sous arbre et donc avoir egalement au maximum 2 branches et ainsi de suite...
 
 __Voici un exemple d'une potentielle commande decoupe et integre dans un arbre binaire.__
-__A retravailler car pas bon sur les prio && et ||!!!__
 
 ![Binary tree](img/bt.png?raw=true "Title")
 
