@@ -48,6 +48,7 @@ TREE		=	bt_create_node_2.c \
 				bt_test_sep.c \
 				bt_write_cmd.c
 UTILS		=	env_to_exec.c \
+				execute.c \
 				get.c \
 				errmsg.c				
 			
