@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 22:22:40 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/31 22:30:34 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/03 11:01:26 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	bt_test_input(char *line)
 			return (i);
 		i++;
 	}
-	return (i);
+	return (0);
 }
 
 int	bt_test_heredoc(char *line)
@@ -96,5 +96,5 @@ int	bt_test_heredoc(char *line)
 			return (i);
 		i++;
 	}
-	return (i);
+	return (0);
 }

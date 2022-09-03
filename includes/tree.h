@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 22:23:58 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/02 00:59:48 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/03 10:49:18 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ char	*tree_parenthesis(char *line, t_tree *tree);
 char	*tree_pipe(char *line, t_tree *tree);
 char	*tree_redirection(char *line, t_tree *tree);
 char	*tree_append(char *line, t_tree *tree);
+char	*tree_input_file(char *line, t_tree *tree);
+char	*tree_heredoc(char *line, t_tree *tree);
 
 char	*tree_cmd(char *line, t_tree *tree);
 

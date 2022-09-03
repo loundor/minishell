@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 22:17:36 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/02 00:56:56 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/03 10:59:57 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ char	*add_node_type(char *line, t_tree *tree, int t, size_t i)
 	while (s < i)
 		work[s++] = *line++;
 	work[s] = '\0';
-	if (t == 1 || t == 4)
+	if (t == 1 || t == 4 || t == 6)
 		line++;
-	else if (t == 2 || t == 3 || t == 5)
+	else if (t == 2 || t == 3 || t == 5 || t == 7)
 		line += 2;
 	tree->type = t;
 	tree->left = bt_create(work);

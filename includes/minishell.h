@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/02 12:33:13 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/03 10:36:17 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ char		*search_var(char *var); // ok
 int			starcmp(t_wildcard	*test); // ok
 
 // EXEC
-int			prepare_exec(t_shell *shell, t_tree * tree);
+// int			prepare_exec(t_shell *shell, t_tree * tree);
 int			prep_signal(t_shell *shell);
 
 /* ************ */
