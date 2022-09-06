@@ -1,11 +1,12 @@
 #include <stdio.h>
+#include <unistd.h>
 #include <stdlib.h>
 
 int main (void)
 {
-	int i;
+	int i[2];
 
-	system("open -a Safari -b https://www.youtube.com/watch?v=YAYfEXDX8zQ");
-
+	if (i[0] == 0)
+		write(1, "OK\0", 3);
 	return 0;
 }

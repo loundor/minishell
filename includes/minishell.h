@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/05 15:28:27 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/06 11:21:59 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int			starcmp(t_wildcard	*test); // ok
 // EXEC
 // int			prepare_exec(t_shell *shell, t_tree * tree);
 int			prep_signal(t_shell *shell);
-void		do_exec(t_shell *shell, t_tree *tree);
+//void		do_exec(t_shell *shell, t_tree *tree);
 int			prepare_exec(t_shell *shell, t_tree * tree);
 /* ************ */
 /*     SUB      */

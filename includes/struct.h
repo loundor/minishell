@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 17:30:18 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/05 13:20:29 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/06 16:52:22 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ typedef struct s_cmd
 typedef struct s_tree
 {
 	int				type;
-	uint8_t			code_err;
+	int				code_err;
 	pid_t			pid;
 	struct s_cmd	*cmdr;
 	int				fd[2];
