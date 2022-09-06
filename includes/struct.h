@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 17:30:18 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/02 11:03:04 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/05 13:20:29 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ typedef struct s_tree
 	uint8_t			code_err;
 	pid_t			pid;
 	struct s_cmd	*cmdr;
-	struct s_pipe	*pipe[2];
+	int				fd[2];
 	struct s_tree	*parent;
 	struct s_tree	*left;
 	struct s_tree	*right;

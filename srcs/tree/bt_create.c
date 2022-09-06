@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:57:32 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/03 12:07:52 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/05 15:46:58 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ t_tree	*bt_create(char *line)
 	tree->left = NULL;
 	tree->right = NULL;
 	tree->cmdr = NULL;
+	tree->parent = NULL;
 	line = bt_create_if(line, tree);
 	line = ft_skipspace(line);
 	if (line && *line != '\0')

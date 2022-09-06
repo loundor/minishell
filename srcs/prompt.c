@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:38:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/01 17:07:47 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/06 09:25:36 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,32 +131,22 @@ int	prompt(t_shell *shell)
 /* -------------------------------------------------------- */
 int	core(t_shell *shell)
 {
-	t_builtins	*builtin;
+//	t_builtins	*builtin;
 	char		*line;
 
 	shell->line = test_line(shell->line);
 	line = parse_space(shell->line);
 	if (line == NULL)
 		return (shell->return_err = 1);
-//puts("======== Test LINE pour verification du parse_space ================");
-//puts(shell->line);
-//puts(line);
-//puts("====================================================================");
 	free(shell->line);
 	shell->line = line;
 	shell->tree = bt_create(shell->line);
-	builtin = search_builtin(shell->tree->cmdr->command, shell->builtin);
-// printf("--> \e[32mPATH: %s\e[0m\n--> \e[33mCMD: %s\e[0m\n--> \e[34mPARAM: %s\e[0m\n", shell->cmd->path, shell->cmd->command, shell->cmd->param);
-	prepare_exe(shell);
-	if (builtin != NULL && shell->tree->cmdr->path == NULL)
-		shell->return_err = builtin->f(shell);
+//	builtin = search_builtin(shell->tree->cmdr->command, shell->builtin);
+	prepare_exec(shell, shell->tree);
+//	shell->return_err = wait_on_pids(shell);
+//	if (builtin != NULL && shell->tree->cmdr->path == NULL)
+//		shell->return_err = builtin->f(shell);
 	free_bt(shell->tree);
 	shell->tree = NULL;
-	return (0);
-}
-
-int	prepare_exe(t_shell *shell)
-{
-	(void)shell;
 	return (0);
 }

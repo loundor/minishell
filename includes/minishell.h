@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/03 10:36:17 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/05 15:28:27 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <sys/wait.h>
 # include <sys/types.h>
 # include <sys/stat.h>
+# include <fcntl.h>
 # include <term.h>
 # include "../readline.linux/readline.h"
 # include "../readline.linux/history.h"
@@ -57,7 +58,6 @@ int			ft_errmsg(int errn); // ok Print error message
 int			get_cmd_type(char *line); // ok
 void		*struct_passing(int type, void *data); // ok
 char		**env_to_exec(void); // ok Parsse struc env to char **
-int			prepare_exe(t_shell *shell);
 int			core(t_shell *shell);// ACTUALY ONLY FOR TEST
 
 /* --------------------| FREE PARTY |---------------------- */
@@ -95,7 +95,8 @@ int			starcmp(t_wildcard	*test); // ok
 // EXEC
 // int			prepare_exec(t_shell *shell, t_tree * tree);
 int			prep_signal(t_shell *shell);
-
+void		do_exec(t_shell *shell, t_tree *tree);
+int			prepare_exec(t_shell *shell, t_tree * tree);
 /* ************ */
 /*     SUB      */
 /* ************ */
