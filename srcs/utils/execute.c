@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 09:10:47 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/07 17:22:01 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/07 21:01:41 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ int	prepare_exec(t_shell *shell, t_tree * tree)
 			}
 		}
 		//	waitpid(tree->left->pid, &tree->code_err, WNOHANG);
-		waitpid(tree->left->pid, &tree->code_err, 0);
-		tree->code_err = tree->left->code_err;
+		//waitpid(tree->left->pid, &tree->code_err, WNOHANG);
+		//tree->code_err = tree->left->code_err;
 		if (tree->left->type == 1 || tree->left->type == 2 || tree->left->type == 3)
 		{
 			tree->fd[1][0] = tree->left->fd[2][0];
@@ -56,8 +56,8 @@ int	prepare_exec(t_shell *shell, t_tree * tree)
 		}
 		else
 		{
-		tree->fd[1][0] = tree->left->fd[1][0];
-		tree->fd[1][1] = tree->left->fd[1][1];
+			tree->fd[1][0] = tree->left->fd[1][0];
+			tree->fd[1][1] = tree->left->fd[1][1];
 		}
 		
 		if (tree->left->type == 0)
@@ -74,16 +74,16 @@ int	prepare_exec(t_shell *shell, t_tree * tree)
 		if (tree->right->type == 0)
 			printf("PIDR %d ------\n", tree->right->pid);
 		// close(tree->right->fd[2][1]);
-		waitpid(tree->right->pid, &tree->code_err, WNOHANG);
+		//waitpid(tree->right->pid, &tree->code_err, WNOHANG);
 /* 		{
 			close(tree->right->fd[1][0]);
 			close(tree->right->fd[1][1]);
 		} */
 		//printf("RETURN ERR RIGHT %d ------\n", tree->code_err);
-		//close(tree->fd[0][0]);
-		//close(tree->fd[0][1]);
-		//close(tree->fd[1][0]);
-		//close(tree->fd[1][1]);
+		close(tree->fd[0][0]);
+		close(tree->fd[0][1]);
+		close(tree->fd[1][0]);
+		close(tree->fd[1][1]);
 		return (0);
 	}
 	
@@ -205,7 +205,9 @@ int	prepare_exec(t_shell *shell, t_tree * tree)
 //			if (execve(cmd, (char* const*)av, ev == -1))
 			if (execve(cmd, (char * const*)tree->cmdr->param, ev))
 				tree->code_err = 127;
-			return (127);
+			free(ev);
+			free(cmd);
+			exit(127);
 		}
 		free(ev);
 		free(cmd);
