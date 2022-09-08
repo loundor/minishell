@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 13:42:20 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/01 00:51:31 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/08 20:27:33 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static char	**env_to_exec_send(int i, t_env *env)
 	while (--i >= 0)
 	{
 		tmp = ft_strjoin(env->env_var[0], "=");
-		ret[i] = ft_strjoin(tmp, env->env_var[1]);
-		free (tmp);
+		ret[i] = ft_strjoin(tmp, env->env_var[1]) + free_str(tmp);
+//		free (tmp);
 		env = env->prev_env;
 	}
 	return (ret);

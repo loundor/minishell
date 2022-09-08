@@ -6,13 +6,13 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 23:12:44 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/01 15:05:00 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/08 19:02:21 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static char	*count_quotes(char *ret, size_t *i)
+char	*count_quotes(char *ret, size_t *i)
 {
 	if (*ret == '"' || *ret == '\'')
 	{

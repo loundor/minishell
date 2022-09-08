@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:38:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/07 21:08:26 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/08 21:38:45 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,19 +146,21 @@ int	core(t_shell *shell)
 	  ///////////////
 	 /// TO TEST ///
 	///////////////
-  		char *test[500];
+   		char *test[500];
 		int	p;
 
 		p = read(shell->tree->fd[2][0], test, 500);
 		printf("---------   %d   --------\n", p);
 		write(1, test, p);
-/* 		close(shell->tree->fd[2][0]);
+		printf("Erreur final : %d\n", shell->return_err);
+  		close(shell->tree->fd[2][0]);
 		close(shell->tree->fd[2][1]);
 		close(shell->tree->fd[1][0]);
 		close(shell->tree->fd[1][1]);
-		close(shell->tree->fd[3][0]);
-		close(shell->tree->fd[3][1]); */
-	//dup2(0, 0);
+		close(shell->tree->fd[0][0]);
+		close(shell->tree->fd[0][1]);
+//		dup2(0, STDIN_FILENO);
+//		dup2(1, STDOUT_FILENO);
 	//waitpid(shell->tree->left->pid, &shell->tree->code_err, 0);
 //	shell->return_err = wait_on_pids(shell);
 //	if (builtin != NULL && shell->tree->cmdr->path == NULL)

@@ -6,50 +6,54 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:04:42 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/01 10:19:32 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/08 21:21:45 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	write_home(t_shell *shell, char *path)
+static void	write_home(char *param, char *path)
 {
 	char	*rep;
 
 	rep = NULL;
-	if (shell->tree->cmdr->param[0] == '~'
-		&& (shell->tree->cmdr->param[1] == '/'
-			|| shell->tree->cmdr->param[1] == 0) && path != NULL)
+	if (param[0] == '~'
+		&& (param[1] == '/'
+			|| param[1] == 0) && path != NULL)
 	{
-		rep = ft_strjoin(path, &shell->tree->cmdr->param[1]);
+		rep = ft_strjoin(path, &param[1]);
 		chdir(rep);
 	}
-	else if (shell->tree->cmdr->param[0] != '~'
-		|| shell->tree->cmdr->param[1] != 0)
-		chdir(shell->tree->cmdr->param);
+	else if (param[0] != '~'
+		|| param[1] != 0)
+		chdir(param);
 	free(rep);
 }
 
-int	cd(t_shell *shell)
+int	cd(char **par)
 {
+	char	*param;
 	char	*path;
 	char	*old;
+	t_shell	*shell;
 
+	param = par[1];
+	shell = struct_passing(1, 0);
 	old = getcwd((void *)0, 0);
 	path = search_var("HOME");
-	if (!shell->tree->cmdr->param
-		|| shell->tree->cmdr->param == NULL)
+	if (!param || param == NULL)
 	{
 		if (path != NULL)
 			chdir(path);
 	}
 	else
-		write_home(shell, path);
+		write_home(param, path);
 	set_env(shell->env, old, "OLDPWD");
 	free(path);
 	free(old);
 	path = getcwd((void *)0, 0);
 	set_env(shell->env, path, "PWD");
 	free(path);
-	return (ft_errmsg(errno));
+	return (0);
+	//return (ft_errmsg(errno));
 }

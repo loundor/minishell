@@ -1,22 +1,23 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdlib.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   param_to_exec.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/08 08:33:06 by stissera          #+#    #+#             */
+/*   Updated: 2022/09/08 20:33:46 by stissera         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static char	*ft_skipspace(char *str)
-{
-	char	*ret;
+#include "../../includes/minishell.h"
 
-	if (!str || *str == '\0')
-		return (0);
-	ret = str;
-	while (*ret && (*ret == '\t' || *ret == '\n' || *ret == '\v'
-			|| *ret == '\f' || *ret == '\r' || *ret == ' '))
-		ret++;
-	if (*ret == '\0')
-		return (0);
-	return (&*ret);
-}
+
+/* ----------------| DO ARGV FOR EXECVE |------------------ */
+/*	Take the line param et slpit in a array like argv.		*/
+/*	WARNING! The first index (0) stay null. We need to		*/
+/*	implement the name of the executable in parent function	*/
+/* -------------------------------------------------------- */
 
 static size_t ft_countav(char *str)
 {
@@ -31,7 +32,8 @@ static size_t ft_countav(char *str)
 		while (*str != 0 && *str != 32 && *str != '\'' && *str != '"')
 			str++;
 		ret++;
-		if (*str == 0)
+		str = ft_skipspace(str);
+		if (!str || *str == 0)
 			return (ret);
 		if (*str == 32)
 			continue ;
@@ -93,10 +95,11 @@ char	**param_to_exec(char *str)
 	i = 0;
 	ret = NULL;
 	count += ft_countav(str);
-	ret = (char **)malloc(sizeof(char *) * count);
+	ret = (char **)malloc(sizeof(char *) * (count + 1));
 	if (!ret)
 		exit(0);
 	ret[0] = NULL;
+	ret[count] = NULL;
 	if (count == 1)
 		return (ret);
 	while (++i < count)
@@ -118,16 +121,4 @@ char	**param_to_exec(char *str)
 		}
 	}
 	return (ret);
-}
-
-int main (void)
-{
-	char	test[] = "Voila une chaine \" qui devrait etre\" splited! mais sa marche pas";
-	char	**ret = param_to_exec(test);
-	//char	*name = "TEST";
-	int		i = 1;
-//	ret[0] = name;
-	while (ret[i])
-		printf("-->%s<--", ret[i++]);
-	return 0;
 }

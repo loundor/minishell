@@ -6,22 +6,40 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 13:11:52 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/01 00:47:24 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/08 22:48:36 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	free_shell(t_shell *shell)
+int free_tab(char **t)
+{
+	int	i;
+
+	i = 0;
+	while (t[i])
+		free(t[i++]);
+	free(t);
+	return (0);
+}
+
+int	free_str(char *str)
+{
+	free(str);
+	return (0);
+}
+
+int	free_shell(t_shell *shell)
 {
 	if (shell->line != NULL)
 		free(shell->line);
 	free_env(shell->env);
 	free_builtins(shell->builtin);
 	free_bt(shell->tree);
+	return (0);
 }
 
-void	free_env(t_env *env)
+int	free_env(t_env *env)
 {
 	int	i;
 
@@ -35,9 +53,10 @@ void	free_env(t_env *env)
 		free(env->env_var);
 		free(env);
 	}
+	return (0);
 }
 
-void	free_cmd(t_cmd *cmd)
+int	free_cmd(t_cmd *cmd)
 {
 	if (cmd != NULL)
 	{
@@ -49,6 +68,7 @@ void	free_cmd(t_cmd *cmd)
 			free(cmd->param);
 		free(cmd);
 	}
+	return (0);
 }
 
 void	free_builtins(t_builtins *builtins)

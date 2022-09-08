@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 17:30:18 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/07 13:38:51 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/08 19:25:28 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,8 @@ typedef struct s_tree
 typedef struct s_shell
 {
 	char				*line;
-	uint8_t				return_err;
+	int					return_err;
+	//uint8_t				return_err;
 	struct s_env		*env;
 	struct s_tree		*tree;
 	struct s_builtins	*builtin;

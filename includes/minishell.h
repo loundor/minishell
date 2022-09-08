@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/06 11:21:59 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/08 21:16:41 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@
 /* -------------------------------------------------------- */
 t_builtins	*search_builtin(char *cmd, t_builtins *builtin); // OK
 int			add_builtins(t_shell *shell); // OK
-int			cd(t_shell *shell); // ok change directory
+int			cd(char **par); // ok change directory
 int			pwd(void); // ok
-int			env(t_shell *shell); // ok
+int			env(char **par); // ok
 int			ft_echo(t_shell *shell); // ok echo builtins
-int			export(t_shell *shell); // ok set a env variable
+int			export(char **par); // ok set a env variable
 
 /* -----------------------| UTILS |------------------------ */
 /*															*/
@@ -65,9 +65,11 @@ int			core(t_shell *shell);// ACTUALY ONLY FOR TEST
 /* -------------------------------------------------------- */
 int			ft_exit(int type, int to_free); // Need complet
 void		free_builtins(t_builtins *builtins);
-void		free_cmd(t_cmd *cmd);
-void		free_env(t_env *env);
-void		free_shell(t_shell *shell);
+int			free_cmd(t_cmd *cmd);
+int			free_env(t_env *env);
+int			free_shell(t_shell *shell);
+int 		free_tab(char **t);
+int			free_str(char *str);
 int			prompt(t_shell *shell);
 
 // ENVIRONEMENT VARIABLES
@@ -75,7 +77,7 @@ void		add_env_line(char *line); // ok
 void		add_env_splited(t_env *env, char *str, char *type); // ok
 void		set_env(t_env *env, char *str, char *type); // ok
 void		rem_env(t_env *env, char *str); // ok
-int			unset(t_shell *shell); // ok unset a env variable
+int			unset(char **par); // ok unset a env variable
 
 // PARSSING
 char		*parse_space(char *line);
@@ -91,12 +93,17 @@ char		*take_exec(char *line, t_cmd *cmd);
 char		*take_params(char *line, t_cmd *cmd);
 char		*search_var(char *var); // ok
 int			starcmp(t_wildcard	*test); // ok
+char		*count_quotes(char *ret, size_t *i);
+
 
 // EXEC
 // int			prepare_exec(t_shell *shell, t_tree * tree);
 int			prep_signal(t_shell *shell);
 //void		do_exec(t_shell *shell, t_tree *tree);
 int			prepare_exec(t_shell *shell, t_tree * tree);
+
+char		**param_to_exec(char *str);
+char		*search_in_path(char *command, char *env);
 /* ************ */
 /*     SUB      */
 /* ************ */

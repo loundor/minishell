@@ -6,14 +6,19 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 10:36:53 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/31 17:43:11 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/08 21:17:08 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	unset(t_shell *shell)
+int	unset(char **par)
 {
-	rem_env(shell->env, shell->tree->cmdr->param);
+	char	*param;
+	t_shell	*shell;
+
+	param = par[1];
+	shell = struct_passing(1, 0);
+	rem_env(shell->env, param);
 	return (0);
 }

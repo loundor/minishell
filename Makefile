@@ -48,9 +48,11 @@ TREE		=	bt_create_node_2.c \
 				bt_test_sep.c \
 				bt_write_cmd.c
 UTILS		=	env_to_exec.c \
+				errmsg.c \
 				execute.c \
 				get.c \
-				errmsg.c
+				param_to_exec.c \
+				search_in_path.c
 #execute.c 		
 			
 OBJS		= 	$(addprefix ./srcs/, ${SRCS: .c=.o})

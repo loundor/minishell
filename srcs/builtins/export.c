@@ -6,14 +6,17 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 12:22:38 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/31 17:42:57 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/08 21:15:26 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	export(t_shell *shell)
+int	export(char **par)
 {
-	add_env_line(shell->tree->cmdr->param);
+	char *param;
+
+	param = par[1];
+	add_env_line(param);
 	return (0);
 }

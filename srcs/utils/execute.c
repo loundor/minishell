@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 09:10:47 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/07 21:01:41 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/08 22:48:46 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	prepare_exec(t_shell *shell, t_tree * tree)
 			{
 				write(1, "FD2>0!\n\0", 8);
 				tree->fd[0][0] = tree->parent->fd[2][0];
-				tree->fd[0][0] = tree->parent->fd[2][0];
+				tree->fd[0][1] = tree->parent->fd[2][1];
 				prepare_exec(shell, tree->left);
 			}
 			else if (tree->parent->fd[1][0] > 0)
@@ -46,10 +46,8 @@ int	prepare_exec(t_shell *shell, t_tree * tree)
 				prepare_exec(shell, tree->left);
 			}
 		}
-		//	waitpid(tree->left->pid, &tree->code_err, WNOHANG);
-		//waitpid(tree->left->pid, &tree->code_err, WNOHANG);
-		//tree->code_err = tree->left->code_err;
-		if (tree->left->type == 1 || tree->left->type == 2 || tree->left->type == 3)
+		if (tree->left->type == 1 || tree->left->type == 2
+			|| tree->left->type == 3)
 		{
 			tree->fd[1][0] = tree->left->fd[2][0];
 			tree->fd[1][1] = tree->left->fd[2][1];
@@ -150,12 +148,16 @@ int	prepare_exec(t_shell *shell, t_tree * tree)
 		}
 		return (0);
 	}
+
+	/* IN TO A NEW FUNCTION */
 	else if (tree->type == 0)
 	{
-//		char	*av[2];
+		char	**av;
 		char	**ev;
 		char	*cmd;
+		t_builtins	*builtin;
 
+		builtin = NULL;
 		if (tree->parent != NULL && tree->parent->type == 1)
 		{
 			if (tree->parent->fd[1][0] > 0)
@@ -166,17 +168,19 @@ int	prepare_exec(t_shell *shell, t_tree * tree)
 		else
 			pipe(tree->parent->fd[2]);
 		ev = env_to_exec();
-/* 		av = arg_to_exec(); // need to implement */
-/* 		if (tree->cmdr->path == NULL)
-			// test builtins
-			cmd = search_in_path(tree->cmdr->command);
-		else */
-			cmd = ft_strjoin(tree->cmdr->path, tree->cmdr->command);
-		if ((tree->pid = fork()) == 0)
+ 		av = param_to_exec(tree->cmdr->param);
+		av[0] = ft_strdup(tree->cmdr->command);
+		cmd = NULL;
+ 		if (tree->cmdr->path == NULL)
+			builtin = search_builtin(tree->cmdr->command, shell->builtin);
+		if (builtin == NULL && tree->cmdr->path == NULL)
+			cmd = search_in_path(tree->cmdr->command, search_var("PATH"));
+		if (builtin == NULL && cmd != NULL && (tree->pid = fork()) == 0)
 		{
 			if (tree->parent != NULL && (tree->parent->type == 1
 					|| tree->parent->type == 2 || tree->parent->type == 3))
 			{
+				/* IN TO A NEW FUNCTION */
 				if (tree->fd[2][0] > 0)
 				{
 					dup2(tree->parent->fd[1][0], 0);
@@ -191,26 +195,62 @@ int	prepare_exec(t_shell *shell, t_tree * tree)
 				}
 				else
 				{
-					//dup2(tree->parent->fd[0][0], 0);
+					dup2(tree->parent->fd[0][0], 0); // pb on strin if on
 					dup2(tree->fd[1][1], 1);
-					tree->parent->fd[0][0] = dup(0);
+					//tree->parent->fd[0][0] = dup(0); // stdin ok if on
 					//tree->fd[1][1] = dup(1);
-					
 				}
 				close(tree->parent->fd[0][0]);
 				close(tree->parent->fd[0][1]);
 				close(tree->fd[1][0]);
 				close(tree->fd[1][1]);
 			}
-//			if (execve(cmd, (char* const*)av, ev == -1))
-			if (execve(cmd, (char * const*)tree->cmdr->param, ev))
-				tree->code_err = 127;
-			free(ev);
-			free(cmd);
-			exit(127);
+			execve(cmd, av, ev);
+			tree->code_err = 127;
+			free_tab(av);
+			free_tab(ev); // char **
+			//free_str(cmd); // char **
+			exit(0);
 		}
-		free(ev);
-		free(cmd);
+		if (builtin != NULL && tree->cmdr->path == NULL)
+		{
+			/* TO REMOVE AFTER FUNCTION ABOVE CREATED*/
+/* 			if (tree->fd[2][0] > 0)
+			{
+				dup2(tree->parent->fd[1][0], 0);
+				dup2(tree->fd[2][1], 1);
+				//tree->parent->fd[1][0] = dup(0);
+				//tree->fd[2][1] = dup(1);
+				close(tree->parent->fd[1][0]);
+				close(tree->parent->fd[1][1]);
+				close(tree->fd[2][0]);
+				close(tree->fd[2][1]);
+			}
+			else
+			{
+				dup2(tree->parent->fd[0][0], 0); // pb on strin if on
+				dup2(tree->fd[1][1], 1);
+				//tree->parent->fd[0][0] = dup(0); // stdin ok if on
+				//tree->fd[1][1] = dup(1);
+			}
+			close(tree->parent->fd[0][0]);
+			close(tree->parent->fd[0][1]);
+			close(tree->fd[1][0]);
+			close(tree->fd[1][1]); */
+			shell->return_err = builtin->f(av);
+		}
+		else if (builtin == NULL && cmd == NULL)
+		{
+			printf("%s : command not found", tree->cmdr->command);
+			shell->return_err = 127;
+		}
+		else
+			waitpid(tree->pid, &shell->return_err, WNOHANG);
+		free_tab(av);
+		free_tab(ev); // char**
+		free_str(cmd);
+		 // char *
+		//return (free_tab(ev) + free_str(cmd) + free_tab(av));
 	}
 	return (0);
 }

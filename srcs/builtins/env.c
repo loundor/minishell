@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 17:18:27 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/31 17:41:45 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/08 21:15:30 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,19 @@
 /*	index 0 = VAR NAME						index 1 = VALUE	*/
 /*	TAKE CARE ABOUT REDIRECTION!!!							*/
 /* -------------------------------------------------------- */
-int	env(t_shell *shell)
+int	env(char **par)
 {
+	t_shell	*shell;
 	t_env	*bak;
+	char 	*param;
 
-	if (shell->tree->cmdr->param != NULL)
+	param = par[1];
+	if (param != NULL)
 	{
-		printf("env : option invalid '%s'\n", shell->tree->cmdr->param);
+		printf("env : option invalid '%s'\n", param);
 		return (125);
 	}
+	shell = struct_passing(1, 0);
 	bak = shell->env;
 	while (shell->env != NULL && bak->env_var[0])
 	{
