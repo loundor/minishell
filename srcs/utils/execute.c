@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 09:10:47 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/08 22:48:46 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/08 23:04:00 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,10 +212,10 @@ int	prepare_exec(t_shell *shell, t_tree * tree)
 			//free_str(cmd); // char **
 			exit(0);
 		}
-		if (builtin != NULL && tree->cmdr->path == NULL)
+		if (builtin != NULL && tree->cmdr->path == NULL && tree->parent != NULL)
 		{
 			/* TO REMOVE AFTER FUNCTION ABOVE CREATED*/
-/* 			if (tree->fd[2][0] > 0)
+			if (tree->fd[2][0] > 0)
 			{
 				dup2(tree->parent->fd[1][0], 0);
 				dup2(tree->fd[2][1], 1);
@@ -228,15 +228,15 @@ int	prepare_exec(t_shell *shell, t_tree * tree)
 			}
 			else
 			{
-				dup2(tree->parent->fd[0][0], 0); // pb on strin if on
-				dup2(tree->fd[1][1], 1);
+				//dup2(tree->parent->fd[0][0], 0); // pb on strin if on
+				//dup2(tree->fd[1][1], 1);
 				//tree->parent->fd[0][0] = dup(0); // stdin ok if on
-				//tree->fd[1][1] = dup(1);
+				tree->fd[1][1] = dup(1);
 			}
 			close(tree->parent->fd[0][0]);
 			close(tree->parent->fd[0][1]);
 			close(tree->fd[1][0]);
-			close(tree->fd[1][1]); */
+			close(tree->fd[1][1]);
 			shell->return_err = builtin->f(av);
 		}
 		else if (builtin == NULL && cmd == NULL)
