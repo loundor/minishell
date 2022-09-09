@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:38:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/09 16:15:52 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/09 17:54:32 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,22 +142,42 @@ int	core(t_shell *shell)
 	shell->line = line;
 	shell->tree = bt_create(shell->line);
 //	builtin = search_builtin(shell->tree->cmdr->command, shell->builtin);
-	if (shell->tree->type == 0 || (0 * prepare_exec(shell, shell->tree)))
-		printf("Simple commande\n");
+	//if (shell->tree->type == 0 || (0 * prepare_exec(shell, shell->tree)))
+	//	printf("Simple commande\n");
+	prepare_exec(shell, shell->tree);
+
+	
+
+ int fd[2];
+pipe(fd);
+pid_t fk;
+fk = fork();
+if (fk == 0)
+{
+	dup2(shell->tree->fd[0][0], 0);
+	execlp("/bin/cat", "cat", NULL);
+}
+wait_process(shell->tree, shell);
+wait(&fk);
+close(fd[0]);
+close(fd[1]);
+	close_all_fd(shell->tree);
+
+
+
+
 		//single_exec(shell);
 	  ///////////////
 	 /// TO TEST ///
 	///////////////
-   		char *test[500];
+/*    		char *test[500];
 		int	p;
 
 		p = read(shell->tree->fd[0][0], test, 500);
 		printf("---------   %d   --------\n", p);
 		write(1, test, p);
 		printf("Erreur final : %d\n", shell->return_err);
-  	//	close(shell->tree->fd[0][0]);
-//		dup2(0, STDIN_FILENO);
-//		dup2(1, STDOUT_FILENO);
+		close(shell->tree->fd[0][1]); */
 	//waitpid(shell->tree->left->pid, &shell->tree->code_err, 0);
 //	shell->return_err = wait_on_pids(shell);
 //	if (builtin != NULL && shell->tree->cmdr->path == NULL)
