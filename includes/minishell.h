@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/08 21:16:41 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/09 13:31:03 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,9 @@ char		*count_quotes(char *ret, size_t *i);
 // int			prepare_exec(t_shell *shell, t_tree * tree);
 int			prep_signal(t_shell *shell);
 //void		do_exec(t_shell *shell, t_tree *tree);
-int			prepare_exec(t_shell *shell, t_tree * tree);
+int			prepare_exec(t_shell *shell, t_tree *tree);
 
-char		**param_to_exec(char *str);
+char		**param_to_exec(char *str, char *name);
 char		*search_in_path(char *command, char *env);
 /* ************ */
 /*     SUB      */

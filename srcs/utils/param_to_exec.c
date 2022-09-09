@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 08:33:06 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/08 20:33:46 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/09 13:30:56 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static char	*ft_write_argv(char *str)
 	return (ret);
 }
 
-char	**param_to_exec(char *str)
+char	**param_to_exec(char *str, char *name)
 {
 	char	**ret;
 	size_t	i;
@@ -98,7 +98,7 @@ char	**param_to_exec(char *str)
 	ret = (char **)malloc(sizeof(char *) * (count + 1));
 	if (!ret)
 		exit(0);
-	ret[0] = NULL;
+	ret[0] = name;
 	ret[count] = NULL;
 	if (count == 1)
 		return (ret);

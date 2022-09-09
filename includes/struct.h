@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 17:30:18 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/08 19:25:28 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/09 14:57:47 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,10 @@ typedef struct s_tmp
 
 typedef struct s_cmd
 {
-	char			*path;
-	char			*command;
-	char			*param;
+	char				*path;
+	char				*command;
+	char				*param;
+	struct s_builtins	*built;
 }	t_cmd;
 
 typedef struct s_tree
