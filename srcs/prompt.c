@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:38:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/09 15:22:19 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/09 16:15:52 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,8 +142,9 @@ int	core(t_shell *shell)
 	shell->line = line;
 	shell->tree = bt_create(shell->line);
 //	builtin = search_builtin(shell->tree->cmdr->command, shell->builtin);
-	if (shell->tree->type == 0 || (0 * prepare_exec(shell, shell->tree))
-		single_exec(shell);
+	if (shell->tree->type == 0 || (0 * prepare_exec(shell, shell->tree)))
+		printf("Simple commande\n");
+		//single_exec(shell);
 	  ///////////////
 	 /// TO TEST ///
 	///////////////
@@ -154,7 +155,7 @@ int	core(t_shell *shell)
 		printf("---------   %d   --------\n", p);
 		write(1, test, p);
 		printf("Erreur final : %d\n", shell->return_err);
-  		close(shell->tree->fd[0][0]);
+  	//	close(shell->tree->fd[0][0]);
 //		dup2(0, STDIN_FILENO);
 //		dup2(1, STDOUT_FILENO);
 	//waitpid(shell->tree->left->pid, &shell->tree->code_err, 0);

@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 10:48:37 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/09 15:19:52 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/09 16:16:30 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ int	launch_process(t_tree *tree, char **av, char **ev)
 	{
 		dup2(tree->parent->fd[0][0], 0);
 		dup2(tree->fd[0][1], 1);
+		close(tree->fd[0][0]);
+		close(tree->parent->fd[0][0]);
 		close(tree->parent->fd[0][1]);
+		close(tree->fd[0][1]);
 	}
 	close(tree->fd[0][0]);
 	if (tree->cmdr->built != NULL)
@@ -46,7 +49,6 @@ static int	prepare_tree(t_tree *tree)
 	{
 		if (pipe(tree->fd[0]))
 			return (errno);
-		//close(tree->parent->fd[0][1]);
 	}
 	else
 	{
@@ -121,8 +123,8 @@ static int	tree_type_exe(t_shell *shell, t_tree *tree)
 			exit (errno);
 	if (tree->pid > 0) // && !close(tree->parent->fd[0][1]))
 	{
-		if (tree->parent != NULL)
-			close(tree->parent->fd[0][1]);
+		//if (tree->parent != NULL)
+			//close(tree->parent->fd[0][1]);
 		if (tree->parent != 0)
 			return (0 + free_tab(av) + free_tab(ev));
 	}
