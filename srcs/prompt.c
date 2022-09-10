@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:38:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/10 19:19:51 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/10 22:50:56 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,12 @@ static char	*get_title_shell(void)
 		while (path[i] && home[i] == path[i])
 			i++;
 		if (home[i] == 0 && (path[i] == 0 || path[i] == '/'))
-			title = ft_strjoin("\e[1;32mminishell-0.1\e[0m:\e[1;34m~", &path[i]);
+			title = ft_strjoin("\e[1;32mminishell-0.2\e[0m:\e[1;34m~", &path[i]);
 		else
-			title = ft_strjoin("\e[1;32mminishell-0.1\e[0m:\e[1;34m", path);
+			title = ft_strjoin("\e[1;32mminishell-0.2\e[0m:\e[1;34m", path);
 	}
 	else
-		title = ft_strjoin("\e[1;32mminishell-0.1\e[0m:\e[1;34m", path);
+		title = ft_strjoin("\e[1;32mminishell-0.2\e[0m:\e[1;34m", path);
 	free(path);
 	path = ft_strjoin(title, "\e[0m$ ");
 	free(title);
@@ -107,6 +107,7 @@ int	prompt(t_shell *shell)
 		if (shell->line != NULL)
 			free(shell->line);
 		path = get_title_shell();
+		usleep(500); // Small pause for put the prompt on bottom
 		shell->line = readline(path);
 		line = shell->line;
 		line = ft_skipspace(line);

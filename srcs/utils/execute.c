@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 10:48:37 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/10 21:55:38 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/10 23:15:17 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,11 @@ int	launch_process(t_tree *tree)
 	}
 	close(tree->fd[0][0]);	
 	if (tree->cmdr->built != NULL)
-		exit (tree->cmdr->built->f(tree->cmdr->av));
+	{
+		free(tree->cmdr->command);
+		tree->cmdr->built->f(tree->cmdr->av);
+		exit (0);
+	}
 	exit (execve(tree->cmdr->command, tree->cmdr->av, tree->cmdr->ev));
 }
 
@@ -56,13 +60,9 @@ static int	tree_type_one(t_shell *shell, t_tree *tree)
 	if (prepare_tree(tree))
 		return (errno);
 	prepare_exec(shell, tree->left);
-	//if (!prepare_exec(shell, tree->left))
-		//return (tree->code_err = errno); // en plus
 	tree->fd[0][0] = tree->left->fd[0][0];
 	tree->fd[0][1] = tree->left->fd[0][1];
 	prepare_exec(shell, tree->right);
-//	if (!prepare_exec(shell, tree->right))
-//		return (errno);
 	tree->fd[0][0] = tree->right->fd[0][0];
 	tree->fd[0][1] = tree->right->fd[0][1];
 	return (0);
@@ -70,20 +70,14 @@ static int	tree_type_one(t_shell *shell, t_tree *tree)
 
 static int	tree_type_andor(t_shell *shell, t_tree *tree)
 {
-	//if (prepare_tree(tree))
-	//	return (errno);
-	if (!prepare_exec(shell, tree->left))
-		return (errno);
+	prepare_exec(shell, tree->left);
 	waitpid(tree->pid, &shell->return_err, 0);
-//	if (!wait_process(tree, shell))
-//		return (errno);
 	tree->fd[0][0] = tree->left->fd[0][0];
 	tree->fd[0][1] = tree->left->fd[0][1];
 	if ((shell->return_err != 0 && tree->type == 3)
 		|| (shell->return_err == 0 && tree->type == 2))
 		return (0);
-	if (!prepare_exec(shell, tree->right))
-		return (errno);
+	prepare_exec(shell, tree->right);
 	tree->fd[0][0] = tree->right->fd[0][0];
 	tree->fd[0][1] = tree->right->fd[0][1];
 	return (0);
@@ -108,12 +102,22 @@ static int	tree_type_exe(t_shell *shell, t_tree *tree)
 	}
 	else
 		tree->cmdr->command = ft_strjoin(tree->cmdr->path, tree->cmdr->command);
-			//+ free_str(tree->cmdr->command);
+	if (tree->last == 1 && tree->cmdr->built != NULL)
+	{
+		tree->cmdr->built->f(tree->cmdr->av);
+		if (tree->parent != NULL)
+		{
+			tree->parent->pid = 0;
+			return (0 * close(tree->parent->fd[0][1]));
+		}
+		if (tree->parent == 0)
+			return (0);
+	}
 	tree->pid = fork();
 	if (tree->pid == 0)
 		if (!launch_process(tree))
 			exit (errno);
-	if (tree->pid > 0) // && !close(tree->parent->fd[0][1]))
+	if (tree->pid > 0)
 	{
 		if (tree->parent != NULL)
 		{
@@ -133,7 +137,6 @@ int	pre_prepare_exec(t_shell *shell, t_tree *tree)
 	{
 		if (pre_prepare_exec(shell, tree->left))
 			return (errno);
-
 		if (!wait_process(tree, shell))
 			return (errno);
 		tree->fd[0][0] = tree->left->fd[0][0];
