@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:38:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/10 22:50:56 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/10 23:27:19 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ int	prompt(t_shell *shell)
 		if (shell->line != NULL)
 			free(shell->line);
 		path = get_title_shell();
-		usleep(500); // Small pause for put the prompt on bottom
 		shell->line = readline(path);
 		line = shell->line;
 		line = ft_skipspace(line);

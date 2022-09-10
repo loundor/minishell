@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 10:48:37 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/10 23:15:17 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/10 23:31:11 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,17 @@ int	launch_process(t_tree *tree)
 	}
 	close(tree->fd[0][0]);	
 	if (tree->cmdr->built != NULL)
-	{
-		free(tree->cmdr->command);
-		tree->cmdr->built->f(tree->cmdr->av);
-		exit (0);
-	}
+		exit(tree->cmdr->built->f(tree->cmdr->av));
 	exit (execve(tree->cmdr->command, tree->cmdr->av, tree->cmdr->ev));
 }
 
 int	wait_process(t_tree *tree, t_shell *shell)
 {
 	if (tree->left != NULL)
-		if (!wait_process(tree->left, shell))
+		if (wait_process(tree->left, shell))
 			return (errno);
 	if (tree->right != NULL)
-		if (!wait_process(tree->right, shell))
+		if (wait_process(tree->right, shell))
 			return (errno);
 	if (tree->pid > 0)
 		waitpid(tree->pid, &shell->return_err, 0);
@@ -168,10 +164,10 @@ int	prepare_exec(t_shell *shell, t_tree *tree)
 int	close_all_fd(t_tree *tree)
 {
 	if (tree->left != NULL)
-		if (!close_all_fd(tree->left))
+		if (close_all_fd(tree->left))
 			return (errno);
 	if (tree->right != NULL)
-		if (!close_all_fd(tree->right))
+		if (close_all_fd(tree->right))
 			return (errno);
 	if (tree->fd[0][0] != 0 || tree->fd[0][1] != 0)
 	{

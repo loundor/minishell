@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 10:08:54 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/31 13:33:02 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/10 23:29:29 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	welcome(void)
 		{
 			write(STDOUT, str, 1);
 		}
+		close(welcome_msg);
 		return (0);
 	}
 	return (1);
