@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 17:30:18 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/09 14:57:47 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/10 18:22:23 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ typedef struct s_cmd
 	char				*path;
 	char				*command;
 	char				*param;
+	char				**av;
+	char				**ev;
 	struct s_builtins	*built;
 }	t_cmd;
 
@@ -100,10 +102,11 @@ typedef struct s_tree
 	int				code_err;
 	pid_t			pid;
 	struct s_cmd	*cmdr;
-	int				fd[3][2];
+	int				fd[2][2]; // can be just fd[2]
 	struct s_tree	*parent;
 	struct s_tree	*left;
 	struct s_tree	*right;
+	int				last;
 }	t_tree;
 
 typedef struct s_shell

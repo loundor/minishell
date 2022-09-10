@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 13:42:20 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/08 20:27:33 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/10 22:16:44 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static char	**env_to_exec_send(int i, t_env *env)
 	while (--i >= 0)
 	{
 		tmp = ft_strjoin(env->env_var[0], "=");
-		ret[i] = ft_strjoin(tmp, env->env_var[1]) + free_str(tmp);
-//		free (tmp);
+		ret[i] = ft_strjoin(tmp, env->env_var[1]);
+		free (tmp);
 		env = env->prev_env;
 	}
 	return (ret);
@@ -40,6 +40,7 @@ char	**env_to_exec(void)
 {
 	t_env	*env;
 	int		i;
+	char	**ret;
 
 	env = (t_env *)struct_passing(2, 0);
 	i = 0;
@@ -50,5 +51,6 @@ char	**env_to_exec(void)
 	}
 	if (i == 0)
 		return (NULL);
-	return (env_to_exec_send(i, env));
+	ret = env_to_exec_send(i, env);
+	return (ret);
 }

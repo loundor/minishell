@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 22:21:16 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/09 14:33:57 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/10 19:37:54 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ char	*tree_cmd(char *line, t_tree *tree)
 		line = take_exec(line, new);
 		line = ft_skipspace(line);
 		line = take_params(line, new);
+		new->av = NULL;
+		new->ev = NULL;
 		new->built = NULL;
 		tree->cmdr = new;
 		line = NULL;

@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:38:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/09 17:54:32 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/10 19:19:51 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static char	*test_line(char *line)
 					;
 			continue ;
 		}
+		// test if ex " qwe |     | qweqw" exist... it a error too.
 		if (get_cmd_type(line) == 2 || get_cmd_type(line) == 3
 			|| get_cmd_type(line) == 5 || get_cmd_type(line) == 7)
 		{
@@ -131,7 +132,6 @@ int	prompt(t_shell *shell)
 /* -------------------------------------------------------- */
 int	core(t_shell *shell)
 {
-//	t_builtins	*builtin;
 	char		*line;
 
 	shell->line = test_line(shell->line);
@@ -141,48 +141,29 @@ int	core(t_shell *shell)
 	free(shell->line);
 	shell->line = line;
 	shell->tree = bt_create(shell->line);
-//	builtin = search_builtin(shell->tree->cmdr->command, shell->builtin);
-	//if (shell->tree->type == 0 || (0 * prepare_exec(shell, shell->tree)))
-	//	printf("Simple commande\n");
-	prepare_exec(shell, shell->tree);
-
-	
-
- int fd[2];
-pipe(fd);
-pid_t fk;
-fk = fork();
-if (fk == 0)
-{
-	dup2(shell->tree->fd[0][0], 0);
-	execlp("/bin/cat", "cat", NULL);
-}
-wait_process(shell->tree, shell);
-wait(&fk);
-close(fd[0]);
-close(fd[1]);
+	put_last_tree(shell->tree);
+	pre_prepare_exec(shell, shell->tree);
+	wait_process(shell->tree, shell);
 	close_all_fd(shell->tree);
-
-
-
-
-		//single_exec(shell);
-	  ///////////////
-	 /// TO TEST ///
-	///////////////
-/*    		char *test[500];
-		int	p;
-
-		p = read(shell->tree->fd[0][0], test, 500);
-		printf("---------   %d   --------\n", p);
-		write(1, test, p);
-		printf("Erreur final : %d\n", shell->return_err);
-		close(shell->tree->fd[0][1]); */
-	//waitpid(shell->tree->left->pid, &shell->tree->code_err, 0);
-//	shell->return_err = wait_on_pids(shell);
-//	if (builtin != NULL && shell->tree->cmdr->path == NULL)
-//		shell->return_err = builtin->f(shell);
 	free_bt(shell->tree);
 	shell->tree = NULL;
 	return (0);
+}
+
+/* ----------------------| LAST!!! |----------------------- */
+/*	Search the last execution and set variable last to 1.	*/
+/*	That can be more last to one.. Need check if the first	*/
+/*	node is || or &&										*/
+/* -------------------------------------------------------- */
+void	put_last_tree(t_tree *tree)
+{
+	if (tree->type == 2 || tree->type == 3)
+	{
+		put_last_tree(tree->left);
+		put_last_tree(tree->right);
+		return ;
+	}
+	while (tree->right != 0)
+		tree = tree->right;
+	tree->last = 1;
 }

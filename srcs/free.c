@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 13:11:52 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/08 22:48:36 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/10 21:48:51 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,10 @@ int	free_cmd(t_cmd *cmd)
 			free(cmd->command);
 		if (cmd->param != NULL)
 			free(cmd->param);
+		if (cmd->ev != NULL)
+			free_tab(cmd->ev);
+		if (cmd->av != NULL)
+			free_tab(cmd->av);
 		free(cmd);
 	}
 	return (0);
