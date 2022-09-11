@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/10 19:20:12 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/11 10:11:08 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int			add_builtins(t_shell *shell); // OK
 int			cd(char **par); // ok change directory
 int			pwd(void); // ok
 int			env(char **par); // ok
-int			ft_echo(t_shell *shell); // ok echo builtins
+int			ft_echo(char **av); // ok echo builtins
 int			export(char **par); // ok set a env variable
 
 /* -----------------------| UTILS |------------------------ */
