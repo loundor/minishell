@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:38:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/10 23:27:19 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/13 14:14:05 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ int	core(t_shell *shell)
 	char		*line;
 
 	shell->line = test_line(shell->line);
-	line = parse_space(shell->line);
+	line = parse_space(ft_skipspace(shell->line));
 	if (line == NULL)
 		return (shell->return_err = 1);
 	free(shell->line);

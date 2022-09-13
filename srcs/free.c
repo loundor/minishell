@@ -6,13 +6,13 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 13:11:52 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/12 01:04:12 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/13 14:27:30 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int free_tab(char **t)
+int	free_tab(char **t)
 {
 	int	i;
 
@@ -25,7 +25,8 @@ int free_tab(char **t)
 
 int	free_str(char *str)
 {
-	free(str);
+	if (str != 0)
+		free(str);
 	return (0);
 }
 

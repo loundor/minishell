@@ -6,12 +6,11 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 08:33:06 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/11 10:33:23 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/12 11:52:46 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
 
 /* ----------------| DO ARGV FOR EXECVE |------------------ */
 /*	Take the line param et slpit in a array like argv.		*/
@@ -19,7 +18,7 @@
 /*	implement the name of the executable in parent function	*/
 /* -------------------------------------------------------- */
 
-static size_t ft_countav(char *str)
+static size_t	ft_countav(char *str)
 {
 	size_t	ret;
 	char	quotes;
@@ -29,7 +28,7 @@ static size_t ft_countav(char *str)
 	while (str && *str != 0)
 	{
 		str = ft_skipspace(str);
-		while (*str != 0 && *str != 32 && *str != '\'' && *str != '"')
+		while (str && *str != 0 && *str != 32 && *str != '\'' && *str != '"')
 			str++;
 		ret++;
 		str = ft_skipspace(str);

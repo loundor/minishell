@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 15:35:45 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/22 15:50:51 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/13 13:56:20 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_joincts(const char *s, const char c)
 	char	*ret;
 	size_t	count;
 	size_t	i;
-	int		plus;
+	size_t	plus;
 
 	count = ft_strlen(s);
 	plus = 2;

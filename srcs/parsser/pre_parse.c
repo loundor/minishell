@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 23:12:44 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/08 19:02:21 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/13 17:08:06 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,62 +35,90 @@ char	*count_quotes(char *ret, size_t *i)
 	return (ret);
 }
 
-static char	*move_if_type(char *ret, size_t *e)
+static char	*write_quotes(char *line, size_t *i, char *ret)
 {
-	size_t	i;
+	char	*bak;
+	char	quotes;
 
-	i = *e;
-	if (ret[-1] != ' ' && !get_cmd_type(&ret[-1]))
-		i++;
-	if (get_cmd_type(ret) == 2 || get_cmd_type(ret) == 3
-		|| get_cmd_type(ret) == 5 || get_cmd_type(ret) == 7)
+	quotes = line[*i];
+	bak = NULL;
+	ret = ft_joincts(bak, line[*i]);
+	*i = *i + 1;
+	while (line[*i] != 0 && ft_strncmp(&line[*i], &quotes, 1))
 	{
-		i += 2;
-		ret++;
+		bak = ret;
+		ret = ft_joincts(bak, line[*i]) + free_str(bak);
+		*i = *i + 1;
 	}
-	else
-		i++;
-	if (*++ret != ' ')
-		i++;
-	*e = i;
+	bak = ret;
+	ret = ft_joincts(bak, line[*i]) + free_str(bak);
+	*i = *i + 1;
 	return (ret);
 }
 
-static char	*while_space(char *ret, size_t *i)
+static char	*write_type(char *line, size_t *i, char *ret)
 {
-	while (ret && *ret != 0)
+	char	*bak;
+
+	bak = NULL;
+	ret = ft_joincts(ret, line[*i]);
+	*i = *i + 1;
+	if (line[*i] != 0 && !ft_strncmp(&line[*i - 1], &line[*i], 1)
+		&& (ft_strncmp(&line[*i - 1], "(", 1)
+			|| ft_strncmp(&line[*i - 1], ")", 1)))
 	{
-		if (get_cmd_type(ret) || *ret == '(' || *ret == ')')
-		{
-			ret = move_if_type(ret, &*i);
-			continue ;
-		}
-		ret = count_quotes(ret, &*i);
-		if (*ret == ' ')
-		{
-			*i = *i + 1;
-			while (ret && *ret == ' ')
-				ret++;
-			continue ;
-		}
+		bak = ret;
+		ret = ft_joincts(bak, line[*i]) + free_str(bak);
 		*i = *i + 1;
-		if (ret && *ret == 0)
-			break ;
-		ret++;
 	}
+	bak = ret;
+	ret = ft_joincts(bak, ' ') + free_str(bak);
 	return (ret);
 }
 
 char	*parse_space(char *line)
 {
 	char	*ret;
+	char	*bak;
+	char	*sep;
 	size_t	i;
 
 	i = 0;
-	if (!line || line == NULL || *line == '\0')
-		return (NULL);
-	ret = ft_skipspace(line);
-	ret = while_space(ret, &i);
-	ret = write_parse_space(ft_skipspace(line), i);
+	sep = NULL;
+	ret = NULL;
+	bak = NULL;
+	while (line && line[i] != 0)
+	{
+		if (line[i] == '"' || line[i] == '\'')
+		{
+			if (ret)
+				bak = ret;
+			sep = write_quotes(line, &i, ret);
+			ret = ft_strjoin(bak, sep) + free_str(bak) + free_str(sep);
+		}
+		else if (line[i] == '>' || line[i] == '<'
+			|| line[i] == '|' || line[i] == '&'
+			|| line[i] == '(' || line[i] == ')')
+		{
+			if (ret)
+				bak = ret;
+			ret = write_type(line, &i, ret) + free_str(bak);
+		}
+		else
+		{
+			if (ret)
+				bak = ret;
+			ret = ft_joincts(bak, line[i++]) + free_str(bak);
+		}
+		if (line != 0 && line[i] == ' ' && ret[ft_strlen(ret) - 1] != ' ')
+		{
+			if (ret)
+				bak = ret;
+			ret = ft_joincts(bak, ' ') + free_str(bak);
+		}
+		if (line[i] != 0 && line[i] == ' ')
+			while (line[i] == ' ')
+				i++;
+	}
 	return (ret);
 }

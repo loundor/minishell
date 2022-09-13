@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 22:17:36 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/03 10:59:57 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/12 16:46:17 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,11 @@ static char	*parenthesis_node(char *line, size_t i, t_tree *tree)
 	work[s] = '\0';
 	line ++;
 	line = ft_skipspace(line);
-	tree->type = get_cmd_type(line);
-	line += 2;
+	if (line && line != 0)
+	{
+		tree->type = get_cmd_type(line);
+		line += 2;
+	}
 	tree->left = bt_create(work);
 	tree->left->parent = tree;
 	free(work);

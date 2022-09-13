@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 10:48:37 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/12 00:51:00 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/12 11:53:04 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,21 +138,13 @@ int	pre_prepare_exec(t_shell *shell, t_tree *tree)
 			return (errno);
 		if (wait_process(tree, shell))
 			return (errno);
-//		if (tree->fd[0] != 0)
-//		{
-			tree->fd[0] = tree->left->fd[0];
-			tree->fd[1] = tree->left->fd[1];
-//		}
+		tree->fd[0] = tree->left->fd[0];
+		tree->fd[1] = tree->left->fd[1];
 		if ((shell->return_err != 0 && tree->type == 3)
 			|| (shell->return_err == 0 && tree->type == 2))
 			return (0);
 		if (pre_prepare_exec(shell, tree->right))
 			return (errno);
-//		if (tree->fd[0] != 0)
-//		{
-//			tree->fd[0] = tree->left->fd[0];
-//			tree->fd[1] = tree->left->fd[1];
-//		}
 		tree->fd[0] = tree->right->fd[0];
 		tree->fd[1] = tree->right->fd[1];
 	}
@@ -188,5 +180,5 @@ int	close_all_fd(t_tree *tree)
 	}
 	dup2(1, STDOUT_FILENO);
 	dup2(0, STDIN_FILENO);
-	return (0); // Maybe + errno
+	return (0);
 }

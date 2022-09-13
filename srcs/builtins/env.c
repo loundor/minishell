@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 17:18:27 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/08 21:15:30 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/12 10:01:12 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	env(char **par)
 {
 	t_shell	*shell;
 	t_env	*bak;
-	char 	*param;
+	char	*param;
 
 	param = par[1];
 	if (param != NULL)
