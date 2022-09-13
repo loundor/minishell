@@ -37,7 +37,6 @@ PARSER		=	dollar.c \
 				param.c \
 				path.c \
 				pre_parse.c \
-				pre_parse_2.c \
 				search_var.c \
 				single_quote.c \
 				wildcard.c 

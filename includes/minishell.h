@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/12 10:10:42 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/13 17:16:35 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void		free_builtins(t_builtins *builtins);
 int			free_cmd(t_cmd *cmd);
 int			free_env(t_env *env);
 int			free_shell(t_shell *shell);
-int 		free_tab(char **t);
+int			free_tab(char **t);
 int			free_str(char *str);
 int			prompt(t_shell *shell);
 
@@ -81,7 +81,6 @@ int			unset(char **par); // ok unset a env variable
 
 // PARSSING
 char		*parse_space(char *line);
-char		*write_parse_space(char *line, size_t i);
 char		*line_parse(char *cmd);
 char		*alloc(int *end, char **ret, char *line);
 char		*dollar(char *tmp, char *line, char **ret);
