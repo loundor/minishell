@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:57:32 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/14 09:29:08 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/14 16:46:20 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ t_tree	*bt_create(char *line)
 
 void	free_bt(t_tree *tree)
 {
-	if (tree == NULL)
+	if (!tree || tree == NULL)
 		return ;
-	if (tree->left != NULL)
+	if (tree->left && tree->left != NULL)
 		free_bt((t_tree *)tree->left);
 	if (tree->right && tree->right != NULL)
 		free_bt((t_tree *)tree->right);

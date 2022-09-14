@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 10:48:37 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/12 11:53:04 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/14 16:08:28 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,8 @@ static int	tree_type_exe(t_shell *shell, t_tree *tree)
 		if (tree->parent != NULL)
 		{
 			tree->parent->pid = tree->pid;
-			return (0 * close(tree->parent->fd[1]));
+			return (0 * close(tree->parent->fd[1]
+					+ close(tree->parent->fd[0])));
 		}
 		if (tree->parent == 0)
 			return (0);

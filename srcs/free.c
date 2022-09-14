@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 13:11:52 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/13 14:27:30 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/14 16:48:22 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,12 @@ int	free_shell(t_shell *shell)
 {
 	if (shell->line != NULL)
 		free(shell->line);
-	free_env(shell->env);
-	free_builtins(shell->builtin);
-	free_bt(shell->tree);
+	if (shell->env != NULL)
+		free_env(shell->env);
+	if (shell->builtin != NULL)
+		free_builtins(shell->builtin);
+	if (shell->tree && shell->tree != NULL)
+		free_bt(shell->tree);
 	return (0);
 }
 
@@ -49,7 +52,7 @@ int	free_env(t_env *env)
 	{
 		if (env->next_env)
 			free_env(env->next_env);
-		while (env->env_var[++i])
+		while (env->env_var[++i] != NULL)
 			free(env->env_var[i]);
 		free(env->env_var);
 		free(env);

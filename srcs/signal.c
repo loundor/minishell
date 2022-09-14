@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 10:47:21 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/25 07:05:39 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/14 16:52:38 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static void	get_signal(int signo, siginfo_t *info, void *context)
 
 	(void)info;
 	(void)context;
-
 	if (signo == 2 || signo == 6)
 	{
 		rl_free_line_state();
@@ -34,7 +33,6 @@ int	prep_signal(t_shell *shell)
 {
 	shell->signal_act.sa_sigaction = &get_signal;
 	sigaction(SIGINT, &shell->signal_act, NULL); // ctl-c
-	sigaction(SIGABRT, &shell->signal_act, NULL); // ctl-\/
-
+	sigaction(SIGQUIT, &shell->signal_act, NULL); // ctl-\/
 	return (0);
 }
