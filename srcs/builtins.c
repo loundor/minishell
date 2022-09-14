@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:41:57 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/01 00:47:01 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/14 18:55:05 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_builtins	*search_builtin(char *cmd, t_builtins *builtin)
 		|| ft_strncmp(cmd, tmp->cmd, ft_strlen(tmp->cmd))
 		|| ft_strncmp(cmd, tmp->cmd, ft_strlen(cmd)))
 	{
-		if (tmp->next)
+		if (tmp->next != NULL)
 			tmp = tmp->next;
 		else
 			return (NULL);
