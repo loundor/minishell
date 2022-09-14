@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:57:32 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/12 01:06:08 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/14 09:29:08 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 /*		WE CAN MAYBE REDUCE THE NUMBER OF FUCNTION			*/
 /* -------------------------------------------------------- */
 
-static char	*bt_create_if(char *line, t_tree *tree)
+char	*bt_create_if(char *line, t_tree *tree)
 {
 	if (*line == '(')
 		line = tree_parenthesis(line, tree);

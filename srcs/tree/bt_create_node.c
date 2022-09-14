@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 22:17:36 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/12 16:46:17 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/14 10:44:17 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ char	*add_node_type(char *line, t_tree *tree, int t, size_t i)
 	size_t	s;
 
 	s = 0;
-	work = (char *)malloc(sizeof(char) * (i + 1));
+	work = (char *)malloc(sizeof(char) * (i));
 	if (!work)
 		exit(ft_exit(MALLOCERR, 1));
-	while (s < i)
+	while (s < i - 1)
 		work[s++] = *line++;
 	work[s] = '\0';
-	if (t == 1 || t == 4 || t == 6)
-		line++;
+	if (line++ && (t == 1 || t == 4 || t == 6))
+		line +=2;
 	else if (t == 2 || t == 3 || t == 5 || t == 7)
-		line += 2;
+		line += 3;
 	tree->type = t;
 	tree->left = bt_create(work);
 	tree->left->parent = tree;
@@ -49,24 +49,35 @@ char	*tree_andor(char *line, t_tree *tree)
 static char	*parenthesis_node(char *line, size_t i, t_tree *tree)
 {
 	char	*work;
+	char	*workr;
 	size_t	s;
 
 	s = 0;
-	work = (char *)malloc(sizeof(char) * (i - 1));
+	workr = NULL;
+	work = (char *)malloc(sizeof(char) * (i - 2));
 	if (!work)
 		exit(ft_exit(MALLOCERR, 1));
-	while (s < (i - 2))
+	while (s < (i - 3))
 		work[s++] = *line++;
 	work[s] = '\0';
-	line ++;
+	line ++;	
 	line = ft_skipspace(line);
 	if (line && line != 0)
 	{
 		tree->type = get_cmd_type(line);
 		line += 2;
+		tree->left = bt_create(work);
+		tree->left->parent = tree;
 	}
-	tree->left = bt_create(work);
-	tree->left->parent = tree;
+	else
+	{
+		workr = bt_create_if(work, tree);
+		if (workr != NULL)
+		{
+			tree->right = bt_create(workr);
+			tree->right->parent = tree;
+		}
+	}
 	free(work);
 	return (line);
 }
@@ -79,7 +90,6 @@ char	*tree_parenthesis(char *line, t_tree *tree)
 	{
 		i[0] = 0;
 		i[1] = 0;
-		i[2] = 0;
 		while (line[i[0]] == '(' || i[1])
 		{
 			while (line[i[0]] != ')')
@@ -91,10 +101,9 @@ char	*tree_parenthesis(char *line, t_tree *tree)
 			i[1]--;
 			i[0]++;
 		}
-		line++;
 		if (i[0] <= 1)
-			return (++line);
-		line = parenthesis_node(line, i[0], tree);
+			return (&line[2]);
+		line = parenthesis_node(&line[2], i[0], tree);
 	}
 	return (line);
 }

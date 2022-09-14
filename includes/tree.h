@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 22:23:58 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/10 18:26:20 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/14 09:29:15 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int		bt_test_andor(char *line);
 int		bt_test_pipe(char *line);
 int		bt_test_redir(char *line);
 
+char	*bt_create_if(char *line, t_tree *tree);
 char	*add_node_type(char *line, t_tree *tree, int t, size_t i);
 char	*tree_andor(char *line, t_tree *tree);
 char	*tree_parenthesis(char *line, t_tree *tree);
