@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/13 17:16:35 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/15 08:46:43 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,6 @@
 # include <errno.h>
 # include "./struct.h"
 # include "./tree.h"
-
-# define STDIN	0
-# define STDOUT	1
-# define STDERR 2
 
 /* ---------------------| BUILTINS |----------------------- */
 /*															*/
