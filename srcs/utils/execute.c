@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 10:48:37 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/12 00:51:00 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/15 10:16:38 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ int	launch_process(t_tree *tree)
 		close(tree->parent->fd[1]);
 	}
 	close(tree->fd[0]);
-	if (tree->cmdr->built == NULL || tree->cmdr->built->f(tree->cmdr->av))
-		execve(tree->cmdr->command, tree->cmdr->av, tree->cmdr->ev);
+	if ((tree->cmdr->built == NULL || tree->cmdr->built->f(tree->cmdr->av))
+		&& ft_strncmp(tree->cmdr->command, "exit", 5))
+		if (execve(tree->cmdr->command, tree->cmdr->av, tree->cmdr->ev) == -1)
+			printf("minishell: command not found: %s\n", tree->cmdr->command);
 	exit (1);
 }
 
@@ -97,7 +99,8 @@ static int	tree_type_exe(t_shell *shell, t_tree *tree)
 	if (tree->cmdr->built == NULL && tree->cmdr->path == NULL)
 	{
 		path = search_in_path(tree->cmdr->command, search_var("PATH"));
-		tree->cmdr->command = free_str(tree->cmdr->command) + path;
+		if (path != NULL)
+			tree->cmdr->command = free_str(tree->cmdr->command) + path;
 	}
 	else
 		tree->cmdr->command = ft_strjoin(tree->cmdr->path, tree->cmdr->command);

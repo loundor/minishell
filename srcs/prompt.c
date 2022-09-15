@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:38:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/10 23:27:19 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/15 10:00:25 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,8 @@ int	prompt(t_shell *shell)
 			if (core(shell))
 				printf("An error was occured!\n");
 		}
-		else
-			continue ;
+		else if (shell->line == NULL)
+			return (0);
 		line = NULL;
 	}
 	return (0);

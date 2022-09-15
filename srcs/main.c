@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:07:29 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/31 17:39:51 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/15 09:57:38 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	main(int argc, char **argv, char **env)
 	shell.line = NULL;
 	shell.return_err = 0;
 	shell.builtin = NULL;
+	shell.tree = NULL;
 	if (!shell.env)
 		exit(ft_exit(ENV, 0));
 	if (argc == 1)
