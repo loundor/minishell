@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:38:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/14 16:51:24 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/15 10:47:16 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ int	prompt(t_shell *shell)
 
 	while (!shell->line || ft_strcmp(shell->line, "exit"))
 	{
+		setsig(0);
 		if (shell->line != NULL)
 			free(shell->line);
 		path = get_title_shell();
@@ -118,7 +119,7 @@ int	prompt(t_shell *shell)
 				printf("An error was occured!\n");
 		}
 		else if (shell->line == NULL)
-			break ;
+			return (0);
 		line = NULL;
 	}
 	return (0);

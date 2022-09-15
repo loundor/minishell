@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/15 08:46:43 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/15 10:55:52 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ char		*count_quotes(char *ret, size_t *i);
 
 // EXEC
 // int			prepare_exec(t_shell *shell, t_tree * tree);
-int			prep_signal(t_shell *shell);
+int			setsig(int type); // Type 1 = fork Type 0 = minishell
+void		ctlc_mini(int singal, siginfo_t *info, void *context);
 //void		do_exec(t_shell *shell, t_tree *tree);
 int			pre_prepare_exec(t_shell *shell, t_tree *tree);
 int			prepare_exec(t_shell *shell, t_tree *tree);

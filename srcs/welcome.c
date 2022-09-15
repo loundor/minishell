@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 10:08:54 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/10 23:29:29 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/15 10:30:41 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	welcome(void)
 
 	str[0] = 0;
 	welcome_msg = open("modt", O_RDONLY);
-	output = STDOUT;
+	output = STDOUT_FILENO;
 	if (welcome_msg < 0)
 	{
 		welcome_msg = open("modt", O_CREAT | O_WRONLY, 0644);
@@ -62,7 +62,7 @@ int	welcome(void)
 	{
 		while (read(welcome_msg, str, 1) > 0)
 		{
-			write(STDOUT, str, 1);
+			write(STDOUT_FILENO, str, 1);
 		}
 		close(welcome_msg);
 		return (0);

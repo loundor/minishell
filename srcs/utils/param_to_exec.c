@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 08:33:06 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/14 16:53:35 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/15 10:23:40 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static size_t	ft_countav(char *str)
 
 	ret = 0;
 	str = ft_skipspace(str);
+	if (!str || str == 0)
+		return (ret);
 	while (str && *str != 0)
 	{
 		str = ft_skipspace(str);
