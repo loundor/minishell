@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 08:33:06 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/15 10:23:40 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/15 19:48:15 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ char	**param_to_exec(char *str, char *name)
 			while (*str != 0 && *str != ' ')
 				str++;
 		}
+		ret[i] = checkstar(ret[i]);
 	}
 	return (ret);
 }

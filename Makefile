@@ -50,6 +50,7 @@ UTILS		=	env_to_exec.c \
 				errmsg.c \
 				execute.c \
 				get.c \
+				ifstar.c \
 				param_to_exec.c \
 				search_in_path.c
 #execute.c 		

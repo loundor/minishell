@@ -4,3 +4,5 @@ Attention si dans le parssing nous rencontrons quelquechose=untruc il nous faut 
 FAIRE UN GROS NETTOYAGE AVANT D ATTAQUER LE CORE! VOIR MEME POUR FAIRE PLUSIEURS FICHIER H CAR C'EST LE BORDEL DANS LE MINISHELL.H !!!!
 
 Verifier qu il y a toujours une commande avant et apres un separateur.. ex: cmd << >> cmd2
+
+A l execution, quand un est sur un type 7 (<<) verifier dans un premier temp que le noeud de droite ne soit pas NULL, si tel est le cas faire un heredoc pour remplir la structure...

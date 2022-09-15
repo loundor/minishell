@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 10:48:37 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/15 10:47:50 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/15 19:35:39 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ static int	tree_type_exe(t_shell *shell, t_tree *tree)
 		if (path && path != NULL)
 			tree->cmdr->command = path + free_str(tree->cmdr->command);
 	}
-	else
+	else if (tree->cmdr->built == NULL)
 		tree->cmdr->command = ft_strjoin(tree->cmdr->path, tree->cmdr->command);
 	if (tree->last == 1 && tree->cmdr->built != NULL)
 	{

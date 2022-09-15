@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/15 10:55:52 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/15 15:13:40 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ char		*take_params(char *line, t_cmd *cmd);
 char		*search_var(char *var); // ok
 int			starcmp(t_wildcard	*test); // ok
 char		*count_quotes(char *ret, size_t *i);
+char		*checkstar(char *av);
 
 // EXEC
 // int			prepare_exec(t_shell *shell, t_tree * tree);
