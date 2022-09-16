@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 19:20:39 by stissera          #+#    #+#             */
-/*   Updated: 2022/07/27 11:00:36 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/16 23:27:15 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,5 @@ char		*ft_skipspace(char *str);
 int			ft_isspace(char car);
 char		*ft_joincts(const char *s, const char c);
 int			ft_strcmp(const char *s1, const char *s2);
+size_t		ft_cnttab(char **array);
 #endif

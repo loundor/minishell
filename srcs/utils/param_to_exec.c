@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 08:33:06 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/16 10:58:54 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/16 22:27:15 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,62 +27,68 @@ static size_t	ft_countav(char *str)
 	str = ft_skipspace(str);
 	if (!str || str == 0)
 		return (ret);
+	str = ft_skipspace(str);
 	while (str && *str != 0)
 	{
-		str = ft_skipspace(str);
-		while (str && *str != 0 && *str != 32 && *str != '\'' && *str != '"')
-			str++;
-		ret++;
-		str = ft_skipspace(str);
-		if (!str || *str == 0)
-			return (ret);
-		if (*str == 32)
-			continue ;
-		if (*str == '\'' || *str == '"')
+		if (str && *str != 0 && *str != 32 && *str != '\''
+			&& *str != '"')
+			while (str && *str != 0 && *str != 32
+				&& *str != '\'' && *str != '"')
+				str++;
+		else if ((*str == '\'' || *str == '"'))
 		{
 			quotes = *str;
 			str++;
-			while (*str != quotes)
+			while (*str != quotes && *str + 1 != quotes)
 				str++;
 			str++;
-			continue ;
 		}
+		else if (ret++ && *str != 0 && *str == ' ')
+			str = ft_skipspace(str);
 	}
 	return (ret);
 }
 
-static char	*ft_write_argv(char *str)
+static char	*ft_write_argv(char *str, char **new, size_t index)
 {
 	size_t	i;
 	size_t	write;
+	size_t	minus_quote;
 	char	quotes;
 	char	*ret;
 
 	i = 0;
 	write = 0;
-	str = ft_skipspace(str);
-	if (str[i] == '"' || str[i] == '\'')
+	minus_quote = 0;
+	// count size for malloc
+	while (str[i] && str[i] != 0 && str[i] != ' ')
 	{
-		quotes = str[i++];
-		while (str[i] != quotes)
+		if (str[i] == '"' || str[i] == '\'')
+		{
+			minus_quote += 2;
+			quotes = str[i++];
+			while (str[i] != quotes && str[i + 1] != quotes)
+				i++;
 			i++;
-		i++;
+		}
+		else if (str[i] && str[i] != 32)
+			while (str[i] != 0 && str[i] != ' '
+				&& str[i] != '"' && str[i] != '\'')
+				i++;
 	}
-	else if (str[i] && str[i] != 32)
-	{
-		while (str[i] != 0 && str[i] != ' ')
-			i++;
-	}
-	ret = (char *)malloc(sizeof(char) * (i + 1));
+	ret = (char *)malloc(sizeof(char) * (i + 1 - minus_quote));
 	if (!ret)
 		exit (0);
-	while (write < i)
+	//write in malloc
+	while (write < (i - minus_quote))
 	{
-		ret[write++] = *str;
-		str++;
+		while (!ft_strncmp(str, quotes, 1))
+			str++;
+		ret[write++] = *str++;
 	}
 	ret[write] = 0;
-	return (ret);
+	new[index] = ret;
+	return (str);
 }
 
 static char	**split_param(char **param, size_t i)
@@ -153,7 +159,6 @@ char	**param_to_exec(char *str, char *name)
 	char	**ret;
 	size_t	i;
 	size_t	count;
-	char	quotes;
 
 	count = 1;
 	i = 0;
@@ -168,21 +173,8 @@ char	**param_to_exec(char *str, char *name)
 		return (ret);
 	while (++i < count)
 	{
-		ret[i] = ft_write_argv(str);
 		str = ft_skipspace(str);
-		if (*str == '"' || *str == '\'')
-		{
-			quotes = *str++;
-			while (*str != quotes)
-				str++;
-			str++;
-			continue ;
-		}
-		else if (str && *str != 32)
-		{
-			while (*str != 0 && *str != ' ')
-				str++;
-		}
+		str = ft_write_argv(str, ret, i);
 		ret[i] = checkstar(ret[i]);
 	}
 	return (explose_param(ret) + free_tab(ret));
