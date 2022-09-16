@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 15:07:31 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/16 11:05:56 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/16 13:02:59 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ static char	*get_list(char *dir, char *pattern, char *ret)
 			else
 				ret = ft_strdup(wildcard.str);
 		}
-			
 	inside = readdir(path);
 	}
 	closedir(path);

@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 10:48:37 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/16 11:00:05 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/16 12:44:08 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	wait_process(t_tree *tree, t_shell *shell)
 			return (errno);
 	if (tree->pid > 0)
 		waitpid(tree->pid, &shell->return_err, 0);
-	return (0); // Maybe + errno
+	return (0);
 }
 
 static int	prepare_tree(t_tree *tree)
@@ -86,15 +86,11 @@ static int	tree_type_andor(t_shell *shell, t_tree *tree)
 	return (0);
 }
 
-static int	tree_type_exe(t_shell *shell, t_tree *tree)
+static int	tree_prep_exe(t_shell *shell, t_tree *tree, char *path)
 {
-	char	*path;
-
-	path = NULL;
-	if (pipe(tree->fd) != 0)
-		return (errno);
 	tree->cmdr->ev = env_to_exec();
 	tree->cmdr->av = param_to_exec(tree->cmdr->param, tree->cmdr->command);
+	tree->cmdr->av = var_to_exec(tree->cmdr->av);
 	if (tree->cmdr->path == NULL)
 		tree->cmdr->built = search_builtin(tree->cmdr->command, shell->builtin);
 	if (tree->cmdr->built == NULL && tree->cmdr->path == NULL)
@@ -111,11 +107,23 @@ static int	tree_type_exe(t_shell *shell, t_tree *tree)
 		if (tree->parent != NULL)
 		{
 			tree->parent->pid = 0;
-			return (0 * close(tree->parent->fd[1]));
+			return (1 * close(tree->parent->fd[1]));
 		}
 		if (tree->parent == 0)
-			return (0);
+			return (1);
 	}
+	return (0);
+}
+
+static int	tree_type_exe(t_shell *shell, t_tree *tree)
+{
+	char	*path;
+
+	if (pipe(tree->fd) != 0)
+		return (errno);
+	path = NULL;
+	if (tree_prep_exe(shell, tree, path))
+		return (errno || 0);
 	setsig(1);
 	tree->pid = fork();
 	if (tree->pid == 0)

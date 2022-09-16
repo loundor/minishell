@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:23:10 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/01 10:47:21 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/16 13:39:15 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ char	*take_double_quote(char *param)
 
 	line = NULL;
 	pre = NULL;
-	param++;
+	if (*param == '"')
+		param++;
 	while (*param && *param != '"' && *param != '\0')
 	{
 		line = is_null_line(line);
@@ -70,9 +71,7 @@ char	*take_double_quote(char *param)
 			line = after_dollar_null(line, pre);
 			continue ;
 		}
-		pre = line;
-		line = ft_joincts(pre, *param++);
-		free(pre);
+		line = ft_joincts(line, *param++) + free_str(line);
 	}
 	return (line);
 }

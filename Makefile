@@ -52,7 +52,8 @@ UTILS		=	env_to_exec.c \
 				get.c \
 				ifstar.c \
 				param_to_exec.c \
-				search_in_path.c
+				search_in_path.c \
+				var_to_exec.c
 #execute.c 		
 			
 OBJS		= 	$(addprefix ./srcs/, ${SRCS: .c=.o})
