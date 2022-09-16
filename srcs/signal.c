@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 10:47:21 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/15 14:19:35 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/15 23:46:49 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,10 @@
 
 void	ctlc_mini(int singal, siginfo_t *info, void *context)
 {
-	t_shell	*shell;
-
 	(void)info;
 	(void)context;
 	if (singal == 2)
 	{
-		shell = struct_passing(1, 0);
 		write(STDIN_FILENO, "\n", 1);
 		rl_replace_line("", 1);
 		rl_on_new_line();

@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 13:11:52 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/14 16:48:22 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/16 10:59:23 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	free_tab(char **t)
 	int	i;
 
 	i = 0;
-	while (t[i])
+	while (t[i] != NULL)
 		free(t[i++]);
 	free(t);
 	return (0);
@@ -25,7 +25,7 @@ int	free_tab(char **t)
 
 int	free_str(char *str)
 {
-	if (str != 0)
+	if (str && str != 0)
 		free(str);
 	return (0);
 }

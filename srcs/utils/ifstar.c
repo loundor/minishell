@@ -6,20 +6,17 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 15:07:31 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/15 19:55:35 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/16 11:05:56 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-
-///// NEED SPLIT RET TO DO ONE ARGV PRO TAB. LIKE ARGV
-static char	*get_list(char *dir, char *pattern, int root, char *ret)
+static char	*get_list(char *dir, char *pattern, char *ret)
 {
 	t_wildcard		wildcard;
 	struct dirent	*inside;
 	DIR				*path;
-	char			*newdir;
 
 	path = opendir(dir);
 	inside = readdir(path);
@@ -31,20 +28,28 @@ static char	*get_list(char *dir, char *pattern, int root, char *ret)
 		wildcard.pe = 0;
 		wildcard.ps = 0;
 		wildcard.str = inside->d_name;
-		if (ret != NULL && inside->d_type == DT_REG && starcmp(&wildcard))
+		if (ret != NULL && ft_strncmp(".", inside->d_name, 2)
+			&& ft_strncmp("..", inside->d_name, 3) && starcmp(&wildcard))
 		{
 			ret = ft_strjoin(ret, " ") + free_str(ret);
+			if (strncmp(dir, "./", 3))
+				ret = ft_strjoin(ret, dir) + free_str(ret);
 			ret = ft_strjoin(ret, wildcard.str) + free_str(ret);
 		}
-		if (ret == NULL && inside->d_type == DT_REG && starcmp(&wildcard))
-			ret = ft_strdup(wildcard.str);
-		if (inside->d_type == DT_DIR && root == 1 && starcmp(&wildcard))
+		if (ret == NULL && ft_strncmp(".", inside->d_name, 2)
+			&& ft_strncmp("..", inside->d_name, 3)  && starcmp(&wildcard))
 		{
-			newdir = ft_strjoin(dir, inside->d_name);
-			ret = get_list(newdir, "*", 0, ret) + free_str(ret);
+			if (strncmp(dir, "./", 3))
+				ret = ft_strdup(dir);;
+			if (ret != NULL)
+				ret = ft_strjoin(ret, wildcard.str) + free_str(ret);
+			else
+				ret = ft_strdup(wildcard.str);
 		}
+			
 	inside = readdir(path);
 	}
+	closedir(path);
 	return (ret);
 }
 
@@ -74,13 +79,14 @@ static char	*remplace_star(char *av, size_t i)
 	}
 	else
 		dir = ft_strjoin(".", "/");
-	return (get_list(dir, pattern, 1, (void *) 0)
+	return (get_list(dir, pattern, (void *) 0)
 		+ free_str(pattern) + free_str(dir));
 }
 
 char	*checkstar(char *av)
 {
 	size_t	i;
+	char	*str;
 
 	i = 0;
 	if (av == NULL || av[1] == '"' || av[1] == '\'')
@@ -88,7 +94,12 @@ char	*checkstar(char *av)
 	while (av[i] != 0)
 	{
 		if (av[i] == '?' || av[i] == '*')
-			return (remplace_star(av, i));
+		{
+			str = remplace_star(av, i);
+			if (str == av)
+				return (av);
+			return (str + free_str(av));
+		}
 		i++;
 	}
 	return (av);

@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 08:33:06 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/15 19:48:15 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/16 10:58:54 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,69 @@ static char	*ft_write_argv(char *str)
 	return (ret);
 }
 
+static char	**split_param(char **param, size_t i)
+{
+	char	**ret;
+	char	**split;
+	size_t	param_i;
+	size_t	count;
+	size_t	e;
+
+	count = 0;
+	e = 0;
+	param_i = 0;
+	ret = (char **)malloc(sizeof(char *) * (i + 1));
+	if (!ret)
+		exit(ft_exit(errno, 0));
+	ret[i] = NULL;
+	ret[count++] = ft_strdup(param[param_i++]);
+	while (param[param_i] && count <= i)
+	{
+		if ((*param[param_i] != '\'' || *param[param_i] != '"'
+				|| *param[param_i] != '$'))
+		{
+			split = ft_split(param[param_i++], ' ');
+			while(split[e] != 0)
+				ret[count++] = ft_strdup(split[e++]);
+			free_tab(split);
+			e = 0;
+			continue ;
+		}
+		else
+			ret[count] = ft_strdup(param[param_i]);
+		param_i++;
+		count++;
+	}
+	return(ret);
+}
+
+static char **explose_param(char **param)
+{
+	size_t	nbr_param;
+	size_t	i;
+	size_t	p;
+
+	nbr_param = 0;
+	i = 0;
+	p = 0;
+	while (param[i] != NULL)
+	{
+		if (param[i][p] == '\'' || param[i][p] == '"' || param[i][p] == '$')
+		{
+			nbr_param++;
+			i++;
+			continue ;
+		}
+		while (param[i][p] != 0)
+			if (param[i][p++] == ' ')
+				nbr_param++;
+		nbr_param++;
+		p = 0;
+		i++;
+	}
+	return (split_param(param, nbr_param));
+}
+
 char	**param_to_exec(char *str, char *name)
 {
 	char	**ret;
@@ -122,5 +185,5 @@ char	**param_to_exec(char *str, char *name)
 		}
 		ret[i] = checkstar(ret[i]);
 	}
-	return (ret);
+	return (explose_param(ret) + free_tab(ret));
 }
