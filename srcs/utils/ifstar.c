@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 15:07:31 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/16 13:02:59 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/20 10:13:30 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static char	*remplace_star(char *av, size_t i)
 	while (av[end] != 0 && av[end] != '/')
 		end++;
 	if (av[end] == '/')
-		return (av + (0 * printf("Wildcard only on selected folder!\n")));
+		return (av + (0 * printf("Wildcard only on working folder!\n")));
 	while (av[i] != '/' && i != 0)
 			i--;
 	if ((i > 0 && i++) || (av[i] == '/' && i++) || i == 0 )
@@ -82,20 +82,18 @@ static char	*remplace_star(char *av, size_t i)
 		+ free_str(pattern) + free_str(dir));
 }
 
-char	*checkstar(char *av)
+static char	*pattern_write(char *av)
 {
 	size_t	i;
 	char	*str;
 
 	i = 0;
-	if (av == NULL || av[1] == '"' || av[1] == '\'')
-		return (av);
 	while (av[i] != 0)
 	{
 		if (av[i] == '?' || av[i] == '*')
 		{
 			str = remplace_star(av, i);
-			if (str == av)
+			if (str == av || str == NULL || str == 0)
 				return (av);
 			return (str + free_str(av));
 		}
@@ -103,3 +101,70 @@ char	*checkstar(char *av)
 	}
 	return (av);
 }
+
+static int	is_needsearch(char *av)
+{
+	char	quotes;
+
+	while (*av != 0)
+	{
+		if (*av ==  '\'' || *av == '"')
+		{
+			quotes = *av++;
+			while (*av != 0 && *av != quotes)
+				av++;
+		}
+		if (*av != 0 && *av == '*')
+			return (1);
+		if (*av != 0)
+			av++;
+	}
+	return (0);
+}
+
+char	*checkstar(char *av)
+{
+	size_t	i;
+	char	*pattern;
+	char	quote;
+	char	*home;
+
+	if (!av || av == 0 || av == NULL)
+		return (ft_strdup(av));
+	i = 0;
+	pattern = NULL;
+	home = NULL;
+	if (!is_needsearch(av))
+		return (ft_strdup(av));
+	if (av[0] == '~')
+	{
+		home = search_var("HOME");
+		if (home != NULL && av++)
+			pattern = ft_strdup(home);
+	}
+	while (av[i] != 0)
+	{
+		while (av[i] != 0 && av[i] != '\'' && av[i] != '"')
+			pattern = ft_joincts(pattern, av[i++]) + free_str(pattern);
+		if (av[i] != 0 && (av[i] == '\'' || av[i] == '"'))
+		{
+			quote = av[i++];
+			while (av[i] != 0 && av[i] != quote)
+			{
+				if (av[i] == '*' || av[i] == '?' )
+				{
+					if (home != NULL)
+						return (ft_strjoin(home, av) + free_str(pattern) + free_str(home));
+					else
+						return (ft_strdup(av) + free_str(pattern));
+				}
+				pattern = ft_joincts(pattern, av[i++]) + free_str(pattern);
+			}
+			if (av[i] != 0)
+				i++;
+			continue ;
+		}
+	}
+	return (pattern_write(pattern) + free_str(home));
+}
+

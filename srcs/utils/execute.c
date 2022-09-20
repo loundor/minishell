@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 10:48:37 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/16 23:21:17 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/19 22:09:13 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static int	tree_type_andor(t_shell *shell, t_tree *tree)
 static int	tree_prep_exe(t_shell *shell, t_tree *tree, char *path)
 {
 	tree->cmdr->ev = env_to_exec();
-tree->cmdr->av = var_to_exec(tree->cmdr); // need retype this because need change var before take all in one n split
+	var_to_exec(tree->cmdr);
 	tree->cmdr->av = param_to_exec(tree->cmdr->param, tree->cmdr->command);
 	if (tree->cmdr->path == NULL)
 		tree->cmdr->built = search_builtin(tree->cmdr->command, shell->builtin);

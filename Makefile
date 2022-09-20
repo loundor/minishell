@@ -1,6 +1,7 @@
 NAME		= 	minishell
 CC			= 	gcc
 FLAGS		= 	-Wall -Werror -Wextra ${EXTRAF}
+#FLAGS		= 	-Wall ${EXTRAF}
 EXTRAF		= 	-g -fsanitize=address
 # MACOS - Fonctionne uniquement sur ma session42
 #LIBRARY		=  -lreadline -Lreadline/lib -L./lib/libft ./lib/libft/libft.a

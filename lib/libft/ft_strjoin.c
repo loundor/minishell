@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 16:17:54 by stissera          #+#    #+#             */
-/*   Updated: 2022/02/27 12:25:41 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/19 18:00:14 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		if (ret == NULL)
 			return (NULL);
 		i = -1;
-		while (s1[++i])
+		while (s1[++i] != 0)
 			ret[i] = s1[i];
 		i = -1;
-		while (s2[++i])
+		while (s2[++i] != 0)
 		{
 			ret[len[0]] = s2[i];
 			len[0]++;

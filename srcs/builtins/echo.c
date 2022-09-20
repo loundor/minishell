@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 17:04:04 by alfux             #+#    #+#             */
-/*   Updated: 2022/09/15 14:39:08 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/19 20:36:13 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_echo(char **av)
 	if (!av || !*av)
 		return (ft_errmsg(EINVAL));
 	if (!*(av + 1))
-		return (0 * printf("\n"));
+		return (0 + printf("\n"));
 	av++;
 	if (!ft_strncmp(*av, "-n\0", 3))
 		ft_shwarg(av, 1);
