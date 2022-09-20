@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:32:29 by stissera          #+#    #+#             */
-/*   Updated: 2022/08/31 17:30:05 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/20 22:11:48 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,18 @@
 static size_t	count_char(char *line)
 {
 	size_t	i;
+	char	quotes;
 
 	i = 0;
-	while (line && line[i] != '\0' && !ft_isspace(line[i]))
+	while (line && line[i] != 0 && !ft_isspace(line[i]))
 	{
 		if (line[i] == '\'' || line[i] == '"')
 		{
-			if (line[i] == '\'')
-			{
+			quotes = line[i++];
+			while (line[i] != 0 && line[i] != quotes)
 				i++;
-				while (line && line[i] != '\0' && line[i] != '\'')
-					i++;
-			}
-			if (line && line[i] != '\0' && line[i] == '"')
-			{
+			if (line[i] != 0)
 				i++;
-				while (line && line[i] != '\0' && line[i] != '"')
-					i++;
-			}
 			continue ;
 		}
 		i++;
@@ -56,7 +50,7 @@ char	*take_exec(char *line, t_cmd *cmd)
 	i = count_char(line);
 	ret = (char *)malloc(sizeof(char) * (i + 1));
 	if (!ret)
-		exit(ft_exit(MALLOCERR, 2));
+		exit(ft_exit(errno, 2));
 	e = 0;
 	while (e < i)
 		ret[e++] = *line++;

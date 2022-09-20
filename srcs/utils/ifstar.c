@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 15:07:31 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/20 10:13:30 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/20 21:58:38 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ static char	*get_list(char *dir, char *pattern, char *ret)
 			ret = ft_strjoin(ret, wildcard.str) + free_str(ret);
 		}
 		if (ret == NULL && ft_strncmp(".", inside->d_name, 2)
-			&& ft_strncmp("..", inside->d_name, 3)  && starcmp(&wildcard))
+			&& ft_strncmp("..", inside->d_name, 3) && starcmp(&wildcard))
 		{
 			if (strncmp(dir, "./", 3))
-				ret = ft_strdup(dir);;
+				ret = ft_strdup(dir);
 			if (ret != NULL)
 				ret = ft_strjoin(ret, wildcard.str) + free_str(ret);
 			else
@@ -108,7 +108,7 @@ static int	is_needsearch(char *av)
 
 	while (*av != 0)
 	{
-		if (*av ==  '\'' || *av == '"')
+		if (*av == '\'' || *av == '"')
 		{
 			quotes = *av++;
 			while (*av != 0 && *av != quotes)
@@ -134,14 +134,14 @@ char	*checkstar(char *av)
 	i = 0;
 	pattern = NULL;
 	home = NULL;
-	if (!is_needsearch(av))
-		return (ft_strdup(av));
 	if (av[0] == '~')
 	{
 		home = search_var("HOME");
 		if (home != NULL && av++)
-			pattern = ft_strdup(home);
+			av = ft_strjoin(home, av);
 	}
+	if (!is_needsearch(av))
+		return (ft_strdup(av) + free_str(home));
 	while (av[i] != 0)
 	{
 		while (av[i] != 0 && av[i] != '\'' && av[i] != '"')
@@ -154,7 +154,8 @@ char	*checkstar(char *av)
 				if (av[i] == '*' || av[i] == '?' )
 				{
 					if (home != NULL)
-						return (ft_strjoin(home, av) + free_str(pattern) + free_str(home));
+						return (ft_strjoin(home, av) + free_str(pattern)
+							+ free_str(home));
 					else
 						return (ft_strdup(av) + free_str(pattern));
 				}
@@ -167,4 +168,3 @@ char	*checkstar(char *av)
 	}
 	return (pattern_write(pattern) + free_str(home));
 }
-

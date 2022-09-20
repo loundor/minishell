@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:04:42 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/08 21:21:45 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/20 20:00:35 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,5 @@ int	cd(char **par)
 	path = getcwd((void *)0, 0);
 	set_env(shell->env, path, "PWD");
 	free(path);
-	return (0);
-	//return (ft_errmsg(errno));
+	return (errno % 256);
 }

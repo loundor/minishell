@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 22:21:16 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/14 16:51:58 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/20 22:03:01 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*tree_cmd(char *line, t_tree *tree)
 			return (line);
 		new = (t_cmd *)malloc(sizeof(t_cmd));
 		if (!new)
-			ft_exit(MALLOCERR, 1);
+			ft_exit(errno, 1);
 		line = ft_skipspace(line);
 		line = take_path(line, new);
 		line = ft_skipspace(line);
