@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 12:44:22 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/20 10:01:02 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/20 10:23:23 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static char	*do_var(char *line)
 			while (*line != 0 && *line != '\'')
 				ret = ft_joincts(ret, *line++) + free_str(ret);
 		}
-		if (*line != 0 && *line == '$' && (line [1] != 0 || line [1] != ' ' ||
-				line[1] != '\'' || line[1] != '"' || line[1] != '$'))
+		if (*line != 0 && *line == '$' && (line [1] != 0 && line [1] != ' ' &&
+				line[1] != '\'' && line[1] != '"' && line[1] != '$'))
 		{
 			dollar = take_dollar(line++);
 			if (ret != NULL)
