@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:38:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/16 11:56:53 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/20 11:51:43 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	prompt(t_shell *shell)
 	char	*path;
 	char	*line;
 
-	while (!shell->line || ft_strcmp(shell->line, "exit"))
+	while (!shell->line || (ft_strncmp(shell->line, "exit", 4)))
 	{
 		setsig(0);
 		if (shell->line != NULL)
