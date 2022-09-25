@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 10:48:37 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/20 22:14:16 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/25 18:04:06 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,6 @@ int	launch_process(t_tree *tree)
 		if (execve(tree->cmdr->command, tree->cmdr->av, tree->cmdr->ev) == -1)
 			printf("minishell: command not found: %s\n", tree->cmdr->command);
 	exit (1);
-}
-
-int	wait_process(t_tree *tree, t_shell *shell)
-{
-	if (tree->left != NULL)
-		if (wait_process(tree->left, shell))
-			return (errno);
-	if (tree->right != NULL)
-		if (wait_process(tree->right, shell))
-			return (errno);
-	if (tree->pid > 0)
-		waitpid(tree->pid, &shell->return_err, 0);
-	return (0);
 }
 
 static int	prepare_tree(t_tree *tree)
@@ -194,5 +181,18 @@ int	close_all_fd(t_tree *tree)
 	}
 	dup2(1, STDOUT_FILENO);
 	dup2(0, STDIN_FILENO);
+	return (0);
+}
+
+int	wait_process(t_tree *tree, t_shell *shell)
+{
+	if (tree->left != NULL)
+		if (wait_process(tree->left, shell))
+			return (errno);
+	if (tree->right != NULL)
+		if (wait_process(tree->right, shell))
+			return (errno);
+	if (tree->pid > 0)
+		waitpid(tree->pid, &shell->return_err, 0);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:38:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/20 11:51:43 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/25 20:16:37 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 /* the command is not null and put the command line in core	*/
 /* -------------------------------------------------------- */
 
-static char	*test_line(char *line)
+/* static char	*test_line(char *line)
 {
 	int		good;
 	int		parenthesis;
@@ -66,7 +66,7 @@ static char	*test_line(char *line)
 		bak = NULL;
 	}
 	return (bak);
-}
+} */
 
 static char	*get_title_shell(void)
 {
@@ -83,14 +83,20 @@ static char	*get_title_shell(void)
 		while (path[i] && home[i] == path[i])
 			i++;
 		if (home[i] == 0 && (path[i] == 0 || path[i] == '/'))
-			title = ft_strjoin("\e[1;32mminishell-0.2\e[0m:\e[1;34m~", &path[i]);
+			title = ft_strjoin(
+				"\001\e[1;32\002mminishell-0.2\001\e[0m\002:\001\e[1;34m\002~"
+				, &path[i]);
 		else
-			title = ft_strjoin("\e[1;32mminishell-0.2\e[0m:\e[1;34m", path);
+			title = ft_strjoin(
+				"\001\e[1;32\002mminishell-0.2\001\e[0m\002:\001\e[1;34m\002"
+				, path);
 	}
 	else
-		title = ft_strjoin("\e[1;32mminishell-0.2\e[0m:\e[1;34m", path);
+		title = ft_strjoin(
+			"\001\e[1;32\002mminishell-0.2\001\e[0m\002:\001\e[1;34m\002"
+			, path);
 	free(path);
-	path = ft_strjoin(title, "\e[0m$ ");
+	path = ft_strjoin(title, "\001\e[0m$\002 ");
 	free(title);
 	if (home != NULL)
 		free(home);
@@ -135,8 +141,8 @@ int	core(t_shell *shell)
 {
 	char		*line;
 
-	shell->line = test_line(shell->line);
 	line = parse_space(ft_skipspace(shell->line));
+	//shell->line = test_line(shell->line);
 	if (line == NULL)
 		return (shell->return_err = 1);
 	free(shell->line);

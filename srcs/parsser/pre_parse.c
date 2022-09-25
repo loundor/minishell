@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 23:12:44 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/14 15:49:48 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/25 19:19:24 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,10 @@ char	*parse_space(char *line)
 		{
 			if (ret)
 			{
-				if (ret[ft_strlen(ret)] != ' ')
+				if (ret[ft_strlen(ret) - 1] != ' ')
 					bak = ft_joincts(ret, ' ') + free_str(ret);
+				else
+					bak = ft_strdup(ret) + free_str(ret);
 				ret = bak;
 			}
 			ret = write_type(line, &i, ret) + free_str(bak);

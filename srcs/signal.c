@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 10:47:21 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/20 21:58:19 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/24 17:47:31 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	setsig(int type)
 	struct sigaction	sig_act_mini;
 
 	sig_act_fork.sa_handler = SIG_IGN;
+	sig_act_fork.sa_flags = 0;
 	sig_act_mini.sa_sigaction = &ctlc_mini;
 	sig_act_mini.sa_flags = SIGQUIT;
 	if (type == 1)

@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:57:32 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/14 16:46:20 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/25 21:00:07 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,7 @@ char	*bt_create_if(char *line, t_tree *tree)
 		line = tree_andor(line, tree);
 	else if (bt_test_pipe(line))
 		line = tree_pipe(line, tree);
-	else if (bt_test_appd(line))
-		line = tree_append(line, tree);
-	else if (bt_test_redir(line))
+	else if (bt_test_redir(line) || bt_test_appd(line))
 		line = tree_redirection(line, tree);
 	else
 	{

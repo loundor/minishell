@@ -4,11 +4,11 @@ FLAGS		= 	-Wall -Werror -Wextra ${EXTRAF}
 #FLAGS		= 	-Wall ${EXTRAF}
 EXTRAF		= 	-g -fsanitize=address
 # MACOS - Fonctionne uniquement sur ma session42
-LIBRARY		=  -lreadline -Lreadline/lib -L./lib/libft ./lib/libft/libft.a
-INCLUDES	= 	-I./includes -I./readline -I./lib/libft 
+#LIBRARY		=  -lreadline -Lreadline/lib -L./lib/libft ./lib/libft/libft.a
+#INCLUDES	= 	-I./includes -I./readline -I./lib/libft 
 # LINUX
-#LIBRARY		=   ./readline.linux/shlib/libreadline.a ./readline.linux/shlib/libhistory.a -lncurses -L./readline.linux/shlib -L./lib/libft ./lib/libft/libft.a
-#INCLUDES	= 	-I./includes -I./lib/libft
+LIBRARY		=   ./readline.linux/shlib/libreadline.a ./readline.linux/shlib/libhistory.a -lncurses -L./readline.linux/shlib -L./lib/libft ./lib/libft/libft.a
+INCLUDES	= 	-I./includes -I./lib/libft
 SRCS		= 	add_env.c \
 				add_env_2.c \
 				builtins.c \

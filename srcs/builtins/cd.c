@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:04:42 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/20 20:00:35 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/24 14:08:56 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,18 @@ int	cd(char **par)
 	shell = struct_passing(1, 0);
 	old = getcwd((void *)0, 0);
 	path = search_var("HOME");
-	if (!param || param == NULL)
-	{
-		if (path != NULL)
-			chdir(path);
-	}
-	else
+	if ((!param || param == NULL) && path != NULL)
+		chdir(path);
+	else if (param || param != NULL)
 		write_home(param, path);
 	set_env(shell->env, old, "OLDPWD");
 	free(path);
-	free(old);
 	path = getcwd((void *)0, 0);
 	set_env(shell->env, path, "PWD");
-	free(path);
-	return (errno % 256);
+	if (errno != 0)
+	{
+		printf("minishell: cd: %s: no file or directory!\n", param);
+		return (1 + free_str(path) + free_str(old));
+	}
+	return (0 + free_str(path) + free_str(old));
 }
