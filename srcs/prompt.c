@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:38:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/25 20:16:37 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/26 18:16:35 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,56 +17,6 @@
 /*	The prompt wait until the command is validate, check	*/
 /* the command is not null and put the command line in core	*/
 /* -------------------------------------------------------- */
-
-/* static char	*test_line(char *line)
-{
-	int		good;
-	int		parenthesis;
-	char	*bak;
-
-	good = 0;
-	parenthesis = 0;
-	bak = line;
-	while (line && *line != 0)
-	{
-		if (*line == '\'' || *line == '"')
-		{
-			if (*line != 0 && *line == '\'')
-				while (*line != 0 && *++line != '\'')
-					;
-			if (*line != 0 && *line == '"')
-				while (*line != 0 && *++line != '"')
-					;
-			continue ;
-		}
-		// test if ex " qwe |     | qweqw" exist... it a error too.
-		if (get_cmd_type(line) == 2 || get_cmd_type(line) == 3
-			|| get_cmd_type(line) == 5 || get_cmd_type(line) == 7)
-		{
-			if (get_cmd_type(&line[1]) == 2 || get_cmd_type(&line[1]) == 3
-				|| get_cmd_type(&line[1]) == 5 || get_cmd_type(&line[1]) == 7)
-			{
-				good = 1;
-				break ;
-			}
-		}
-		if (*line == '(')
-			parenthesis++;
-		if (*line == ')')
-			parenthesis--;
-		line++;
-	}
-	if (good == 1 || parenthesis != 0)
-	{
-		if (good == 1)
-			printf("parse error near '%c'\n", *line);
-		else if (parenthesis != 0)
-			printf("missing parenthesis\n");
-		free(bak);
-		bak = NULL;
-	}
-	return (bak);
-} */
 
 static char	*get_title_shell(void)
 {
@@ -111,8 +61,6 @@ int	prompt(t_shell *shell)
 	while (!shell->line || (ft_strncmp(shell->line, "exit", 4)))
 	{
 		setsig(0);
-		if (shell->line != NULL)
-			free(shell->line);
 		path = get_title_shell();
 		shell->line = readline(path);
 		line = shell->line;
@@ -142,9 +90,12 @@ int	core(t_shell *shell)
 	char		*line;
 
 	line = parse_space(ft_skipspace(shell->line));
-	//shell->line = test_line(shell->line);
+	line = test_line(line);
 	if (line == NULL)
-		return (shell->return_err = 1);
+	{
+		shell->return_err = 1;
+		return (0);
+	}
 	free(shell->line);
 	shell->line = line;
 	shell->tree = bt_create(shell->line);
@@ -152,25 +103,8 @@ int	core(t_shell *shell)
 	pre_prepare_exec(shell, shell->tree);
 	wait_process(shell->tree, shell);
 	close_all_fd(shell->tree);
+	free(shell->line);
 	free_bt(shell->tree);
 	shell->tree = NULL;
 	return (0);
-}
-
-/* ----------------------| LAST!!! |----------------------- */
-/*	Search the last execution and set variable last to 1.	*/
-/*	That can be more last to one.. Need check if the first	*/
-/*	node is || or &&										*/
-/* -------------------------------------------------------- */
-void	put_last_tree(t_tree *tree)
-{
-	if (tree->type == 2 || tree->type == 3)
-	{
-		put_last_tree(tree->left);
-		put_last_tree(tree->right);
-		return ;
-	}
-	while (tree->right != 0)
-		tree = tree->right;
-	tree->last = 1;
 }

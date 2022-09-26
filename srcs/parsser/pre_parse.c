@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 23:12:44 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/25 19:19:24 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/26 18:34:38 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,10 @@ char	*parse_space(char *line)
 			if (ret)
 				bak = ret;
 			sep = write_quotes(line, &i, ret);
-			ret = ft_strjoin(bak, sep) + free_str(bak) + free_str(sep);
+			if (bak)
+				ret = ft_strjoin(bak, sep) + free_str(bak) + free_str(sep);
+			else
+				ret = ft_strdup(sep) + free_str(bak) + free_str(sep);
 		}
 		else if (line[i] == '>' || line[i] == '<'
 			|| line[i] == '|' || line[i] == '&'

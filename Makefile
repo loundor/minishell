@@ -54,6 +54,7 @@ UTILS		=	env_to_exec.c \
 				ifstar.c \
 				param_to_exec.c \
 				search_in_path.c \
+				test_line.c \
 				var_to_exec.c
 #execute.c 		
 			

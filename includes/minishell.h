@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/16 23:24:04 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/26 17:52:05 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int			unset(char **par); // ok unset a env variable
 // PARSSING
 char		*parse_space(char *line);
 char		*line_parse(char *cmd);
+char		*test_line(char *line);
 char		*alloc(int *end, char **ret, char *line);
 char		*dollar(char *tmp, char *line, char **ret);
 char		*take_dollar(char *param); // ok

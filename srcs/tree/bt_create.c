@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:57:32 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/25 21:00:07 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/26 18:17:03 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,24 @@ t_tree	*bt_create(char *line)
 	if (tree->type != 0)
 		return (tree);
 	return (tree);
+}
+
+/* ----------------------| LAST!!! |----------------------- */
+/*	Search the last execution and set variable last to 1.	*/
+/*	That can be more last to one.. Need check if the first	*/
+/*	node is || or &&										*/
+/* -------------------------------------------------------- */
+void	put_last_tree(t_tree *tree)
+{
+	if (tree->type == 2 || tree->type == 3)
+	{
+		put_last_tree(tree->left);
+		put_last_tree(tree->right);
+		return ;
+	}
+	while (tree->right != 0)
+		tree = tree->right;
+	tree->last = 1;
 }
 
 void	free_bt(t_tree *tree)
