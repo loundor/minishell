@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 22:17:36 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/14 10:44:17 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/26 09:08:49 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*add_node_type(char *line, t_tree *tree, int t, size_t i)
 	s = 0;
 	work = (char *)malloc(sizeof(char) * (i));
 	if (!work)
-		exit(ft_exit(MALLOCERR, 1));
+		exit(ft_exit(errno, 1));
 	while (s < i - 1)
 		work[s++] = *line++;
 	work[s] = '\0';

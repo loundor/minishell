@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 13:15:55 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/25 20:23:11 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/26 09:06:48 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,31 +93,3 @@ int	bt_test_pipe(char *line)
 	return (0);
 }
 
-int	bt_test_redir(char *line)
-{
-	int		parenthesis;
-	size_t	i;
-
-	i = 0;
-	parenthesis = 0;
-	while (line[i] || line[i] != '\0')
-	{
-		while (line[i] == '(' || parenthesis != 0)
-		{
-			while (line[i] != ')')
-			{
-				if (line[i] == '(')
-					parenthesis++;
-				i++;
-			}
-			parenthesis--;
-			i++;
-		}
-		if (skip_part_char(line, &i, '\'') || skip_part_char(line, &i, '"'))
-			continue ;
-		if (line[i] == '>' && line[i + 1] != '>')
-			return (i);
-		i++;
-	}
-	return (0);
-}
