@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 17:30:18 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/11 21:32:05 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/26 20:58:00 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ typedef struct s_shell
 	struct s_tree		*tree;
 	struct s_builtins	*builtin;
 	struct sigaction	signal_act;
+	int					history;
 }	t_shell;
 
 #endif
