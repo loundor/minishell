@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:38:28 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/28 19:08:44 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/28 21:01:23 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,20 @@ static char	*get_title_shell(void)
 			i++;
 		if (home[i] == 0 && (path[i] == 0 || path[i] == '/'))
 			title = ft_strjoin(
-				"\001\e[1;32\002mminishell-0.2\001\e[0m\002:\001\e[1;34m\002~"
-				, &path[i]);
+					"\001\e[1;32\002mminishell-0.2\001\e[0m\002:\001\e[1;34m\002~",
+					&path[i]);
 		else
 			title = ft_strjoin(
-				"\001\e[1;32\002mminishell-0.2\001\e[0m\002:\001\e[1;34m\002"
-				, path);
+					"\001\e[1;32\002mminishell-0.2\001\e[0m\002:\001\e[1;34m\002",
+					path);
 	}
 	else
 		title = ft_strjoin(
-			"\001\e[1;32\002mminishell-0.2\001\e[0m\002:\001\e[1;34m\002"
-			, path);
+				"\001\e[1;32\002mminishell-0.2\001\e[0m\002:\001\e[1;34m\002",
+				path);
 	free(path);
 	path = ft_strjoin(title, "\001\e[0m$\002 ");
-	free(title);
-	if (home != NULL)
-		free(home);
-	return (path);
+	return (path + free_str(title) + free_str(home));
 }
 
 int	prompt(t_shell *shell)

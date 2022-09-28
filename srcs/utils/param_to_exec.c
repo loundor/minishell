@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 08:33:06 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/20 10:07:28 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/28 21:17:01 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ static size_t	ft_countav(char *str)
 			continue ;
 		}
 		if (str && *str != 0 && *str != 32
-				&& *str != '\'' && *str != '"')
+			&& *str != '\'' && *str != '"')
 				str++;
-		if (*str != 0 && *str == ' ' && *++str != 0 && ret++) 
+		if (*str != 0 && *str == ' ' && *++str != 0 && ret++)
 			str = ft_skipspace(str);
 	}
 	ret++;
@@ -56,7 +56,6 @@ static char	*ft_write_argv(char *str, char **new, size_t index)
 
 	i = 0;
 	write = 0;
-	// count size for malloc
 	while (str[i] && str[i] != 0 && str[i] != ' ')
 	{
 		while (str[i] != 0 && str[i] != 32
@@ -74,7 +73,6 @@ static char	*ft_write_argv(char *str, char **new, size_t index)
 	ret = (char *)malloc(sizeof(char) * (i + 1));
 	if (!ret)
 		exit (0);
-	//write in malloc
 	while (write < i)
 	{
 		while (str[i] != 0 && str[i] != 32
@@ -88,7 +86,7 @@ static char	*ft_write_argv(char *str, char **new, size_t index)
 		}
 		while (*str != 0 && *str != 32
 			&& (*str != '"' || *str != '\''))
-			ret[write++] = *str++;;
+			ret[write++] = *str++;
 	}
 	ret[write] = 0;
 	new[index] = ret;
@@ -113,28 +111,32 @@ static char	**split_param(char **param, size_t i, char quote)
 		ret[count] = NULL;
 		while (*param[param_i] != 0)
 		{
-			if (*param[param_i] != 0 && (*param[param_i] == '\'' || *param[param_i] == '"'))
+			if (*param[param_i] != 0 && (*param[param_i] == '\''
+					|| *param[param_i] == '"'))
 			{
 				quote = *param[param_i]++;
 				while (*param[param_i] != 0 && *param[param_i] != quote)
-					ret[count] = ft_joincts(ret[count], *param[param_i]++) + free_str(ret[count]);
+					ret[count] = ft_joincts(ret[count], *param[param_i]++)
+						+ free_str(ret[count]);
 				param[param_i]++;
-				continue;
+				continue ;
 			}
 			if (*param[param_i] != 0 && *param[param_i] != ' ')
 			{
-					ret[count] = ft_joincts(ret[count], *param[param_i]++) + free_str(ret[count]);
+					ret[count] = ft_joincts(ret[count], *param[param_i]++)
+					+ free_str(ret[count]);
 			}
-			if (*param[param_i] != 0 && *param[param_i] == ' ' && param[param_i]++)
+			if (*param[param_i] != 0 && *param[param_i] == ' '
+				&& param[param_i]++)
 				count++;
 		}
 		param_i++;
 		count++;
 	}
-	return(ret);
+	return (ret);
 }
 
-static char **explose_param(char **param)
+static char	**explose_param(char **param)
 {
 	size_t	nbr_param;
 	size_t	i;
@@ -155,7 +157,8 @@ static char **explose_param(char **param)
 					p++;
 				p++;
 			}
-			while (param[i][p] != 0 && param[i][p] != ' ' && param[i][p] != '\'' && param[i][p] != '"')
+			while (param[i][p] != 0 && param[i][p] != ' ' && param[i][p] != '\''
+				&& param[i][p] != '"')
 				p++;
 			if (param[i][p] != 0 && param[i][p] == ' ' && p++)
 				nbr_param++;

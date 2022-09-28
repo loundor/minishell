@@ -6,16 +6,15 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 12:44:22 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/20 10:23:23 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/28 21:18:34 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-
 static char	*do_var(char *line)
 {
-	char 	*ret;
+	char	*ret;
 	char	*dollar;
 	int		quotes;
 
@@ -32,8 +31,8 @@ static char	*do_var(char *line)
 			while (*line != 0 && *line != '\'')
 				ret = ft_joincts(ret, *line++) + free_str(ret);
 		}
-		if (*line != 0 && *line == '$' && (line [1] != 0 && line [1] != ' ' &&
-				line[1] != '\'' && line[1] != '"' && line[1] != '$'))
+		if (*line != 0 && *line == '$' && (line [1] != 0 && line [1] != ' '
+				&& line[1] != '\'' && line[1] != '"' && line[1] != '$'))
 		{
 			dollar = take_dollar(line++);
 			if (ret != NULL)
@@ -41,7 +40,7 @@ static char	*do_var(char *line)
 			else
 				ret = ft_strdup(dollar) + free_str(dollar);
 			while (*line != 0 && (ft_isalnum(*line) || *line == '_'
-				|| *line == '?'))
+					|| *line == '?'))
 				line++;
 			continue ;
 		}

@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 22:17:36 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/26 09:08:49 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/28 21:11:10 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*add_node_type(char *line, t_tree *tree, int t, size_t i)
 		work[s++] = *line++;
 	work[s] = '\0';
 	if (line++ && (t == 1 || t == 4 || t == 6))
-		line +=2;
+		line += 2;
 	else if (t == 2 || t == 3 || t == 5 || t == 7)
 		line += 3;
 	tree->type = t;
@@ -60,7 +60,7 @@ static char	*parenthesis_node(char *line, size_t i, t_tree *tree)
 	while (s < (i - 3))
 		work[s++] = *line++;
 	work[s] = '\0';
-	line ++;	
+	line++;
 	line = ft_skipspace(line);
 	if (line && line != 0)
 	{

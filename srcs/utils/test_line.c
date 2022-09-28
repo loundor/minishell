@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 17:50:58 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/26 18:10:38 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/28 21:12:49 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	check_parenthesis(char *line)
 	return (8);
 }
 
-static int line_error(int type, char *line)
+static int	line_error(int type, char *line)
 {
 	char	*caractere;
 
@@ -60,7 +60,7 @@ static int line_error(int type, char *line)
 	else
 		caractere = "|";
 	if (caractere != 0)
- 		printf("parse error near '%s'\n", caractere);
+		printf("parse error near '%s'\n", caractere);
 	return (0 + free_str(line));
 }
 

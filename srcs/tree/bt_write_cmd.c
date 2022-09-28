@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 22:21:16 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/25 20:38:35 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/28 21:04:00 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ char	*tree_cmd(char *line, t_tree *tree)
 	t_cmd	*new;
 
 	new = NULL;
-	if (bt_test_heredoc(line) && (bt_test_heredoc(line) < bt_test_input(line) || bt_test_input(line) == 0 ))
+	if (bt_test_heredoc(line) && (bt_test_heredoc(line) < bt_test_input(line)
+			|| bt_test_input(line) == 0))
 		line = tree_heredoc(line, tree);
 	else if (bt_test_input(line))
 		line = tree_input_file(line, tree);

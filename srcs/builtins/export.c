@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 12:22:38 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/11 11:13:41 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/28 21:03:08 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	export(char **par)
 {
-	char *param;
+	char	*param;
 
 	param = par[1];
 	add_env_line(param);

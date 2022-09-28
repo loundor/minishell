@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 15:07:31 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/20 21:58:38 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/28 21:13:24 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static char	*remplace_star(char *av, size_t i)
 		return (av + (0 * printf("Wildcard only on working folder!\n")));
 	while (av[i] != '/' && i != 0)
 			i--;
-	if ((i > 0 && i++) || (av[i] == '/' && i++) || i == 0 )
+	if ((i > 0 && i++) || (av[i] == '/' && i++) || i == 0)
 		pattern = ft_strdup(&av[i]);
 	if (i > 0)
 	{

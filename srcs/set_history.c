@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 18:51:50 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/28 20:27:13 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/28 20:56:06 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	add_list_history(char *line, t_shell *shell)
 	last = NULL;
 	new = (t_history *)malloc(sizeof(t_history) * 1);
 	if (!new)
-			exit (ft_exit(errno, 1));
+		exit (ft_exit(errno, 1));
 	new->line = ft_strdup(line);
 	new->next = NULL;
 	if (shell->h_list == NULL)
@@ -83,7 +83,7 @@ No previous history available!\n\001\033[0m");
 	return (0 + free_str(line));
 }
 
-int ft_write_history(t_shell *shell)
+int	ft_write_history(t_shell *shell)
 {
 	t_history	*hist;
 
@@ -91,7 +91,7 @@ int ft_write_history(t_shell *shell)
 	if (shell->history <= 0 || shell->h_list == NULL)
 		return (0);
 	shell->history = open(".minishell_history", O_RDWR
-		| O_APPEND | O_CREAT, 0666);
+			| O_APPEND | O_CREAT, 0666);
 	if (shell->history <= 0)
 		return (0 * printf("\001\033[1;31m\002\
 Writing probleme on history file!\n\001\033[0m")
