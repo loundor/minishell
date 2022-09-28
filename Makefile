@@ -16,6 +16,7 @@ SRCS		= 	add_env.c \
 				free.c \
 				main.c \
 				prompt.c \
+				set_history.c \
 				signal.c \
 				welcome.c \
 				test.c \

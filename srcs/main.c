@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:07:29 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/26 20:55:57 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/28 20:30:21 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,16 @@ int	main(int argc, char **argv, char **env)
 	shell.history = 0;
 	shell.builtin = NULL;
 	shell.tree = NULL;
+	shell.h_list = NULL;
 	if (!shell.env)
 		exit(ft_exit(ENV, 0));
 	if (argc == 1)
 		(void)argv;
-	if (add_builtins(&shell))
-		exit(ft_exit(BUILT, 0));
-	if (welcome())
-		exit (ft_exit(WELCOME_ERR, 2));
-	if (set_history(&shell.history))
-		exit (ft_exit(errno, 2));
-	if (prompt(&shell))
-		return (ft_exit(WELCOME_ERR, 1));
-	ft_exit(0, 1);
-	if (write_history(&shell.history))
+	if (add_builtins(&shell) || welcome() || ft_set_history(&shell)
+		|| prompt(&shell) || ft_write_history(&shell))
 		exit(ft_exit(errno, 1));
-	write(1, "exit\n", 5);
+	ft_exit(0, 1);
+	write(1, "\001\033[0m\002exit\n\0", 11);
 	return (0);
 }
 

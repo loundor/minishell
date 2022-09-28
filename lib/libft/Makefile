@@ -15,11 +15,12 @@ SRCS	=	ft_atoi.c ft_memchr.c ft_split.c \
 			ft_isprint.c ft_putnbr_fd.c ft_strmapi.c \
 			ft_striteri.c ft_itoa.c ft_putstr_fd.c \
 			ft_strncmp.c ft_skipspace.c ft_isspace.c \
-			ft_joincts.c ft_strcmp.c ft_cnttab.c ft_tabbzero.c
+			ft_joincts.c ft_strcmp.c ft_cnttab.c ft_tabbzero.c \
+			get_next_line.c
 OBJS	= $(addprefix ./, ${SRCS:.c=.o})
 BONUSSRCS = 
 BNS		= $(addprefix ./, ${BONUSSRCS:.c=.o})
-HEADER =	./libft.h
+HEADER =	./libft.h ./gnl/get_next_line.c
 
 .c.o		:
 			${CC} ${FLAGS} -c ${INCLUDES} $< -o ${<:.c=.o}

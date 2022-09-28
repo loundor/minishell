@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 19:20:39 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/20 09:17:18 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/27 08:07:51 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
+# define BUFFER_SIZE 1
 
 int			ft_isalpha(int c);
 int			ft_isdigit(int c);
@@ -56,4 +57,5 @@ char		*ft_joincts(const char *s, const char c);
 int			ft_strcmp(const char *s1, const char *s2);
 size_t		ft_cnttab(char **array);
 char		**ft_tabbzero(char **tab, size_t count);
+char		*get_next_line(int fd);
 #endif

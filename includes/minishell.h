@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/26 20:58:50 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/28 19:06:29 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,9 @@ char		*checkstar(char *av);
 int			var_to_exec(t_cmd *cmd);
 
 //HISTORY
-int			set_history(int *history);
-int 		write_history(int *history);
+int			ft_set_history(t_shell 	*shell);
+int 		ft_write_history(t_shell *shell);
+void		add_list_history(char *line, t_shell *shell);
 
 // EXEC
 // int			prepare_exec(t_shell *shell, t_tree * tree);

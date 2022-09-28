@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 17:30:18 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/26 20:58:00 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/28 18:45:13 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,12 @@ typedef struct s_tree
 	int				last;
 }	t_tree;
 
+typedef struct s_history
+{
+	char				*line;
+	struct s_history	*next;
+}	t_history;
+
 typedef struct s_shell
 {
 	char				*line;
@@ -117,6 +123,7 @@ typedef struct s_shell
 	struct s_env		*env;
 	struct s_tree		*tree;
 	struct s_builtins	*builtin;
+	struct s_history	*h_list;
 	struct sigaction	signal_act;
 	int					history;
 }	t_shell;
