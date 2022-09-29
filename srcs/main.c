@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:07:29 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/29 15:27:34 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/29 18:11:17 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	main(int argc, char **argv, char **env)
 	t_shell	shell;
 
 	struct_passing(0, &shell);
+	shell.env = NULL;
 	do_env(env);
 	shell.line = NULL;
 	shell.return_err = 0;
