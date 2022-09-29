@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 12:09:04 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/28 19:06:29 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/29 15:20:45 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ int			export(char **par); // ok set a env variable
 /*															*/
 /* -------------------------------------------------------- */
 int			welcome(void); // OK
-t_env		*do_env(char **env); // ok
+void		do_env(char **env);
+//t_env		*do_env(char **env); // ok
 int			ft_errmsg(int errn); // ok Print error message
 int			get_cmd_type(char *line); // ok
 void		*struct_passing(int type, void *data); // ok
@@ -99,13 +100,20 @@ int 		ft_write_history(t_shell *shell);
 void		add_list_history(char *line, t_shell *shell);
 
 // EXEC
+int			pre_prepare_exec(t_shell *shell, t_tree *tree);
+int			prepare_exec(t_shell *shell, t_tree *tree);
+int			prepare_tree(t_tree *tree);
+int			tree_type_exe(t_shell *shell, t_tree *tree);
+int			tree_type_andor(t_shell *shell, t_tree *tree);
+int			tree_type_one(t_shell *shell, t_tree *tree);
+int			tree_type_redirect(t_tree *tree);
+int			launch_process(t_tree *tree);
+int			wait_process(t_tree *tree, t_shell *shell);
+
 // int			prepare_exec(t_shell *shell, t_tree * tree);
 int			setsig(int type); // Type 1 = fork Type 0 = minishell
 void		ctlc_mini(int singal, siginfo_t *info, void *context);
 //void		do_exec(t_shell *shell, t_tree *tree);
-int			pre_prepare_exec(t_shell *shell, t_tree *tree);
-int			prepare_exec(t_shell *shell, t_tree *tree);
-int			wait_process(t_tree *tree, t_shell *shell);
 int			close_all_fd(t_tree *tree);
 char		**param_to_exec(char *str, char *name);
 char		*search_in_path(char *command, char *env);

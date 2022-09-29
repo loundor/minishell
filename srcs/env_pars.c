@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 14:26:15 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/01 16:58:49 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/29 15:32:44 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,41 +20,12 @@
 /*	Need to put all variable in a **char the execve			*/
 /* -------------------------------------------------------- */
 
-static t_env	*first(char **env)
+void	do_env(char **env)
 {
-	t_env	*tenv;
-
-	tenv = (t_env *)malloc(sizeof(t_env));
-	if (!tenv)
-		exit(ft_exit(MALLOCERR, 1));
-	tenv->prev_env = NULL;
-	tenv->env_var = ft_split(*env, '=');
-	tenv->next_env = NULL;
-	return (tenv);
-}
-
-t_env	*do_env(char **env)
-{
-	t_env	*tenv;
-	t_env	*ret;
-	t_env	*parsse;
-
-	if (*env != NULL)
+	while (*env != 0)
 	{
-		tenv = first(env);
-		ret = tenv;
+		add_env_line(*env);
+		env++;
 	}
-	while (++env && *env)
-	{
-		parsse = 0;
-		parsse = (t_env *)malloc(sizeof(t_env));
-		if (!parsse)
-			exit(ft_exit(MALLOCERR, 1));
-		parsse->prev_env = tenv;
-		parsse->env_var = ft_split(*env, '=');
-		parsse->next_env = NULL;
-		tenv->next_env = parsse;
-		tenv = tenv->next_env;
-	}
-	return (ret);
+	return ;
 }

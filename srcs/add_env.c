@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 11:55:12 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/01 17:03:16 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/29 15:31:19 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	add_env_splited(t_env *env, char *str, char *type)
 	newenv = (t_env *)malloc(sizeof(t_env) * 1);
 	if (!newenv)
 		exit(ft_exit(errno, 1));
-	newenv->env_var = (char **)malloc(sizeof(char *) * 2);
+	newenv->env_var = (char **)malloc(sizeof(char *) * 3);
 	if (!newenv->env_var)
 		exit(ft_exit(errno, 1));
 	newenv->env_var[0] = ft_strdup(type);
@@ -62,6 +62,7 @@ void	add_env_splited(t_env *env, char *str, char *type)
 		newenv->env_var[1] = ft_strdup(str);
 	else
 		newenv->env_var[1] = NULL;
+	newenv->env_var[2] = 0;
 	newenv->next_env = NULL;
 	set_next_prev(env, shell, newenv);
 	return ;
@@ -100,10 +101,12 @@ void	rem_env(t_env *env, char *str)
 	while (env != NULL && ft_strncmp(env->env_var[0], str, ft_strlen(str) + 1))
 		env = env->next_env;
 	if (env != NULL && !ft_strncmp(env->env_var[0], str, ft_strlen(str) + 1))
+	{
 		set_env_rem(env, shell);
-	free(env->env_var[0]);
-	free(env->env_var[1]);
-	free(env->env_var);
-	free(env);
+		free(env->env_var[0]);
+		free(env->env_var[1]);
+		free(env->env_var);
+		free(env);
+	}
 	return ;
 }

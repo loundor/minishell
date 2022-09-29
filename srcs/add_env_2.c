@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 17:01:44 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/01 17:03:15 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/29 15:26:48 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ void	add_env_line(char *line)
 
 	var = take(line);
 	set_env(struct_passing(2, 0), var[1], var[0]);
+	free(var[0]);
+	free(var[1]);
 	free(var);
 	return ;
 }

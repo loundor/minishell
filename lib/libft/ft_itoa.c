@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 14:18:11 by stissera          #+#    #+#             */
-/*   Updated: 2022/02/27 12:34:51 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/28 23:44:42 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static char	*ft_itoawrite(long n, int neg, int size)
 	ret = (char *) malloc(sizeof(char) * size + neg + 1);
 	if (!ret)
 		return (0);
-	ret[size + neg + 1] = '\0';
+	ret[size + neg] = '\0';
 	if (neg == 1)
 		ret[0] = '-';
 	while (size > 0)

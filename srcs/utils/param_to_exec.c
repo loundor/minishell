@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 08:33:06 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/28 21:17:01 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/29 11:28:39 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,5 +193,5 @@ char	**param_to_exec(char *str, char *name)
 		str = ft_write_argv(str, ret, i);
 		ret[i] = checkstar(ret[i]) + free_str(ret[i]);
 	}
-	return (explose_param(ret));// + free_tab(ret));
+	return (explose_param(ret));
 }

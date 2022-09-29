@@ -16,7 +16,8 @@ SRCS		= 	add_env.c add_env_2.c builtins.c \
 				${addprefix builtins/, ${BUILTIN}} \
 				${addprefix parsser/, ${PARSER}} \
 				${addprefix utils/, ${UTILS}} \
-				${addprefix tree/, ${TREE}}
+				${addprefix tree/, ${TREE}} \
+				${addprefix process/, ${PROCESS}}
 BUILTIN		=	cd.c echo.c env.c \
 				exit.c export.c pwd.c \
 				unset.c
@@ -29,8 +30,9 @@ TREE		=	bt_create_node_2.c bt_create_node.c bt_create.c \
 UTILS		=	env_to_exec.c errmsg.c execute.c \
 				get.c ifstar.c param_to_exec.c \
 				search_in_path.c test_line.c var_to_exec.c
-#execute.c 		
-			
+PROCESS		=	andor.c launch.c output.c \
+				pipe.c prepare_exe.c prepare.c \
+				wait_process.c	
 OBJS		= 	$(addprefix ./srcs/, ${SRCS: .c=.o})
 RM			= 	rm -rf
 

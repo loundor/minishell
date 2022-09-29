@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   output.c                                           :+:      :+:    :+:   */
+/*   wait_process.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/25 18:08:48 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/29 11:39:45 by stissera         ###   ########.fr       */
+/*   Created: 2022/09/29 11:43:47 by stissera          #+#    #+#             */
+/*   Updated: 2022/09/29 11:43:57 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	tree_type_redirect(t_tree *tree)
+int	wait_process(t_tree *tree, t_shell *shell)
 {
-	if (prepare_tree(tree))
-		return (errno);
-	
-
+	if (tree->left != NULL)
+		if (wait_process(tree->left, shell))
+			return (errno);
+	if (tree->right != NULL)
+		if (wait_process(tree->right, shell))
+			return (errno);
+	if (tree->pid > 0)
+		waitpid(tree->pid, &shell->return_err, 0);
 	return (0);
 }

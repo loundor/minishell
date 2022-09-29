@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 13:11:52 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/26 18:45:39 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/29 15:03:09 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ int	free_env(t_env *env)
 	i = -1;
 	if (env != NULL)
 	{
-		if (env->next_env)
-			free_env(env->next_env);
+		if (env->next_env != NULL)
+			free_env((t_env *)env->next_env);
 		while (env->env_var[++i] != NULL)
 			free(env->env_var[i]);
 		free(env->env_var);
