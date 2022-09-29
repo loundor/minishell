@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/19 11:18:16 by stissera          #+#    #+#             */
-/*   Updated: 2022/02/26 10:30:26 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/29 16:02:21 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strdup(const char *s1)
 
 	str = NULL;
 	str = (char *)malloc(sizeof(char) * (ft_strlen(s1)) + 1);
-	if (!str)
+	if (!str || s1 == NULL)
 		return (NULL);
 	count = 0;
 	while (*s1)

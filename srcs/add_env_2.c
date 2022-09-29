@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 17:01:44 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/29 15:26:48 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/29 15:58:54 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ static char	**take(char *line)
 	char	**var;
 
 	size = 0;
-	if (*line == '$')
-		line++;
 	while (line[size] != '=' && line[size] != 0)
 		size++;
+	if (*line == '$' || size == ft_strlen(line))
+		return (NULL + ( 0 * printf("Can't create the environnement variable.\n")));
 	var = (char **)malloc(sizeof(char *) * 2);
 	var[0] = (char *)malloc(sizeof(char) * (size + 1));
 	if (!var[0])
@@ -58,6 +58,8 @@ void	add_env_line(char *line)
 {
 	char	**var;
 
+	if (!line || line == NULL)
+		return ;
 	var = take(line);
 	set_env(struct_passing(2, 0), var[1], var[0]);
 	free(var[0]);

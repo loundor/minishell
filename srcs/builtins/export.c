@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 12:22:38 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/28 21:03:08 by stissera         ###   ########.fr       */
+/*   Updated: 2022/09/29 15:41:58 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 int	export(char **par)
 {
-	char	*param;
+	size_t	index;
 
-	param = par[1];
-	add_env_line(param);
+	index = 1;
+	if (par[index] == NULL)
+		return (0);
+	while (par[index] != NULL)
+		add_env_line(par[index++]);
 	return (0);
 }
