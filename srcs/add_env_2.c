@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 17:01:44 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/29 15:58:54 by stissera         ###   ########.fr       */
+/*   Updated: 2022/10/05 19:28:52 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ static char	**take(char *line)
 	size = 0;
 	while (line[size] != '=' && line[size] != 0)
 		size++;
-	if (*line == '$' || size == ft_strlen(line))
-		return (NULL + ( 0 * printf("Can't create the environnement variable.\n")));
+	if ((*line == '$' || size == ft_strlen(line)) && printf("Can't create the environnement variable.\n"))
+		return (NULL);
 	var = (char **)malloc(sizeof(char *) * 2);
 	var[0] = (char *)malloc(sizeof(char) * (size + 1));
 	if (!var[0])

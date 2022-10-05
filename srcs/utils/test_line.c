@@ -6,7 +6,7 @@
 /*   By: stissera <stissera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 17:50:58 by stissera          #+#    #+#             */
-/*   Updated: 2022/09/28 21:12:49 by stissera         ###   ########.fr       */
+/*   Updated: 2022/10/05 19:27:51 by stissera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	line_error(int type, char *line)
 		caractere = "|";
 	if (caractere != 0)
 		printf("parse error near '%s'\n", caractere);
-	return (0 + free_str(line));
+	return (1 + free_str(line));
 }
 
 static int	check_separator(char *line)
@@ -92,13 +92,13 @@ static int	check_separator(char *line)
 
 char	*test_line(char *line)
 {
-	if (*line == ')' || line[2] == ')')
-		return (NULL + line_error(8, line));
-	if (get_cmd_type(line))
-		return (NULL + line_error(get_cmd_type(line), line));
-	if (check_parenthesis(line))
-		return (NULL + line_error(check_parenthesis(line), line));
-	if (check_separator(line))
-		return (NULL + line_error(check_separator(line), line));
+	if ((*line == ')' || line[2] == ')') && line_error(8, line))
+		return (NULL);
+	if (get_cmd_type(line) && line_error(get_cmd_type(line), line))
+		return (NULL);
+	if (check_parenthesis(line) && line_error(check_parenthesis(line), line))
+		return (NULL);
+	if (check_separator(line) && line_error(check_separator(line), line))
+		return (NULL);
 	return (line);
 }
