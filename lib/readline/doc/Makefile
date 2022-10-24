@@ -22,7 +22,7 @@ topdir = ..
 srcdir = .
 
 
-prefix = /usr/local
+prefix = /usr/local/readline/8_0
 
 datarootdir = ${prefix}/share
 
@@ -49,7 +49,7 @@ RM = rm -f
 INSTALL = /usr/bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
 
-BUILD_DIR = /Users/stissera/Downloads/readline-8.0
+BUILD_DIR = /home/loundor/readline-8.0
 TEXINPUTDIR = $(srcdir)
 
 MAKEINFO    = LANGUAGE= makeinfo

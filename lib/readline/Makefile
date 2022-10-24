@@ -31,7 +31,7 @@ PACKAGE_TARNAME = readline
 srcdir = .
 
 top_srcdir = .
-BUILD_DIR = /Users/stissera/Downloads/readline-8.0
+BUILD_DIR = /home/loundor/readline-8.0
 
 INSTALL = /usr/bin/install -c
 INSTALL_PROGRAM = ${INSTALL}
@@ -48,7 +48,7 @@ MV = mv
 
 SHELL = /bin/sh
 
-prefix = /usr/local
+prefix = /usr/local/readline/8_0
 exec_prefix = ${prefix}
 
 datarootdir = ${prefix}/share

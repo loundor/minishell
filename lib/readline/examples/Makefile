@@ -21,7 +21,7 @@ RL_LIBRARY_VERSION = 8.0
 SHELL = /bin/sh
 RM = rm -f
 
-prefix = /usr/local
+prefix = /usr/local/readline/8_0
 exec_prefix = ${prefix}
 
 datarootdir = ${prefix}/share
@@ -32,7 +32,7 @@ datadir = ${datarootdir}
 
 top_srcdir = ..
 #BUILD_DIR = .
-BUILD_DIR = /Users/stissera/Downloads/readline-8.0
+BUILD_DIR = /home/loundor/readline-8.0
 installdir = $(datadir)/readline
 
 INSTALL = /usr/bin/install -c
